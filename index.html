@@ -1,16 +1,18 @@
 <!DOCTYPE html> 
 <html>
   <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Optimiza funcionamiento en celulares -->
+    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+
+    <!--Librerías-->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-    <!-- Link a Google Fonts -->
+    <!-- Fuente: "Roboto"-->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
 
     <style>
-      /* Todo igual que antes, con fuentes nuevas */
       body, #pantalla-carga {
         font-family: 'Roboto', sans-serif;
       }
@@ -32,6 +34,14 @@
         padding: 0 1em;
         opacity: 1;
         transition: opacity 0.6s ease;
+      }
+
+      #pantalla-carga p {
+        margin: 0.2em 0 1.2em 0;
+        font-size: 1.2em;
+        font-weight: 400;
+        color: #ddd;
+        max-width: 300px;
       }
 
       #pantalla-carga.fade-out {
@@ -57,14 +67,6 @@
         letter-spacing: 0.04em;
       }
 
-      #pantalla-carga p {
-        margin: 0.2em 0 1.2em 0;
-        font-size: 1.2em;
-        font-weight: 400;
-        color: #ddd;
-        max-width: 300px;
-      }
-
       #boton-comenzar {
         padding: 1em 2em;
         font-size: 1.2em;
@@ -84,6 +86,7 @@
         color: white;
       }
 
+      /*Oculta el botón "VR" de A-Frame*/
       a-scene .a-enter-vr-button {
         display: none !important;
       }
@@ -106,8 +109,10 @@
         }
       }
     </style>
+
   </head>
   <body>
+    <!-- Texto Pantalla de carga -->
     <div id="pantalla-carga">
       <h1 id="titulo-principal">Ocho memorias</h1>
       <h2 id="subtitulo">desde la sombra</h2>
@@ -122,16 +127,17 @@
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
     >
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+      <!-- Solicita al usuario permiso para acceder a la cámara-->
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera> 
 
-      <!-- Los 3 targets del archivo targets.mind -->
+      <!-- Targets del archivo targets.mind (por ahora 3)-->
       <a-entity mindar-image-target="targetIndex: 0">
         <a-text
           value="Gato"
           color="black"
           align="center"
           position="0 0 0.1"
-          width="2"
+          width="1.5"
           font="mozillavr"
         ></a-text>
       </a-entity>
@@ -142,7 +148,7 @@
           color="black"
           align="center"
           position="0 0 0.1"
-          width="2"
+          width="1.5"
           font="mozillavr"
         ></a-text>
       </a-entity>
@@ -153,11 +159,12 @@
           color="black"
           align="center"
           position="0 0 0.1"
-          width="2"
+          width="1.5"
           font="mozillavr"
         ></a-text>
       </a-entity>
     </a-scene>
+    <!-- -->
 
     <script>
       const boton = document.getElementById('boton-comenzar');
@@ -185,4 +192,3 @@
     </script>
   </body>
 </html>
-
