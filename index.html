@@ -22,12 +22,12 @@
     </style>
   </head>
   <body>
-    <div id="loading-message">Cargando AR, por favor espera...</div>
+    <div id="loading-message">Cargando realidad aumentada...</div>
 
     <a-scene mindar-image="imageTargetSrc: target.mind;" embedded color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: true">
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0" position="0 0 0">
+      <a-entity mindar-image-target="targetIndex: 0">
         <a-text 
           value="Perro" 
           color="#000000" 
@@ -40,12 +40,21 @@
     </a-scene>
 
     <script>
-      const loadingMsg = document.getElementById('loading-message');
-      const scene = document.querySelector('a-scene');
+      window.addEventListener("DOMContentLoaded", () => {
+        const loadingMsg = document.getElementById('loading-message');
+        const sceneEl = document.querySelector('a-scene');
 
-      scene.addEventListener('renderstart', () => {
-        // Cuando arranca A-Frame / MindAR, ocultamos el mensaje
-        loadingMsg.style.display = 'none';
+        sceneEl.addEventListener("arReady", (event) => {
+          // MindAR ya está listo, ocultamos el mensaje
+          console.log("MindAR listo");
+          loadingMsg.style.display = "none";
+        });
+
+        sceneEl.addEventListener("arError", (event) => {
+          // Hubo un error, mostrar mensaje distinto
+          loadingMsg.innerText = "Error al iniciar la cámara o cargar AR.";
+          loadingMsg.style.background = "#faa";
+        });
       });
     </script>
   </body>
