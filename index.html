@@ -11,17 +11,11 @@
         font-family: sans-serif;
         overflow: hidden;
       }
-      #overlay {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        z-index: 10;
-      }
       #startButton {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
         padding: 15px 30px;
         font-size: 20px;
         cursor: pointer;
@@ -29,24 +23,18 @@
         color: white;
         border: none;
         border-radius: 5px;
-        margin-top: 20px;
+        z-index: 10;
+      }
+      a-scene {
+        display: none; /* ocultamos la escena al principio */
       }
     </style>
   </head>
   <body>
 
-    <div id="overlay">
-      <div id="loadingText">Preparando...</div>
-      <button id="startButton" disabled>Comenzar recorrido</button>
-    </div>
+    <button id="startButton">Comenzar recorrido</button>
 
-    <a-scene mindar-image="imageTargetSrc: target.mind;" 
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false"
-             embedded
-    >
+    <a-scene mindar-image="imageTargetSrc: target.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" embedded>
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
@@ -62,24 +50,14 @@
     </a-scene>
 
     <script>
-      const overlay = document.getElementById('overlay');
-      const loadingText = document.getElementById('loadingText');
-      const startButton = document.getElementById('startButton');
+      const btn = document.getElementById('startButton');
       const scene = document.querySelector('a-scene');
 
-      // Cuando MindAR esté listo habilitamos el botón y cambiamos texto
-      scene.addEventListener('mindar-ready', () => {
-        loadingText.textContent = '';
-        startButton.disabled = false;
-      });
-
-      startButton.addEventListener('click', () => {
-        overlay.style.display = 'none';
-        const mindarComponent = scene.components['mindar-image'];
-        if (mindarComponent) {
-          mindarComponent.start();
-        }
+      btn.addEventListener('click', () => {
+        btn.style.display = 'none'; // oculto el botón
+        scene.style.display = 'block'; // muestro la escena
       });
     </script>
+
   </body>
 </html>
