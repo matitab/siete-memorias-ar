@@ -1,80 +1,26 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-    <style>
-      body, html {
-        margin: 0; padding: 0; height: 100%; overflow: hidden;
-        font-family: 'Montserrat', sans-serif;
-        background: #121212;
-      }
-      #splash {
-        position: fixed;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: #121212;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 10;
-      }
-      #splash button {
-        padding: 15px 30px;
-        font-size: 18px;
-        background: #3b4252;
-        color: #ddd;
-        border: none;
-        border-radius: 8px;
-        cursor: pointer;
-      }
-      #splash button:hover {
-        background: #5e81ac;
-        color: #fff;
-      }
-      a-scene {
-        display: none; /* Oculto escena al principio */
-        width: 100vw;
-        height: 100vh;
-      }
-      a-scene[visible] {
-        display: block; /* Mostrar cuando tenga el atributo visible */
-      }
-    </style>
   </head>
   <body>
-    <div id="splash">
-      <button id="startBtn">Empezar recorrido</button>
-    </div>
-
-    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/band.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false" embedded auto-start="false">
-      <a-assets>
-        <a-asset-item id="bearModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/bear/scene.gltf"></a-asset-item>
-        <a-asset-item id="raccoonModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/raccoon/scene.gltf"></a-asset-item>
-      </a-assets>
-
+    <a-scene mindar-image="imageTargetSrc: target.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
+      <!-- Mostramos texto al detectar la imagen -->
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer></a-gltf-model>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 1">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer></a-gltf-model>
+        <a-text 
+          value="Perro" 
+          color="black" 
+          align="center"
+          position="0 0 0.1"
+          width="1.5"
+          font="mozillavr"
+        ></a-text>
       </a-entity>
     </a-scene>
-
-    <script>
-      const splash = document.getElementById('splash');
-      const startBtn = document.getElementById('startBtn');
-      const scene = document.querySelector('a-scene');
-
-      startBtn.addEventListener('click', () => {
-        splash.style.display = 'none';       // Oculto splash
-        scene.setAttribute('visible', '');   // Muestro escena
-        const mindar = scene.components['mindar-image'];
-        if (mindar) mindar.start();           // Arranco MindAR (cámara)
-      });
-    </script>
   </body>
 </html>
-
