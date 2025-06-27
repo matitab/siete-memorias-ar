@@ -20,6 +20,7 @@
         z-index: 9999;
         flex-direction: column;
       }
+
       #boton-comenzar {
         padding: 1em 2em;
         font-size: 1.2em;
@@ -29,6 +30,11 @@
         border-radius: 0.5em;
         cursor: pointer;
         margin-top: 1em;
+      }
+
+      /* Ocultar botón VR sí o sí */
+      a-scene .a-enter-vr-button {
+        display: none !important;
       }
     </style>
   </head>
@@ -48,9 +54,9 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-text 
-          value="Perro" 
-          color="black" 
+        <a-text
+          value="Perro"
+          color="black"
           align="center"
           position="0 0 0.1"
           width="1.5"
@@ -60,8 +66,29 @@
     </a-scene>
 
     <script>
-      document.getElementById('boton-comenzar').addEventListener('click', () => {
-        document.getElementById('pantalla-carga').style.display = 'none';
+      const boton = document.getElementById('boton-comenzar');
+      const pantalla = document.getElementById('pantalla-carga');
+      const escena = document.querySelector('a-scene');
+
+      boton.addEventListener('click', () => {
+        if (escena.hasLoaded) {
+          // Si ya cargó la escena, ocultar la pantalla al toque
+          pantalla.style.display = 'none';
+          // Por si quedó el botón VR, eliminarlo
+          const botonVR = document.querySelector('.a-enter-vr-button');
+          if (botonVR) botonVR.remove();
+        } else {
+          // Esperar a que la escena cargue
+          escena.addEventListener(
+            'loaded',
+            () => {
+              pantalla.style.display = 'none';
+              const botonVR = document.querySelector('.a-enter-vr-button');
+              if (botonVR) botonVR.remove();
+            },
+            { once: true }
+          );
+        }
       });
     </script>
   </body>
