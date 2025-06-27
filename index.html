@@ -5,8 +5,16 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+    <!-- Link a Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+
     <style>
-      /* todo igual que antes, sin cambios */
+      /* Todo igual que antes, con fuentes nuevas */
+      body, #pantalla-carga {
+        font-family: 'Roboto', sans-serif;
+      }
+
       #pantalla-carga {
         position: fixed;
         top: 0;
@@ -25,26 +33,38 @@
         opacity: 1;
         transition: opacity 0.6s ease;
       }
+
       #pantalla-carga.fade-out {
         opacity: 0;
       }
+
       #titulo-principal {
+        font-family: 'Montserrat', sans-serif;
         font-size: 2em;
         font-weight: 700;
         margin: 0;
         color: white;
         line-height: 1.1;
+        letter-spacing: 0.05em;
       }
+
       #subtitulo {
+        font-family: 'Montserrat', sans-serif;
         font-size: 1.8em;
         margin: 0.1em 0 1.2em 0;
         color: #4fc3f7;
         font-weight: 600;
+        letter-spacing: 0.04em;
       }
+
       #pantalla-carga p {
         margin: 0.2em 0 1.2em 0;
         font-size: 1.2em;
+        font-weight: 400;
+        color: #ddd;
+        max-width: 300px;
       }
+
       #boton-comenzar {
         padding: 1em 2em;
         font-size: 1.2em;
@@ -54,10 +74,20 @@
         border-radius: 0.5em;
         cursor: pointer;
         user-select: none;
+        font-weight: 500;
+        font-family: 'Montserrat', sans-serif;
+        transition: background-color 0.3s ease;
       }
+
+      #boton-comenzar:hover {
+        background-color: #4fc3f7;
+        color: white;
+      }
+
       a-scene .a-enter-vr-button {
         display: none !important;
       }
+
       @media (max-width: 425px) {
         #titulo-principal {
           font-size: 1.4em;
@@ -68,6 +98,7 @@
         }
         #pantalla-carga p {
           font-size: 1em;
+          max-width: 260px;
         }
         #boton-comenzar {
           padding: 0.8em 1.5em;
@@ -80,7 +111,7 @@
     <div id="pantalla-carga">
       <h1 id="titulo-principal">Ocho memorias</h1>
       <h2 id="subtitulo">desde la sombra</h2>
-      <p>Explorá con tu cámara.</p>
+      <p>Explorá el mapa y enfocá los distintos marcadores para conocer las historias.</p>
       <button id="boton-comenzar">Empezar recorrido</button>
     </div>
 
@@ -96,7 +127,7 @@
       <!-- Los 3 targets del archivo targets.mind -->
       <a-entity mindar-image-target="targetIndex: 0">
         <a-text
-          value="Gato"
+          value="Perro"
           color="black"
           align="center"
           position="0 0 0.1"
@@ -107,7 +138,7 @@
 
       <a-entity mindar-image-target="targetIndex: 1">
         <a-text
-          value="Carpincho"
+          value="Gato"
           color="black"
           align="center"
           position="0 0 0.1"
@@ -118,7 +149,7 @@
 
       <a-entity mindar-image-target="targetIndex: 2">
         <a-text
-          value="Perro"
+          value="Pájaro"
           color="black"
           align="center"
           position="0 0 0.1"
@@ -154,5 +185,4 @@
     </script>
   </body>
 </html>
-
 
