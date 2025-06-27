@@ -18,12 +18,16 @@
         transform: translate(-50%, -50%);
         padding: 15px 30px;
         font-size: 20px;
-        cursor: pointer;
-        background: #2196F3;
+        cursor: not-allowed;
+        background: #bbb;
         color: white;
         border: none;
         border-radius: 5px;
         z-index: 10;
+      }
+      #startButton.enabled {
+        background: #2196F3;
+        cursor: pointer;
       }
       a-scene {
         display: none; /* Oculto la escena hasta que arranque */
@@ -31,7 +35,7 @@
     </style>
   </head>
   <body>
-    <button id="startButton">Comenzar recorrido</button>
+    <button id="startButton" disabled>Preparando...</button>
 
     <a-scene mindar-image="imageTargetSrc: target.mind;" 
              color-space="sRGB" 
@@ -58,24 +62,25 @@
       const startBtn = document.getElementById('startButton');
       const scene = document.querySelector('a-scene');
 
+      // Cuando MindAR esté listo, habilito el botón
+      scene.addEventListener('mindar-ready', () => {
+        startBtn.disabled = false;
+        startBtn.textContent = 'Comenzar recorrido';
+        startBtn.classList.add('enabled');
+      });
+
       startBtn.addEventListener('click', () => {
-        startBtn.style.display = 'none'; // oculto botón
+        if (startBtn.disabled) return;
+
+        startBtn.style.display = 'none'; // oculto el botón
         scene.style.display = 'block';   // muestro la escena
 
-        // Arranco MindAR, que está pausado por defecto
         const mindarComponent = scene.components['mindar-image'];
         if (mindarComponent) {
           mindarComponent.start();
         }
       });
-
-      // Por las dudas, al cargar la página dejo MindAR pausado
-      window.addEventListener('load', () => {
-        const mindarComponent = scene.components['mindar-image'];
-        if (mindarComponent) {
-          mindarComponent.stop();
-        }
-      });
     </script>
   </body>
 </html>
+
