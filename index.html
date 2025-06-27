@@ -1,26 +1,130 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <title>Ocho Memorias AR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body, html {
+        margin: 0;
+        padding: 0;
+        font-family: 'Montserrat', sans-serif;
+        background-color: #121212;
+        color: #eee;
+        height: 100%;
+        overflow: hidden;
+      }
+
+      .splash {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #121212;
+      }
+
+      .splash-box {
+        background: #1f1f1f;
+        padding: 50px 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(255 255 255 / 0.1);
+        text-align: center;
+        max-width: 90%;
+        width: 320px;
+      }
+
+      .splash-box h1 {
+        font-size: 30px;
+        margin: 0;
+        color: #ddd;
+      }
+
+      .splash-highlight {
+        color: #88c0d0;
+      }
+
+      .splash-box p {
+        margin-top: 15px;
+        color: #bbb;
+        font-size: 18px;
+      }
+
+      #launchButton {
+        margin-top: 35px;
+        background-color: #3b4252;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 30px;
+        font-size: 18px;
+        color: #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #launchButton:hover {
+        background-color: #5e81ac;
+        color: #fff;
+      }
+
+      #ar-container {
+        display: none;
+        width: 100vw;
+        height: 100vh;
+        overflow: hidden;
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: target.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <!-- Splash -->
+    <div class="splash" id="splash">
+      <div class="splash-box">
+        <h1><span class="splash-highlight">Ocho memorias</span> desde la sombra</h1>
+        <p>Explorá con tu cámara.</p>
+        <button id="launchButton">Empezar recorrido</button>
+      </div>
+    </div>
 
-      <!-- Mostramos texto al detectar la imagen -->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-text 
-          value="Perro" 
-          color="black" 
-          align="center"
-          position="0 0 0.1"
-          width="1.5"
-          font="mozillavr"
-        ></a-text>
-      </a-entity>
-    </a-scene>
+    <!-- AR Scene -->
+    <div id="ar-container">
+      <a-scene
+        mindar-image="imageTargetSrc: target.mind;"
+        color-space="sRGB"
+        renderer="colorManagement: true, physicallyCorrectLights"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+        embedded
+      >
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+
+        <a-entity mindar-image-target="targetIndex: 0">
+          <a-text
+            value="Perro"
+            color="black"
+            align="center"
+            position="0 0 0.1"
+            width="1.5"
+            font="mozillavr"
+          ></a-text>
+        </a-entity>
+      </a-scene>
+    </div>
+
+    <script>
+      const splash = document.getElementById("splash");
+      const launchButton = document.getElementById("launchButton");
+      const arContainer = document.getElementById("ar-container");
+
+      launchButton.addEventListener("click", () => {
+        splash.style.display = "none";
+        arContainer.style.display = "block";
+      });
+    </script>
   </body>
 </html>
+
