@@ -6,44 +6,45 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
-      body, html {
-        margin: 0; padding: 0; height: 100%;
-        font-family: sans-serif;
-        overflow: hidden;
-        background: white;
-      }
-      #startButton {
+      #pantalla-carga {
         position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 15px 30px;
-        font-size: 20px;
-        cursor: pointer;
-        background: #2196F3;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #1a1a1a; /* Fondo gris oscuro */
         color: white;
-        border: none;
-        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         z-index: 9999;
+        flex-direction: column;
       }
-      a-scene {
-        display: none;
+      #boton-comenzar {
+        padding: 1em 2em;
+        font-size: 1.2em;
+        background-color: white;
+        color: #1a1a1a;
+        border: none;
+        border-radius: 0.5em;
+        cursor: pointer;
+        margin-top: 1em;
       }
     </style>
   </head>
   <body>
+    <div id="pantalla-carga">
+      <h2>Ocho Memorias AR</h2>
+      <button id="boton-comenzar">Comenzar</button>
+    </div>
 
-    <button id="startButton">Comenzar recorrido</button>
-
-    <a-scene mindar-image="imageTargetSrc: target.mind;" 
-             color-space="sRGB" 
-             renderer="colorManagement: true, physicallyCorrectLights" 
-             vr-mode-ui="enabled: false" 
-             device-orientation-permission-ui="enabled: false" 
-             embedded
+    <a-scene
+      mindar-image="imageTargetSrc: target.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
     >
-      <a-entity light="type: ambient; color: #fff; intensity: 1"></a-entity>
-
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
@@ -51,7 +52,7 @@
           value="Perro" 
           color="black" 
           align="center"
-          position="0 0 0.2"
+          position="0 0 0.1"
           width="1.5"
           font="mozillavr"
         ></a-text>
@@ -59,15 +60,11 @@
     </a-scene>
 
     <script>
-      const btn = document.getElementById('startButton');
-      const scene = document.querySelector('a-scene');
-
-      btn.addEventListener('click', () => {
-        btn.style.display = 'none';  // oculto botón
-        scene.style.display = 'block'; // muestro la escena
+      document.getElementById('boton-comenzar').addEventListener('click', () => {
+        document.getElementById('pantalla-carga').style.display = 'none';
       });
     </script>
-
   </body>
 </html>
+
 
