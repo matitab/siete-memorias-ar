@@ -29,10 +29,19 @@
         opacity: 0;
       }
 
-      #pantalla-carga h1 {
-        margin: 0.2em 0;
+      #titulo-principal {
         font-size: 2em;
         font-weight: 700;
+        margin: 0;
+        color: white;
+        line-height: 1.1;
+      }
+
+      #subtitulo {
+        font-size: 1.8em;
+        margin: 0.1em 0 1.2em 0;
+        color: #4fc3f7; /* celeste */
+        font-weight: 600;
       }
 
       #pantalla-carga p {
@@ -58,14 +67,16 @@
 
       /* Ajustes para pantallas móviles (hasta 425px ancho) */
       @media (max-width: 425px) {
-        #pantalla-carga h1 {
+        #titulo-principal {
           font-size: 1.4em;
         }
-
+        #subtitulo {
+          font-size: 1.2em;
+          margin-bottom: 1em;
+        }
         #pantalla-carga p {
           font-size: 1em;
         }
-
         #boton-comenzar {
           padding: 0.8em 1.5em;
           font-size: 1em;
@@ -75,7 +86,8 @@
   </head>
   <body>
     <div id="pantalla-carga">
-      <h1>Ocho memorias desde la sombra</h1>
+      <h1 id="titulo-principal">Ocho memorias</h1>
+      <h2 id="subtitulo">desde la sombra</h2>
       <p>Explorá con tu cámara.</p>
       <button id="boton-comenzar">Empezar recorrido</button>
     </div>
@@ -123,11 +135,6 @@
             ocultarPantalla();
           }, { once: true });
         }
-      });
-    </script>
-  </body>
-</html>
-
       });
     </script>
   </body>
