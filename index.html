@@ -29,7 +29,6 @@
         align-items: center;
         z-index: 9999;
         flex-direction: column;
-        transition: opacity 0.3s ease;
       }
 
       #boton-comenzar {
@@ -42,45 +41,49 @@
         cursor: pointer;
         margin-top: 1em;
       }
+
+      #contenedor-escena {
+        display: none;
+      }
     </style>
   </head>
   <body>
+    <!-- Pantalla de carga -->
     <div id="pantalla-carga">
       <h2>Ocho Memorias AR</h2>
       <button id="boton-comenzar">Comenzar</button>
     </div>
 
-    <a-scene
-      mindar-image="imageTargetSrc: target.mind;"
-      color-space="sRGB"
-      renderer="colorManagement: true, physicallyCorrectLights"
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
-    >
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <!-- Contenedor de la escena oculto al principio -->
+    <div id="contenedor-escena">
+      <a-scene
+        mindar-image="imageTargetSrc: target.mind;"
+        color-space="sRGB"
+        renderer="colorManagement: true, physicallyCorrectLights"
+        vr-mode-ui="enabled: false"
+        device-orientation-permission-ui="enabled: false"
+      >
+        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-text 
-          value="Perro" 
-          color="black" 
-          align="center"
-          position="0 0 0.1"
-          width="1.5"
-          font="mozillavr"
-        ></a-text>
-      </a-entity>
-    </a-scene>
+        <a-entity mindar-image-target="targetIndex: 0">
+          <a-text 
+            value="Perro" 
+            color="black" 
+            align="center"
+            position="0 0 0.1"
+            width="1.5"
+            font="mozillavr"
+          ></a-text>
+        </a-entity>
+      </a-scene>
+    </div>
 
     <script>
-      const pantallaCarga = document.getElementById('pantalla-carga');
-      const botonComenzar = document.getElementById('boton-comenzar');
-
-      botonComenzar.addEventListener('click', () => {
-        // Le damos un frame al navegador para terminar transiciones
-        pantallaCarga.style.opacity = '0';
-        setTimeout(() => {
-          pantallaCarga.style.display = 'none';
-        }, 300); // coincidir con el tiempo del fade
+      const boton = document.getElementById('boton-comenzar');
+      boton.addEventListener('click', () => {
+        // Mostrar escena y ocultar pantalla de carga
+        document.getElementById('pantalla-carga').style.display = 'none';
+        document.getElementById('contenedor-escena').style.display = 'block';
       });
     </script>
   </body>
