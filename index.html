@@ -6,20 +6,32 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body, html {
+        height: 100%;
+        overflow: hidden;
+      }
+
       #pantalla-carga {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #1a1a1a; /* Fondo gris oscuro */
+        width: 100dvw;
+        height: 100dvh;
+        background: #1a1a1a;
         color: white;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 9999;
         flex-direction: column;
+        transition: opacity 0.3s ease;
       }
+
       #boton-comenzar {
         padding: 1em 2em;
         font-size: 1.2em;
@@ -60,11 +72,17 @@
     </a-scene>
 
     <script>
-      document.getElementById('boton-comenzar').addEventListener('click', () => {
-        document.getElementById('pantalla-carga').style.display = 'none';
+      const pantallaCarga = document.getElementById('pantalla-carga');
+      const botonComenzar = document.getElementById('boton-comenzar');
+
+      botonComenzar.addEventListener('click', () => {
+        // Le damos un frame al navegador para terminar transiciones
+        pantallaCarga.style.opacity = '0';
+        setTimeout(() => {
+          pantallaCarga.style.display = 'none';
+        }, 300); // coincidir con el tiempo del fade
       });
     </script>
   </body>
 </html>
-
 
