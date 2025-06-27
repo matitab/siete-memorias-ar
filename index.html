@@ -55,6 +55,22 @@
       a-scene .a-enter-vr-button {
         display: none !important;
       }
+
+      /* Ajustes para pantallas móviles (hasta 425px ancho) */
+      @media (max-width: 425px) {
+        #pantalla-carga h1 {
+          font-size: 1.4em;
+        }
+
+        #pantalla-carga p {
+          font-size: 1em;
+        }
+
+        #boton-comenzar {
+          padding: 0.8em 1.5em;
+          font-size: 1em;
+        }
+      }
     </style>
   </head>
   <body>
@@ -107,6 +123,11 @@
             ocultarPantalla();
           }, { once: true });
         }
+      });
+    </script>
+  </body>
+</html>
+
       });
     </script>
   </body>
