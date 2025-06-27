@@ -1,47 +1,117 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600&display=swap" rel="stylesheet" />
     <style>
-      #pantalla-carga {
+      body, html {
+        padding: 0;
+        margin: 0;
+        font-family: 'Montserrat', sans-serif;
+        height: 100%;
+        background-color: #121212;
+        color: #eee;
+      }
+      /* Pantalla de carga */
+      .splash {
         position: fixed;
-        top: 0;
-        left: 0;
         width: 100vw;
         height: 100vh;
-        background: #1a1a1a; /* Fondo gris oscuro */
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         z-index: 9999;
+        display: flex;
         flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background: #1f1f1f;
+        transition: opacity 0.5s ease;
       }
-
+      .splash.oculto {
+        opacity: 0;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .splash-box {
+        width: 320px;
+        max-width: 90%;
+        background: #2e2e2e;
+        border-radius: 10px;
+        padding: 50px 30px;
+        box-sizing: border-box;
+        box-shadow: 0 0 10px rgba(255 255 255 / 0.1);
+      }
+      .splash-box > h1 {
+        font-size: 28px;
+        font-weight: 600;
+        margin: 0;
+        color: #ddd;
+      }
+      .splash-highlight {
+        color: #88c0d0;
+      }
+      p {
+        color: #bbb;
+        margin-top: 15px;
+        font-size: 18px;
+      }
       #boton-comenzar {
-        padding: 1em 2em;
-        font-size: 1.2em;
-        background-color: white;
-        color: #1a1a1a;
+        margin-top: 35px;
+        background-color: #3b4252;
+        border-radius: 8px;
         border: none;
-        border-radius: 0.5em;
+        padding: 14px 30px;
+        font-size: 20px;
+        line-height: 24px;
+        color: #ddd;
         cursor: pointer;
-        margin-top: 1em;
+        transition: background-color 0.3s ease;
       }
-
-      /* Ocultar botón VR sí o sí */
+      #boton-comenzar:hover:not(:disabled) {
+        background-color: #5e81ac;
+        color: #fff;
+      }
+      #boton-comenzar:disabled {
+        background: none;
+        visibility: hidden;
+        padding: 0;
+        width: 48px;
+        height: 48px;
+        cursor: default;
+      }
+      #boton-comenzar:disabled::before {
+        content: '';
+        visibility: visible;
+        display: block;
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        box-sizing: border-box;
+        border: 5px solid #ddd;
+        border-color: #ddd transparent #ddd transparent;
+        animation: loading-animation 1.2s linear infinite;
+        margin: 0 auto;
+      }
+      @keyframes loading-animation {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      /* Ocultar botón VR */
       a-scene .a-enter-vr-button {
         display: none !important;
       }
     </style>
   </head>
   <body>
-    <div id="pantalla-carga">
-      <h2>Ocho Memorias AR</h2>
-      <button id="boton-comenzar">Comenzar</button>
+    <div class="splash">
+      <div class="splash-box">
+        <h1><span class="splash-highlight">Ocho memorias</span> desde la sombra</h1>
+        <p>Explorá con tu cámara.</p>
+        <button id="boton-comenzar">Comenzar</button>
+      </div>
     </div>
 
     <a-scene
@@ -50,6 +120,7 @@
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
       device-orientation-permission-ui="enabled: false"
+      style="background-color: #222;"
     >
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
@@ -67,27 +138,26 @@
 
     <script>
       const boton = document.getElementById('boton-comenzar');
-      const pantalla = document.getElementById('pantalla-carga');
+      const splash = document.querySelector('.splash');
       const escena = document.querySelector('a-scene');
 
       boton.addEventListener('click', () => {
+        boton.disabled = true; // spinner
+
+        const ocultarSplash = () => {
+          splash.classList.add('oculto');
+        };
+
         if (escena.hasLoaded) {
-          // Si ya cargó la escena, ocultar la pantalla al toque
-          pantalla.style.display = 'none';
-          // Por si quedó el botón VR, eliminarlo
+          ocultarSplash();
           const botonVR = document.querySelector('.a-enter-vr-button');
           if (botonVR) botonVR.remove();
         } else {
-          // Esperar a que la escena cargue
-          escena.addEventListener(
-            'loaded',
-            () => {
-              pantalla.style.display = 'none';
-              const botonVR = document.querySelector('.a-enter-vr-button');
-              if (botonVR) botonVR.remove();
-            },
-            { once: true }
-          );
+          escena.addEventListener('loaded', () => {
+            ocultarSplash();
+            const botonVR = document.querySelector('.a-enter-vr-button');
+            if (botonVR) botonVR.remove();
+          }, { once: true });
         }
       });
     </script>
