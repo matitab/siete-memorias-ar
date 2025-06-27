@@ -5,12 +5,43 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      body {
+        margin: 0; padding: 0;
+        overflow: hidden;
+        font-family: sans-serif;
+      }
+      #startButton {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 15px 30px;
+        font-size: 20px;
+        cursor: pointer;
+        background: #2196F3;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        z-index: 10;
+      }
+      a-scene {
+        display: none; /* Oculto la escena hasta que arranque */
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: target.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <button id="startButton">Comenzar recorrido</button>
+
+    <a-scene mindar-image="imageTargetSrc: target.mind;" 
+             color-space="sRGB" 
+             renderer="colorManagement: true, physicallyCorrectLights" 
+             vr-mode-ui="enabled: false" 
+             device-orientation-permission-ui="enabled: false"
+             embedded
+    >
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      <!-- Mostramos texto al detectar la imagen -->
       <a-entity mindar-image-target="targetIndex: 0">
         <a-text 
           value="Perro" 
@@ -22,5 +53,29 @@
         ></a-text>
       </a-entity>
     </a-scene>
+
+    <script>
+      const startBtn = document.getElementById('startButton');
+      const scene = document.querySelector('a-scene');
+
+      startBtn.addEventListener('click', () => {
+        startBtn.style.display = 'none'; // oculto botón
+        scene.style.display = 'block';   // muestro la escena
+
+        // Arranco MindAR, que está pausado por defecto
+        const mindarComponent = scene.components['mindar-image'];
+        if (mindarComponent) {
+          mindarComponent.start();
+        }
+      });
+
+      // Por las dudas, al cargar la página dejo MindAR pausado
+      window.addEventListener('load', () => {
+        const mindarComponent = scene.components['mindar-image'];
+        if (mindarComponent) {
+          mindarComponent.stop();
+        }
+      });
+    </script>
   </body>
 </html>
