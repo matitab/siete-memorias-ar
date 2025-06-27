@@ -60,12 +60,10 @@
         user-select: none;
       }
 
-      /* Ocultar botón VR sí o sí */
       a-scene .a-enter-vr-button {
         display: none !important;
       }
 
-      /* Ajustes para pantallas móviles (hasta 425px ancho) */
       @media (max-width: 425px) {
         #titulo-principal {
           font-size: 1.4em;
@@ -93,7 +91,7 @@
     </div>
 
     <a-scene
-      mindar-image="imageTargetSrc: target.mind;"
+      mindar-image="imageTargetSrc: targets.mind;"
       color-space="sRGB"
       renderer="colorManagement: true, physicallyCorrectLights"
       vr-mode-ui="enabled: false"
@@ -104,6 +102,28 @@
       <a-entity mindar-image-target="targetIndex: 0">
         <a-text
           value="Perro"
+          color="black"
+          align="center"
+          position="0 0 0.1"
+          width="1.5"
+          font="mozillavr"
+        ></a-text>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 1">
+        <a-text
+          value="Gato"
+          color="black"
+          align="center"
+          position="0 0 0.1"
+          width="1.5"
+          font="mozillavr"
+        ></a-text>
+      </a-entity>
+
+      <a-entity mindar-image-target="targetIndex: 2">
+        <a-text
+          value="Pájaro"
           color="black"
           align="center"
           position="0 0 0.1"
