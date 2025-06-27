@@ -6,23 +6,13 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
     <style>
-      * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-      }
-      body, html {
-        height: 100%;
-        overflow: hidden;
-      }
-
       #pantalla-carga {
         position: fixed;
         top: 0;
         left: 0;
-        width: 100dvw;
-        height: 100dvh;
-        background: #1a1a1a;
+        width: 100vw;
+        height: 100vh;
+        background: #1a1a1a; /* Fondo gris oscuro */
         color: white;
         display: flex;
         justify-content: center;
@@ -30,7 +20,6 @@
         z-index: 9999;
         flex-direction: column;
       }
-
       #boton-comenzar {
         padding: 1em 2em;
         font-size: 1.2em;
@@ -41,51 +30,39 @@
         cursor: pointer;
         margin-top: 1em;
       }
-
-      #contenedor-escena {
-        display: none;
-      }
     </style>
   </head>
   <body>
-    <!-- Pantalla de carga -->
     <div id="pantalla-carga">
       <h2>Ocho Memorias AR</h2>
       <button id="boton-comenzar">Comenzar</button>
     </div>
 
-    <!-- Contenedor de la escena oculto al principio -->
-    <div id="contenedor-escena">
-      <a-scene
-        mindar-image="imageTargetSrc: target.mind;"
-        color-space="sRGB"
-        renderer="colorManagement: true, physicallyCorrectLights"
-        vr-mode-ui="enabled: false"
-        device-orientation-permission-ui="enabled: false"
-      >
-        <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+    <a-scene
+      mindar-image="imageTargetSrc: target.mind;"
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: false"
+    >
+      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-        <a-entity mindar-image-target="targetIndex: 0">
-          <a-text 
-            value="Perro" 
-            color="black" 
-            align="center"
-            position="0 0 0.1"
-            width="1.5"
-            font="mozillavr"
-          ></a-text>
-        </a-entity>
-      </a-scene>
-    </div>
+      <a-entity mindar-image-target="targetIndex: 0">
+        <a-text 
+          value="Perro" 
+          color="black" 
+          align="center"
+          position="0 0 0.1"
+          width="1.5"
+          font="mozillavr"
+        ></a-text>
+      </a-entity>
+    </a-scene>
 
     <script>
-      const boton = document.getElementById('boton-comenzar');
-      boton.addEventListener('click', () => {
-        // Mostrar escena y ocultar pantalla de carga
+      document.getElementById('boton-comenzar').addEventListener('click', () => {
         document.getElementById('pantalla-carga').style.display = 'none';
-        document.getElementById('contenedor-escena').style.display = 'block';
       });
     </script>
   </body>
 </html>
-
