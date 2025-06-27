@@ -1,26 +1,131 @@
-
+<!DOCTYPE html>
 <html>
   <head>
+    <meta charset="UTF-8" />
+    <title>Ocho Memorias AR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+        overflow: hidden;
+        font-family: 'Montserrat', sans-serif;
+        height: 100%;
+        background: #121212;
+        touch-action: none;
+      }
+
+      .splash {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        background: #121212;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .splash-box {
+        background: #1f1f1f;
+        padding: 50px 30px;
+        border-radius: 10px;
+        text-align: center;
+        max-width: 90%;
+        width: 320px;
+        box-shadow: 0 0 10px rgba(255 255 255 / 0.1);
+      }
+
+      .splash h1 {
+        font-size: 30px;
+        color: #eee;
+        margin: 0;
+      }
+
+      .splash-highlight {
+        color: #88c0d0;
+      }
+
+      .splash p {
+        color: #bbb;
+        margin-top: 15px;
+        font-size: 18px;
+      }
+
+      #launchButton {
+        margin-top: 30px;
+        background-color: #3b4252;
+        border: none;
+        border-radius: 8px;
+        padding: 14px 30px;
+        font-size: 18px;
+        color: #ddd;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
+
+      #launchButton:hover {
+        background-color: #5e81ac;
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
-    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/band.mind; maxTrack: 2" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-      <a-assets>
-        <a-asset-item id="bearModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/bear/scene.gltf"></a-asset-item>
-        <a-asset-item id="raccoonModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/band-example/raccoon/scene.gltf"></a-asset-item>
-      </a-assets>
+    <!-- Splash -->
+    <div class="splash" id="splash">
+      <div class="splash-box">
+        <h1><span class="splash-highlight">Ocho memorias</span> desde la sombra</h1>
+        <p>Explorá con tu cámara.</p>
+        <button id="launchButton">Empezar recorrido</button>
+      </div>
+    </div>
 
+    <!-- Escena AR -->
+    <a-scene
+      mindar-image="imageTargetSrc: target.mind; autoStart: false"
+      embedded
+      color-space="sRGB"
+      renderer="colorManagement: true, physicallyCorrectLights"
+      vr-mode-ui="enabled: false"
+      device-orientation-permission-ui="enabled: true"
+    >
+      <a-assets></a-assets>
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
       <a-entity mindar-image-target="targetIndex: 0">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#raccoonModel" animation-mixer>
-      </a-entity>
-      <a-entity mindar-image-target="targetIndex: 1">
-        <a-gltf-model rotation="0 0 0 " position="0 -0.25 0" scale="0.05 0.05 0.05" src="#bearModel" animation-mixer>
+        <a-text 
+          value="Perro"
+          color="black"
+          align="center"
+          position="0 0 0.1"
+          width="1.5"
+          font="mozillavr"
+        ></a-text>
       </a-entity>
     </a-scene>
+
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const splash = document.getElementById("splash");
+        const launchButton = document.getElementById("launchButton");
+        const scene = document.querySelector("a-scene");
+
+        launchButton.addEventListener("click", () => {
+          splash.style.display = "none";
+
+          const mindarComponent = scene.components["mindar-image"];
+          if (mindarComponent) {
+            mindarComponent.start(); // arranca la cámara y el tracking
+          } else {
+            console.error("No se encontró el componente mindar-image.");
+          }
+        });
+      });
+    </script>
   </body>
 </html>
+
