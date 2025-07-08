@@ -183,6 +183,10 @@
 
         </a-scene>
 
+    <!-- Scripts -->
+
+    <!-- Oculta la pantalla de carga al iniciar la escena -->
+
     <script>
       const boton = document.getElementById('boton-comenzar');
       const pantalla = document.getElementById('pantalla-carga');
@@ -207,5 +211,22 @@
         }
       });
     </script>
+
+    <!-- Script para reproducir el video al detectar el marcador "Perro" -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const video = document.getElementById("video-perro");
+        const perroTarget = document.querySelector('[mindar-image-target="targetIndex: 2"]');
+
+        perroTarget.addEventListener("targetFound", () => {
+          video.play();
+        });
+
+        perroTarget.addEventListener("targetLost", () => {
+          video.pause();
+        });
+      });
+    </script>
+
   </body>
 </html>
