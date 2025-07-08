@@ -115,7 +115,7 @@
   <body>
 
     <!-- Video agregado -->
-    <video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline muted style="visibility:hidden;position:absolute;left:-9999px;"></video>
+    <video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline style="visibility:hidden;position:absolute;left:-9999px;"></video>
 
     <!-- Texto Pantalla de carga -->
     <div id="pantalla-carga">
@@ -136,12 +136,14 @@
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera> 
 
       <!-- Targets del archivo targets.mind (por ahora 3)-->
+
+      <!-- position="x y z"-->
       <a-entity mindar-image-target="targetIndex: 0">
         <a-text
           value="Gato"
           color="black"
           align="center"
-          position="0 0 0.1"
+          position="0 0 0.1"  
           width="1.5"
           font="mozillavr"
         ></a-text>
@@ -163,7 +165,7 @@
           value="Perro"
           color="black"
           align="center"
-          position="0 0 0.1"
+          position="0 0.5 0.1"
           width="1.5"
           font="mozillavr"
         ></a-text>
@@ -171,12 +173,12 @@
         <a-video
           src="#video-perro"
           position="0 0 0"
-          width="1.5"
-          height="1"
+          width="1"
+          height="0.5"
           rotation="0 0 0"
           autoplay="true"
           loop="true"
-          muted="true"
+          muted="false"
           playsinline="true"
         ></a-video>
       </a-entity>
