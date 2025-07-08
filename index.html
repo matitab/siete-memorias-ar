@@ -126,8 +126,8 @@
     </div>
 
     <!-- Botón de Play/Pausa -->
-    <button id="boton-play-pausa" style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
-    ▶️ / ⏸️
+    <button id="boton-play-pausa" style="position: fixed; bottom: 20px; left: 20px; z-index: 10000; display: none;">
+    ▶️
     </button>
 
 
@@ -219,21 +219,53 @@
       });
     </script>
 
-    <!-- Script para reproducir el video al detectar el marcador "Perro" -->
     <script>
       document.addEventListener("DOMContentLoaded", () => {
-        const video = document.getElementById("video-perro");
-        const perroTarget = document.querySelector('[mindar-image-target="targetIndex: 2"]');
+        const botonPlayPausa = document.getElementById("boton-play-pausa");
+        let videoActivo = null;
 
-        perroTarget.addEventListener("targetFound", () => {
-          video.play();
+        const videosTargets = {
+          2: document.getElementById("video-perro"),
+          // Añadir otros videos acá
+          // 1: document.getElementById("video-carpincho"),
+          // 0: document.getElementById("video-gato"),
+        };
+
+        const targets = document.querySelectorAll("[mindar-image-target]");
+
+        targets.forEach(target => {
+          const targetIndex = target.getAttribute("mindar-image-target").match(/\d+/)[0];
+
+          target.addEventListener("targetFound", () => {
+            videoActivo = videosTargets[targetIndex];
+            if (!videoActivo) return;
+
+            botonPlayPausa.style.display = "block";
+            botonPlayPausa.textContent = videoActivo.paused ? "▶️" : "⏸️";
+          });
+
+          target.addEventListener("targetLost", () => {
+            if (videoActivo) {
+              videoActivo.pause();
+            }
+            botonPlayPausa.style.display = "none";
+            videoActivo = null;
+          });
         });
 
-        perroTarget.addEventListener("targetLost", () => {
-          video.pause();
+        botonPlayPausa.addEventListener("click", () => {
+          if (!videoActivo) return;
+          if (videoActivo.paused) {
+            videoActivo.play();
+            botonPlayPausa.textContent = "⏸️";
+          } else {
+            videoActivo.pause();
+            botonPlayPausa.textContent = "▶️";
+          }
         });
       });
     </script>
 
+    
   </body>
 </html>
