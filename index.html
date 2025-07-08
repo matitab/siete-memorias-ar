@@ -113,6 +113,10 @@
 
   </head>
   <body>
+
+    <!-- Video agregado -->
+    <video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline muted style="visibility:hidden;position:absolute;left:-9999px;"></video>
+
     <!-- Texto Pantalla de carga -->
     <div id="pantalla-carga">
       <h1 id="titulo-principal">Ocho memorias</h1>
@@ -163,8 +167,21 @@
           width="1.5"
           font="mozillavr"
         ></a-text>
+
+        <a-video
+          src="#video-perro"
+          position="0 0 0"
+          width="1.5"
+          height="1"
+          rotation="0 0 0"
+          autoplay="true"
+          loop="true"
+          muted="true"
+          playsinline="true"
+        ></a-video>
       </a-entity>
-    </a-scene>
+
+        </a-scene>
 
     <script>
       const boton = document.getElementById('boton-comenzar');
