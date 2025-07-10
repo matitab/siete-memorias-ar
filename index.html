@@ -126,9 +126,18 @@
     </div>
 
     <!-- Botón de Play/Pausa -->
-    <button id="boton-play-pausa" style="position: fixed; bottom: 20px; left: 20px; z-index: 10000; display: none; font-size: 2em; padding: 0.5em 1em;">
+    
+
+    <button id="boton-play-pausa" style="position: fixed; bottom: 60px; left: 20px; z-index: 10000; display: none; font-size: 2em; padding: 0.5em 1em;">
     ▶️
     </button>
+
+    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
+      <button onclick="encenderLed()" style="font-size: 1.2em; margin-right: 8px;">Encender LED</button>
+      <button onclick="apagarLed()" style="font-size: 1.2em;">Apagar LED</button>
+    </div>
+
+
 
     <!-- Escena A-Frame con MindAR -->
     <a-scene
@@ -266,6 +275,24 @@
       });
     </script>
 
+    <!-- Encender y apagar LED -->
+    <script>
+      const espIp = 'http://192.168.1.122'; // IP del ESP32
+
+      function encenderLed() {
+        fetch(espIp + '/led/on')
+          .then(response => response.text())
+          .then(data => console.log(data))
+          .catch(err => console.error('Error:', err));
+      }
+
+      function apagarLed() {
+        fetch(espIp + '/led/off')
+          .then(response => response.text())
+          .then(data => console.log(data))
+          .catch(err => console.error('Error:', err));
+      }
+    </script>
     
   </body>
 </html>
