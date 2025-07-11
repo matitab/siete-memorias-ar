@@ -1,298 +1,191 @@
 <!DOCTYPE html> 
 <html>
-  <head>
-    <!-- Optimiza funcionamiento en celulares -->
-    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
 
-    <!--Librerías-->
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <!-- Librerías A-Frame y MindAR -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-    <!-- Fuente: "Roboto"-->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
+  <!-- MQTT.js -->
+  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
 
-    <style>
-      body, #pantalla-carga {
-        font-family: 'Roboto', sans-serif;
-      }
+  <!-- Fuente -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
 
-      /* Diseño */
-      #pantalla-carga {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: #1a1a1a;
-        color: white;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        flex-direction: column;
-        text-align: center;
-        padding: 0 1em;
-        opacity: 1;
-        transition: opacity 0.6s ease;
-      }
+  <!-- Estilos -->
+  <style>
+    body, #pantalla-carga { font-family: 'Roboto', sans-serif; }
+    #pantalla-carga {
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: #1a1a1a; color: white; display: flex; justify-content: center; align-items: center;
+      z-index: 9999; flex-direction: column; text-align: center; padding: 0 1em; opacity: 1; transition: opacity 0.6s ease;
+    }
+    #pantalla-carga.fade-out { opacity: 0; }
+    #titulo-principal { font-family: 'Montserrat', sans-serif; font-size: 2em; font-weight: 700; margin: 0; color: white; letter-spacing: 0.05em; }
+    #subtitulo { font-family: 'Montserrat', sans-serif; font-size: 1.8em; margin: 0.1em 0 1.2em 0; color: #4fc3f7; font-weight: 600; letter-spacing: 0.04em; }
+    #boton-comenzar {
+      padding: 1em 2em; font-size: 1.2em; background-color: white; color: #1a1a1a; border: none; border-radius: 0.5em;
+      cursor: pointer; user-select: none; font-weight: 500; font-family: 'Montserrat', sans-serif; transition: background-color 0.3s ease;
+    }
+    #boton-comenzar:hover { background-color: #4fc3f7; color: white; }
+    a-scene .a-enter-vr-button { display: none !important; }
 
-      #pantalla-carga p {
-        margin: 0.2em 0 1.2em 0;
-        font-size: 1.2em;
-        font-weight: 400;
-        color: #ddd;
-        max-width: 300px;
-      }
+    @media (max-width: 425px) {
+      #titulo-principal { font-size: 1.4em; }
+      #subtitulo { font-size: 1.2em; margin-bottom: 1em; }
+      #pantalla-carga p { font-size: 1em; max-width: 260px; }
+      #boton-comenzar { padding: 0.8em 1.5em; font-size: 1em; }
+    }
+  </style>
+</head>
 
-      #pantalla-carga.fade-out {
-        opacity: 0;
-      }
+<body>
 
-      #titulo-principal {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2em;
-        font-weight: 700;
-        margin: 0;
-        color: white;
-        line-height: 1.1;
-        letter-spacing: 0.05em;
-      }
+<!-- Video -->
+<video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline style="visibility:hidden;position:absolute;left:-9999px;"></video>
 
-      #subtitulo {
-        font-family: 'Montserrat', sans-serif;
-        font-size: 1.8em;
-        margin: 0.1em 0 1.2em 0;
-        color: #4fc3f7;
-        font-weight: 600;
-        letter-spacing: 0.04em;
-      }
+<!-- Pantalla de carga -->
+<div id="pantalla-carga">
+  <h1 id="titulo-principal">Ocho memorias</h1>
+  <h2 id="subtitulo">desde la sombra</h2>
+  <p>Explorá el mapa y enfocá los distintos marcadores para conocer las historias.</p>
+  <button id="boton-comenzar">Empezar recorrido</button>
+</div>
 
-      #boton-comenzar {
-        padding: 1em 2em;
-        font-size: 1.2em;
-        background-color: white;
-        color: #1a1a1a;
-        border: none;
-        border-radius: 0.5em;
-        cursor: pointer;
-        user-select: none;
-        font-weight: 500;
-        font-family: 'Montserrat', sans-serif;
-        transition: background-color 0.3s ease;
-      }
+<!-- Botones de control LED -->
+<div style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
+  <button onclick="encenderLed()" style="font-size: 1.2em; margin-right: 8px;">Encender LED</button>
+  <button onclick="apagarLed()" style="font-size: 1.2em;">Apagar LED</button>
+</div>
 
-      #boton-comenzar:hover {
-        background-color: #4fc3f7;
-        color: white;
-      }
+<!-- Escena MindAR -->
+<a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
+         color-space="sRGB"
+         renderer="colorManagement: true, physicallyCorrectLights"
+         vr-mode-ui="enabled: false"
+         device-orientation-permission-ui="enabled: false">
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera> 
 
-      /*Oculta el botón "VR" de A-Frame*/
-      a-scene .a-enter-vr-button {
-        display: none !important;
-      }
+  <a-entity mindar-image-target="targetIndex: 0">
+    <a-text value="Gato" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
+  </a-entity>
 
-      @media (max-width: 425px) {
-        #titulo-principal {
-          font-size: 1.4em;
-        }
-        #subtitulo {
-          font-size: 1.2em;
-          margin-bottom: 1em;
-        }
-        #pantalla-carga p {
-          font-size: 1em;
-          max-width: 260px;
-        }
-        #boton-comenzar {
-          padding: 0.8em 1.5em;
-          font-size: 1em;
-        }
-      }
-    </style>
+  <a-entity mindar-image-target="targetIndex: 1">
+    <a-text value="Carpincho" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
+  </a-entity>
 
-  </head>
-  <body>
+  <a-entity mindar-image-target="targetIndex: 2">
+    <a-text value="Perro" color="black" align="center" position="0 0.5 0.1" width="1.5" font="mozillavr"></a-text>
+    <a-video src="#video-perro" position="0 0 0" width="1" height="0.7" rotation="0 0 0" muted="false" playsinline="true"></a-video>
+  </a-entity>
+</a-scene>
 
-    <!-- Video agregado -->
-    <video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline style="visibility:hidden;position:absolute;left:-9999px;"></video>
+<!-- Scripts: Pantalla carga -->
+<script>
+  const boton = document.getElementById('boton-comenzar');
+  const pantalla = document.getElementById('pantalla-carga');
+  const escena = document.querySelector('a-scene');
 
-    <!-- Texto Pantalla de carga -->
-    <div id="pantalla-carga">
-      <h1 id="titulo-principal">Ocho memorias</h1>
-      <h2 id="subtitulo">desde la sombra</h2>
-      <p>Explorá el mapa y enfocá los distintos marcadores para conocer las historias.</p>
-      <button id="boton-comenzar">Empezar recorrido</button>
-    </div>
+  function ocultarPantalla() {
+    pantalla.classList.add('fade-out');
+    pantalla.addEventListener('transitionend', () => {
+      pantalla.style.display = 'none';
+      const botonVR = document.querySelector('.a-enter-vr-button');
+      if (botonVR) botonVR.remove();
+    }, { once: true });
+  }
 
-    <!-- Botón de Play/Pausa -->
-    
+  boton.addEventListener('click', () => {
+    if (escena.hasLoaded) {
+      ocultarPantalla();
+    } else {
+      escena.addEventListener('loaded', () => {
+        ocultarPantalla();
+      }, { once: true });
+    }
+  });
+</script>
 
-    <button id="boton-play-pausa" style="position: fixed; bottom: 60px; left: 20px; z-index: 10000; display: none; font-size: 2em; padding: 0.5em 1em;">
-    ▶️
-    </button>
+<!-- Scripts: Play/Pause videos -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const botonPlayPausa = document.getElementById("boton-play-pausa");
+    let videoActivo = null;
 
-    <div style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
-      <button onclick="encenderLed()" style="font-size: 1.2em; margin-right: 8px;">Encender LED</button>
-      <button onclick="apagarLed()" style="font-size: 1.2em;">Apagar LED</button>
-    </div>
+    const videosTargets = {
+      2: document.getElementById("video-perro"),
+    };
 
+    const targets = document.querySelectorAll("[mindar-image-target]");
 
+    targets.forEach(target => {
+      const targetIndex = target.getAttribute("mindar-image-target").match(/\d+/)[0];
 
-    <!-- Escena A-Frame con MindAR -->
-    <a-scene
-      mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
-      color-space="sRGB"
-      renderer="colorManagement: true, physicallyCorrectLights"
-      vr-mode-ui="enabled: false"
-      device-orientation-permission-ui="enabled: false"
-    >
-      <!-- Solicita al usuario permiso para acceder a la cámara-->
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera> 
+      target.addEventListener("targetFound", () => {
+        videoActivo = videosTargets[targetIndex];
+        if (!videoActivo) return;
 
-      <!-- Targets del archivo targets.mind (por ahora 3)-->
-
-      <!-- position="x y z"-->
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-text
-          value="Gato"
-          color="black"
-          align="center"
-          position="0 0 0.1"  
-          width="1.5"
-          font="mozillavr"
-        ></a-text>
-      </a-entity>
-
-      <a-entity mindar-image-target="targetIndex: 1">
-        <a-text
-          value="Carpincho"
-          color="black"
-          align="center"
-          position="0 0 0.1"
-          width="1.5"
-          font="mozillavr"
-        ></a-text>
-      </a-entity>
-
-      <a-entity mindar-image-target="targetIndex: 2">
-        <a-text
-          value="Perro"
-          color="black"
-          align="center"
-          position="0 0.5 0.1"
-          width="1.5"
-          font="mozillavr"
-        ></a-text>
-
-        <!-- Video agregado al target Perro -->
-        <!-- Eliminado: autoplay="true"
-          loop="true"-->
-        <a-video
-          src="#video-perro"
-          position="0 0 0"
-          width="1"
-          height="0.7"
-          rotation="0 0 0"
-          muted="false"
-          playsinline="true"
-        ></a-video>
-      </a-entity>
-
-        </a-scene>
-
-    <!-- Scripts -->
-    <!-- Oculta la pantalla de carga al iniciar la escena -->
-    <script>
-      const boton = document.getElementById('boton-comenzar');
-      const pantalla = document.getElementById('pantalla-carga');
-      const escena = document.querySelector('a-scene');
-
-      function ocultarPantalla() {
-        pantalla.classList.add('fade-out');
-        pantalla.addEventListener('transitionend', () => {
-          pantalla.style.display = 'none';
-          const botonVR = document.querySelector('.a-enter-vr-button');
-          if (botonVR) botonVR.remove();
-        }, { once: true });
-      }
-
-      boton.addEventListener('click', () => {
-        if (escena.hasLoaded) {
-          ocultarPantalla();
-        } else {
-          escena.addEventListener('loaded', () => {
-            ocultarPantalla();
-          }, { once: true });
-        }
+        botonPlayPausa.style.display = "block";
+        botonPlayPausa.textContent = videoActivo.paused ? "▶️" : "⏸️";
       });
-    </script>
 
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const botonPlayPausa = document.getElementById("boton-play-pausa");
-        let videoActivo = null;
-
-        const videosTargets = {
-          2: document.getElementById("video-perro"),
-          // Añadir otros videos acá
-          // 1: document.getElementById("video-carpincho"),
-          // 0: document.getElementById("video-gato"),
-        };
-
-        const targets = document.querySelectorAll("[mindar-image-target]");
-
-        targets.forEach(target => {
-          const targetIndex = target.getAttribute("mindar-image-target").match(/\d+/)[0];
-
-          target.addEventListener("targetFound", () => {
-            videoActivo = videosTargets[targetIndex];
-            if (!videoActivo) return;
-
-            botonPlayPausa.style.display = "block";
-            botonPlayPausa.textContent = videoActivo.paused ? "▶️" : "⏸️";
-          });
-
-          target.addEventListener("targetLost", () => {
-            if (videoActivo) {
-              videoActivo.pause();
-            }
-            botonPlayPausa.style.display = "none";
-            videoActivo = null;
-          });
-        });
-
-        botonPlayPausa.addEventListener("click", () => {
-          if (!videoActivo) return;
-          if (videoActivo.paused) {
-            videoActivo.play();
-            botonPlayPausa.textContent = "⏸️";
-          } else {
-            videoActivo.pause();
-            botonPlayPausa.textContent = "▶️";
-          }
-        });
+      target.addEventListener("targetLost", () => {
+        if (videoActivo) {
+          videoActivo.pause();
+        }
+        botonPlayPausa.style.display = "none";
+        videoActivo = null;
       });
-    </script>
+    });
 
-    <!-- Encender y apagar LED -->
-    <script>
-      const espIp = 'http://192.168.1.122'; // IP del ESP32
-
-      function encenderLed() {
-        fetch(espIp + '/led/on')
-          .then(response => response.text())
-          .then(data => console.log(data))
-          .catch(err => console.error('Error:', err));
+    botonPlayPausa.addEventListener("click", () => {
+      if (!videoActivo) return;
+      if (videoActivo.paused) {
+        videoActivo.play();
+        botonPlayPausa.textContent = "⏸️";
+      } else {
+        videoActivo.pause();
+        botonPlayPausa.textContent = "▶️";
       }
+    });
+  });
+</script>
 
-      function apagarLed() {
-        fetch(espIp + '/led/off')
-          .then(response => response.text())
-          .then(data => console.log(data))
-          .catch(err => console.error('Error:', err));
-      }
-    </script>
-    
-  </body>
+<!-- Scripts: MQTT -->
+<script>
+  const options = {
+    username: 'esp32user', // Usuario HiveMQ
+    password: 'Ochohistorias2025',  // contraseña HiveMQ
+    clean: true,
+    reconnectPeriod: 1000,
+    connectTimeout: 30 * 1000,
+    clientId: 'WebClient_' + Math.random().toString(16).substr(2, 8),
+    protocol: 'wss',
+  };
+
+  const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt'; // 👉 Cambiá por tu host HiveMQ
+  const client = mqtt.connect(connectUrl, options);
+
+  client.on('connect', () => {
+    console.log('Conectado a HiveMQ Cloud desde el Frontend');
+  });
+
+  client.on('error', (err) => {
+    console.error('Error en MQTT:', err);
+  });
+
+  function encenderLed() {
+    client.publish('led/control', 'on');
+    console.log('Enviado: on');
+  }
+
+  function apagarLed() {
+    client.publish('led/control', 'off');
+    console.log('Enviado: off');
+  }
+</script>
+
+</body>
 </html>
