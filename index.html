@@ -189,5 +189,34 @@
   }
 </script>
 
+<!-- LED GPIO HIGH/LOW según el marcador detectado -->
+<script>
+  function controlarLedPorMarcador(targetIndex, topic) {
+    const target = document.querySelector(`[mindar-image-target="targetIndex: ${targetIndex}"]`);
+    
+    if (!target) {
+      console.warn(`No se encontró el marcador targetIndex: ${targetIndex}`);
+      return;
+    }
+
+    target.addEventListener("targetFound", () => {
+      console.log(`Marcador ${targetIndex} detectado`);
+      client.publish(topic, 'on');
+    });
+
+    target.addEventListener("targetLost", () => {
+      console.log(`Marcador ${targetIndex} perdido`);
+      client.publish(topic, 'off');
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    controlarLedPorMarcador(0, 'led/pin4');  // Gato -> Pin 4 (GPIO 4)
+    controlarLedPorMarcador(1, 'led/pin13'); // Carpincho -> Pin 13
+    controlarLedPorMarcador(2, 'led/pin5');  // Perro -> Pin 5
+  });
+</script>
+
+
 </body>
 </html>
