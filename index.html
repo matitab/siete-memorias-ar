@@ -84,27 +84,29 @@
 
 <!-- Scripts: Pantalla carga -->
 <script>
-  const boton = document.getElementById('boton-comenzar');
-  const pantalla = document.getElementById('pantalla-carga');
-  const escena = document.querySelector('a-scene');
+  document.addEventListener('DOMContentLoaded', () => {
+    const boton = document.getElementById('boton-comenzar');
+    const pantalla = document.getElementById('pantalla-carga');
+    const escena = document.querySelector('a-scene');
 
-  function ocultarPantalla() {
-    pantalla.classList.add('fade-out');
-    pantalla.addEventListener('transitionend', () => {
-      pantalla.style.display = 'none';
-      const botonVR = document.querySelector('.a-enter-vr-button');
-      if (botonVR) botonVR.remove();
-    }, { once: true });
-  }
-
-  boton.addEventListener('click', () => {
-    if (escena.hasLoaded) {
-      ocultarPantalla();
-    } else {
-      escena.addEventListener('loaded', () => {
-        ocultarPantalla();
+    function ocultarPantalla() {
+      pantalla.classList.add('fade-out');
+      pantalla.addEventListener('transitionend', () => {
+        pantalla.style.display = 'none';
+        const botonVR = document.querySelector('.a-enter-vr-button');
+        if (botonVR) botonVR.remove();
       }, { once: true });
     }
+
+    boton.addEventListener('click', () => {
+      if (escena.hasLoaded) {
+        ocultarPantalla();
+      } else {
+        escena.addEventListener('loaded', () => {
+          ocultarPantalla();
+        }, { once: true });
+      }
+    });
   });
 </script>
 
@@ -165,7 +167,7 @@
     protocol: 'wss',
   };
 
-  const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt'; // 👉 Cambiá por tu host HiveMQ
+  const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt'; // Cambia por tu host HiveMQ
   const client = mqtt.connect(connectUrl, options);
 
   client.on('connect', () => {
