@@ -138,55 +138,45 @@
 <script>
   document.addEventListener("DOMContentLoaded", () => {
     const botonPlayPausa = document.getElementById("boton-play-pausa");
-    let videoActivo = null;
+    const videoPerro = document.getElementById("video-perro");
+    const perroTarget = document.querySelector('[mindar-image-target="targetIndex: 2"]');
 
-    const videosTargets = {
-      2: document.getElementById("video-perro"),
-    };
+    // Ocultar el botón al principio
+    botonPlayPausa.style.display = "none";
 
-    const targets = document.querySelectorAll("[data-index]");
-
-
-    targets.forEach(target => {
-      const targetIndex = parseInt(target.dataset.index);
-
-      target.addEventListener("targetFound", () => {
-      videoActivo = videosTargets[targetIndex];
-      if (!videoActivo) return;
-
-      videoActivo.style.display = "block";   // Mostrar video
-      videoActivo.style.position = "static";
-      videoActivo.style.left = "0";
+    // Mostrar y reproducir el video cuando detecta el target
+    perroTarget.addEventListener("targetFound", () => {
+      videoPerro.style.display = "block";
+      videoPerro.style.position = "static";
+      videoPerro.style.left = "0";
+      videoPerro.play();
 
       botonPlayPausa.style.display = "block";
-      botonPlayPausa.textContent = videoActivo.paused ? "▶️" : "⏸️";
+      botonPlayPausa.textContent = "⏸️";
     });
 
-    target.addEventListener("targetLost", () => {
-      if (videoActivo) {
-        videoActivo.pause();
-        videoActivo.style.display = "none";   // Ocultar video
-        videoActivo.style.position = "absolute";
-        videoActivo.style.left = "-9999px";
-      }
+    // Ocultar y pausar el video cuando pierde el target
+    perroTarget.addEventListener("targetLost", () => {
+      videoPerro.pause();
+      videoPerro.style.display = "none";
+      videoPerro.style.position = "absolute";
+      videoPerro.style.left = "-9999px";
+
       botonPlayPausa.style.display = "none";
-      videoActivo = null;
-    });
     });
 
+    // Play/Pause manual
     botonPlayPausa.addEventListener("click", () => {
-      if (!videoActivo) return;
-      if (videoActivo.paused) {
-        videoActivo.play();
+      if (videoPerro.paused) {
+        videoPerro.play();
         botonPlayPausa.textContent = "⏸️";
       } else {
-        videoActivo.pause();
+        videoPerro.pause();
         botonPlayPausa.textContent = "▶️";
       }
     });
   });
 </script>
-
 
 <!-- Scripts: MQTT -->
 <script>
