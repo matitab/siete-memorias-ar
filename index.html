@@ -59,11 +59,12 @@
   <button id="boton-play-pausa" style="font-size: 1.2em; display:none;">▶️</button>
 </div>
 
-<!-- Botones de control LED -->
+<!-- Botones de control LED 
 <div style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
   <button onclick="encenderLed()" style="font-size: 1.2em; margin-right: 8px;">Encender LED</button>
   <button onclick="apagarLed()" style="font-size: 1.2em;">Apagar LED</button>
 </div>
+-->
 
 <!-- Escena MindAR -->
 <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
@@ -73,15 +74,15 @@
          device-orientation-permission-ui="enabled: false">
   <a-camera position="0 0 0" look-controls="enabled: false"></a-camera> 
 
-  <a-entity mindar-image-target="targetIndex: 0">
+  <a-entity mindar-image-target="targetIndex: 0" data-index="0">
     <a-text value="Gato" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
   </a-entity>
 
-  <a-entity mindar-image-target="targetIndex: 1">
+  <a-entity mindar-image-target="targetIndex: 1" data-index="1">
     <a-text value="Carpincho" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
   </a-entity>
 
-  <a-entity mindar-image-target="targetIndex: 2">
+  <a-entity mindar-image-target="targetIndex: 2" data-index="2">
     <a-text value="Perro" color="black" align="center" position="0 0.5 0.1" width="1.5" font="mozillavr"></a-text>
     <a-video src="#video-perro" position="0 0 0" width="1" height="0.7" rotation="0 0 0" muted="false" playsinline="true"></a-video>
   </a-entity>
@@ -125,14 +126,19 @@
       2: document.getElementById("video-perro"),
     };
 
-    const targets = document.querySelectorAll("[mindar-image-target]");
+    const targets = document.querySelectorAll("[data-index]");
+
 
     targets.forEach(target => {
-      const targetIndex = target.getAttribute("mindar-image-target").match(/\d+/)[0];
+      const targetIndex = parseInt(target.dataset.index);
 
       target.addEventListener("targetFound", () => {
         videoActivo = videosTargets[targetIndex];
         if (!videoActivo) return;
+
+        videoActivo.style.visibility = "visible";
+        videoActivo.style.position = "static";
+        videoActivo.style.left = "0";
 
         botonPlayPausa.style.display = "block";
         botonPlayPausa.textContent = videoActivo.paused ? "▶️" : "⏸️";
@@ -141,6 +147,9 @@
       target.addEventListener("targetLost", () => {
         if (videoActivo) {
           videoActivo.pause();
+          videoActivo.style.visibility = "hidden";
+          videoActivo.style.position = "absolute";
+          videoActivo.style.left = "-9999px";
         }
         botonPlayPausa.style.display = "none";
         videoActivo = null;
@@ -159,6 +168,7 @@
     });
   });
 </script>
+
 
 <!-- Scripts: MQTT -->
 <script>
