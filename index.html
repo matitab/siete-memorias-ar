@@ -38,6 +38,24 @@
       #pantalla-carga p { font-size: 1em; max-width: 260px; }
       #boton-comenzar { padding: 0.8em 1.5em; font-size: 1em; }
     }
+
+    /*Estilo botón*/
+    #boton-play-pausa {
+    font-size: 2.5em;
+    padding: 0.4em 0.8em;
+    border-radius: 0.4em;
+    cursor: pointer;
+    background-color: white;
+    color: #1a1a1a;
+    border: none;
+    user-select: none;
+    transition: background-color 0.3s ease;
+  }
+
+  #boton-play-pausa:hover {
+    background-color: #4fc3f7;
+    color: white;
+  }
   </style>
 </head>
 
@@ -56,7 +74,7 @@
 
 <!-- Botón de play/pausa video -->
 <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
-  <button id="boton-play-pausa" style="font-size: 1.2em; display:none;">▶️</button>
+  <button id="boton-play-pausa">▶️</button>
 </div>
 
 <!-- Botones de control LED 
@@ -133,27 +151,27 @@
       const targetIndex = parseInt(target.dataset.index);
 
       target.addEventListener("targetFound", () => {
-        videoActivo = videosTargets[targetIndex];
-        if (!videoActivo) return;
+      videoActivo = videosTargets[targetIndex];
+      if (!videoActivo) return;
 
-        videoActivo.style.visibility = "visible";
-        videoActivo.style.position = "static";
-        videoActivo.style.left = "0";
+      videoActivo.style.display = "block";   // Mostrar video
+      videoActivo.style.position = "static";
+      videoActivo.style.left = "0";
 
-        botonPlayPausa.style.display = "block";
-        botonPlayPausa.textContent = videoActivo.paused ? "▶️" : "⏸️";
-      });
+      botonPlayPausa.style.display = "block";
+      botonPlayPausa.textContent = videoActivo.paused ? "▶️" : "⏸️";
+    });
 
-      target.addEventListener("targetLost", () => {
-        if (videoActivo) {
-          videoActivo.pause();
-          videoActivo.style.visibility = "hidden";
-          videoActivo.style.position = "absolute";
-          videoActivo.style.left = "-9999px";
-        }
-        botonPlayPausa.style.display = "none";
-        videoActivo = null;
-      });
+    target.addEventListener("targetLost", () => {
+      if (videoActivo) {
+        videoActivo.pause();
+        videoActivo.style.display = "none";   // Ocultar video
+        videoActivo.style.position = "absolute";
+        videoActivo.style.left = "-9999px";
+      }
+      botonPlayPausa.style.display = "none";
+      videoActivo = null;
+    });
     });
 
     botonPlayPausa.addEventListener("click", () => {
