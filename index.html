@@ -84,6 +84,24 @@
 </div>
 -->
 
+<!-- Contador de marcadores detectados -->
+<div id="contador-marcadores" style="
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10000;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 0.8em 1.2em;
+  border-radius: 0.5em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  display: none;
+">
+  Has encontrado 0 de 3 historias
+</div>
+
+
 <!-- Escena MindAR -->
 <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
          color-space="sRGB"
@@ -240,6 +258,38 @@
   });
 </script>
 
+<!-- Contador de marcadores detectados -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const marcadorDetectado = new Set(); // índices de los target ya escaneados
+    const totalMarcadores = 3;
+    const contadorDiv = document.getElementById("contador-marcadores");
+
+    const actualizarContador = () => {
+      contadorDiv.textContent = `Has encontrado ${marcadorDetectado.size} de ${totalMarcadores} historias`;
+      contadorDiv.style.display = "block";
+
+      if (marcadorDetectado.size === totalMarcadores) {
+        setTimeout(() => {
+          alert("¡Completaste el recorrido!");
+        }, 500);
+      }
+    };
+
+    // eventos de detección
+    [0, 1, 2].forEach(index => {
+      const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
+      if (!target) return;
+
+      target.addEventListener("targetFound", () => {
+        if (!marcadorDetectado.has(index)) {
+          marcadorDetectado.add(index);
+          actualizarContador();
+        }
+      });
+    });
+  });
+</script>
 
 </body>
 </html>
