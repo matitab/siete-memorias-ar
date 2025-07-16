@@ -271,7 +271,7 @@
 
       if (marcadorDetectado.size === totalMarcadores) {
         setTimeout(() => {
-          alert("¡Completaste el recorrido!");
+          document.getElementById("mensaje-final").style.display = "block";
         }, 500);
       }
     };
@@ -288,8 +288,33 @@
         }
       });
     });
+
+    // cierra mensaje con click
+    document.getElementById("mensaje-final").addEventListener("click", () => {
+      document.getElementById("mensaje-final").style.display = "none";
+    });
   });
 </script>
+
+<!-- Cartel recorrido completado -->
+<div id="mensaje-final" style="display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.9);
+  color: white;
+  padding: 2em;
+  font-size: 1.4em;
+  border-radius: 1em;
+  text-align: center;
+  z-index: 10001;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 80vw;">
+  ¡Completaste el recorrido!
+  <br><br>
+  <small>Tocá para cerrar este mensaje</small>
+</div>
 
 </body>
 </html>
