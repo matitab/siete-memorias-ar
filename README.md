@@ -5,4 +5,3 @@ Este proyecto se basa en el escaneo de imágenes con un dispositivo electrónico
 Herramientas utilizadas: 
 * Visual studio code
 * Arduino IDE
-* HiveMQ (broker MQTT)
