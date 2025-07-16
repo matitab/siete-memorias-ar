@@ -16,7 +16,8 @@ const char* mqtt_pass = "Ochohistorias2025";   // Contraseña
 WiFiClientSecure espClient;
 PubSubClient client(espClient);
 
-const int ledPin = 2;  
+// Pines del ESP32 que vamos a utilizar
+int ledPin = 2;  
 int pin_cuatro = 4;
 int pin_cinco = 5;
 int pin_trece = 13;
