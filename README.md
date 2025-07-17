@@ -7,6 +7,7 @@ Herramientas utilizadas:
 * Librería mindAR.js
 * Arduino IDE
 * github pages
+* validator.w3
 
 Comenzamos a diseñar el código del proyecto en los entornos de programación Visual Studio Code y Arduino IDE. Luego los subimos a un repositorio en github que vamos actualizando en función de los cambios que realizamos en el código. Para crear la web estática que servirá como conexión entre el usuario y el programa utilizamos la funcionalidad “github pages”. Accederemos a esta web escaneando un código QR. 
 Dentro de github, contamos con los dos archivos principales del código del proyecto, index.html y targets.mind. En index.html creamos la interfaz y diseñamos la interacción con los distintos marcadores, contenidos en el archivo targets.mind. Este último archivo es interpretado gracias a la librería mindAR - que incluimos en index.html - que maneja la implementación de realidad aumentada en el lenguaje de programación html. Mediante las herramientas que incluye la web de la librería mindAR, entrenamos imágenes con IA y las almacenamos en targets.mind, para luego ser reconocidas desde distintos ángulos y distancias, con cierto margen de error.
