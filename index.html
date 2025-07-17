@@ -133,7 +133,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
 <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
   <button 
     id="boton-play-pausa" 
-    style="font-size: 2.5em; display: none;"
+    style="display: none;"
     >▶️
   </button>
 </div>
@@ -257,9 +257,10 @@ style="visibility:hidden;position:absolute;left:-9999px;">
 <!--         SCRIPTS          -->
 <!-- ======================== -->
 
-<!-- Pantalla de carga -->
+<!-- Carga de contenido -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    /* Pantalla de carga */
     const boton = document.getElementById('boton-comenzar');
     const pantalla = document.getElementById('pantalla-carga');
     const escena = document.querySelector('a-scene');
@@ -280,26 +281,19 @@ style="visibility:hidden;position:absolute;left:-9999px;">
         }, { once: true });
       }
     });
-  });
-</script>
 
-<!-- Play/Pause videos -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
+    /*Play/Pause videos*/
     const botonPlayPausa = document.getElementById("boton-play-pausa");
     const videoPerro = document.getElementById("video-perro");
     const perroTarget = document.querySelector('[mindar-image-target="targetIndex: 2"]');
-
     // Ocultar el botón al principio
     botonPlayPausa.style.display = "none";
-
     // Mostrar y reproducir el video cuando detecta el target
     perroTarget.addEventListener("targetFound", () => {
       videoPerro.style.display = "block";
       videoPerro.style.position = "static";
       videoPerro.style.left = "0";
       videoPerro.play();
-
       botonPlayPausa.style.display = "block";
       botonPlayPausa.textContent = "⏸️";
     });
@@ -309,7 +303,6 @@ style="visibility:hidden;position:absolute;left:-9999px;">
       videoPerro.style.display = "none";
       videoPerro.style.position = "absolute";
       videoPerro.style.left = "-9999px";
-
       botonPlayPausa.style.display = "none";
     });
     // Play/Pause manual
@@ -317,11 +310,42 @@ style="visibility:hidden;position:absolute;left:-9999px;">
       if (videoPerro.paused) {
         videoPerro.play();
         botonPlayPausa.textContent = "⏸️";
-      } else {
+        } else {
         videoPerro.pause();
         botonPlayPausa.textContent = "▶️";
+        }
+      });  
+    
+    /* Contador de marcadores detectados */
+    const marcadorDetectado = new Set(); // índices de los target ya escaneados
+    const totalMarcadores = 3;
+    const contadorDiv = document.getElementById("contador-marcadores");
+    const actualizarContador = () => {
+      contadorDiv.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;
+      contadorDiv.style.display = "block";
+
+      if (marcadorDetectado.size === totalMarcadores) {
+        setTimeout(() => {
+          document.getElementById("mensaje-final").style.display = "block";
+        }, 500);
       }
+    };
+    // eventos de detección (si agregamos más targets, modificar índice)
+    [0, 1, 2].forEach(index => {
+      const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
+      if (!target) return;
+
+      target.addEventListener("targetFound", () => {
+        if (!marcadorDetectado.has(index)) {
+          marcadorDetectado.add(index);
+          actualizarContador();
+        }
+      });
     });
+    // cierra mensaje con click
+    document.getElementById("mensaje-final").addEventListener("click", () => {
+      document.getElementById("mensaje-final").style.display = "none";
+    });     
   });
 </script>
 
@@ -337,7 +361,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     clientId: 'WebClient_' + Math.random().toString(16).substr(2, 8),
     protocol: 'wss',
   };
-  const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt'; // Cambia por tu host HiveMQ
+  const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt';
   const client = mqtt.connect(connectUrl, options);
 
   client.on('connect', () => {
@@ -356,7 +380,6 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   }
 </script>
 -->
-
 <!-- Script encender y apagar LEDs segun reconoce marcadores (habilitar en caso de implementación de uso de LEDs)-->
 <!-- LED GPIO HIGH/LOW según el marcador detectado
 <script>
@@ -382,42 +405,6 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   });
 </script>
 -->
-
-<!-- Contador de marcadores detectados -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const marcadorDetectado = new Set(); // índices de los target ya escaneados
-    const totalMarcadores = 3;
-    const contadorDiv = document.getElementById("contador-marcadores");
-    const actualizarContador = () => {
-      contadorDiv.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;
-      contadorDiv.style.display = "block";
-
-      if (marcadorDetectado.size === totalMarcadores) {
-        setTimeout(() => {
-          document.getElementById("mensaje-final").style.display = "block";
-        }, 500);
-      }
-    };
-
-    // eventos de detección (si agregamos más targets, modificar índice)
-    [0, 1, 2].forEach(index => {
-      const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
-      if (!target) return;
-
-      target.addEventListener("targetFound", () => {
-        if (!marcadorDetectado.has(index)) {
-          marcadorDetectado.add(index);
-          actualizarContador();
-        }
-      });
-    });
-    // cierra mensaje con click
-    document.getElementById("mensaje-final").addEventListener("click", () => {
-      document.getElementById("mensaje-final").style.display = "none";
-    });
-  });
-</script>
 
 </body>
 </html>
