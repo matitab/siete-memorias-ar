@@ -19,24 +19,25 @@
   <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
   -->
 
-  <!-- Fuentes -->
-  <!-- "Roboto" -->
+  <!--#### Fuentes ####-->
+  <!-- Montserrat, Roboto, Fénix -->
   <link 
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap"
-  rel="stylesheet" >
+  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&family=Fenix:wght@400;500&display=swap" 
+  rel="stylesheet" 
+  >
 
   <!-- ======================== -->
   <!--        ESTILOS           -->
   <!-- ======================== -->
   <style>
     /*Estilo pantalla de carga*/
-    body, #pantalla-carga { font-family: 'Roboto', sans-serif; }
+    body, #pantalla-carga { font-family: 'Fenix', sans-serif; }
     #pantalla-carga {
       position: fixed; 
       top: 0; left: 0; 
       width: 100vw; 
       height: 100vh;
-      background: #1a1a1a; 
+      background: #000000; 
       color: white; 
       display: flex; 
       justify-content: center; 
@@ -51,21 +52,39 @@
     #pantalla-carga.fade-out { opacity: 0; }
 
     #titulo-principal { 
-      font-family: 'Montserrat', sans-serif; 
+      font-family: 'Fenix', serif; 
       font-size: 2em; 
       font-weight: 700; 
       margin: 0; 
       color: white; 
-      letter-spacing: 0.05em; }
+    }
 
     #subtitulo { 
-      font-family: 'Montserrat', sans-serif; 
+      font-family: 'Fenix', serif; 
       font-size: 1.8em; 
       margin: 0.1em 0 1.2em 0; 
-      color: #4fc3f7; 
+      color: #3185ac; 
       font-weight: 600; 
-      letter-spacing: 0.04em; }
+      letter-spacing: 0.04em;
     
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid white;
+      display: inline-block;
+      letter-spacing: 0.05em;
+      animation: typing 2s steps(15, end) forwards, blink 0.5s step-end infinite;
+    }
+
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 12.5ch; }
+    }
+
+    @keyframes blink {
+      0%, 100% { border-color: white; }
+      50% { border-color: transparent; }
+    }
+
     #boton-comenzar {
       padding: 1em 2em; 
       font-size: 1.2em; 
@@ -76,12 +95,12 @@
       cursor: pointer; 
       user-select: none; 
       font-weight: 500; 
-      font-family: 'Montserrat', sans-serif; 
+      font-family: 'Fenix', serif; 
       transition: background-color 0.3s ease;
     }
     /*Estilo cuando el mouse pasa por encima*/
     #boton-comenzar:hover { 
-      background-color: #4fc3f7; 
+      background-color: #3185ac; 
       color: white; }
       
     a-scene .a-enter-vr-button { display: block !important; }
@@ -104,7 +123,7 @@
     transition: background-color 0.3s ease;}
     /*Estilo cuando el mouse pasa por encima*/
     #boton-play-pausa:hover {
-      background-color: #4fc3f7;
+      background-color: #3185ac;
       color: white;
     }
 
