@@ -8,10 +8,11 @@
   <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-  <!-- MQTT.js -->
+  <!-- MQTT.js, implementa protocolo MQTT (habilitar en caso de implementación de uso de LEDs)
   <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+  -->
 
-  <!-- Fuente -->
+  <!-- Fuentes -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- Estilos -->
@@ -31,14 +32,12 @@
     }
     #boton-comenzar:hover { background-color: #4fc3f7; color: white; }
     a-scene .a-enter-vr-button { display: none !important; }
-
     @media (max-width: 425px) {
       #titulo-principal { font-size: 1.4em; }
       #subtitulo { font-size: 1.2em; margin-bottom: 1em; }
       #pantalla-carga p { font-size: 1em; max-width: 260px; }
       #boton-comenzar { padding: 0.8em 1.5em; font-size: 1em; }
     }
-
     /*Estilo botón*/
     #boton-play-pausa {
     font-size: 2em;
@@ -51,7 +50,6 @@
     user-select: none;
     transition: background-color 0.3s ease;
   }
-
   #boton-play-pausa:hover {
     background-color: #4fc3f7;
     color: white;
@@ -60,10 +58,6 @@
 </head>
 
 <body>
-
-<!-- Video -->
-<video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline style="visibility:hidden;position:absolute;left:-9999px;"></video>
-
 <!-- Pantalla de carga -->
 <div id="pantalla-carga">
   <h1 id="titulo-principal">Ocho memorias</h1>
@@ -72,12 +66,24 @@
   <button id="boton-comenzar">Empezar recorrido</button>
 </div>
 
+<!--#### ASSETS ####-->
+<!-- Video de prueba 1-->
+<video 
+id="video-perro" 
+src="assets/video1test.mp4" 
+preload="auto"
+loop
+playsinline 
+style="visibility:hidden;position:absolute;left:-9999px;">
+</video>
+
+<!-- ####BOTONES/INTERACCIÓN DEL USUARIO ####-->
 <!-- Botón de play/pausa video -->
 <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
   <button id="boton-play-pausa" style="font-size: 2.5em; display: none;">▶️</button>
 </div>
 
-<!-- Botones de control LED 
+<!-- Botones de control LED (habilitar para facilitar testeo)
 <div style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
   <button onclick="encenderLed()" style="font-size: 1.2em; margin-right: 8px;">Encender LED</button>
   <button onclick="apagarLed()" style="font-size: 1.2em;">Apagar LED</button>
@@ -101,8 +107,29 @@
   Escaneaste 0 de 3 imágenes
 </div>
 
+<!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
+<div id="mensaje-final" style="display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.9);
+  color: #4fc3f7;
+  padding: 2em;
+  font-size: 1.4em;
+  border-radius: 1em;
+  text-align: center;
+  z-index: 10001;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 80vw;">
+  ¡Completaste el recorrido!
+  <br><br>
+  <small>Click para cerrar</small>
+</div>
 
-<!-- Escena MindAR -->
+<!--#### Escena MindAR ####-->
+<!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
+<!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
 <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
          color-space="sRGB"
          renderer="colorManagement: true, physicallyCorrectLights"
@@ -110,21 +137,24 @@
          device-orientation-permission-ui="enabled: false">
   <a-camera position="0 0 0" look-controls="enabled: false"></a-camera> 
 
+  <!-- Marcador 0-->
   <a-entity mindar-image-target="targetIndex: 0" data-index="0">
     <a-text value="Gato" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
   </a-entity>
 
+  <!-- Marcador 1-->
   <a-entity mindar-image-target="targetIndex: 1" data-index="1">
     <a-text value="Carpincho" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
   </a-entity>
 
+  <!-- Marcador 2-->
   <a-entity mindar-image-target="targetIndex: 2" data-index="2">
     <a-text value="Perro" color="black" align="center" position="0 0.5 0.1" width="1.5" font="mozillavr"></a-text>
     <a-video src="#video-perro" position="0 0 0" width="1" height="0.7" rotation="0 0 0" muted="false" playsinline="true"></a-video>
   </a-entity>
 </a-scene>
 
-<!-- ##SCRIPTS## -->
+<!--#### SCRIPTS ####-->
 <!-- Pantalla de carga -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -270,7 +300,7 @@
       }
     };
 
-    // eventos de detección
+    // eventos de detección (si agregamos más targets, modificar índice)
     [0, 1, 2].forEach(index => {
       const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
       if (!target) return;
@@ -282,33 +312,12 @@
         }
       });
     });
-
     // cierra mensaje con click
     document.getElementById("mensaje-final").addEventListener("click", () => {
       document.getElementById("mensaje-final").style.display = "none";
     });
   });
 </script>
-
-<!-- Cartel recorrido completado -->
-<div id="mensaje-final" style="display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.9);
-  color: #4fc3f7;
-  padding: 2em;
-  font-size: 1.4em;
-  border-radius: 1em;
-  text-align: center;
-  z-index: 10001;
-  font-family: 'Montserrat', sans-serif;
-  max-width: 80vw;">
-  ¡Completaste el recorrido!
-  <br><br>
-  <small>Click para cerrar</small>
-</div>
 
 </body>
 </html>
