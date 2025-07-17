@@ -15,22 +15,66 @@
   <!-- Fuentes -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
 
-  <!-- Estilos -->
+  <!-- ======================== -->
+  <!--        ESTILOS           -->
+  <!-- ======================== -->
   <style>
+
+    /*Estilo pantalla de carga*/
     body, #pantalla-carga { font-family: 'Roboto', sans-serif; }
     #pantalla-carga {
-      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-      background: #1a1a1a; color: white; display: flex; justify-content: center; align-items: center;
-      z-index: 9999; flex-direction: column; text-align: center; padding: 0 1em; opacity: 1; transition: opacity 0.6s ease;
+      position: fixed; 
+      top: 0; left: 0; 
+      width: 100vw; 
+      height: 100vh;
+      background: #1a1a1a; 
+      color: white; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      z-index: 9999; 
+      flex-direction: column; 
+      text-align: center; 
+      padding: 0 1em; 
+      opacity: 1; 
+      transition: opacity 0.6s ease;
     }
     #pantalla-carga.fade-out { opacity: 0; }
-    #titulo-principal { font-family: 'Montserrat', sans-serif; font-size: 2em; font-weight: 700; margin: 0; color: white; letter-spacing: 0.05em; }
-    #subtitulo { font-family: 'Montserrat', sans-serif; font-size: 1.8em; margin: 0.1em 0 1.2em 0; color: #4fc3f7; font-weight: 600; letter-spacing: 0.04em; }
+
+    #titulo-principal { 
+      font-family: 'Montserrat', sans-serif; 
+      font-size: 2em; 
+      font-weight: 700; 
+      margin: 0; 
+      color: white; 
+      letter-spacing: 0.05em; }
+
+    #subtitulo { 
+      font-family: 'Montserrat', sans-serif; 
+      font-size: 1.8em; 
+      margin: 0.1em 0 1.2em 0; 
+      color: #4fc3f7; 
+      font-weight: 600; 
+      letter-spacing: 0.04em; }
+    
     #boton-comenzar {
-      padding: 1em 2em; font-size: 1.2em; background-color: white; color: #1a1a1a; border: none; border-radius: 0.5em;
-      cursor: pointer; user-select: none; font-weight: 500; font-family: 'Montserrat', sans-serif; transition: background-color 0.3s ease;
+      padding: 1em 2em; 
+      font-size: 1.2em; 
+      background-color: white; 
+      color: #1a1a1a; 
+      border: none; 
+      border-radius: 0.5em;
+      cursor: pointer; 
+      user-select: none; 
+      font-weight: 500; 
+      font-family: 'Montserrat', sans-serif; 
+      transition: background-color 0.3s ease;
     }
-    #boton-comenzar:hover { background-color: #4fc3f7; color: white; }
+    /*Estilo cuando el mouse pasa por encima*/
+    #boton-comenzar:hover { 
+      background-color: #4fc3f7; 
+      color: white; }
+      
     a-scene .a-enter-vr-button { display: none !important; }
     @media (max-width: 425px) {
       #titulo-principal { font-size: 1.4em; }
@@ -38,7 +82,7 @@
       #pantalla-carga p { font-size: 1em; max-width: 260px; }
       #boton-comenzar { padding: 0.8em 1.5em; font-size: 1em; }
     }
-    /*Estilo botón*/
+
     #boton-play-pausa {
     font-size: 2em;
     padding: 0.2em 0.4em;
@@ -48,16 +92,17 @@
     color: #1a1a1a;
     border: none;
     user-select: none;
-    transition: background-color 0.3s ease;
-  }
-  #boton-play-pausa:hover {
-    background-color: #4fc3f7;
-    color: white;
-  }
+    transition: background-color 0.3s ease;}
+    /*Estilo cuando el mouse pasa por encima*/
+    #boton-play-pausa:hover {
+      background-color: #4fc3f7;
+      color: white;
+    }
+
   </style>
 </head>
-
 <body>
+
 <!-- Pantalla de carga -->
 <div id="pantalla-carga">
   <h1 id="titulo-principal">Ocho memorias</h1>
@@ -66,9 +111,11 @@
   <button id="boton-comenzar">Empezar recorrido</button>
 </div>
 
-<!--#### ASSETS ####-->
+<!-- ======================== -->
+<!--        ASSETS            -->
+<!-- ======================== -->
+
 <!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
-  
 <!-- Video de prueba 1-->
 <video 
 id="video-perro" 
@@ -79,10 +126,17 @@ playsinline
 style="visibility:hidden;position:absolute;left:-9999px;">
 </video>
 
-<!--#### BOTONES / INTERACCIÓN CON EL USUARIO ####-->
+<!-- ====================================== -->
+<!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
+<!-- ====================================== -->
+
 <!-- Botón de play/pausa video -->
 <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
-  <button id="boton-play-pausa" style="font-size: 2.5em; display: none;">▶️</button>
+  <button 
+    id="boton-play-pausa" 
+    style="font-size: 2.5em; display: none;"
+    >▶️
+  </button>
 </div>
 
 <!-- Botones de control LED (habilitar para facilitar testeo)
@@ -93,7 +147,9 @@ style="visibility:hidden;position:absolute;left:-9999px;">
 -->
 
 <!-- Contador de marcadores detectados -->
-<div id="contador-marcadores" style="
+<div 
+  id="contador-marcadores" 
+  style="
   position: fixed;
   top: 20px;
   left: 20px;
@@ -105,13 +161,15 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   display: none;
-">
+  ">
   <!-- Mensaje por defecto -->
   Escaneaste 0 de 3 imágenes
 </div>
 
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
-<div id="mensaje-final" style="display: none;
+<div 
+  id="mensaje-final" 
+  style="display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -125,42 +183,81 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   z-index: 10001;
   font-family: 'Montserrat', sans-serif;
   max-width: 80vw;">
+  <!-- Mensaje por defecto -->
   ¡Completaste el recorrido!
   <br><br>
-  <small>Click para cerrar</small>
+  <small> Click para cerrar </small>
 </div>
 
-<!--#### ESCENA MIND-AR ####-->
+<!-- ======================== -->
+<!--      ESCENA MIND-AR      -->
+<!-- ======================== -->
+
 <!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
 <!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
 
-<a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
-         color-space="sRGB"
-         renderer="colorManagement: true, physicallyCorrectLights"
-         vr-mode-ui="enabled: false"
-         device-orientation-permission-ui="enabled: false">
-  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera> 
+<a-scene 
+  mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
+  color-space="sRGB"
+  renderer="colorManagement: true, physicallyCorrectLights"
+  vr-mode-ui="enabled: false"
+  device-orientation-permission-ui="enabled: false">
+
+  <a-camera 
+  position="0 0 0" 
+  look-controls="enabled: false">
+  </a-camera> 
 
   <!-- Marcador 0 -->
   <a-entity mindar-image-target="targetIndex: 0" data-index="0">
-    <a-text value="Gato" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
+    <a-text 
+    value="Gato" 
+    color="black" align="center" 
+    position="0 0 0.1" 
+    width="1.5" 
+    font="mozillavr">
+    </a-text>
   </a-entity>
 
-  <!-- Marcador 1 -->
+  <!-- Marcador 1 --> 
   <a-entity mindar-image-target="targetIndex: 1" data-index="1">
-    <a-text value="Carpincho" color="black" align="center" position="0 0 0.1" width="1.5" font="mozillavr"></a-text>
+    <a-text 
+    value="Carpincho" 
+    color="black" align="center" 
+    position="0 0 0.1" 
+    width="1.5" 
+    font="mozillavr"></a-text>
   </a-entity>
 
   <!-- Marcador 2 -->
   <a-entity mindar-image-target="targetIndex: 2" data-index="2">
-    <a-text value="Perro" color="black" align="center" position="0 0.5 0.1" width="1.5" font="mozillavr"></a-text>
-    <a-video src="#video-perro" position="0 0 0" width="1" height="0.7" rotation="0 0 0" muted="false" playsinline="true"></a-video>
+    <a-text 
+    value="Perro"
+    color="black" align="center" 
+    position="0 0.5 0.1" 
+    width="1.5" 
+    font="mozillavr">
+    </a-text>
+
+    <a-video 
+    src="#video-perro" 
+    position="0 0 0" 
+    width="1" 
+    height="0.7" 
+    rotation="0 0 0" 
+    muted="false" 
+    playsinline="true">
+    </a-video>
   </a-entity>
 
   <!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
 </a-scene>
 
-<!--#### SCRIPTS ####-->
+
+<!-- ======================== -->
+<!--         SCRIPTS          -->
+<!-- ======================== -->
+
 <!-- Pantalla de carga -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
@@ -207,7 +304,6 @@ style="visibility:hidden;position:absolute;left:-9999px;">
       botonPlayPausa.style.display = "block";
       botonPlayPausa.textContent = "⏸️";
     });
-
     // Ocultar y pausar el video cuando pierde el target
     perroTarget.addEventListener("targetLost", () => {
       videoPerro.pause();
@@ -217,7 +313,6 @@ style="visibility:hidden;position:absolute;left:-9999px;">
 
       botonPlayPausa.style.display = "none";
     });
-
     // Play/Pause manual
     botonPlayPausa.addEventListener("click", () => {
       if (videoPerro.paused) {
@@ -288,6 +383,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   });
 </script>
 -->
+
 <!-- Contador de marcadores detectados -->
 <script>
   document.addEventListener("DOMContentLoaded", () => {
