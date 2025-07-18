@@ -35,13 +35,13 @@
   <style>
     /* Fondo */
     #tsparticles {
-       position: absolute;
-  width: 100%;
-  height: 100%;
-  z-index: 10009;
-   background: #000;
-   pointer-events: auto;
-   will-change: transform, opacity;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 10009;
+      background: #000;
+      pointer-events: none;
+      will-change: transform, opacity;
     }
     
     /*Estilo pantalla de carga*/
@@ -496,17 +496,17 @@ style="visibility:hidden;position:absolute;left:-9999px;">
         }
       },
       opacity: {
-        value: 0.63,
+        value: 0.7,
         random: true,
         anim: {
           enable: true,
-          speed: 1,
+          speed: 2,
           opacity_min: 0,
           sync: false
         }
       },
       size: {
-        value: 4,
+        value: 3.5,
         random: true,
         anim: {
           enable: false,
@@ -538,21 +538,12 @@ style="visibility:hidden;position:absolute;left:-9999px;">
       events: {
         onhover: {
           enable: true,
-          mode: "attract"
         },
         onclick: {
           enable: true,
-          mode: "attract"
         },
         resize: true
       },
-      modes: {
-        attract: {
-          distance: 200,
-          duration: 2,
-          factor: 1
-        }
-      }
     },
     retina_detect: true
   });
