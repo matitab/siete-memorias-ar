@@ -77,17 +77,14 @@
       letter-spacing: 0.05em;
       animation: typing 3.5s steps(16, end) forwards, blink 0.6s step-end infinite;
     }
-
     @keyframes typing {
     from { width: 0ch; }
     to { width: 16.2ch; }
     }
-
     @keyframes blink {
       0%, 100% { border-color: white; }
       50% { border-color: transparent; }
     }
-
     @keyframes fadeout-cursor {
       to { border-right-color: transparent; }
     }
@@ -108,8 +105,11 @@
     /*Estilo cuando el mouse pasa por encima*/
     #boton-comenzar:hover { 
       background-color: #3185ac; 
-      color: white; }
-      
+      color: white; 
+      animation:shadow-drop-center 0.4s linear both;
+    }
+  @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
+
     a-scene .a-enter-vr-button { display: block !important; }
     @media (max-width: 425px) {
       #titulo-principal { font-size: 1.4em; }
