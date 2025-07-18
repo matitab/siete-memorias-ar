@@ -33,6 +33,16 @@
   <!--        ESTILOS           -->
   <!-- ======================== -->
   <style>
+    /* Fondo */
+    #tsparticles {
+       position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10009;
+   background: #000;
+   pointer-events: auto;
+    }
+    
     /*Estilo pantalla de carga*/
     body, #pantalla-carga { font-family: 'Courier Prime', monospace; }
     #pantalla-carga {
@@ -40,17 +50,17 @@
       top: 0; left: 0; 
       width: 100vw; 
       height: 100vh;
-      background: #000000; 
       color: white; 
       display: flex; 
       justify-content: center; 
       align-items: center;
-      z-index: 9999; 
       flex-direction: column; 
       text-align: center; 
       padding: 0 1em; 
       opacity: 1; 
-      transition: opacity 0.6s ease;
+      transition: opacity 0.7s ease;
+      z-index: 10010;
+  pointer-events: auto;
     }
     #pantalla-carga.fade-out { opacity: 0; }
 
@@ -70,19 +80,18 @@
       font-weight: 600; 
       letter-spacing: 0.04em;
     
+      width: 16ch;
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid white;
       display: inline-block;
-      letter-spacing: 0.05em;
-      animation: typing 3.5s steps(16, end) forwards, blink 0.6s step-end infinite;
+      animation: typing 3s steps(12) forwards, blink 0.5s step-end infinite;
     }
     @keyframes typing {
-    from { width: 0ch; }
-    to { width: 16.2ch; }
+    from { width: 0; }
+ 
     }
     @keyframes blink {
-      0%, 100% { border-color: white; }
       50% { border-color: transparent; }
     }
     @keyframes fadeout-cursor {
@@ -101,12 +110,16 @@
       font-weight: 500; 
       font-family: 'Courier Prime', monospace; 
       transition: background-color 0.3s ease;
+      position: relative;
+       z-index: 10011;
     }
     /*Estilo cuando el mouse pasa por encima*/
     #boton-comenzar:hover { 
       background-color: #3185ac; 
       color: white; 
       animation:shadow-drop-center 0.4s linear both;
+      position: relative;
+      z-index: 10002; /* que quede arriba de todo */
     }
   @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
 
@@ -116,7 +129,10 @@
       #subtitulo { font-size: 1.2em; margin-bottom: 1em; }
       #pantalla-carga p { font-size: 1em; max-width: 260px; }
       #boton-comenzar { padding: 0.8em 1.5em; font-size: 1em; }
+
+
     }
+
 
     #boton-play-pausa {
     font-size: 2em;
@@ -137,6 +153,11 @@
   </style>
 </head>
 <body>
+
+<div id="pantalla-fondo-negro"></div>
+
+<!-- Efecto sutíl de partículas -->
+<div id="tsparticles"></div>
 
 <!-- Pantalla de carga -->
 <div id="pantalla-carga">
@@ -231,6 +252,8 @@ style="visibility:hidden;position:absolute;left:-9999px;">
 <!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
 
 <a-scene 
+
+
   mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
   color-space="sRGB"
   renderer="colorManagement: true, physicallyCorrectLights"
@@ -295,18 +318,28 @@ style="visibility:hidden;position:absolute;left:-9999px;">
 <!-- Carga de contenido -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+
+    document.getElementById('tsparticles').style.pointerEvents = 'auto';
+
+    const escenaCanvas = document.querySelector('a-scene canvas');
+
+    if (escenaCanvas) escenaCanvas.style.pointerEvents = 'auto';
+
     /* Pantalla de carga */
     const boton = document.getElementById('boton-comenzar');
     const pantalla = document.getElementById('pantalla-carga');
     const escena = document.querySelector('a-scene');
     function ocultarPantalla() {
-      pantalla.classList.add('fade-out');
-      pantalla.addEventListener('transitionend', () => {
-        pantalla.style.display = 'none';
-        const botonVR = document.querySelector('.a-enter-vr-button');
-        if (botonVR) botonVR.remove();
-      }, { once: true });
-    }
+  pantalla.classList.add('fade-out');
+  pantalla.addEventListener('transitionend', () => {
+    pantalla.style.display = 'none';
+
+    document.getElementById('pantalla-fondo-negro').style.display = 'none';
+    document.getElementById('tsparticles').style.display = 'none';
+
+  }, { once: true });
+}
+
     boton.addEventListener('click', () => {
       if (escena.hasLoaded) {
         ocultarPantalla();
@@ -440,6 +473,89 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   });
 </script>
 -->
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("tsparticles", {
+    particles: {
+      number: {
+        value: 8,
+        density: {
+          enable: true,
+          value_area: 800
+        }
+      },
+      color: {
+        value: "#3185ac"
+      },
+      shape: {
+        type: "circle",
+        stroke: {
+          width: 0,
+        }
+      },
+      opacity: {
+        value: 0.73,
+        random: true,
+        anim: {
+          enable: true,
+          speed: 0.5,
+          opacity_min: 0,
+          sync: false
+        }
+      },
+      size: {
+        value: 5,
+        random: true,
+        anim: {
+          enable: false,
+          speed: 4,
+          size_min: 0.3,
+          sync: false
+        }
+      },
+      line_linked: {
+        enable: false
+      },
+      move: {
+        enable: true,
+        speed: 0.3,
+        direction: "none",
+        random: true,
+        straight: false,
+        out_mode: "out",
+        bounce: false,
+        attract: {
+          enable: true,
+          rotateX: 300,
+          rotateY: 300
+        }
+      }
+    },
+    interactivity: {
+      detect_on: "window",
+      events: {
+        onhover: {
+          enable: true,
+          mode: "attract"
+        },
+        onclick: {
+          enable: false
+        },
+        resize: true
+      },
+      modes: {
+        attract: {
+          distance: 200,
+          duration: 2,
+          factor: 0.7
+        }
+      }
+    },
+    retina_detect: true
+  });
+</script>
+
 
 </body>
 </html>
