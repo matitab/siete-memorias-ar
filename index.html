@@ -122,9 +122,13 @@
       position: relative;
       z-index: 10002; /* que quede arriba de todo */
     }
-  @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
+    @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
 
-    a-scene .a-enter-vr-button { display: block !important; }
+    /*Botón VR*/
+    a-scene .a-enter-vr-button { 
+      display: block !important;
+      z-index: 10012 !important;}
+
     @media (max-width: 425px) {
       #titulo-principal { font-size: 1.4em; }
       #subtitulo { font-size: 1.2em; margin-bottom: 1em; }
