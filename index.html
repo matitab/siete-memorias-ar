@@ -109,8 +109,12 @@
     @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
     /*Botón VR*/
     a-scene .a-enter-vr-button { 
-      display: block !important;
-      z-index: 10012 !important;}
+    position: fixed !important;  
+    bottom: 20px !important;     
+    left: 20px !important;      
+    right: auto !important;       
+    z-index: 10012 !important;
+    display: block !important;}
     @media (max-width: 425px) {
       #titulo-principal { font-size: 1.4em; }
       #subtitulo { font-size: 1.2em; margin-bottom: 1em; }
@@ -252,7 +256,7 @@
   </a-text>
   <a-img 
   src="#imagen-carpincho" 
-  position="0 0 0" 
+  position="0 0 0.1" 
   width="1" 
   height="0.7" 
   rotation="0 0 0">
@@ -266,12 +270,12 @@
   color="white" align="center" 
   position="0 0.5 0.1" 
   width="2" 
-  font="Montserrat">
+  font="mozillavr">
   </a-text>
 
   <a-video 
   src="#video-perro" 
-  position="0 0 0" 
+  position="0 0 0.1" 
   width="1" 
   height="0.7" 
   rotation="0 0 0"
