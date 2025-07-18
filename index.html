@@ -1,28 +1,23 @@
 <!DOCTYPE html> 
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
-  <title>Ocho Memorias Desde La Sombra</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>Ocho Memorias Desde La Sombra</title>
 
-  <!--
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-  -->
+<!--<link rel="icon" href="assets/favicon.ico" type="image/x-icon" />-->
 
-  <!-- Librerías A-Frame y MindAR -->
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+<!-- Librerías: A-Frame y MindAR -->
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+<!-- MQTT.js, implementa protocolo MQTT (habilitar en caso de implementación de uso de LEDs)
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+-->
 
-  <!-- MQTT.js, implementa protocolo MQTT (habilitar en caso de implementación de uso de LEDs)
-  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-  -->
-
-  <!--Fuentes utilizadas: Montserrat, Roboto; Courier Prime-->
-  <link 
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" 
-  rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+<!--Fuentes utilizadas: Montserrat y Courier Prime-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 
   <!-- ======================== -->
   <!--        ESTILOS           -->
@@ -194,8 +189,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   display: none;">
-  <!-- Mensaje por defecto -->
-  Escaneaste 0 de 3 imágenes
+  <!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
 </div>
 
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
@@ -214,8 +208,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   z-index: 10001;
   font-family: 'Montserrat', sans-serif;
   max-width: 80vw;">
-  <!-- Mensaje por defecto -->
-  ¡Completaste el recorrido!
+  <!-- Mensaje por defecto: --> ¡Completaste el recorrido!
   <br><br>
   <small> Click para cerrar </small>
 </div>
@@ -368,62 +361,37 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     });});
 </script>
 
-<!-- Script para conectar el repo a la nube (habilitar en caso de implementación de uso de LEDs)-->
-<!-- MQTT 
+<!-- MQTT - Script para conectar el repo a la nube (habilitar en caso de implementación de uso de LEDs)
 <script>
   const options = {
     username: 'esp32user', // Usuario HiveMQ
     password: 'Ochohistorias2025',  // contraseña HiveMQ
-    clean: true,
-    reconnectPeriod: 1000,
-    connectTimeout: 30 * 1000,
-    clientId: 'WebClient_' + Math.random().toString(16).substr(2, 8),
-    protocol: 'wss',
-  };
+    clean: true, reconnectPeriod: 1000, connectTimeout: 30 * 1000,
+    clientId: 'WebClient_' + Math.random().toString(16).substr(2, 8), protocol: 'wss',};
   const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt';
   const client = mqtt.connect(connectUrl, options);
+  client.on('connect', () => {console.log('Conectado a HiveMQ Cloud desde el Frontend');});
+  client.on('error', (err) => {console.error('Error en MQTT:', err);});
 
-  client.on('connect', () => {
-    console.log('Conectado a HiveMQ Cloud desde el Frontend');
-  });
-  client.on('error', (err) => {
-    console.error('Error en MQTT:', err);
-  });
-  function encenderLed() {
-    client.publish('led/control', 'on');
-    console.log('Enviado: on');
-  }
-  function apagarLed() {
-    client.publish('led/control', 'off');
-    console.log('Enviado: off');
-  }
-</script>
--->
+  function encenderLed() {client.publish('led/control', 'on'); console.log('Enviado: on');}
+  function apagarLed() {client.publish('led/control', 'off'); console.log('Enviado: off');}
+</script> -->
+
 <!-- Script encender y apagar LEDs segun reconoce marcadores (habilitar en caso de implementación de uso de LEDs)-->
 <!-- LED GPIO HIGH/LOW según el marcador detectado
 <script>
   function controlarLedPorMarcador(targetIndex, topic) {
     const target = document.querySelector(`[mindar-image-target="targetIndex: ${targetIndex}"]`);
-    if (!target) {
-      console.warn(`No se encontró el marcador targetIndex: ${targetIndex}`);
-      return;
-    }
-    target.addEventListener("targetFound", () => {
-      console.log(`Marcador ${targetIndex} detectado`);
-      client.publish(topic, 'on');
-    });
-    target.addEventListener("targetLost", () => {
-      console.log(`Marcador ${targetIndex} perdido`);
-      client.publish(topic, 'off');
-    });
-  }
+    if (!target) {console.warn(`No se encontró el marcador targetIndex: ${targetIndex}`); return; }
+    target.addEventListener("targetFound", () => {console.log(`Marcador ${targetIndex} detectado`); client.publish(topic, 'on'); });
+    target.addEventListener("targetLost", () => {console.log(`Marcador ${targetIndex} perdido`); client.publish(topic, 'off');
+    });}
   document.addEventListener("DOMContentLoaded", () => {
     controlarLedPorMarcador(0, 'led/pin4');  // Gato -> Pin 4 (GPIO 4)
     controlarLedPorMarcador(1, 'led/pin13'); // Carpincho -> Pin 13
     controlarLedPorMarcador(2, 'led/pin5');  // Perro -> Pin 5
   });
-</script>
--->
+</script> -->
 
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
 <script>
