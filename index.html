@@ -41,6 +41,7 @@
   z-index: 10009;
    background: #000;
    pointer-events: auto;
+   will-change: transform, opacity;
     }
     
     /*Estilo pantalla de carga*/
@@ -479,7 +480,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   tsParticles.load("tsparticles", {
     particles: {
       number: {
-        value: 25,
+        value: 35,
         density: {
           enable: true,
           value_area: 800
@@ -495,7 +496,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
         }
       },
       opacity: {
-        value: 0.73,
+        value: 0.53,
         random: true,
         anim: {
           enable: true,
@@ -519,7 +520,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
       },
       move: {
         enable: true,
-        speed: 0.6,
+        speed: 0.1,
         direction: "none",
         random: true,
         straight: false,
