@@ -169,7 +169,16 @@
 
 <!-- Contador de marcadores detectados -->
 <div id="contador-marcadores" 
- Montserrat', sans-serif;
+  style="
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10000;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 0.8em 1.2em;
+  border-radius: 0.5em;
+  font-family: 'Montserrat', sans-serif;
   font-size: 1em;
   display: none;">
   <!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
@@ -177,7 +186,19 @@
 
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
 <div id="mensaje-final" 
- Montserrat', sans-serif;
+  style="display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.9);
+  color: #4fc3f7;
+  padding: 2em;
+  font-size: 1.4em;
+  border-radius: 1em;
+  text-align: center;
+  z-index: 10001;
+  font-family: 'Montserrat', sans-serif;
   max-width: 80vw;">
   <!-- Mensaje por defecto: --> ¡Completaste el recorrido!
   <br><br>
