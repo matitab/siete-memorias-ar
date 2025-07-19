@@ -138,10 +138,10 @@
   </style>
 </head>
 
+<body>
 
-  <body>
-
-  <div id="pantalla-fondo-negro"></div>
+<!-- Pantalla de fondo -->
+<div id="pantalla-fondo-negro"></div>
 <!-- Efecto sutíl de partículas -->
 <div id="tsparticles"></div>
 <!-- Pantalla de carga -->
@@ -156,29 +156,20 @@
 <!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
 <!-- ====================================== -->
 <!-- Botón de play/pausa video -->
-<div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
-<button id="boton-play-pausa" style="display: none;" >▶️</button>
+<div>
+<button id="boton-play-pausa" >▶️</button>
 </div>
 
 <!-- Botones de control LED (habilitar para facilitar testeo)
-<div style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
-  <button onclick="encenderLed()" style="font-size: 1.2em; margin-right: 8px;">Encender LED</button>
-  <button onclick="apagarLed()" style="font-size: 1.2em;">Apagar LED</button>
+<div>
+  <button onclick="encenderLed()">Encender LED</button>
+  <button onclick="apagarLed()">Apagar LED</button>
 </div>
 -->
 
 <!-- Contador de marcadores detectados -->
 <div id="contador-marcadores" 
-  style="
-  position: fixed;
-  top: 20px;
-  left: 20px;
-  z-index: 10000;
-  background: rgba(0,0,0,0.7);
-  color: white;
-  padding: 0.8em 1.2em;
-  border-radius: 0.5em;
-  font-family: 'Montserrat', sans-serif;
+ Montserrat', sans-serif;
   font-size: 1em;
   display: none;">
   <!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
@@ -186,73 +177,48 @@
 
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
 <div id="mensaje-final" 
-  style="display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: rgba(0,0,0,0.9);
-  color: #4fc3f7;
-  padding: 2em;
-  font-size: 1.4em;
-  border-radius: 1em;
-  text-align: center;
-  z-index: 10001;
-  font-family: 'Montserrat', sans-serif;
+ Montserrat', sans-serif;
   max-width: 80vw;">
   <!-- Mensaje por defecto: --> ¡Completaste el recorrido!
   <br><br>
   <small> Click para cerrar </small>
 </div>
 
-
 <!-- ======================== -->
 <!--      ESCENA MIND-AR      -->
 <!-- ======================== -->
 <!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
 <!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
-
-
-    <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: true" device-orientation-permission-ui="enabled: false">
-      
-      <!-- ======================== -->
-<!--        ASSETS            -->
-<!-- ======================== -->
-<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
-
-      <a-assets>
-        <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
-      
-      <!-- Video de prueba 1-->
+<a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: true" device-orientation-permission-ui="enabled: false">
+  <!-- ======================== -->
+  <!--        ASSETS            -->
+  <!-- ======================== -->
+  <!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
+  <a-assets>
+  <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
+  <!-- Video de prueba 1-->
   <video 
-id="video-perro" 
-src="assets/video1test.mp4" 
-preload="auto"
-loop
-playsinline 
-style="visibility:hidden;position:absolute;left:-9999px;">
-</video>
-
+  id="video-perro" 
+  src="assets/video1test.mp4" 
+  preload="auto"
+  loop
+  playsinline >
+  </video>
   <img id="imgtest1" src="assets/imagentest1.png" />
+  </a-assets>
 
+  <!-- Cámara-->
+  <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
-      
-      </a-assets>
-
-      <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-
-
-      <!-- Marcador 0 -->
+  <!-- Marcador 0 -->
   <a-entity mindar-image-target="targetIndex: 0" data-index="0">
     <a-text 
     value="Gato" 
     color="white" align="center" 
     position="0 0 0.1" 
-    width="1.5" 
-    font="mozillavr">
+    width="1.5" >
     </a-text>
-
-    <a-image src="#imgtest1" position="0 0 0" width="1" height="1"></a-image>
+    <a-image src="#imgtest1" position="0 0 0" width="0.5" height="0.5"></a-image>
   </a-entity>
 
   <!-- Marcador 1 --> 
@@ -261,8 +227,8 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     value="Carpincho" 
     color="white" align="center" 
     position="0 0 0.1" 
-    width="1.5" 
-    font="mozillavr"></a-text>
+    width="1.5" >
+    </a-text>
     <a-plane src="#card" position="0 0 0.1" height="0.552" width="1" rotation="0 0 0"></a-plane>
   </a-entity>
 
@@ -272,10 +238,8 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     value="Perro"
     color="white" align="center" 
     position="0 0.3 0.1" 
-    width="1.5" 
-    font="mozillavr">
+    width="1.5" >
     </a-text>
-
     <a-video 
     src="#video-perro" 
     position="0 -0.2 0" 
@@ -286,14 +250,10 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     playsinline="true">
     </a-video>
   </a-entity>
-
   <!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
+</a-scene>
 
-
-
-    </a-scene>
-
-    <!-- ======================== -->
+<!-- ======================== -->
 <!--         SCRIPTS          -->
 <!-- ======================== -->
 <!-- Carga de contenido -->
@@ -302,7 +262,6 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     document.getElementById('tsparticles').style.pointerEvents = 'auto';
     const escenaCanvas = document.querySelector('a-scene canvas');
     if (escenaCanvas) escenaCanvas.style.pointerEvents = 'auto';
-
     /* Pantalla de carga */
     const boton = document.getElementById('boton-comenzar');
     const pantalla = document.getElementById('pantalla-carga');
@@ -314,20 +273,16 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     document.getElementById('pantalla-fondo-negro').style.display = 'none';
     document.getElementById('tsparticles').style.display = 'none';
     document.getElementById('pantalla-carga').style.display = 'none';
-
   }, { once: true });}
     boton.addEventListener('click', () => {
       if (escena.hasLoaded) {ocultarPantalla();} 
       else {escena.addEventListener('loaded', () => {ocultarPantalla();}, { once: true });}});
-
     /*Play/Pause videos*/
     const botonPlayPausa = document.getElementById("boton-play-pausa");
     const videoPerro = document.getElementById("video-perro");
     const perroTarget = document.querySelector('[mindar-image-target="targetIndex: 2"]');
-
     // Ocultar el botón al principio
     botonPlayPausa.style.display = "none";
-
     // Mostrar y reproducir el video cuando detecta el target
     perroTarget.addEventListener("targetFound", () => {
       videoPerro.style.display = "block";
@@ -426,5 +381,5 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     events: {onhover: {enable: false}, onclick: {enable: false},resize: true}}, retina_detect: true});
 </script>
 
-  </body>
+</body>
 </html>
