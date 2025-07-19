@@ -42,7 +42,7 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  border-bottom: 4px solid #FF3D00;
+  border-bottom: 4px solid #3185ac;
   border-left: 4px solid transparent;
 }
 @keyframes rotation {
@@ -63,7 +63,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 10050;
-  background: rgba(0, 0, 0, 0.5); 
+  background: rgba(0, 0, 0, 0.8); /* fondo negro con opacidad */
   padding: 1em;
   border-radius: 1em;
 }
@@ -193,16 +193,16 @@
 <!-- Pantalla de fondo -->
 <div id="pantalla-fondo-negro"></div>
 <!-- Efecto sutíl de partículas -->
-<div id="tsparticles"></div>
+<div id="tsparticles" style="display:none;"></div>
 <!-- Pantalla de carga -->
-<div id="pantalla-carga">
+<div id="pantalla-carga" style="display:none;">
   <h1 id="titulo-principal">Ocho memorias</h1>
   <h2 id="subtitulo">desde la sombra</h2>
   <p>Explorá el mapa y enfocá los distintos marcadores para conocer las historias.</p>
-  <button id="boton-comenzar">Empezar recorrido</button>
+  <button id="boton-comenzar" style="display:none;">Empezar recorrido</button>
 </div>
 
-<div id="mi-loading" class="hidden loader-container">
+<div id="mi-loading" class="loader-container">
   <span class="loader"></span>
 </div>
 
@@ -339,50 +339,43 @@ device-orientation-permission-ui="enabled: false">
 <!-- Carga de contenido -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('tsparticles').style.pointerEvents = 'auto';
-    const escenaCanvas = document.querySelector('a-scene canvas');
-    if (escenaCanvas) escenaCanvas.style.pointerEvents = 'auto';
+    const loader = document.getElementById('mi-loading');
+  const boton = document.getElementById('boton-comenzar');
+  const pantalla = document.getElementById('pantalla-carga');
+  const pantallaFondo = document.getElementById('pantalla-fondo-negro');
+  const tsparticles = document.getElementById('tsparticles');
 
-    /* Pantalla de carga */
-    const miLoading = document.getElementById('mi-loading');
-    const boton = document.getElementById('boton-comenzar');
-    const pantalla = document.getElementById('pantalla-carga');
-    const escena = document.querySelector('a-scene');
-    function ocultarPantalla() {
-  pantalla.classList.add('fade-out');
-  pantalla.addEventListener('transitionend', () => {
-    pantalla.style.display = 'none';
-    document.getElementById('pantalla-fondo-negro').style.display = 'none';
-    document.getElementById('tsparticles').style.display = 'none';
-    document.getElementById('pantalla-carga').style.display = 'none';
+  // Referencia a la escena MindAR
+  const escena = document.querySelector('a-scene');
 
-  }, { once: true });}
+ escena.addEventListener('renderstart', () => {
+  // Dejar el loader visible un poco más (ejemplo: 2 segundos)
+  setTimeout(() => {
+    // Mostrar pantalla de carga, fondo, partículas y botón
+    pantalla.style.display = 'flex';
+    pantallaFondo.style.display = 'block';
+    tsparticles.style.display = 'block';
+    boton.style.display = 'inline-block';
+
+    // Ocultar loader
+    loader.style.display = 'none';
+  }, 2000); // 2000 ms = 2 segundos
+});
 
 
-    boton.addEventListener('click', () => {
-  // Mostrar loader
-  miLoading.classList.remove('hidden');
-
-  if (escena.hasLoaded) {
+  // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
+  boton.addEventListener('click', () => {
+    // Ocultamos la pantalla de carga con fadeout
     pantalla.classList.add('fade-out');
     pantalla.addEventListener('transitionend', () => {
       pantalla.style.display = 'none';
-      miLoading.classList.add('hidden');
-      document.getElementById('pantalla-fondo-negro').style.display = 'none';
-      document.getElementById('tsparticles').style.display = 'none';
+      pantallaFondo.style.display = 'none';
+      tsparticles.style.display = 'none';
     }, { once: true });
-  } else {
-    escena.addEventListener('loaded', () => {
-      pantalla.classList.add('fade-out');
-      pantalla.addEventListener('transitionend', () => {
-        pantalla.style.display = 'none';
-        miLoading.classList.add('hidden');
-        document.getElementById('pantalla-fondo-negro').style.display = 'none';
-        document.getElementById('tsparticles').style.display = 'none';
-      }, { once: true });
-    }, { once: true });
-  }
-});
+
+    // Arrancamos MindAR
+    escena.components['mindar-image'].start();
+  });
 
 
     /*Play/Pause videos*/
