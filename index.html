@@ -213,7 +213,7 @@
 <!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
 
 
-    <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+    <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       
       <!-- ======================== -->
 <!--        ASSETS            -->
@@ -238,13 +238,58 @@ style="visibility:hidden;position:absolute;left:-9999px;">
       </a-assets>
 
 
-
-
-
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-      <a-entity mindar-image-target="targetIndex: 0">
-        <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-      </a-entity>
+
+
+      <!-- Marcador 0 -->
+  <a-entity mindar-image-target="targetIndex: 0" data-index="0">
+    <a-text 
+    value="Gato" 
+    color="white" align="center" 
+    position="0 0 0.1" 
+    width="1.5" 
+    font="mozillavr">
+    </a-text>
+
+    <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
+  </a-entity>
+
+  <!-- Marcador 1 --> 
+  <a-entity mindar-image-target="targetIndex: 1" data-index="1">
+    <a-text 
+    value="Carpincho" 
+    color="white" align="center" 
+    position="0 0 0.1" 
+    width="1.5" 
+    font="mozillavr"></a-text>
+    <a-plane src="#card" position="0 0 0.1" height="0.552" width="1" rotation="0 0 0"></a-plane>
+  </a-entity>
+
+  <!-- Marcador 2 -->
+  <a-entity mindar-image-target="targetIndex: 2" data-index="2">
+    <a-text 
+    value="Perro"
+    color="white" align="center" 
+    position="0 0.3 0.1" 
+    width="1.5" 
+    font="mozillavr">
+    </a-text>
+
+    <a-video 
+    src="#video-perro" 
+    position="0 -0.2 0" 
+    width="1" 
+    height="0.7" 
+    rotation="0 0 0" 
+    muted="false" 
+    playsinline="true">
+    </a-video>
+  </a-entity>
+
+  <!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
+
+
+
     </a-scene>
 
     <!-- ======================== -->
