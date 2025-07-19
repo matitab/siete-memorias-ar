@@ -85,7 +85,7 @@
       top: 0; left: 0; 
       width: 100vw; 
       height: 100vh;
-      color: white; 
+      color: #d1cfc7; 
       display: flex; 
       justify-content: center; 
       align-items: center;
@@ -103,8 +103,9 @@
       font-size: 2em; 
       font-weight: 700; 
       margin: 0; 
-      color: white; 
+      color: #d1cfc7;
     }
+    
     #subtitulo { 
       font-family: 'Courier Prime', monospace;
       font-size: 1.8em; 
@@ -115,7 +116,7 @@
       width: 16ch;
       white-space: nowrap;
       overflow: hidden;
-      border-right: 3px solid white;
+      border-right: 3px solid #d1cfc7;
       display: inline-block;
       animation: typing 3s steps(12) forwards, blink 0.5s step-end infinite;
     }
@@ -125,7 +126,7 @@
     #boton-comenzar {
       padding: 1em 2em; 
       font-size: 1.2em; 
-      background-color: white; 
+      background-color: #d1cfc7; 
       color: #1a1a1a; 
       border: none; 
       border-radius: 0.5em;
@@ -444,7 +445,20 @@ device-orientation-permission-ui="enabled: false">
 
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
 <!-- Config. partículas -->
-<script>tsParticles.load("tsparticles",{particles:{number:{value:40,density:{enable:true,value_area:800}},color:{value:["#ffffcc","#ccffcc","#ffffff"]},shape:{type:"circle",stroke:{width:0}},opacity:{value:0.8,random:true,anim:{enable:true,speed:1,opacity_min:0.1,sync:false}},size:{value:3.5,random:true,anim:{enable:false,speed:4,size_min:0.8,sync:false}},line_linked:{enable:false},move:{enable:true,speed:0.6,direction:"none",random:true,straight:false,out_mode:"out",bounce:false}},interactivity:{detect_on:"window",events:{onhover:{enable:false},onclick:{enable:false},resize:true}},retina_detect:true});</script>
+<script>tsParticles.load("tsparticles",{particles:{number:{value:40,density:{enable:true,value_area:800}},
+color:{value: ["#ffffff", "#ddeeff", "#cceeff"]},
+shape:{type:"circle",stroke:{width:0}},opacity:{value:0.8,random:true,
+anim:{enable:true,speed:1,opacity_min:0.1,sync:false}},
+size:{value:3.5,random:true,anim:{enable:false,speed:4,size_min:0.8,sync:false}},line_linked:{enable:false},
+move:{enable: true,
+  speed: 0.25, // más lento
+  direction: "none",
+  random: true,
+  straight: false,
+  out_mode: "out",
+  bounce: false,}},
+interactivity:{detect_on:"window",events:{onhover:{enable:false},onclick:{enable:false},resize:true}},
+retina_detect:true});</script>
 
 </body>
 </html>
