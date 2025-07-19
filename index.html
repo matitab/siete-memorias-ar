@@ -210,12 +210,7 @@
 <!-- Video de prueba 1-->
 
 <a-assets>
-  <!-- Imagen de prueba 1-->
-  <img id="imagen-carpincho-externa" 
-  preload="auto"
-  style="visibility:hidden;position:absolute;left:-9999px;"
-  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Capivara(Hydrochoerus_hydrochaeris).jpg">
-  
+  <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
   <!-- Video de prueba 1-->
   <video 
 id="video-perro" 
@@ -266,14 +261,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     width="1.5" 
     font="mozillavr"></a-text>
 
- <a-image 
-  src="#imagen-carpincho-externa"
-  position="0 0 0.1"
-  visible="true"
-  width="1" 
-  height="0.7" 
-  rotation="0 0 0">
-</a-image>
+ <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
 
   </a-entity>
 
