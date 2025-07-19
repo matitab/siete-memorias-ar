@@ -150,19 +150,6 @@
   <button id="boton-comenzar">Empezar recorrido</button>
 </div>
 
-<!-- ======================== -->
-<!--        ASSETS            -->
-<!-- ======================== -->
-<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
-<!-- Video de prueba 1-->
-
-<a-assets>
-  <!-- Imagen de prueba 1-->
-  <img id="imagen-carpincho" src="assets/imagentest1.png">
-  <!-- Video de prueba 1-->
-  <video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline webkit-playsinline></video>
-</a-assets>
-
 <!-- ====================================== -->
 <!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
 <!-- ====================================== -->
@@ -217,77 +204,94 @@
 </div>
 
 <!-- ======================== -->
+<!--        ASSETS            -->
+<!-- ======================== -->
+<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
+<!-- Video de prueba 1-->
+
+<a-assets>
+  <!-- Imagen de prueba 1-->
+  <img id="imagen-carpincho" src="assets/imagentest1.png">
+  <!-- Video de prueba 1-->
+  <video 
+id="video-perro" 
+src="assets/video1test.mp4" 
+preload="auto"
+loop
+playsinline 
+style="visibility:hidden;position:absolute;left:-9999px;">
+</video>
+
+</a-assets>
+
+<!-- ======================== -->
 <!--      ESCENA MIND-AR      -->
 <!-- ======================== -->
 <!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
 <!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
 
 <a-scene 
-  embedded
-  mindar-image="imageTargetSrc: targets.mind; maxTrack: 3"
-  mindar-image-system
+  mindar-image="imageTargetSrc: targets.mind; maxTrack: 3;"
+  color-space="sRGB"
+  renderer="colorManagement: true, physicallyCorrectLights"
   vr-mode-ui="enabled: true"
-  device-orientation-permission-ui="enabled: false"
-  renderer="colorManagement: true, physicallyCorrectLights">
+  device-orientation-permission-ui="enabled: false">
 
-  <a-camera 
+ <a-camera 
   position="0 0 0" 
   look-controls="enabled: true">
   </a-camera> 
 
   <!-- Marcador 0 -->
   <a-entity mindar-image-target="targetIndex: 0" data-index="0">
-  <a-text 
-  value="Gato" 
-  color="white" align="center" 
-  position="0 0 0" 
-  width="2" 
-  font="mozillavr">
-  </a-text>
+    <a-text 
+    value="Gato" 
+    color="black" align="center" 
+    position="0 0 0.1" 
+    width="1.5" 
+    font="mozillavr">
+    </a-text>
   </a-entity>
 
   <!-- Marcador 1 --> 
   <a-entity mindar-image-target="targetIndex: 1" data-index="1">
-  <a-text 
-  value="Carpincho" 
-  color="white" align="center" 
-  position="0 0 0" 
-  width="2" 
-  font="mozillavr">
-  </a-text>
-  <a-img 
+    <a-text 
+    value="Carpincho" 
+    color="black" align="center" 
+    position="0 0 0.1" 
+    width="1.5" 
+    font="mozillavr"></a-text>
+
+    <a-img 
   src="#imagen-carpincho" 
   position="0 0 0" 
   width="2" 
   height="1.2" 
   rotation="0 0 0">
   </a-img>
-  <a-box color="red" position="0 0 0.1" depth="0.1" height="0.5" width="0.5"></a-box>
 
   </a-entity>
 
   <!-- Marcador 2 -->
   <a-entity mindar-image-target="targetIndex: 2" data-index="2">
-  <a-text 
-  value="Perro"
-  color="white" align="center" 
-  position="0 0 0" 
-  width="2" 
-  font="mozillavr">
-  </a-text>
+    <a-text 
+    value="Perro"
+    color="black" align="center" 
+    position="0 0.5 0.1" 
+    width="1.5" 
+    font="mozillavr">
+    </a-text>
 
-  <a-video 
-  src="#video-perro" 
-  position="0 0 0" 
-  width="1" 
-  height="0.7" 
-  rotation="0 0 0"
-  autoplay="true"
-  loop="true"
-  muted="true"
-  playsinline="true"
-  webkit-playsinline>
-  </a-video>
+    <a-video 
+    src="#video-perro" 
+    position="0 0 0" 
+    width="1" 
+    height="0.7" 
+    rotation="0 0 0" 
+    muted="false" 
+    playsinline="true">
+    </a-video>
+  </a-entity>
 
   </a-entity>
   <!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
