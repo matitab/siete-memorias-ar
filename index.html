@@ -146,12 +146,13 @@
     /*Estilo cuando el mouse pasa por encima*/
     #boton-comenzar:hover { 
       background-color: #3185ac; 
-      color: white; 
-      animation:shadow-drop-center 0.4s linear both;
+      color: #d1cfc7;  
+      animation:shadow-drop-center 0.1s linear both;
     }
-    @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
+    @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 10px 0 #3185ac}}
     /*Botón VR*/
     a-scene .a-enter-vr-button { 
+    background-color: #d1cfc76e;   
     position: fixed !important;  
     bottom: 20px !important;     
     left: 20px !important;      
@@ -169,7 +170,7 @@
     padding: 0.2em 0.4em;
     border-radius: 0.4em;
     cursor: pointer;
-    background-color: white;
+    background-color: #d1cfc7; 
     color: #1a1a1a;
     border: none;
     user-select: none;
