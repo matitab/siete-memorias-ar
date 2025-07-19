@@ -379,5 +379,51 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     });});
 </script>
 
+<!-- MQTT - Script para conectar el repo a la nube (habilitar en caso de implementación de uso de LEDs)
+<script>
+  const options = {
+    username: 'esp32user', // Usuario HiveMQ
+    password: 'Ochohistorias2025',  // contraseña HiveMQ
+    clean: true, reconnectPeriod: 1000, connectTimeout: 30 * 1000,
+    clientId: 'WebClient_' + Math.random().toString(16).substr(2, 8), protocol: 'wss',};
+  const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt';
+  const client = mqtt.connect(connectUrl, options);
+  client.on('connect', () => {console.log('Conectado a HiveMQ Cloud desde el Frontend');});
+  client.on('error', (err) => {console.error('Error en MQTT:', err);});
+
+  function encenderLed() {client.publish('led/control', 'on'); console.log('Enviado: on');}
+  function apagarLed() {client.publish('led/control', 'off'); console.log('Enviado: off');}
+</script> -->
+
+<!-- Script encender y apagar LEDs segun reconoce marcadores (habilitar en caso de implementación de uso de LEDs)-->
+<!-- LED GPIO HIGH/LOW según el marcador detectado
+<script>
+  function controlarLedPorMarcador(targetIndex, topic) {
+    const target = document.querySelector(`[mindar-image-target="targetIndex: ${targetIndex}"]`);
+    if (!target) {console.warn(`No se encontró el marcador targetIndex: ${targetIndex}`); return; }
+    target.addEventListener("targetFound", () => {console.log(`Marcador ${targetIndex} detectado`); client.publish(topic, 'on'); });
+    target.addEventListener("targetLost", () => {console.log(`Marcador ${targetIndex} perdido`); client.publish(topic, 'off');
+    });}
+  document.addEventListener("DOMContentLoaded", () => {
+    controlarLedPorMarcador(0, 'led/pin4');  // Gato -> Pin 4 (GPIO 4)
+    controlarLedPorMarcador(1, 'led/pin13'); // Carpincho -> Pin 13
+    controlarLedPorMarcador(2, 'led/pin5');  // Perro -> Pin 5
+  });
+</script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("tsparticles", {
+    particles: {number: {value: 35, density: {enable: true, value_area: 800}},
+      color: {value: "#3185ac"},
+      shape: {type: "circle", stroke: {width: 0}},
+      opacity: {value: 0.7, random: true, anim: {enable: true, speed: 1.5, opacity_min: 0, sync: false}},
+      size: {value: 3.5,random: true,anim: {enable: false,speed: 1,size_min: 0.3,sync: false}},
+      line_linked: {enable: false},
+      move: {enable: true,speed: 1.5,direction: "none",random: true,straight: false,out_mode: "out",bounce: false}},
+    interactivity: {detect_on: "window",
+    events: {onhover: {enable: false}, onclick: {enable: false},resize: true}}, retina_detect: true});
+</script>
+
   </body>
 </html>
