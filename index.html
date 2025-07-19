@@ -152,8 +152,68 @@
   <button id="boton-comenzar">Empezar recorrido</button>
 </div>
 
+<!-- ====================================== -->
+<!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
+<!-- ====================================== -->
+<!-- Botón de play/pausa video -->
+<div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
+<button id="boton-play-pausa" style="display: none;" >▶️</button>
+</div>
+
+<!-- Botones de control LED (habilitar para facilitar testeo)
+<div style="position: fixed; bottom: 20px; left: 20px; z-index: 10000;">
+  <button onclick="encenderLed()" style="font-size: 1.2em; margin-right: 8px;">Encender LED</button>
+  <button onclick="apagarLed()" style="font-size: 1.2em;">Apagar LED</button>
+</div>
+-->
+
+<!-- Contador de marcadores detectados -->
+<div id="contador-marcadores" 
+  style="
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 10000;
+  background: rgba(0,0,0,0.7);
+  color: white;
+  padding: 0.8em 1.2em;
+  border-radius: 0.5em;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1em;
+  display: none;">
+  <!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
+</div>
+
+<!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
+<div id="mensaje-final" 
+  style="display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.9);
+  color: #4fc3f7;
+  padding: 2em;
+  font-size: 1.4em;
+  border-radius: 1em;
+  text-align: center;
+  z-index: 10001;
+  font-family: 'Montserrat', sans-serif;
+  max-width: 80vw;">
+  <!-- Mensaje por defecto: --> ¡Completaste el recorrido!
+  <br><br>
+  <small> Click para cerrar </small>
+</div>
 
     <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+      
+      <!-- ======================== -->
+<!--        ASSETS            -->
+<!-- ======================== -->
+<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
+<!-- Video de prueba 1-->
+
+      
       <a-assets>
         <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
       </a-assets>
@@ -163,5 +223,94 @@
         <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
       </a-entity>
     </a-scene>
+
+    <!-- ======================== -->
+<!--         SCRIPTS          -->
+<!-- ======================== -->
+<!-- Carga de contenido -->
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('tsparticles').style.pointerEvents = 'auto';
+    const escenaCanvas = document.querySelector('a-scene canvas');
+    if (escenaCanvas) escenaCanvas.style.pointerEvents = 'auto';
+
+    /* Pantalla de carga */
+    const boton = document.getElementById('boton-comenzar');
+    const pantalla = document.getElementById('pantalla-carga');
+    const escena = document.querySelector('a-scene');
+    function ocultarPantalla() {
+  pantalla.classList.add('fade-out');
+  pantalla.addEventListener('transitionend', () => {
+    pantalla.style.display = 'none';
+    document.getElementById('pantalla-fondo-negro').style.display = 'none';
+    document.getElementById('tsparticles').style.display = 'none';
+    document.getElementById('pantalla-carga').style.display = 'none';
+
+  }, { once: true });}
+    boton.addEventListener('click', () => {
+      if (escena.hasLoaded) {ocultarPantalla();} 
+      else {escena.addEventListener('loaded', () => {ocultarPantalla();}, { once: true });}});
+
+    /*Play/Pause videos*/
+    const botonPlayPausa = document.getElementById("boton-play-pausa");
+    const videoPerro = document.getElementById("video-perro");
+    const perroTarget = document.querySelector('[mindar-image-target="targetIndex: 2"]');
+
+    // Ocultar el botón al principio
+    botonPlayPausa.style.display = "none";
+
+    // Mostrar y reproducir el video cuando detecta el target
+    perroTarget.addEventListener("targetFound", () => {
+      videoPerro.style.display = "block";
+      videoPerro.style.position = "static";
+      videoPerro.style.left = "0";
+      videoPerro.play();
+      botonPlayPausa.style.display = "block";
+      botonPlayPausa.textContent = "⏸️";
+    });
+    // Ocultar y pausar el video cuando pierde el target
+    perroTarget.addEventListener("targetLost", () => {
+      videoPerro.pause();
+      videoPerro.style.display = "none";
+      videoPerro.style.position = "absolute";
+      videoPerro.style.left = "-9999px";
+      botonPlayPausa.style.display = "none";
+    });
+    // Play/Pause manual
+    botonPlayPausa.addEventListener("click", () => {
+      if (videoPerro.paused) {
+        videoPerro.play();
+        botonPlayPausa.textContent = "⏸️";
+        } else {
+        videoPerro.pause();
+        botonPlayPausa.textContent = "▶️";
+        }});  
+    /* Contador de marcadores detectados */
+    const marcadorDetectado = new Set(); // índices de los target ya escaneados
+    const totalMarcadores = 3;
+    const contadorDiv = document.getElementById("contador-marcadores");
+    const actualizarContador = () => {
+      contadorDiv.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;
+      contadorDiv.style.display = "block";
+      if (marcadorDetectado.size === totalMarcadores) {
+        setTimeout(() => {
+          document.getElementById("mensaje-final").style.display = "block";
+        }, 500);}};
+    // eventos de detección (si agregamos más targets, modificar índice)
+    [0, 1, 2].forEach(index => {
+      const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
+      if (!target) return;
+      target.addEventListener("targetFound", () => {
+        if (!marcadorDetectado.has(index)) {
+          marcadorDetectado.add(index);
+          actualizarContador();
+        }});});
+    // cierra mensaje con click
+    document.getElementById("mensaje-final").addEventListener("click", () => {
+      document.getElementById("mensaje-final").style.display = "none";
+    });});
+</script>
+
+
   </body>
 </html>
