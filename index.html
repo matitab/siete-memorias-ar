@@ -211,7 +211,11 @@
 
 <a-assets>
   <!-- Imagen de prueba 1-->
-  <img id="imagen-carpincho-externa" src="https://upload.wikimedia.org/wikipedia/commons/9/99/Capivara(Hydrochoerus_hydrochaeris).jpg">
+  <img id="imagen-carpincho-externa" 
+  preload="auto"
+  style="visibility:hidden;position:absolute;left:-9999px;"
+  src="https://upload.wikimedia.org/wikipedia/commons/9/99/Capivara(Hydrochoerus_hydrochaeris).jpg">
+  
   <!-- Video de prueba 1-->
   <video 
 id="video-perro" 
@@ -237,7 +241,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   vr-mode-ui="enabled: true"
   device-orientation-permission-ui="enabled: false">
 
- <a-camera 
+  <a-camera 
   position="0 0 0" 
   look-controls="enabled: true">
   </a-camera> 
@@ -265,6 +269,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
  <a-image 
   src="#imagen-carpincho-externa"
   position="0 0 0.1"
+  visible="true"
   width="1" 
   height="0.7" 
   rotation="0 0 0">
@@ -277,7 +282,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     <a-text 
     value="Perro"
     color="white" align="center" 
-    position="0 0.2 0.1" 
+    position="0 0.3 0.1" 
     width="1.5" 
     font="mozillavr">
     </a-text>
