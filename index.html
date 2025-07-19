@@ -22,7 +22,6 @@
   <!-- ======================== -->
   <style>
 
-
   .loader {
   width: 48px;
   height: 48px;
@@ -45,17 +44,8 @@
   border-bottom: 4px solid #3185ac;
   border-left: 4px solid transparent;
 }
-@keyframes rotation {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-} 
-#mi-loading.hidden {
-  display: none;
-}
+@keyframes rotation {0% {transform: rotate(0deg);}100% {transform: rotate(360deg);}} 
+#mi-loading.hidden {display: none;}
 
 .loader-container {
   position: fixed;
@@ -67,18 +57,23 @@
   padding: 1em;
   border-radius: 1em;
 }
-
-
     /* Estilo fondo */
-    #pantalla-fondo-negro {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-color: black;
-      z-index: 10005;
-    }
+ #pantalla-fondo-negro {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #111;
+  background-image: radial-gradient(
+    circle at center,
+    rgba(255, 255, 255, 0.06) 0%,
+    rgba(200, 200, 200, 0.03) 25%,
+    rgba(150, 150, 150, 0.015) 50%,
+    transparent 80%
+  );
+  z-index: 10005;
+}
     /*Estilo partículas*/
     #tsparticles {
       position: absolute; width: 100%; height: 100%; z-index: 10009; pointer-events: none; will-change: transform, opacity;
@@ -100,9 +95,7 @@
       opacity: 1; 
       transition: opacity 0.7s ease;
       z-index: 10010;
-      margin: 0;
       overflow: hidden;
-      pointer-events: auto;
     }
     #pantalla-carga.fade-out { opacity: 0; }
     #titulo-principal { 
@@ -149,8 +142,6 @@
       background-color: #3185ac; 
       color: white; 
       animation:shadow-drop-center 0.4s linear both;
-      position: relative;
-      z-index: 10002; /* que quede arriba de todo */
     }
     @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
     /*Botón VR*/
@@ -184,11 +175,7 @@
     }
   </style>
 </head>
-
 <body>
-
-
-
 
 <!-- Pantalla de fondo -->
 <div id="pantalla-fondo-negro"></div>
@@ -338,29 +325,20 @@ device-orientation-permission-ui="enabled: false">
 
 <!-- Carga de contenido -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const loader = document.getElementById('mi-loading');
-  const boton = document.getElementById('boton-comenzar');
-  const pantalla = document.getElementById('pantalla-carga');
-  const pantallaFondo = document.getElementById('pantalla-fondo-negro');
-  const tsparticles = document.getElementById('tsparticles');
-
-  // Referencia a la escena MindAR
-  const escena = document.querySelector('a-scene');
-
- escena.addEventListener('renderstart', () => {
-  //Deja el loader visible un poco más
-  setTimeout(() => {
-    // muestra pantalla de carga, fondo, partículas y botón
-    pantalla.style.display = 'flex';
-    pantallaFondo.style.display = 'block';
-    tsparticles.style.display = 'block';
-    boton.style.display = 'inline-block';
-
-    //Oculta loader
-    loader.style.display = 'none';
-  }, 2000); // 1000 ms = 1 segundos
-});
+  document.addEventListener("DOMContentLoaded",()=>{
+    const loader=document.getElementById("mi-loading");
+    const boton=document.getElementById("boton-comenzar");
+    const pantalla=document.getElementById("pantalla-carga");
+    const pantallaFondo=document.getElementById("pantalla-fondo-negro");
+    const tsparticles=document.getElementById("tsparticles");
+    const escena=document.querySelector("a-scene");
+    escena.addEventListener("renderstart",()=>{
+      setTimeout(()=>{
+        pantalla.style.display="flex";
+        pantallaFondo.style.display="block";
+        tsparticles.style.display="block";
+        boton.style.display="inline-block";
+        loader.style.display="none";},1000);})
 
   // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
   boton.addEventListener('click', () => {
@@ -370,7 +348,7 @@ device-orientation-permission-ui="enabled: false">
       pantallaFondo.style.display = 'none';
       tsparticles.style.display = 'none';
     }, { once: true });
-    // Arrancamos MindAR
+    // Activa MindAR
     escena.components['mindar-image'].start();
   });
     /*Play/Pause videos*/
@@ -465,18 +443,8 @@ device-orientation-permission-ui="enabled: false">
 </script> -->
 
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-<script>
-  tsParticles.load("tsparticles", {
-    particles: {number: {value: 35, density: {enable: true, value_area: 800}},
-      color: {value: "#3185ac"},
-      shape: {type: "circle", stroke: {width: 0}},
-      opacity: {value: 0.7, random: true, anim: {enable: true, speed: 1.5, opacity_min: 0, sync: false}},
-      size: {value: 3.5,random: true,anim: {enable: false,speed: 1,size_min: 0.3,sync: false}},
-      line_linked: {enable: false},
-      move: {enable: true,speed: 1.5,direction: "none",random: true,straight: false,out_mode: "out",bounce: false}},
-    interactivity: {detect_on: "window",
-    events: {onhover: {enable: false}, onclick: {enable: false},resize: true}}, retina_detect: true});
-</script>
+<!-- Config. partículas -->
+<script>tsParticles.load("tsparticles",{particles:{number:{value:40,density:{enable:true,value_area:800}},color:{value:["#ffffcc","#ccffcc","#ffffff"]},shape:{type:"circle",stroke:{width:0}},opacity:{value:0.8,random:true,anim:{enable:true,speed:1,opacity_min:0.1,sync:false}},size:{value:3.5,random:true,anim:{enable:false,speed:4,size_min:0.8,sync:false}},line_linked:{enable:false},move:{enable:true,speed:0.6,direction:"none",random:true,straight:false,out_mode:"out",bounce:false}},interactivity:{detect_on:"window",events:{onhover:{enable:false},onclick:{enable:false},resize:true}},retina_detect:true});</script>
 
 </body>
 </html>
