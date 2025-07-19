@@ -57,6 +57,11 @@
   padding: 1em;
   border-radius: 1em;
 }
+.fade-out-loader {
+  opacity: 0;
+  transition: opacity 0.7s ease-in-out;
+}
+
     /* Estilo fondo */
  #pantalla-fondo-negro {
   position: fixed;
@@ -333,13 +338,18 @@ device-orientation-permission-ui="enabled: false">
     const pantallaFondo=document.getElementById("pantalla-fondo-negro");
     const tsparticles=document.getElementById("tsparticles");
     const escena=document.querySelector("a-scene");
-    escena.addEventListener("renderstart",()=>{
-      setTimeout(()=>{
-        pantalla.style.display="flex";
-        pantallaFondo.style.display="block";
-        tsparticles.style.display="block";
-        boton.style.display="inline-block";
-        loader.style.display="none";},1000);})
+    escena.addEventListener("renderstart", () => {
+    setTimeout(() => {
+      pantalla.style.display = "flex";
+      pantallaFondo.style.display = "block";
+      tsparticles.style.display = "block";
+      boton.style.display = "inline-block";
+      loader.classList.add("fade-out-loader");
+      loader.addEventListener("transitionend", () => {
+        loader.style.display = "none";
+      }, { once: true });
+    }, 700);
+  });
 
   // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
   boton.addEventListener('click', () => {
