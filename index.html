@@ -1,21 +1,153 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>Ocho Memorias Desde La Sombra</title>
 
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-  </head>
+<!--<link rel="icon" href="assets/favicon.ico" type="image/x-icon" />-->
+
+<!-- Librerías: A-Frame y MindAR -->
+<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+<!-- MQTT.js, implementa protocolo MQTT (habilitar en caso de implementación de uso de LEDs)
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+-->
+
+<!--Fuentes utilizadas: Montserrat y Courier Prime-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
+
+  <!-- ======================== -->
+  <!--        ESTILOS           -->
+  <!-- ======================== -->
+  <style>
+    /* Estilo fondo */
+    #pantalla-fondo-negro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      z-index: 10005;
+    }
+    /*Estilo partículas*/
+    #tsparticles {
+      position: absolute; width: 100%; height: 100%; z-index: 10009; pointer-events: none; will-change: transform, opacity;
+    }
+    /*Estilo pantalla de carga*/
+    body, html, #pantalla-carga { font-family: 'Courier Prime', monospace; }
+    #pantalla-carga {
+      position: fixed; 
+      top: 0; left: 0; 
+      width: 100vw; 
+      height: 100vh;
+      color: white; 
+      display: flex; 
+      justify-content: center; 
+      align-items: center;
+      flex-direction: column; 
+      text-align: center; 
+      padding: 0 1em; 
+      opacity: 1; 
+      transition: opacity 0.7s ease;
+      z-index: 10010;
+      margin: 0;
+      overflow: hidden;
+      pointer-events: auto;
+    }
+    #pantalla-carga.fade-out { opacity: 0; }
+    #titulo-principal { 
+      font-family: 'Courier Prime', monospace; 
+      font-size: 2em; 
+      font-weight: 700; 
+      margin: 0; 
+      color: white; 
+    }
+    #subtitulo { 
+      font-family: 'Courier Prime', monospace;
+      font-size: 1.8em; 
+      margin: 0.1em 0 1.2em 0; 
+      color: #3185ac; 
+      font-weight: 600; 
+      letter-spacing: 0.04em;
+      width: 16ch;
+      white-space: nowrap;
+      overflow: hidden;
+      border-right: 3px solid white;
+      display: inline-block;
+      animation: typing 3s steps(12) forwards, blink 0.5s step-end infinite;
+    }
+    @keyframes typing {from { width: 0; }}
+    @keyframes blink {50% { border-color: transparent; }}
+    @keyframes fadeout-cursor {to { border-right-color: transparent; }}
+    #boton-comenzar {
+      padding: 1em 2em; 
+      font-size: 1.2em; 
+      background-color: white; 
+      color: #1a1a1a; 
+      border: none; 
+      border-radius: 0.5em;
+      cursor: pointer; 
+      user-select: none; 
+      font-weight: 500; 
+      font-family: 'Courier Prime', monospace; 
+      transition: background-color 0.3s ease;
+      position: relative;
+       z-index: 10011;
+    }
+    /*Estilo cuando el mouse pasa por encima*/
+    #boton-comenzar:hover { 
+      background-color: #3185ac; 
+      color: white; 
+      animation:shadow-drop-center 0.4s linear both;
+      position: relative;
+      z-index: 10002; /* que quede arriba de todo */
+    }
+    @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
+    /*Botón VR*/
+    a-scene .a-enter-vr-button { 
+    position: fixed !important;  
+    bottom: 20px !important;     
+    left: 20px !important;      
+    right: auto !important;       
+    z-index: 10012 !important;
+    display: block !important;}
+    @media (max-width: 425px) {
+      #titulo-principal { font-size: 1.4em; }
+      #subtitulo { font-size: 1.2em; margin-bottom: 1em; }
+      #pantalla-carga p { font-size: 1em; max-width: 260px; }
+      #boton-comenzar { padding: 0.8em 1.5em; font-size: 1em; }
+    }
+    #boton-play-pausa {
+    font-size: 2em;
+    padding: 0.2em 0.4em;
+    border-radius: 0.4em;
+    cursor: pointer;
+    background-color: white;
+    color: #1a1a1a;
+    border: none;
+    user-select: none;
+    transition: background-color 0.3s ease;}
+    /*Estilo cuando el mouse pasa por encima*/
+    #boton-play-pausa:hover {
+      background-color: #3185ac;
+      color: white;
+    }
+  </style>
+</head>
+
+
   <body>
     <a-scene mindar-image="imageTargetSrc: https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind;" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
       <a-assets>
         <img id="card" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.png" />
-        <a-asset-item id="avatarModel" src="https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/softmind/scene.gltf"></a-asset-item>
       </a-assets>
 
       <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0">
         <a-plane src="#card" position="0 0 0" height="0.552" width="1" rotation="0 0 0"></a-plane>
-        <a-gltf-model rotation="0 0 0 " position="0 0 0.1" scale="0.005 0.005 0.005" src="#avatarModel" animation="property: position; to: 0 0.1 0.1; dur: 1000; easing: easeInOutQuad; loop: true; dir: alternate">
       </a-entity>
     </a-scene>
   </body>
