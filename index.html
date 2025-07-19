@@ -1,59 +1,64 @@
 <!DOCTYPE html> 
 <html lang="es">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1"> 
-  <title>Ocho Memorias Desde La Sombra</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>Ocho Memorias Desde La Sombra</title>
 
-  <!--
-  <link rel="icon" href="assets/favicon.ico" type="image/x-icon" />
-  -->
+<!--<link rel="icon" href="assets/favicon.ico" type="image/x-icon" />-->
 
-  <!-- Librerías A-Frame y MindAR -->
-  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+<!-- Librerías: A-Frame y MindAR -->
+<script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v7.0.0/dist/aframe-extras.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+<!-- MQTT.js, implementa protocolo MQTT (habilitar en caso de implementación de uso de LEDs)
+<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+-->
 
-  <!-- MQTT.js, implementa protocolo MQTT (habilitar en caso de implementación de uso de LEDs)
-  <script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
-  -->
-
-  <!--#### Fuentes ####-->
-  <!-- Montserrat, Roboto -->
-  <link 
-  href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400;500&display=swap" 
-  rel="stylesheet" 
-  >
-  <!-- Courier Prime -->
-  <link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
-
+<!--Fuentes utilizadas: Montserrat y Courier Prime-->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 
   <!-- ======================== -->
   <!--        ESTILOS           -->
   <!-- ======================== -->
   <style>
+    /* Estilo fondo */
+    #pantalla-fondo-negro {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: black;
+      z-index: 10005;
+    }
+    /*Estilo partículas*/
+    #tsparticles {
+      position: absolute; width: 100%; height: 100%; z-index: 10009; pointer-events: none; will-change: transform, opacity;
+    }
     /*Estilo pantalla de carga*/
-    body, #pantalla-carga { font-family: 'Courier Prime', monospace; }
+    body, html, #pantalla-carga { font-family: 'Courier Prime', monospace; }
     #pantalla-carga {
       position: fixed; 
       top: 0; left: 0; 
       width: 100vw; 
       height: 100vh;
-      background: #000000; 
       color: white; 
       display: flex; 
       justify-content: center; 
       align-items: center;
-      z-index: 9999; 
       flex-direction: column; 
       text-align: center; 
       padding: 0 1em; 
       opacity: 1; 
-      transition: opacity 0.6s ease;
+      transition: opacity 0.7s ease;
+      z-index: 10010;
+      margin: 0;
+      overflow: hidden;
+      pointer-events: auto;
     }
     #pantalla-carga.fade-out { opacity: 0; }
-
     #titulo-principal { 
       font-family: 'Courier Prime', monospace; 
       font-size: 2em; 
@@ -61,7 +66,6 @@
       margin: 0; 
       color: white; 
     }
-
     #subtitulo { 
       font-family: 'Courier Prime', monospace;
       font-size: 1.8em; 
@@ -69,26 +73,16 @@
       color: #3185ac; 
       font-weight: 600; 
       letter-spacing: 0.04em;
-    
+      width: 16ch;
       white-space: nowrap;
       overflow: hidden;
       border-right: 3px solid white;
       display: inline-block;
-      letter-spacing: 0.05em;
-      animation: typing 3.5s steps(16, end) forwards, blink 0.6s step-end infinite;
+      animation: typing 3s steps(12) forwards, blink 0.5s step-end infinite;
     }
-    @keyframes typing {
-    from { width: 0ch; }
-    to { width: 16.2ch; }
-    }
-    @keyframes blink {
-      0%, 100% { border-color: white; }
-      50% { border-color: transparent; }
-    }
-    @keyframes fadeout-cursor {
-      to { border-right-color: transparent; }
-    }
-
+    @keyframes typing {from { width: 0; }}
+    @keyframes blink {50% { border-color: transparent; }}
+    @keyframes fadeout-cursor {to { border-right-color: transparent; }}
     #boton-comenzar {
       padding: 1em 2em; 
       font-size: 1.2em; 
@@ -101,23 +95,32 @@
       font-weight: 500; 
       font-family: 'Courier Prime', monospace; 
       transition: background-color 0.3s ease;
+      position: relative;
+       z-index: 10011;
     }
     /*Estilo cuando el mouse pasa por encima*/
     #boton-comenzar:hover { 
       background-color: #3185ac; 
       color: white; 
       animation:shadow-drop-center 0.4s linear both;
+      position: relative;
+      z-index: 10002; /* que quede arriba de todo */
     }
-  @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
-
-    a-scene .a-enter-vr-button { display: block !important; }
+    @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}100%{box-shadow:0 0 20px 0 #3185ac}}
+    /*Botón VR*/
+    a-scene .a-enter-vr-button { 
+    position: fixed !important;  
+    bottom: 20px !important;     
+    left: 20px !important;      
+    right: auto !important;       
+    z-index: 10012 !important;
+    display: block !important;}
     @media (max-width: 425px) {
       #titulo-principal { font-size: 1.4em; }
       #subtitulo { font-size: 1.2em; margin-bottom: 1em; }
       #pantalla-carga p { font-size: 1em; max-width: 260px; }
       #boton-comenzar { padding: 0.8em 1.5em; font-size: 1em; }
     }
-
     #boton-play-pausa {
     font-size: 2em;
     padding: 0.2em 0.4em;
@@ -133,11 +136,12 @@
       background-color: #3185ac;
       color: white;
     }
-
   </style>
 </head>
 <body>
-
+<div id="pantalla-fondo-negro"></div>
+<!-- Efecto sutíl de partículas -->
+<div id="tsparticles"></div>
 <!-- Pantalla de carga -->
 <div id="pantalla-carga">
   <h1 id="titulo-principal">Ocho memorias</h1>
@@ -146,32 +150,12 @@
   <button id="boton-comenzar">Empezar recorrido</button>
 </div>
 
-<!-- ======================== -->
-<!--        ASSETS            -->
-<!-- ======================== -->
-
-<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
-<!-- Video de prueba 1-->
-<video 
-id="video-perro" 
-src="assets/video1test.mp4" 
-preload="auto"
-loop
-playsinline 
-style="visibility:hidden;position:absolute;left:-9999px;">
-</video>
-
 <!-- ====================================== -->
 <!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
 <!-- ====================================== -->
-
 <!-- Botón de play/pausa video -->
 <div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
-  <button 
-    id="boton-play-pausa" 
-    style="display: none;"
-    >▶️
-  </button>
+<button id="boton-play-pausa" style="display: none;" >▶️</button>
 </div>
 
 <!-- Botones de control LED (habilitar para facilitar testeo)
@@ -182,8 +166,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
 -->
 
 <!-- Contador de marcadores detectados -->
-<div 
-  id="contador-marcadores" 
+<div id="contador-marcadores" 
   style="
   position: fixed;
   top: 20px;
@@ -195,15 +178,12 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   border-radius: 0.5em;
   font-family: 'Montserrat', sans-serif;
   font-size: 1em;
-  display: none;
-  ">
-  <!-- Mensaje por defecto -->
-  Escaneaste 0 de 3 imágenes
+  display: none;">
+  <!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
 </div>
 
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
-<div 
-  id="mensaje-final" 
+<div id="mensaje-final" 
   style="display: none;
   position: fixed;
   top: 50%;
@@ -218,11 +198,31 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   z-index: 10001;
   font-family: 'Montserrat', sans-serif;
   max-width: 80vw;">
-  <!-- Mensaje por defecto -->
-  ¡Completaste el recorrido!
+  <!-- Mensaje por defecto: --> ¡Completaste el recorrido!
   <br><br>
   <small> Click para cerrar </small>
 </div>
+
+<!-- ======================== -->
+<!--        ASSETS            -->
+<!-- ======================== -->
+<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
+<!-- Video de prueba 1-->
+
+<a-assets>
+  <!-- Imagen de prueba 1-->
+  <img id="imagen-carpincho" src="assets/imagentest1.png">
+  <!-- Video de prueba 1-->
+  <video 
+id="video-perro" 
+src="assets/video1test.mp4" 
+preload="auto"
+loop
+playsinline 
+style="visibility:hidden;position:absolute;left:-9999px;">
+</video>
+
+</a-assets>
 
 <!-- ======================== -->
 <!--      ESCENA MIND-AR      -->
@@ -237,7 +237,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
   vr-mode-ui="enabled: true"
   device-orientation-permission-ui="enabled: false">
 
-  <a-camera 
+ <a-camera 
   position="0 0 0" 
   look-controls="enabled: true">
   </a-camera> 
@@ -247,7 +247,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     <a-text 
     value="Gato" 
     color="black" align="center" 
-    position="0 0 0.1" 
+    position="0.5 0 0.1" 
     width="1.5" 
     font="mozillavr">
     </a-text>
@@ -258,9 +258,18 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     <a-text 
     value="Carpincho" 
     color="black" align="center" 
-    position="0 0 0.1" 
+    position="0.5 0 0.1" 
     width="1.5" 
     font="mozillavr"></a-text>
+
+    <a-img 
+  src="#imagen-carpincho" 
+  position="0.5 0 0.1"
+  width="2" 
+  height="1.2" 
+  rotation="0 0 0">
+  </a-img>
+
   </a-entity>
 
   <!-- Marcador 2 -->
@@ -268,14 +277,14 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     <a-text 
     value="Perro"
     color="black" align="center" 
-    position="0 0.5 0.1" 
+    position="0.5 -0.5 0.1" 
     width="1.5" 
     font="mozillavr">
     </a-text>
 
     <a-video 
     src="#video-perro" 
-    position="0 0 0" 
+    position="0.5 -0.5 0" 
     width="1" 
     height="0.7" 
     rotation="0 0 0" 
@@ -284,45 +293,43 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     </a-video>
   </a-entity>
 
+  </a-entity>
   <!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
 </a-scene>
-
 
 <!-- ======================== -->
 <!--         SCRIPTS          -->
 <!-- ======================== -->
-
 <!-- Carga de contenido -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('tsparticles').style.pointerEvents = 'auto';
+    const escenaCanvas = document.querySelector('a-scene canvas');
+    if (escenaCanvas) escenaCanvas.style.pointerEvents = 'auto';
+
     /* Pantalla de carga */
     const boton = document.getElementById('boton-comenzar');
     const pantalla = document.getElementById('pantalla-carga');
     const escena = document.querySelector('a-scene');
     function ocultarPantalla() {
-      pantalla.classList.add('fade-out');
-      pantalla.addEventListener('transitionend', () => {
-        pantalla.style.display = 'none';
-        const botonVR = document.querySelector('.a-enter-vr-button');
-        if (botonVR) botonVR.remove();
-      }, { once: true });
-    }
+  pantalla.classList.add('fade-out');
+  pantalla.addEventListener('transitionend', () => {
+    pantalla.style.display = 'none';
+    document.getElementById('pantalla-fondo-negro').style.display = 'none';
+    document.getElementById('tsparticles').style.display = 'none';
+  }, { once: true });}
     boton.addEventListener('click', () => {
-      if (escena.hasLoaded) {
-        ocultarPantalla();
-      } else {
-        escena.addEventListener('loaded', () => {
-          ocultarPantalla();
-        }, { once: true });
-      }
-    });
+      if (escena.hasLoaded) {ocultarPantalla();} 
+      else {escena.addEventListener('loaded', () => {ocultarPantalla();}, { once: true });}});
 
     /*Play/Pause videos*/
     const botonPlayPausa = document.getElementById("boton-play-pausa");
     const videoPerro = document.getElementById("video-perro");
     const perroTarget = document.querySelector('[mindar-image-target="targetIndex: 2"]');
+
     // Ocultar el botón al principio
     botonPlayPausa.style.display = "none";
+
     // Mostrar y reproducir el video cuando detecta el target
     perroTarget.addEventListener("targetFound", () => {
       videoPerro.style.display = "block";
@@ -348,9 +355,7 @@ style="visibility:hidden;position:absolute;left:-9999px;">
         } else {
         videoPerro.pause();
         botonPlayPausa.textContent = "▶️";
-        }
-      });  
-    
+        }});  
     /* Contador de marcadores detectados */
     const marcadorDetectado = new Set(); // índices de los target ya escaneados
     const totalMarcadores = 3;
@@ -358,88 +363,69 @@ style="visibility:hidden;position:absolute;left:-9999px;">
     const actualizarContador = () => {
       contadorDiv.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;
       contadorDiv.style.display = "block";
-
       if (marcadorDetectado.size === totalMarcadores) {
         setTimeout(() => {
           document.getElementById("mensaje-final").style.display = "block";
-        }, 500);
-      }
-    };
+        }, 500);}};
     // eventos de detección (si agregamos más targets, modificar índice)
     [0, 1, 2].forEach(index => {
       const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
       if (!target) return;
-
       target.addEventListener("targetFound", () => {
         if (!marcadorDetectado.has(index)) {
           marcadorDetectado.add(index);
           actualizarContador();
-        }
-      });
-    });
+        }});});
     // cierra mensaje con click
     document.getElementById("mensaje-final").addEventListener("click", () => {
       document.getElementById("mensaje-final").style.display = "none";
-    });     
-  });
+    });});
 </script>
 
-<!-- Script para conectar el repo a la nube (habilitar en caso de implementación de uso de LEDs)-->
-<!-- MQTT 
+<!-- MQTT - Script para conectar el repo a la nube (habilitar en caso de implementación de uso de LEDs)
 <script>
   const options = {
     username: 'esp32user', // Usuario HiveMQ
     password: 'Ochohistorias2025',  // contraseña HiveMQ
-    clean: true,
-    reconnectPeriod: 1000,
-    connectTimeout: 30 * 1000,
-    clientId: 'WebClient_' + Math.random().toString(16).substr(2, 8),
-    protocol: 'wss',
-  };
+    clean: true, reconnectPeriod: 1000, connectTimeout: 30 * 1000,
+    clientId: 'WebClient_' + Math.random().toString(16).substr(2, 8), protocol: 'wss',};
   const connectUrl = 'wss://1c26c61f82654cb3a64a06309ccffa42.s1.eu.hivemq.cloud:8884/mqtt';
   const client = mqtt.connect(connectUrl, options);
+  client.on('connect', () => {console.log('Conectado a HiveMQ Cloud desde el Frontend');});
+  client.on('error', (err) => {console.error('Error en MQTT:', err);});
 
-  client.on('connect', () => {
-    console.log('Conectado a HiveMQ Cloud desde el Frontend');
-  });
-  client.on('error', (err) => {
-    console.error('Error en MQTT:', err);
-  });
-  function encenderLed() {
-    client.publish('led/control', 'on');
-    console.log('Enviado: on');
-  }
-  function apagarLed() {
-    client.publish('led/control', 'off');
-    console.log('Enviado: off');
-  }
-</script>
--->
+  function encenderLed() {client.publish('led/control', 'on'); console.log('Enviado: on');}
+  function apagarLed() {client.publish('led/control', 'off'); console.log('Enviado: off');}
+</script> -->
+
 <!-- Script encender y apagar LEDs segun reconoce marcadores (habilitar en caso de implementación de uso de LEDs)-->
 <!-- LED GPIO HIGH/LOW según el marcador detectado
 <script>
   function controlarLedPorMarcador(targetIndex, topic) {
     const target = document.querySelector(`[mindar-image-target="targetIndex: ${targetIndex}"]`);
-    if (!target) {
-      console.warn(`No se encontró el marcador targetIndex: ${targetIndex}`);
-      return;
-    }
-    target.addEventListener("targetFound", () => {
-      console.log(`Marcador ${targetIndex} detectado`);
-      client.publish(topic, 'on');
-    });
-    target.addEventListener("targetLost", () => {
-      console.log(`Marcador ${targetIndex} perdido`);
-      client.publish(topic, 'off');
-    });
-  }
+    if (!target) {console.warn(`No se encontró el marcador targetIndex: ${targetIndex}`); return; }
+    target.addEventListener("targetFound", () => {console.log(`Marcador ${targetIndex} detectado`); client.publish(topic, 'on'); });
+    target.addEventListener("targetLost", () => {console.log(`Marcador ${targetIndex} perdido`); client.publish(topic, 'off');
+    });}
   document.addEventListener("DOMContentLoaded", () => {
     controlarLedPorMarcador(0, 'led/pin4');  // Gato -> Pin 4 (GPIO 4)
     controlarLedPorMarcador(1, 'led/pin13'); // Carpincho -> Pin 13
     controlarLedPorMarcador(2, 'led/pin5');  // Perro -> Pin 5
   });
-</script>
--->
+</script> -->
 
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+<script>
+  tsParticles.load("tsparticles", {
+    particles: {number: {value: 35, density: {enable: true, value_area: 800}},
+      color: {value: "#3185ac"},
+      shape: {type: "circle", stroke: {width: 0}},
+      opacity: {value: 0.7, random: true, anim: {enable: true, speed: 1.5, opacity_min: 0, sync: false}},
+      size: {value: 3.5,random: true,anim: {enable: false,speed: 1,size_min: 0.3,sync: false}},
+      line_linked: {enable: false},
+      move: {enable: true,speed: 1.5,direction: "none",random: true,straight: false,out_mode: "out",bounce: false}},
+    interactivity: {detect_on: "window",
+    events: {onhover: {enable: false}, onclick: {enable: false},resize: true}}, retina_detect: true});
+</script>
 </body>
 </html>
