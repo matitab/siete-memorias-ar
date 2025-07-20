@@ -190,6 +190,8 @@ a-scene .a-enter-vr-button {
   #subtitulo { 
     font-size: 1.2em; 
     margin-bottom: 1em; 
+    text-align: left;
+    display: inline-block;
   }
   #pantalla-carga p { 
     font-size: 1em; 
@@ -202,13 +204,11 @@ a-scene .a-enter-vr-button {
     font-size: 1em; 
   }
   #contenedor-subtitulo {
-    margin-left: 0; 
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%); 
+    width: auto; 
     align-self: center; 
-    width: 100%; 
-    text-align: center; 
-  }
-  #subtitulo {
-    text-align: center; 
   }
 }
 #boton-play-pausa {
