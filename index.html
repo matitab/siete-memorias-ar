@@ -45,13 +45,14 @@ border-bottom: 4px solid #3185ac;
 border-left: 4px solid transparent;
 }@keyframes rotation {0% {transform: rotate(0deg);}100% {transform: rotate(360deg);}} 
 #mi-loading.hidden {display: none;}
+
 .loader-container {
 position: fixed;
 top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 z-index: 10050;
-background: rgba(0, 0, 0, 0.8);
+background: rgba(0, 0, 0, 0.8); 
 padding: 1em;
 border-radius: 1em;
 }
@@ -97,6 +98,7 @@ transition: opacity 0.7s ease;
 z-index: 10010;
 overflow: hidden;
 }#pantalla-carga.fade-out { opacity: 0; }
+
 #titulo-principal { 
 font-family: 'Courier Prime', monospace; 
 font-size: 2em; 
@@ -104,6 +106,7 @@ font-weight: 700;
 margin: 0; 
 color: #d1cfc7;
 }
+
 #subtitulo {
 font-family: 'Courier Prime', monospace;
 font-size: 1.8em;
@@ -178,6 +181,7 @@ transition: background-color 0.3s ease;}
 #boton-play-pausa:hover {
 background-color: #3185ac;
 color: white;}
+
 /* Menu marcador 1: estilo */
 .container-menu {
   position: fixed;
@@ -331,11 +335,11 @@ body {
 <div class="container-menu" id="menu-carpincho">
   <input type="checkbox" id="toggle">
   <div class="toggle-container">
-  <label for="toggle" class="button-toggle">
-  <span class="bar"></span>
-  <span class="bar"></span>
-  <span class="bar"></span>
-</label>
+    <button class="button-toggle">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </button>
   </div>
   <div class="nav">
     <div class="nav-item" onclick="showContent('Carpincho Info')">Carpincho Info</div>
@@ -548,6 +552,12 @@ device-orientation-permission-ui="enabled: false">
       carpinchoTarget.addEventListener("targetFound", () => {
   menuCarpincho.style.display = "block";
   toggleCheckbox.checked = true; // abre menú
+  menuCarpincho.style.height = "450px";
+    menuCarpincho.style.width = "300px";
+    document.querySelector("#menu-carpincho .nav").style.opacity = "1";
+    document.querySelector("#menu-carpincho .nav").style.pointerEvents = "auto";
+    document.querySelector("#menu-carpincho .dummy-content").style.opacity = "1";
+    document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "auto";
       });
       carpinchoTarget.addEventListener("targetLost", () => {
           menuCarpincho.style.display = "none";
@@ -556,7 +566,28 @@ device-orientation-permission-ui="enabled: false">
     } else {
       console.error("Carpincho target not found");
     }
-  
+    // botón toggle
+    const toggleButton = document.querySelector('.button-toggle');
+    if (toggleButton) {
+   toggleButton.addEventListener('click', () => {
+  toggleCheckbox.checked = !toggleCheckbox.checked;
+  if (toggleCheckbox.checked) {
+    menuCarpincho.style.height = "450px";
+    menuCarpincho.style.width = "300px";
+    document.querySelector("#menu-carpincho .nav").style.opacity = "1";
+    document.querySelector("#menu-carpincho .nav").style.pointerEvents = "auto";
+    document.querySelector("#menu-carpincho .dummy-content").style.opacity = "1";
+    document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "auto";
+  } else {
+    menuCarpincho.style.height = "50px";
+    menuCarpincho.style.width = "50px";
+    document.querySelector("#menu-carpincho .nav").style.opacity = "0";
+    document.querySelector("#menu-carpincho .nav").style.pointerEvents = "none";
+    document.querySelector("#menu-carpincho .dummy-content").style.opacity = "0";
+    document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "none";
+  }
+});
+    }
     window.showContent = function (option) {
       const contentDiv = document.getElementById("menu-content");
       let content = "";
