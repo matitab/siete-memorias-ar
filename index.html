@@ -221,6 +221,7 @@ color: white;}
 #toggle:checked ~ .dummy-content {
   opacity: 1;
   transform: translateY(0);
+  visibility: visible;
   pointer-events: auto;
 }
 #toggle:checked ~ .nav .nav-item {
@@ -273,6 +274,7 @@ color: white;}
   opacity: 0;
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
+  visibility: hidden;
   pointer-events: none;
 }
 .nav-item {
