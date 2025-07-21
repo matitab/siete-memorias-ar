@@ -481,6 +481,7 @@ device-orientation-permission-ui="enabled: false">
 
 <!-- Carga de contenido -->
 <script>
+
   document.addEventListener("DOMContentLoaded",()=>{
     const loader = document.getElementById("mi-loading");
     const boton = document.getElementById("boton-comenzar");
@@ -549,44 +550,50 @@ device-orientation-permission-ui="enabled: false">
      // Menú marcador 1
     const carpinchoTarget = document.querySelector('[mindar-image-target="targetIndex: 1"]');
     const menuCarpincho = document.getElementById("menu-carpincho");
-    const toggleCheckbox = document.getElementById("toggle");     
+    const toggleCheckbox = document.getElementById("toggle");   
+
+    function menuAbierto() {
+      menuCarpincho.style.height = "450px";
+      menuCarpincho.style.width = "300px";
+      document.querySelector("#menu-carpincho .nav").style.opacity = "1";
+      document.querySelector("#menu-carpincho .nav").style.pointerEvents = "auto";
+      document.querySelector("#menu-carpincho .dummy-content").style.opacity = "1";
+      document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "auto";
+    } 
+    function menuCerrado() {
+      menuCarpincho.style.height = "50px";
+      menuCarpincho.style.width = "50px";
+      document.querySelector("#menu-carpincho .nav").style.opacity = "0";
+      document.querySelector("#menu-carpincho .nav").style.pointerEvents = "none";
+      document.querySelector("#menu-carpincho .dummy-content").style.opacity = "0";
+      document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "none";
+    }
+      
+    // Mostrar menú cuando se detecta el target
     if (carpinchoTarget) {
       carpinchoTarget.addEventListener("targetFound", () => {
   menuCarpincho.style.display = "block";
-  toggleCheckbox.checked = true; // abre menú
-  menuCarpincho.style.height = "450px";
-    menuCarpincho.style.width = "300px";
-    document.querySelector("#menu-carpincho .nav").style.opacity = "1";
-    document.querySelector("#menu-carpincho .nav").style.pointerEvents = "auto";
-    document.querySelector("#menu-carpincho .dummy-content").style.opacity = "1";
-    document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "auto";
+  toggleCheckbox.checked = true; // guarda estado como abierto
+  menuAbierto();
       });
       carpinchoTarget.addEventListener("targetLost", () => {
           menuCarpincho.style.display = "none";
-  toggleCheckbox.checked = false; // cierra menú
+  toggleCheckbox.checked = false; // guarda estado como cerrado
+  menuCerrado();
       });
     } else {
       console.error("Carpincho target not found");
     }
-    // botón toggle
+
+    // click en botón toggle
     const toggleButton = document.querySelector('.button-toggle');
     if (toggleButton) {
    toggleButton.addEventListener('click', () => {
   toggleCheckbox.checked = !toggleCheckbox.checked;
   if (toggleCheckbox.checked) {
-    menuCarpincho.style.height = "450px";
-    menuCarpincho.style.width = "300px";
-    document.querySelector("#menu-carpincho .nav").style.opacity = "1";
-    document.querySelector("#menu-carpincho .nav").style.pointerEvents = "auto";
-    document.querySelector("#menu-carpincho .dummy-content").style.opacity = "1";
-    document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "auto";
+    menuAbierto()
   } else {
-    menuCarpincho.style.height = "50px";
-    menuCarpincho.style.width = "50px";
-    document.querySelector("#menu-carpincho .nav").style.opacity = "0";
-    document.querySelector("#menu-carpincho .nav").style.pointerEvents = "none";
-    document.querySelector("#menu-carpincho .dummy-content").style.opacity = "0";
-    document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "none";
+    menuCerrado();
   }
 });
     }
