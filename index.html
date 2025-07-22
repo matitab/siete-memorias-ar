@@ -11,11 +11,10 @@
 		<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 		<!-- MQTT.js, implementa protocolo MQTT (habilitar en caso de implementación de uso de LEDs)
-<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
--->
+		<script src="https://unpkg.com/mqtt/dist/mqtt.min.js"></script>
+		-->
 
-		<!--Fuentes utilizadas: Montserrat y Courier Prime-->
-		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" as="style" />
+		<!--Fuente utilizada: Courier Prime-->
 		<link rel="preload" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" as="style" />
 
 		<!-- ======================== -->
@@ -147,28 +146,29 @@
 			}
 			#boton-play-pausa:hover{background-color:#3185ac;color:#fff}
 			.container-menu {
+				font-family: "Courier Prime",monospace;
 			    overflow: hidden;
 			    position: fixed;
-			    top: 15px;
-			    left: 20px;
-			    width: 300px;
+			    top: 0.625rem;
+			    left: 0.625rem;
+			    width: 18.75rem;
+				height: 28.125rem;
 			    max-width: 90vw;
-			    height: 450px;
 			    padding: 30px;
 			    border-radius: 8px;
 			    background: rgba(0,173,196,.1);
 			    backdrop-filter: blur(4px);
-			    box-shadow: 0 4px 4px rgba(0,0,0,.15),0 0 12px rgba(0,0,0,.08),inset 3px 3px 3px 0 rgba(0,173,196,.1),inset -3px -3px 3px 0 rgba(0,173,196,.1);
+			    box-shadow: 0 4px 4px rgba(0,173,196,.1),0 0 12px rgba(0,173,196,.1),inset 3px 3px 3px 0 rgba(0,173,196,.1),inset -3px -3px 3px 0 rgba(0,173,196,.1);
 			    display: none;
 			    pointer-events: auto;
-			    font-family: "Montserrat",sans-serif;
 			    z-index: 10020
 			}
+			.button-toggle .bar {transform-origin: center;}
 			#toggle-M1{display:none}
             #toggle-M1:checked~.toggle-container .button-toggle{background-color:rgba(0,173,196,.3)}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(1){transform:translateY(8px) rotate(45deg)}
+            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(1){transform: rotate(45deg); position: absolute;}
             #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(2){opacity:0}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(3){transform: rotate(-45deg); position: absolute;}
             #toggle-M1:checked~.dummy-content,#toggle-M1:checked~.nav{opacity:0;transform:translateY(-20px);pointer-events:none;visibility:hidden}
             #toggle-M1:checked~.dummy-content{transform:translateY(20px)}
             #toggle-M1:not(:checked)~.dummy-content,
@@ -198,7 +198,7 @@
 			    margin: 2px 0;
 			    transition: transform .3s ease,opacity .3s ease
 			}
-			.nav {gap: 16px;margin: 60px 20px 20px}
+			.nav {gap: 16px;margin: 30px 20px 20px}
 			.nav-item {
 			    display: block;
 			    line-height: 32px;
@@ -228,14 +228,43 @@
 			    left: 15px;
 			    right: 15px;
 			    visibility: hidden;
-			    color: #fff;
+			    color: #ffffff;
 			    text-align: center;
 			    z-index: 3;
-			    background: rgba(255,255,255,.1);
+			    background: #3185ac;
 			    border-radius: 8px;
 			    padding: 10px;
-			    font-size: 12px;
-			    box-shadow: inset 1px 1px 1px 0 rgba(255,255,255,.45),inset -1px -1px 1px 0 rgba(255,255,255,.45)
+			    font-size: 15px;
+			    box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
+			}
+			.nombre-content { 
+			margin-bottom: 8px;
+			margin-top: 0;
+			white-space: nowrap;
+			padding: 2px 8px;
+			font-size: 0.92em;
+			min-width: 180px;
+			max-width: 90%;
+			line-height: 1.2;
+			background: rgba(49, 133, 172, 0.85);
+			font-weight: 600;
+			letter-spacing: 0.03em;
+			box-shadow: none;
+			cursor: default;
+			text-transform: uppercase;
+			pointer-events: none;
+			border-radius: 8px;
+			width: 250px;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;	
+			margin-left: 20px;
+			margin-right: auto;
+			font-family: "Courier Prime",monospace;
+			font-size: 0.9em;
+			color: #ffffff;
+			box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
 			}
 		</style>
 	</head>
@@ -265,10 +294,14 @@
 					<span class="bar"></span>
 				</button>
 			</div>
+			<div class="nombre-content" id="nombre-persona">
+				<p>Nombre y apellido persona</p>
+			</div>
 			<div class="nav">
 				<div class="nav-item" onclick="showContent('M1-Info')">M1-Info</div>
 				<div class="nav-item" onclick="showContent('Historia')">Historia</div>
 				<div class="nav-item" onclick="showContent('Imágenes')">Imágenes</div>
+				<div class="nav-item" onclick="showContent('M1-Video')">M1-Video</div>
 			</div>
 			<div class="dummy-content" id="menu-content">
 				<p>Selecciona una opción del menú</p>
@@ -297,7 +330,7 @@
         color: white;
         padding: 0.8em 1.2em;
         border-radius: 0.5em;
-        font-family: 'Montserrat', sans-serif;
+        font-family: Courier Prime, monospace;
         font-size: 1em;
         display: none;"
 		><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
@@ -316,7 +349,7 @@
         border-radius: 1em;
         text-align: center;
         z-index: 10050;
-        font-family: 'Montserrat', sans-serif;
+        font-family: Courier Prime, monospace;
         max-width: 80vw;"
 		><!-- Mensaje por defecto: -->¡Completaste el recorrido! <br /><br /><small> Click para cerrar </small>
 		</div>
@@ -339,7 +372,7 @@
 			<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
 			<a-assets>
 				<!-- Video de prueba 1-->
-				<video id="video-perro" src="assets/video1test.mp4" preload="auto" loop playsinline></video>
+				<video id="video1-M2" src="assets/video1test.mp4" preload="auto" loop playsinline></video>
 				<img id="imgtest1" src="assets/imagentest1.png" alt="" />
 			</a-assets>
 			<!-- Cámara-->
@@ -357,7 +390,7 @@
 			<!-- Marcador 2 -->
 			<a-entity mindar-image-target="targetIndex: 2" data-index="2">
 				<a-text value="Perro" color="white" align="center" position="0 0.3 0.1" width="1.5"> </a-text>
-				<a-video src="#video-perro" position="0 -0.2 0" width="1" height="0.7" rotation="0 0 0" muted="false" playsinline="true"> </a-video>
+				<a-video src="#video1-M2" position="0 -0.2 0" width="1" height="0.7" rotation="0 0 0" muted="false" playsinline="true"> </a-video>
 			</a-entity>
 			<!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
 		</a-scene>
@@ -394,7 +427,7 @@
 			  });
 			    /*Play/Pause videos*/
 			    const botonPlayPausa = document.getElementById("boton-play-pausa");
-			    const videoM2 = document.getElementById("video-perro");
+			    const videoM2 = document.getElementById("video1-M2");
 			    const Marcador2 = document.querySelector('[mindar-image-target="targetIndex: 2"]');
 			    botonPlayPausa.style.display = "none";
 			    // Mostrar y reproducir el video cuando detecta el target
@@ -428,6 +461,7 @@
 			  const menu = document.getElementById(menuId);
 			  const nav = document.querySelector(`#${menuId} .nav`);
 			  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+			  const nombre = document.getElementById("nombre-persona");
 			  if (menu && nav && dummyContent) {
 			    menu.style.display = "block";
 			    menu.style.width = "18.75rem";
@@ -441,11 +475,13 @@
 			    dummyContent.style.transform = "translateY(0)";
 			    dummyContent.style.pointerEvents = "auto";
 			    dummyContent.style.visibility = "visible";
+				nombre.style.visibility = "visible";
 			  }}
 			function menuCerrado(menuId) {
 			  const menu = document.getElementById(menuId);
 			  const nav = document.querySelector(`#${menuId} .nav`);
 			  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+			  const nombre = document.getElementById("nombre-persona");
 			  if (menu && nav && dummyContent) {
 			    menu.style.width = "2.5rem";
 			    menu.style.height = "2.5rem";
@@ -458,6 +494,7 @@
 			    dummyContent.style.transform = "translateY(20px)";
 			    dummyContent.style.pointerEvents = "none";
 			    dummyContent.style.visibility = "hidden";
+				nombre.style.visibility = "hidden";
 			  }}
 
 			function contenidoMarcador1() {
@@ -475,6 +512,9 @@
 			      case "Imágenes":
 			        content = '<img src="assets/carpincho.jpeg" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px;">';
 			        break;
+				  case "M1-Video":
+			        content = '<video src="assets/video1test.mp4" controls style="width: 100%; max-width: 12.5rem; height: 8.5rem; border-radius: 8px;"></video>';
+			        break;
 			      default:
 			        content = "<p>Selecciona una opción del menú</p>";
 			    }
@@ -488,6 +528,8 @@
 			const toggleButtonM1 = document.querySelector("#Menu-M1 .button-toggle");
 			if (Marcador1 && toggleM1 && menuM1 && toggleButtonM1) {
 			  Marcador1.addEventListener("targetFound", () => {
+				const nombreDiv = document.getElementById("nombre-persona");
+				nombreDiv.innerHTML = "<p>Nombre y apellido persona</p>"; 
 			     menuM1.style.display = "block";
 			    menuAbierto("Menu-M1");
 			    toggleM1.checked = true;
