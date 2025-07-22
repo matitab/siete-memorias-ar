@@ -145,24 +145,30 @@
 			    transition: background-color .3s ease
 			}
 			#boton-play-pausa:hover{background-color:#3185ac;color:#fff}
+
 			.container-menu {
-				font-family: "Courier Prime",monospace;
-			    overflow: hidden;
-			    position: fixed;
-			    top: 0.625rem;
-			    left: 0.625rem;
-			    width: 18.75rem;
-				height: 28.125rem;
-			    max-width: 90vw;
-			    padding: 30px;
-			    border-radius: 8px;
-			    background: rgba(0,173,196,.1);
-			    backdrop-filter: blur(4px);
-			    box-shadow: 0 4px 4px rgba(0,173,196,.1),0 0 12px rgba(0,173,196,.1),inset 3px 3px 3px 0 rgba(0,173,196,.1),inset -3px -3px 3px 0 rgba(0,173,196,.1);
-			    display: none;
-			    pointer-events: auto;
-			    z-index: 10020
+			background: rgba(0,173,196,.1);
+			font-family: "Courier Prime", monospace;
+			top: 0.625rem;
+			left: 0.625rem;
+			width: 18.75rem;
+			height: 28.125rem;
+			padding: 1.875rem;
+			border-radius: 2rem;
+			position: fixed;
+			overflow: hidden;
+			z-index: 10020;
+			display: none;
 			}
+			.container-menu--bend {
+			backdrop-filter: blur(3px);
+			border-radius: 2rem;
+			filter: url(#glass-blur);
+			inset: 0;
+			position: absolute;
+			z-index: 0;
+			}
+		
 			.button-toggle .bar {transform-origin: center;}
 			#toggle-M1{display:none}
             #toggle-M1:checked~.toggle-container .button-toggle{background-color:rgba(0,173,196,.3)}
@@ -176,8 +182,8 @@
             .toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}.button-toggle {
 			    text-align: center;
 			    position: fixed;
-			    top: 10px;
-			    left: 10px;
+			    top: 1.2rem;
+				left: 1.3rem;
 			    width: 30px;
 			    height: 30px;
 			    background: rgba(0,173,196,.1);
@@ -259,7 +265,7 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;	
-			margin-left: 20px;
+			margin-left: 10px;
 			margin-right: auto;
 			font-family: "Courier Prime",monospace;
 			font-size: 0.9em;
@@ -267,6 +273,7 @@
 			box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
 			}
 		</style>
+		
 	</head>
 	<body>
 		<!-- Pantalla de fondo -->
@@ -286,18 +293,18 @@
 		</div>
 		<!-- Menú marcador 1 -->
 		<div class="container-menu" id="Menu-M1">
+			<div class="container-menu--bend"></div>
 			<input type="checkbox" id="toggle-M1" />
-			<div class="toggle-container">
-				<button class="button-toggle">
-					<span class="bar"></span>
-					<span class="bar"></span>
-					<span class="bar"></span>
-				</button>
-			</div>
-			<div class="nombre-content" id="nombre-persona">
-				<p>Nombre y apellido persona</p>
-			</div>
+				<div class="toggle-container">
+					<button class="button-toggle">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+			
 			<div class="nav">
+				<div class="nombre-content" id="nombre-persona"><p>Nombre y apellido persona</p></div>
 				<div class="nav-item" onclick="showContent('M1-Info')">M1-Info</div>
 				<div class="nav-item" onclick="showContent('Historia')">Historia</div>
 				<div class="nav-item" onclick="showContent('Imágenes')">Imágenes</div>
@@ -307,6 +314,7 @@
 				<p>Selecciona una opción del menú</p>
 			</div>
 		</div>
+		
 		<!-- ====================================== -->
 		<!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
 		<!-- ====================================== -->
@@ -323,13 +331,13 @@
 		<!-- Contador de marcadores detectados -->
 		<div id="contador-marcadores" style="
         position: fixed;
-        top: 20px;
+        top: 10px;
         right: 20px;
         z-index: 10050;
-        background: rgba(0, 173, 196, 0.541);
+        background: rgba(0, 173, 196, 0.479);
         color: white;
-        padding: 0.8em 1.2em;
-        border-radius: 0.5em;
+        padding: 0.4em 0.6em;
+        border-radius: 0.3em;
         font-family: Courier Prime, monospace;
         font-size: 1em;
         display: none;"
@@ -364,8 +372,7 @@
 			color-space="sRGB"
 			renderer="colorManagement: true, physicallyCorrectLights"
 			vr-mode-ui="enabled: true"
-			device-orientation-permission-ui="enabled: false"
-		>
+			device-orientation-permission-ui="enabled: false">
 			<!-- ======================== -->
 			<!--        ASSETS            -->
 			<!-- ======================== -->
@@ -496,6 +503,30 @@
 			    dummyContent.style.visibility = "hidden";
 				nombre.style.visibility = "hidden";
 			  }}
+			
+			function contenidoMarcador0() {
+			  window.showContent = function (option) {
+			    const contentDiv = document.getElementById("menu-content");
+			    if (!contentDiv) return;
+			    let content = "";
+			    switch (option) {
+			      case "M0-Info":
+			        content = "<p>Información 0</p>";
+			        break;
+			      case "Historia":
+			        content = "<p>Historia 0</p>";
+			        break;
+			      case "Imágenes":
+			        content = '<img src="assets/carpincho.jpeg" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px;">';
+			        break;
+				  case "M0-Video":
+			        content = '<video src="assets/video1test.mp4" controls style="width: 100%; max-width: 12.5rem; height: 8.5rem; border-radius: 8px;"></video>';
+			        break;
+			      default:
+			        content = "<p>Selecciona una opción del menú</p>";
+			    }
+			    contentDiv.innerHTML = content;
+			  };}
 
 			function contenidoMarcador1() {
 			  window.showContent = function (option) {
@@ -521,6 +552,8 @@
 			    contentDiv.innerHTML = content;
 			  };}
 
+			  
+
 			// Menú marcador 1
 			const Marcador1 = document.querySelector('[mindar-image-target="targetIndex: 1"]');
 			const toggleM1 = document.getElementById("toggle-M1");
@@ -544,33 +577,37 @@
       } else {
         menuCerrado("Menu-M1");
       }
-      });}
-			contenidoMarcador1();
-			    /* Contador de marcadores detectados */
-			    const marcadorDetectado = new Set(); // índices de los target ya escaneados
-			    const totalMarcadores = 3;
-			    const contadorDiv = document.getElementById("contador-marcadores");
-			    const actualizarContador = () => {
-			      contadorDiv.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;
-			      contadorDiv.style.display = "block";
-			      if (marcadorDetectado.size === totalMarcadores) {
-			        setTimeout(() => {
-			          document.getElementById("mensaje-final").style.display = "block";
-			        }, 500);}};
-			    // eventos de detección (si agregamos más targets, modificar índice)
-			    [0, 1, 2].forEach(index => {
-			      const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
-			      if (!target) return;
-			      target.addEventListener("targetFound", () => {
-			        if (!marcadorDetectado.has(index)) {
-			          marcadorDetectado.add(index);
-			          actualizarContador();
-			        }});});
-			    // cierra mensaje con click
-			    document.getElementById("mensaje-final").addEventListener("click", () => {
-			      document.getElementById("mensaje-final").style.display = "none";
-			    });});
-		</script>
+      });} contenidoMarcador1();
+
+	  
+	/* Contador de marcadores detectados */
+	const marcadorDetectado = new Set(); // índices de los target ya escaneados
+	const totalMarcadores = 3;
+	const contadorDiv = document.getElementById("contador-marcadores");
+	const actualizarContador = () => {
+	contadorDiv.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;
+	contadorDiv.style.display = "block";
+	setTimeout(() => {
+		contadorDiv.style.display = "none";
+	}, timeout = 3000);
+	if (marcadorDetectado.size === totalMarcadores) {
+		setTimeout(() => {
+		document.getElementById("mensaje-final").style.display = "block";
+		}, 500);}};
+		// eventos de detección (si agregamos más targets, modificar índice)
+		[0, 1, 2].forEach(index => {
+		const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
+		if (!target) return;
+			target.addEventListener("targetFound", () => {
+			if (!marcadorDetectado.has(index)) {
+			    marcadorDetectado.add(index);
+			    actualizarContador();
+			    }});});
+			// cierra mensaje con click
+			document.getElementById("mensaje-final").addEventListener("click", () => {
+			document.getElementById("mensaje-final").style.display = "none";
+			});});
+		</script>		    
 
 		<!-- MQTT - Script para conectar el repo a la nube (habilitar en caso de implementación de uso de LEDs)
 <script>
@@ -613,5 +650,13 @@
 			move:{enable: true, speed: 0.25, direction: "none", random: true, straight: false, out_mode: "out", bounce: false,}},
 			interactivity:{detect_on:"window",events:{onhover:{enable:false},onclick:{enable:false},resize:true}}, retina_detect:true});
 		</script>
+
+	<svg style="display: none" xmlns="http://www.w3.org/2000/svg">
+	<filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
+		<feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
+		<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
+	</filter>
+	</svg>
+
 	</body>
 </html>
