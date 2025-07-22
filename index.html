@@ -168,7 +168,6 @@
 			position: absolute;
 			z-index: 0;
 			}
-		
 			.button-toggle .bar {transform-origin: center;}
 			#toggle-M1{display:none}
             #toggle-M1:checked~.toggle-container .button-toggle{background-color:rgba(0,173,196,.3)}
@@ -291,6 +290,31 @@
 		<div id="mi-loader" class="loader-container">
 			<span class="loader"></span>
 		</div>
+
+		<!-- Menú marcador 0 -->
+		<div class="container-menu" id="Menu-M0">
+			<div class="container-menu--bend"></div>
+			<input type="checkbox" id="toggle-M0" />
+				<div class="toggle-container">
+					<button class="button-toggle">
+						<span class="bar"></span>
+						<span class="bar"></span>
+						<span class="bar"></span>
+					</button>
+				</div>
+			
+			<div class="nav">
+				<div class="nombre-content" id="nombre-persona"><p>Nombre y apellido persona</p></div>
+				<div class="nav-item" onclick="showContent('M1-Info')">M1-Info</div>
+				<div class="nav-item" onclick="showContent('Historia')">Historia</div>
+				<div class="nav-item" onclick="showContent('Imágenes')">Imágenes</div>
+				<div class="nav-item" onclick="showContent('M1-Video')">M1-Video</div>
+			</div>
+			<div class="dummy-content" id="menu-content">
+				<p>Selecciona una opción del menú</p>
+			</div>
+		</div>
+
 		<!-- Menú marcador 1 -->
 		<div class="container-menu" id="Menu-M1">
 			<div class="container-menu--bend"></div>
@@ -314,6 +338,7 @@
 				<p>Selecciona una opción del menú</p>
 			</div>
 		</div>
+		
 		
 		<!-- ====================================== -->
 		<!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
@@ -405,34 +430,9 @@
 		<!-- Carga de contenido -->
 		<script>
 			  document.addEventListener("DOMContentLoaded",()=>{
-			    const loader = document.getElementById("mi-loader");
-			    const boton = document.getElementById("boton-comenzar");
-			    const pantalla = document.getElementById("pantalla-carga");
-			    const pantallaFondo = document.getElementById("pantalla-fondo-negro");
-			    const tsparticles = document.getElementById("tsparticles");
-			    const escena = document.querySelector("a-scene");
-			    escena.addEventListener("renderstart", () => {
-			      pantalla.style.display = "flex";
-			      pantallaFondo.style.display = "block";
-			      tsparticles.style.display = "block";
-			      boton.style.display = "inline-block";
-			      loader.classList.add("fade-out-loader");
-			      loader.addEventListener("transitionend", () => {
-			        loader.style.display = "none";
-			      }, { once: true });
-            pantalla.classList.remove("fade-out");
-			  });
-			  // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
-			    boton.addEventListener('click', () => {
-			    pantalla.classList.add('fade-out');
-			    pantalla.addEventListener('transitionend', () => {
-			      pantalla.style.display = 'none';
-			      pantallaFondo.style.display = 'none';
-			      tsparticles.style.display = 'none';
-			    }, { once: true });
-			    escena.components['mindar-image'].start();
-			  });
-			    /*Play/Pause videos*/
+
+/*
+			    //Play/Pause videos
 			    const botonPlayPausa = document.getElementById("boton-play-pausa");
 			    const videoM2 = document.getElementById("video1-M2");
 			    const Marcador2 = document.querySelector('[mindar-image-target="targetIndex: 2"]');
@@ -463,6 +463,37 @@
 			        videoM2.pause();
 			        botonPlayPausa.textContent = "▶️";
 			        }});
+					*/
+
+
+			    const loader = document.getElementById("mi-loader");
+			    const boton = document.getElementById("boton-comenzar");
+			    const pantalla = document.getElementById("pantalla-carga");
+			    const pantallaFondo = document.getElementById("pantalla-fondo-negro");
+			    const tsparticles = document.getElementById("tsparticles");
+			    const escena = document.querySelector("a-scene");
+			    escena.addEventListener("renderstart", () => {
+			      pantalla.style.display = "flex";
+			      pantallaFondo.style.display = "block";
+			      tsparticles.style.display = "block";
+			      boton.style.display = "inline-block";
+			      loader.classList.add("fade-out-loader");
+			      loader.addEventListener("transitionend", () => {
+			        loader.style.display = "none";
+			      }, { once: true });
+            pantalla.classList.remove("fade-out");
+			  });
+			  // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
+			    boton.addEventListener('click', () => {
+			    pantalla.classList.add('fade-out');
+			    pantalla.addEventListener('transitionend', () => {
+			      pantalla.style.display = 'none';
+			      pantallaFondo.style.display = 'none';
+			      tsparticles.style.display = 'none';
+			    }, { once: true });
+			    escena.components['mindar-image'].start();
+			  });
+			  
 
 			function menuAbierto(menuId) {
 			  const menu = document.getElementById(menuId);
@@ -503,30 +534,8 @@
 			    dummyContent.style.visibility = "hidden";
 				nombre.style.visibility = "hidden";
 			  }}
-			
-			function contenidoMarcador0() {
-			  window.showContent = function (option) {
-			    const contentDiv = document.getElementById("menu-content");
-			    if (!contentDiv) return;
-			    let content = "";
-			    switch (option) {
-			      case "M0-Info":
-			        content = "<p>Información 0</p>";
-			        break;
-			      case "Historia":
-			        content = "<p>Historia 0</p>";
-			        break;
-			      case "Imágenes":
-			        content = '<img src="assets/carpincho.jpeg" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px;">';
-			        break;
-				  case "M0-Video":
-			        content = '<video src="assets/video1test.mp4" controls style="width: 100%; max-width: 12.5rem; height: 8.5rem; border-radius: 8px;"></video>';
-			        break;
-			      default:
-			        content = "<p>Selecciona una opción del menú</p>";
-			    }
-			    contentDiv.innerHTML = content;
-			  };}
+
+			  
 
 			function contenidoMarcador1() {
 			  window.showContent = function (option) {
@@ -639,6 +648,8 @@
     controlarLedPorMarcador(2, 'led/pin5');  // Perro -> Pin 5
   });
 </script> -->
+
+
 		<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
 		<!-- Config. partículas -->
 		<script>
