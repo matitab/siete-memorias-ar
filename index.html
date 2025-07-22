@@ -22,11 +22,11 @@
 		<!--        ESTILOS           -->
 		<!-- ======================== -->
 		<style>
-	@keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-    @keyframes typing{0%{width:0;border-right-color:transparent}1%{border-right-color:#d1cfc7}to{width:16ch;border-right-color:#d1cfc7}}
-    @keyframes blink{50%{border-color:transparent}}
-    @keyframes fadeout-cursor{to{border-right-color:transparent}}
-    @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#3185ac}}
+        @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+        @keyframes typing{0%{width:0;border-right-color:transparent}1%{border-right-color:#d1cfc7}to{width:16ch;border-right-color:#d1cfc7}}
+        @keyframes blink{50%{border-color:transparent}}
+        @keyframes fadeout-cursor{to{border-right-color:transparent}}
+        @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#3185ac}}
 	  .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
       .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
       .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #3185ac;border-left:4px solid transparent}
@@ -293,7 +293,7 @@
         top: 20px;
         right: 20px;
         z-index: 10050;
-        background: rgba(0,0,0,0.7);
+        background: rgba(0,173,196,.3);
         color: white;
         padding: 0.8em 1.2em;
         border-radius: 0.5em;
@@ -309,7 +309,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(0,0,0,0.9);
+        background: rgba(0, 0, 0, 0.411);
         color: #4fc3f7;
         padding: 2em;
         font-size: 1.4em;
@@ -352,7 +352,6 @@
 
 			<!-- Marcador 1 -->
 			<a-entity mindar-image-target="targetIndex: 1" data-index="1">
-				<a-text value="Marcador 1" color="white" align="center" position="0 0 0.1" width="1.5"> </a-text>
 			</a-entity>
 
 			<!-- Marcador 2 -->
@@ -506,8 +505,7 @@
       } else {
         menuCerrado("Menu-M1");
       }
-      });
-			}
+      });}
 			contenidoMarcador1();
 			    /* Contador de marcadores detectados */
 			    const marcadorDetectado = new Set(); // índices de los target ya escaneados
