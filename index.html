@@ -198,38 +198,42 @@ color: white;}
   pointer-events: auto;
   font-family: 'Montserrat', sans-serif;
 }
-#toggle {
+#toggle-M1 {
   display: none;
 }
-#toggle:checked ~ .toggle-container .button-toggle {
+#toggle-M1:checked ~ .toggle-container .button-toggle {
   background-color: rgba(0, 0, 0, 0.1);
 }
-#toggle:checked ~ .toggle-container .button-toggle .bar:nth-child(1) {
+#toggle-M1:checked ~ .toggle-container .button-toggle .bar:nth-child(1) {
   transform: translateY(8px) rotate(45deg);
 }
-#toggle:checked ~ .toggle-container .button-toggle .bar:nth-child(2) {
+#toggle-M1:checked ~ .toggle-container .button-toggle .bar:nth-child(2) {
   opacity: 0;
 }
-#toggle:checked ~ .toggle-container .button-toggle .bar:nth-child(3) {
+#toggle-M1:checked ~ .toggle-container .button-toggle .bar:nth-child(3) {
   transform: translateY(-8px) rotate(-45deg);
 }
-#toggle:checked ~ .nav {
+#toggle-M1:checked ~ .nav {
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
+  visibility: visible; /* Añadido para consistencia */
 }
-#toggle:checked ~ .dummy-content {
+#toggle-M1:checked ~ .dummy-content {
   opacity: 1;
   transform: translateY(0);
   visibility: visible;
   pointer-events: auto;
 }
-#toggle:checked ~ .nav .nav-item {
+#toggle-M1:checked ~ .nav .nav-item {
   opacity: 1;
   transform: translateY(0);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 .button-toggle {
+  text-align: center; 
+  justify-content: center;
+  align-items: center;
   position: absolute;
   top: 10px;
   left: 10px;
@@ -243,8 +247,7 @@ color: white;}
   z-index: 10021;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+
 }
 .button-toggle:hover {
   background-color: rgba(0, 0, 0, 0.2);
@@ -287,6 +290,9 @@ color: white;}
   transition: opacity 0.3s ease, transform 0.3s ease;
   opacity: 0;
   transform: translateY(10px);
+  text-align: center; 
+  justify-content: center;
+  align-items: center;
 }
 .nav-item:hover {
   color: white;
@@ -334,8 +340,8 @@ body {
 </div>
 
 <!-- Menú marcador 1 -->
-<div class="container-menu" id="menu-carpincho">
-  <input type="checkbox" id="toggle">
+<div class="container-menu" id="Menu-M1">
+  <input type="checkbox" id="toggle-M1"> 
   <div class="toggle-container">
     <button class="button-toggle">
       <span class="bar"></span>
@@ -352,6 +358,7 @@ body {
     <p>Selecciona una opción del menú</p>
   </div>
 </div>
+
 
 <!-- ====================================== -->
 <!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
@@ -481,7 +488,6 @@ device-orientation-permission-ui="enabled: false">
 
 <!-- Carga de contenido -->
 <script>
-
   document.addEventListener("DOMContentLoaded",()=>{
     const loader = document.getElementById("mi-loading");
     const boton = document.getElementById("boton-comenzar");
@@ -547,74 +553,94 @@ device-orientation-permission-ui="enabled: false">
         botonPlayPausa.textContent = "▶️";
         }});  
 
-     // Menú marcador 1
-    const carpinchoTarget = document.querySelector('[mindar-image-target="targetIndex: 1"]');
-    const menuCarpincho = document.getElementById("menu-carpincho");
-    const toggleCheckbox = document.getElementById("toggle");   
-
-    function menuAbierto() {
-      menuCarpincho.style.height = "450px";
-      menuCarpincho.style.width = "300px";
-      document.querySelector("#menu-carpincho .nav").style.opacity = "1";
-      document.querySelector("#menu-carpincho .nav").style.pointerEvents = "auto";
-      document.querySelector("#menu-carpincho .dummy-content").style.opacity = "1";
-      document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "auto";
-    } 
-    function menuCerrado() {
-      menuCarpincho.style.height = "50px";
-      menuCarpincho.style.width = "50px";
-      document.querySelector("#menu-carpincho .nav").style.opacity = "0";
-      document.querySelector("#menu-carpincho .nav").style.pointerEvents = "none";
-      document.querySelector("#menu-carpincho .dummy-content").style.opacity = "0";
-      document.querySelector("#menu-carpincho .dummy-content").style.pointerEvents = "none";
-    }
-      
-    // Mostrar menú cuando se detecta el target
-    if (carpinchoTarget) {
-      carpinchoTarget.addEventListener("targetFound", () => {
-  menuCarpincho.style.display = "block";
-  toggleCheckbox.checked = true; // guarda estado como abierto
-  menuAbierto();
-      });
-      carpinchoTarget.addEventListener("targetLost", () => {
-          menuCarpincho.style.display = "none";
-  toggleCheckbox.checked = false; // guarda estado como cerrado
-  menuCerrado();
-      });
-    } else {
-      console.error("Carpincho target not found");
-    }
-
-    // click en botón toggle
-    const toggleButton = document.querySelector('.button-toggle');
-    if (toggleButton) {
-   toggleButton.addEventListener('click', () => {
-  toggleCheckbox.checked = !toggleCheckbox.checked;
-  if (toggleCheckbox.checked) {
-    menuAbierto()
-  } else {
-    menuCerrado();
+function menuAbierto(menuId) {
+  const menu = document.getElementById(menuId);
+  const nav = document.querySelector(`#${menuId} .nav`);
+  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+  if (menu && nav && dummyContent) {
+    menu.style.display = "block";
+    menu.style.height = "450px";
+    menu.style.width = "300px";
+    nav.style.opacity = "1";
+    nav.style.pointerEvents = "auto";
+    nav.style.visibility = "visible";
+    dummyContent.style.opacity = "1";
+    dummyContent.style.pointerEvents = "auto";
+    dummyContent.style.visibility = "visible";
+    dummyContent.innerHTML = "<p>Selecciona una opción del menú</p>";
   }
-});
+}
+function menuCerrado(menuId) {
+  const menu = document.getElementById(menuId);
+  const nav = document.querySelector(`#${menuId} .nav`);
+  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+  if (menu && nav && dummyContent) {
+    nav.style.opacity = "0";
+    nav.style.pointerEvents = "none";
+    nav.style.visibility = "hidden";
+    dummyContent.style.opacity = "0";
+    dummyContent.style.pointerEvents = "none";
+    dummyContent.style.visibility = "hidden";
+    dummyContent.innerHTML = "";
+      menu.style.height = "50px";
+      menu.style.width = "50px";
+  }
+}
+
+function contenidoMarcador1() {
+  window.showContent = function (option) {
+    const contentDiv = document.getElementById("menu-content");
+    if (!contentDiv) return;
+    let content = "";
+    switch (option) {
+      case "Carpincho Info":
+        content = "<p>Información sobre el carpincho.</p>";
+        break;
+      case "Historia":
+        content = "<p>Historia del carpincho.</p>";
+        break;
+      case "Imágenes":
+        content = '<img src="assets/carpincho.jpeg" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px;">';
+        break;
+      default:
+        content = "<p>Selecciona una opción del menú</p>";
     }
-    window.showContent = function (option) {
-      const contentDiv = document.getElementById("menu-content");
-      let content = "";
-      switch (option) {
-        case "Carpincho Info":
-          content = "<p>Info</p>";
-          break;
-        case "Historia":
-          content = "<p>Historia</p>";
-          break;
-        case "Imágenes":
-          content = '<img src="assets/carpincho.jpeg" style="width: 100%; max-width: 200px; height: auto; border-radius: 8px;">';
-          break;
-        default:
-          content = "<p>Selecciona una opción del menú</p>";
-      }
-      contentDiv.innerHTML = content;
-    };
+    contentDiv.innerHTML = content;
+  };
+}
+
+// Menú marcador 1
+const Marcador1 = document.querySelector('[mindar-image-target="targetIndex: 1"]');
+const toggleM1 = document.getElementById("toggle-M1");
+const menuM1 = document.getElementById("Menu-M1");
+
+if (Marcador1) {
+  Marcador1.addEventListener("targetFound", () => {
+    menuM1.style.display = "block";
+    menuAbierto("Menu-M1");
+    toggleM1.checked = true;
+  });
+  Marcador1.addEventListener("targetLost", () => {
+    menuM1.style.display = "none";
+    menuCerrado("Menu-M1");
+    toggleM1.checked = false;
+  });
+}
+
+// Botón toggle menú M1
+const toggleButtonM1 = document.querySelector("#Menu-M1 .button-toggle");
+if (toggleButtonM1) {
+  toggleButtonM1.addEventListener("click", () => {
+    toggleM1.checked = !toggleM1.checked;
+    if (toggleM1.checked) {
+      menuM1.style.display = "block";
+      menuAbierto("Menu-M1");
+    } else {
+      menuCerrado("Menu-M1");
+    }
+  });
+}
+contenidoMarcador1();
 
     /* Contador de marcadores detectados */
     const marcadorDetectado = new Set(); // índices de los target ya escaneados
