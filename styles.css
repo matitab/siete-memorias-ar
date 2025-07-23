@@ -87,7 +87,7 @@
 			}
 			#boton-comenzar:hover{background-color:#3185ac;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
 			a-scene .a-enter-vr-button {
-			    background-color: #d1cfc76e;
+			    background-color: #8499e562;
 			    position: fixed!important;
 			    bottom: 20px!important;
 			    left: 20px!important;
@@ -108,19 +108,7 @@
             #boton-comenzar{padding:.8em 1.5em;font-size:1em}.container-menu{width:80vw;height:25rem;padding:1.25rem}
             .nav-item{font-size:13px;line-height:30px}
 			}
-			#boton-play-pausa {
-			    font-size: 2em;
-			    padding: .2em .4em;
-			    border-radius: .4em;
-			    cursor: pointer;
-			    background-color: #d1cfc7;
-			    color: #1a1a1a;
-			    border: 0;
-			    user-select: none;
-			    transition: background-color .3s ease
-			}
-			#boton-play-pausa:hover{background-color:#3185ac;color:#fff}
-
+	
 			.container-menu {
 			background: rgba(255,255,255,.1);
 			top: 0.625rem;
@@ -184,7 +172,6 @@
 			    transition: opacity .3s ease,transform .3s ease;
 			    text-align: center;
 			    border-radius: 0.2em;
-			    box-shadow: inset 1px 1px 1px 0 rgba(0,173,196,.1),inset -1px -1px 1px 0 rgba(0,173,196,.1);
 			    justify-content: center;
 			    align-items: center;
 			    height: 32px;
@@ -194,10 +181,15 @@
 			    font-size: 14px;
 			    text-transform: uppercase;
 			    cursor: pointer;
-			    background: linear-gradient(90deg,#1a76ad 0,#288ec9 100%);
+			    background: #1a1f3c;
 			    z-index: 3
 			}
-			.nav-item:hover {background: linear-gradient(90deg,#288ec9 0,#1a76ad 100%)}
+			.nav-item:hover {background: #120907;}
+			.nav-item.cliqueado {
+			background-color: #120907;
+			box-shadow: inset 1px 1px 1px 0 #d1cfc7,inset -1px -1px 1px 0 #d1cfc7;
+			}
+
 			.nav-item:nth-child(1) {transition-delay: .1s}
 			.nav-item:nth-child(2) {transition-delay: .2s}
 			.nav-item:nth-child(3) {transition-delay: .3s}
@@ -210,11 +202,10 @@
 			    color: #ffffff;
 			    text-align: center;
 			    z-index: 3;
-			    background: #3185ac;
+			    background: #1a1f3c;
 			    border-radius: .2em;
 			    padding: 10px;
 			    font-size: 15px;
-			    box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
 			}
 			.nombre-content { 
 			font-size: 0.9em;
@@ -224,7 +215,7 @@
 			margin-top: 0;
 			margin-left: 10px;
 			padding: 2px 8px;
-			background: rgba(49, 133, 172, 0.85);
+			background: #1a1f3c;
 			letter-spacing: 0.03em;
 			text-transform: uppercase;
 			border-radius: 0.2em;
@@ -234,5 +225,4 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;	
-			box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
 			}

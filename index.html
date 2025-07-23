@@ -16,8 +16,9 @@
 		<!--        ESTILOS           -->
 		<!-- ======================== -->
 		<link rel="stylesheet" href="styles.css" />
-	</head>
+		<!-- ======================== -->
 	<base href="./">
+	</head>
 	<body>
 		<!-- ====================================== -->
 		<!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
@@ -52,10 +53,10 @@
 			
 			<div class="nav">
 				<div class="nombre-content" id="nombre-persona"><p>Nombre y apellido persona</p></div>
-				<div class="nav-item" onclick="showContent('M1-Info')">M1-Info</div>
-				<div class="nav-item" onclick="showContent('Historia')">Historia</div>
-				<div class="nav-item" onclick="showContent('Imágenes')">Imágenes</div>
-				<div class="nav-item" onclick="showContent('M1-Video')">M1-Video</div>
+				<div class="nav-item" onclick="showContent('M1-Info', this)">M1-Info</div>
+				<div class="nav-item" onclick="showContent('Historia', this)">Historia</div>
+				<div class="nav-item" onclick="showContent('Imágenes', this)">Imágenes</div>
+				<div class="nav-item" onclick="showContent('M1-Video', this)">M1-Video</div>
 			</div>
 			<div class="dummy-content" id="menu-content">
 				<p>Selecciona una opción del menú</p>
@@ -209,9 +210,18 @@
 				nombre.style.visibility = "hidden";
 			  }}
 
+
 			function contenidoMarcador1() {
-			  window.showContent = function (option) {
+			  window.showContent = function (option, element) {
 			    const contentDiv = document.getElementById("menu-content");
+
+				
+				document.querySelectorAll(".nav-item").forEach(btn => {
+				btn.classList.remove("cliqueado");
+				});
+				if (element) {
+					element.classList.add("cliqueado");
+				}
 			    if (!contentDiv) return;
 			    let content = "";
 			    switch (option) {
@@ -256,8 +266,8 @@
       } else {
         menuCerrado("Menu-M1");
       }
-      });} contenidoMarcador1();
-		
+      });}
+	   contenidoMarcador1();
 		});
 	</script>		    
 
