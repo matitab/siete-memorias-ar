@@ -212,7 +212,7 @@
 			    text-align: center;
 			    z-index: 3;
 			    background: #3185ac;
-			    border-radius: 8px;
+			    border-radius: .2em;
 			    padding: 10px;
 			    font-size: 15px;
 			    box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
