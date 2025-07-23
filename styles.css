@@ -133,7 +133,7 @@
 			position: fixed;
 			overflow: hidden;
 			z-index: 10020;
-			display: block;
+			display: none;
 			}
 			.container-menu--bend {
 			backdrop-filter: blur(3px);
