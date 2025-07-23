@@ -123,7 +123,7 @@
 			#boton-play-pausa:hover{background-color:#3185ac;color:#fff}
 
 			.container-menu {
-			background: rgba(0,173,196,.1);
+			background: rgba(255,255,255,.1);
 			top: 0.625rem;
 			left: 0.625rem;
 			width: 18.75rem;
@@ -133,7 +133,7 @@
 			position: fixed;
 			overflow: hidden;
 			z-index: 10020;
-			display: none;
+			display: block;
 			}
 			.container-menu--bend {
 			backdrop-filter: blur(3px);
