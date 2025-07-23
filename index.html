@@ -39,10 +39,10 @@
 			<span class="loader"></span>
 		</div>
 
-		<!-- Menú marcador 1 -->
-		<div class="container-menu" id="Menu-M1">
+		<!-- Menú (general)-->
+		<div class="container-menu" id="Menu">
 			<div class="container-menu--bend"></div>
-			<input type="checkbox" id="toggle-M1" />
+			<input type="checkbox" id="toggle" />
 				<div class="toggle-container">
 					<button class="button-toggle">
 						<span class="bar"></span>
@@ -50,18 +50,19 @@
 						<span class="bar"></span>
 					</button>
 				</div>
-			
 			<div class="nav">
 				<div class="nombre-content" id="nombre-persona"><p>Nombre y apellido persona</p></div>
-				<div class="nav-item" onclick="showContent('M1-Info', this)">M1-Info</div>
+				<div class="nav-item" onclick="showContent('Info', this)">Info</div>
 				<div class="nav-item" onclick="showContent('Historia', this)">Historia</div>
 				<div class="nav-item" onclick="showContent('Imágenes', this)">Imágenes</div>
-				<div class="nav-item" onclick="showContent('M1-Video', this)">M1-Video</div>
+				<div class="nav-item" onclick="showContent('Video', this)">Video</div>
 			</div>
 			<div class="dummy-content" id="menu-content">
 				<p>Selecciona una opción del menú</p>
 			</div>
 		</div>
+		
+
 		
 		<!-- Botón de play/pausa video -->
 		<div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
@@ -74,10 +75,10 @@
         top: 10px;
         right: 30px;
         z-index: 10050;
-        background: rgba(0, 173, 196, 0.479);
+        background: #1a1f3c;
         color: white;
         padding: 0.4em 0.6em;
-        border-radius: 2rem;
+        border-radius: .2em;
         font-family: Courier Prime, monospace;
         font-size: 1em;
         display: none;"
@@ -90,7 +91,7 @@
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.411);
+        background: rgba(0, 0, 0, 0.616);
         color: #4fc3f7;
         padding: 2em;
         font-size: 1.4em;
@@ -210,64 +211,89 @@
 				nombre.style.visibility = "hidden";
 			  }}
 
+			const marcadoresData = [
+			{
+				nombre: "Nombre y apellido 0",
+				info: "Información 0",
+				historia: "Historia 0",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			},
+			{
+				nombre: "Nombre y apellido 1",
+				info: "Información 1",
+				historia: "Historia 1",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			},
+			{
+				nombre: "Nombre y apellido 2",
+				info: "Información 2",
+				historia: "Historia 2",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			}
+			];
 
-			function contenidoMarcador1() {
-			  window.showContent = function (option, element) {
-			    const contentDiv = document.getElementById("menu-content");
+			let marcadorActivo = 0; 
 
-				
-				document.querySelectorAll(".nav-item").forEach(btn => {
-				btn.classList.remove("cliqueado");
-				});
-				if (element) {
-					element.classList.add("cliqueado");
-				}
-			    if (!contentDiv) return;
-			    let content = "";
-			    switch (option) {
-			      case "M1-Info":
-			        content = "<p>Información 1</p>";
-			        break;
-			      case "Historia":
-			        content = "<p>Historia 1</p>";
-			        break;
-			      case "Imágenes":
-			        content = '<img src="assets/carpincho.jpeg" style="width: 100%; max-width: 200px; height: auto; border-radius: .2em;">';
-			        break;
-				  case "M1-Video":
-			        content = '<video src="assets/video1test.mp4" controls style="width: 100%; max-width: 200px; height: auto; border-radius: .2em;"></video>';
-			        break;
-			      default:
-			        content = "<p>Selecciona una opción del menú</p>";
-			    }
-			    contentDiv.innerHTML = content;
-			  };}
+			
+			
+			 window.showContent = function (option, element) {
+  const contentDiv = document.getElementById("menu-content");
+  document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("cliqueado"));
+  if (element) element.classList.add("cliqueado");
+  if (!contentDiv) return;
+  const data = marcadoresData[marcadorActivo];
+  let content = "";
+  switch (option) {
+    case "Info":
+      content = `<p>${data.info}</p>`;
+      break;
+    case "Historia":
+      content = `<p>${data.historia}</p>`;
+      break;
+    case "Imágenes":
+      content = `<img src="${data.imagen}" style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;">`;
+      break;
+    case "Video":
+      content = `<video src="${data.video}" controls style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;"></video>`;
+      break;
+    default:
+      content = "<p>Selecciona una opción del menú</p>";
+  }
+  contentDiv.innerHTML = content;
+			  }
 
-			// Detección marcador 1 / apertura de menú
-			const Marcador1 = document.querySelector('[mindar-image-target="targetIndex: 1"]');
-			const toggleM1 = document.getElementById("toggle-M1");
-			const menuM1 = document.getElementById("Menu-M1");
-			const toggleButtonM1 = document.querySelector("#Menu-M1 .button-toggle");
-			if (Marcador1 && toggleM1 && menuM1 && toggleButtonM1) {
-			  Marcador1.addEventListener("targetFound", () => {
-				const nombreDiv = document.getElementById("nombre-persona");
-				nombreDiv.innerHTML = "<p>Nombre y apellido persona</p>"; 
-			     menuM1.style.display = "block";
-			    menuAbierto("Menu-M1");
-			    toggleM1.checked = true;
-			  });
-			  Marcador1.addEventListener("targetLost", () => {
-			  });
-      toggleButtonM1.addEventListener("click", () => {
-      toggleM1.checked = !toggleM1.checked;
-      if (toggleM1.checked) {
-        menuM1.style.display = "block";
-        menuAbierto("Menu-M1");
+			// Detección marcadores / apertura de menú
+			const menuGeneral = document.getElementById("Menu");
+const nombreDiv = document.getElementById("nombre-persona");
+const toggle = document.getElementById("toggle");
+const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
+
+[0, 1, 2].forEach(idx => {
+  const marcador = document.querySelector(`[mindar-image-target="targetIndex: ${idx}"]`);
+  if (marcador) {
+    marcador.addEventListener("targetFound", () => {
+      marcadorActivo = idx;
+      nombreDiv.innerHTML = `<p>${marcadoresData[idx].nombre}</p>`;
+      menuGeneral.style.display = "block";
+      menuAbierto("Menu");
+	  toggle.checked = true;
+    });
+    marcador.addEventListener("targetLost", () => {
+    });
+  }
+});
+      toggleButtonMenu.addEventListener("click", () => {
+      toggle.checked = !toggle.checked;
+      if (toggle.checked) {
+        menuGeneral.style.display = "block";
+        menuAbierto("Menu");
       } else {
-        menuCerrado("Menu-M1");
+        menuCerrado("Menu");
       }
-      });}
-	   contenidoMarcador1();
+      })
 		});
 	</script>		    
 

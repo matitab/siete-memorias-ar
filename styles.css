@@ -131,15 +131,15 @@
 			z-index: 0;
 			}
 			.button-toggle .bar {transform-origin: center;}
-			#toggle-M1{display:none}
-            #toggle-M1:checked~.toggle-container .button-toggle{background-color:rgba(0,173,196,.3)}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(1){transform: rotate(45deg); position: absolute;}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(2){opacity:0}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(3){transform: rotate(-45deg); position: absolute;}
-            #toggle-M1:checked~.dummy-content,#toggle-M1:checked~.nav{opacity:0;transform:translateY(-20px);pointer-events:none;visibility:hidden}
-            #toggle-M1:checked~.dummy-content{transform:translateY(20px)}
-            #toggle-M1:not(:checked)~.dummy-content,
-            #toggle-M1:not(:checked)~.nav{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto}
+			#toggle{display:none}
+            #toggle:checked~.toggle-container .button-toggle{background-color:#1a1f3c;}
+            #toggle:checked~.toggle-container .button-toggle .bar:nth-child(1){transform: rotate(45deg); position: absolute;}
+            #toggle:checked~.toggle-container .button-toggle .bar:nth-child(2){opacity:0}
+            #toggle:checked~.toggle-container .button-toggle .bar:nth-child(3){transform: rotate(-45deg); position: absolute;}
+            #toggle:checked~.dummy-content,#toggle:checked~.nav{opacity:0;transform:translateY(-20px);pointer-events:none;visibility:hidden}
+            #toggle:checked~.dummy-content{transform:translateY(20px)}
+            #toggle:not(:checked)~.dummy-content,
+            #toggle:not(:checked)~.nav{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto}
             .toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}.button-toggle {
 			    text-align: center;
 			    position: fixed;
@@ -147,7 +147,7 @@
 				left: 1.25rem;
 			    width: 30px;
 			    height: 30px;
-			    background: rgba(0,173,196,.1);
+			    background: #1a1f3c44;
 			    border: 0;
 			    cursor: pointer;
 			    border-radius: 50%;
@@ -156,7 +156,7 @@
 			    justify-content: center;
 			    align-items: center
 			}
-			.button-toggle:hover {background-color: rgba(0,173,196,.2)}
+			.button-toggle:hover {background-color: #1a1f3c;}
 			.button-toggle .bar {
 			    width: 18px;
 			    height: 3px;
