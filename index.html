@@ -15,249 +15,7 @@
 		<!-- ======================== -->
 		<!--        ESTILOS           -->
 		<!-- ======================== -->
-		<style>
-        @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-        @keyframes typing{0%{width:0;border-right-color:transparent}1%{border-right-color:#d1cfc7}to{width:16ch;border-right-color:#d1cfc7}}
-        @keyframes blink{50%{border-color:transparent}}
-        @keyframes fadeout-cursor{to{border-right-color:transparent}}
-        @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#3185ac}}
-	  .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
-      .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
-      .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #3185ac;border-left:4px solid transparent}
-      #mi-loader.hidden{display:none}
-			.loader-container {
-			    position: fixed;
-			    top: 50%;
-			    left: 50%;
-			    transform: translate(-50%,-50%);
-			    z-index: 10050;
-			    background: rgba(0,0,0,.8);
-			    padding: 1em;
-			    border-radius: 1em
-			}
-			.fade-out-loader{opacity:0;transition:opacity .3s ease-in-out}
-			#pantalla-fondo-negro {
-			    position: fixed;
-			    top: 0;
-			    left: 0;
-			    width: 100vw;
-			    height: 100vh;
-			    background-color: #111;
-			    background-image: radial-gradient(circle at center,rgba(255,255,255,.06)0,rgba(200,200,200,.03) 25%,rgba(150,150,150,.015) 50%,transparent 80%);
-			    z-index: 10005
-			}
-			#tsparticles {
-			    position: absolute;
-			    width: 100%;
-			    height: 100%;
-			    z-index: 10009;
-			    pointer-events: none;
-			    will-change: transform,opacity;
-			    mix-blend-mode: screen
-			}
-			#pantalla-carga {
-			    font-family: "Courier Prime",monospace;
-			    position: fixed;
-			    top: 0;
-			    left: 0;
-			    width: 100vw;
-			    height: 100vh;
-			    color: #d1cfc7;
-			    display: flex;
-			    justify-content: center;
-			    align-items: center;
-			    flex-direction: column;
-			    text-align: center;
-			    padding: 0 1em;
-			    opacity: 1;
-			    transition: opacity .7s ease;
-			    z-index: 10010;
-			    overflow: hidden
-			}
-			#pantalla-carga.fade-out{opacity:0}#titulo-principal{font-size:2em;font-weight:700;margin:0;color:#d1cfc7}
-            #boton-comenzar,#subtitulo,#titulo-principal, .container-menu, .nombre-content{font-family:"Courier Prime", monospace}
-			#subtitulo {
-			    font-size: 1.8em;
-			    color: #3185ac;
-			    font-weight: 600;
-			    letter-spacing: .04em;
-			    width: 0;
-			    white-space: nowrap;
-			    overflow: hidden;
-			    border-right: 3px solid #d1cfc7;
-			    animation: typing 2s steps(32,end) forwards,blink .5s step-end infinite;
-			    animation-delay: .5s,.5s;
-			    animation-fill-mode: both;
-			    text-align: left;
-			    display: inline-block
-			}
-			#boton-comenzar {
-			    padding: 1em 2em;
-			    font-size: 1.2em;
-			    background-color: #d1cfc7;
-			    color: #1a1a1a;
-			    border: 0;
-			    border-radius: .5em;
-			    cursor: pointer;
-			    user-select: none;
-			    font-weight: 500;
-			    transition: background-color .3s ease;
-			    position: relative;
-			    z-index: 10011
-			}
-			#boton-comenzar:hover{background-color:#3185ac;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
-			a-scene .a-enter-vr-button {
-			    background-color: #d1cfc76e;
-			    position: fixed!important;
-			    bottom: 20px!important;
-			    left: 20px!important;
-			    right: auto!important;
-			    z-index: 10012!important;
-			    display: block!important
-			}
-			a-scene .a-enter-vr-button:hover {
-			    background-color: #3185ac;
-			    color: #d1cfc7;
-			    box-shadow: 0 0 10px 0#3185ac;
-			    transition: background-color .3s ease,color .3s ease
-			}
-			@media(max-width:425px){
-            #titulo-principal{font-size:1.4em}
-            #subtitulo{font-size:1.2em;margin-bottom:1em}
-            #pantalla-carga p{font-size:1em;max-width:260px}
-            #boton-comenzar{padding:.8em 1.5em;font-size:1em}.container-menu{width:80vw;height:25rem;padding:1.25rem}
-            .nav-item{font-size:13px;line-height:30px}
-			}
-			#boton-play-pausa {
-			    font-size: 2em;
-			    padding: .2em .4em;
-			    border-radius: .4em;
-			    cursor: pointer;
-			    background-color: #d1cfc7;
-			    color: #1a1a1a;
-			    border: 0;
-			    user-select: none;
-			    transition: background-color .3s ease
-			}
-			#boton-play-pausa:hover{background-color:#3185ac;color:#fff}
-
-			.container-menu {
-			background: rgba(0,173,196,.1);
-			top: 0.625rem;
-			left: 0.625rem;
-			width: 18.75rem;
-			height: 34.125rem;
-			padding: 1.875rem;
-			border-radius: 2rem;
-			position: fixed;
-			overflow: hidden;
-			z-index: 10020;
-			display: none;
-			}
-			.container-menu--bend {
-			backdrop-filter: blur(3px);
-			border-radius: 2rem;
-			filter: url(#glass-blur);
-			inset: 0;
-			position: absolute;
-			z-index: 0;
-			}
-			.button-toggle .bar {transform-origin: center;}
-			#toggle-M1{display:none}
-            #toggle-M1:checked~.toggle-container .button-toggle{background-color:rgba(0,173,196,.3)}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(1){transform: rotate(45deg); position: absolute;}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(2){opacity:0}
-            #toggle-M1:checked~.toggle-container .button-toggle .bar:nth-child(3){transform: rotate(-45deg); position: absolute;}
-            #toggle-M1:checked~.dummy-content,#toggle-M1:checked~.nav{opacity:0;transform:translateY(-20px);pointer-events:none;visibility:hidden}
-            #toggle-M1:checked~.dummy-content{transform:translateY(20px)}
-            #toggle-M1:not(:checked)~.dummy-content,
-            #toggle-M1:not(:checked)~.nav{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto}
-            .toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}.button-toggle {
-			    text-align: center;
-			    position: fixed;
-			    top: 1.2rem;
-				left: 1.25rem;
-			    width: 30px;
-			    height: 30px;
-			    background: rgba(0,173,196,.1);
-			    border: 0;
-			    cursor: pointer;
-			    border-radius: 50%;
-			    transition: background-color .3s ease;
-			    z-index: 10021;
-			    justify-content: center;
-			    align-items: center
-			}
-			.button-toggle:hover {background-color: rgba(0,173,196,.2)}
-			.button-toggle .bar {
-			    width: 18px;
-			    height: 3px;
-			    background-color: #fff;
-			    border-radius: 5px;
-			    margin: 2px 0;
-			    transition: transform .3s ease,opacity .3s ease
-			}
-			.nav {gap: 16px;margin: 30px 20px 20px}
-			.nav-item {
-			    display: block;
-			    line-height: 32px;
-			    transition: opacity .3s ease,transform .3s ease;
-			    text-align: center;
-			    border-radius: 8px;
-			    box-shadow: inset 1px 1px 1px 0 rgba(0,173,196,.1),inset -1px -1px 1px 0 rgba(0,173,196,.1);
-			    justify-content: center;
-			    align-items: center;
-			    height: 32px;
-			    padding: 4px;
-			    width: 100%;
-			    color: #fff;
-			    font-size: 14px;
-			    text-transform: uppercase;
-			    cursor: pointer;
-			    background: linear-gradient(90deg,#1a76ad 0,#288ec9 100%);
-			    z-index: 3
-			}
-			.nav-item:hover {background: linear-gradient(90deg,#288ec9 0,#1a76ad 100%)}
-			.nav-item:nth-child(1) {transition-delay: .1s}
-			.nav-item:nth-child(2) {transition-delay: .2s}
-			.nav-item:nth-child(3) {transition-delay: .3s}
-			.dummy-content {
-			    position: absolute;
-			    bottom: 15px;
-			    left: 15px;
-			    right: 15px;
-			    visibility: hidden;
-			    color: #ffffff;
-			    text-align: center;
-			    z-index: 3;
-			    background: #3185ac;
-			    border-radius: 8px;
-			    padding: 10px;
-			    font-size: 15px;
-			    box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
-			}
-			.nombre-content { 
-			font-size: 0.9em;
-			white-space: nowrap;
-			color: #fff;
-			margin-bottom: 8px;
-			margin-top: 0;
-			margin-left: 10px;
-			padding: 2px 8px;
-			background: rgba(49, 133, 172, 0.85);
-			letter-spacing: 0.03em;
-			text-transform: uppercase;
-			border-radius: 8px;
-			min-width: 180px;
-			max-width: 90%;
-			width: 250px;
-			display: flex;
-			justify-content: center;
-			align-items: center;	
-			box-shadow: inset 1px 1px 1px 0 rgba(255, 255, 255, 0.637),inset -1px -1px 1px 0 rgba(255,255,255,.45)
-			}
-		</style>
-		
+		<link rel="stylesheet" href="styles.css" />
 	</head>
 	<body>
 		<!-- Pantalla de fondo -->
@@ -381,7 +139,7 @@
 		</a-scene>
 
 		<script type="module">
-			import { ContadorMarcadores } from './contador.js';
+			import {ContadorMarcadores } from './contador.js';
 			  document.addEventListener("DOMContentLoaded",()=>{
 				/* Contador de marcadores detectados */
 				ContadorMarcadores();
@@ -504,9 +262,6 @@
         menuCerrado("Menu-M1");
       }
       });} contenidoMarcador1();
-
-	  
-
 		
 		});
 	</script>		    
@@ -514,7 +269,7 @@
 
 	<!-- Config. partículas -->
 	<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-	<script>src="/particulas-config.js"</script>
+	<script src="/particulas-config.js"></script>
 
 	<svg style="display: none" xmlns="http://www.w3.org/2000/svg">
 	<filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
