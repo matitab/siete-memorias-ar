@@ -116,7 +116,7 @@
 			width: 18.75rem;
 			height: 34.125rem;
 			padding: 1.875rem;
-			border-radius: 0.2em;
+			border-radius: .2em;
 			position: fixed;
 			overflow: hidden;
 			z-index: 10020;
@@ -124,7 +124,7 @@
 			}
 			.container-menu--bend {
 			backdrop-filter: blur(3px);
-			border-radius: 2rem;
+			border-radius: .2em;
 			filter: url(#glass-blur);
 			inset: 0;
 			position: absolute;
@@ -161,7 +161,7 @@
 			    width: 18px;
 			    height: 3px;
 			    background-color: #fff;
-			    border-radius: 5px;
+			    border-radius: .2em;
 			    margin: 2px 0;
 			    transition: transform .3s ease,opacity .3s ease
 			}
@@ -171,7 +171,7 @@
 			    line-height: 32px;
 			    transition: opacity .3s ease,transform .3s ease;
 			    text-align: center;
-			    border-radius: 0.2em;
+			    border-radius: .2em;
 			    justify-content: center;
 			    align-items: center;
 			    height: 32px;
