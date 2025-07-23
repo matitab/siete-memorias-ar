@@ -163,7 +163,7 @@
 			    background: rgba(0,173,196,.1);
 			    border: 0;
 			    cursor: pointer;
-			    border-radius: 50%;
+			    border-radius: .2em;
 			    transition: background-color .3s ease;
 			    z-index: 10021;
 			    justify-content: center;
