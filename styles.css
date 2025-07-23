@@ -134,6 +134,7 @@
 			overflow: hidden;
 			z-index: 10020;
 			display: block;
+		        box-sizing: border-box;
 			}
 			.container-menu--bend {
 			backdrop-filter: blur(3px);
