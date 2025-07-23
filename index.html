@@ -239,10 +239,8 @@
 			];
 
 			let marcadorActivo = 0; 
-
-			
-			
-			 window.showContent = function (option, element) {
+		
+window.showContent = function (option, element) {
   const contentDiv = document.getElementById("menu-content");
   document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("cliqueado"));
   if (element) element.classList.add("cliqueado");
@@ -266,10 +264,11 @@
       content = "<p>Selecciona una opción del menú</p>";
   }
   contentDiv.innerHTML = content;
-			  }
+}
 
-			// Detección marcadores / apertura de menú
-			const menuGeneral = document.getElementById("Menu");
+// Detección marcadores / apertura de menú
+const menuGeneral = document.getElementById("Menu");
+const contentDiv = document.getElementById("menu-content");
 const nombreDiv = document.getElementById("nombre-persona");
 const toggle = document.getElementById("toggle");
 const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
@@ -281,7 +280,10 @@ const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
       marcadorActivo = idx;
       nombreDiv.innerHTML = `<p>${marcadoresData[idx].nombre}</p>`;
       menuGeneral.style.display = "block";
-      menuAbierto("Menu");
+	
+		contentDiv.style.display = "block";
+	  
+        menuAbierto("Menu");
 	  toggle.checked = true;
     });
     marcador.addEventListener("targetLost", () => {
@@ -292,9 +294,13 @@ const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
       toggle.checked = !toggle.checked;
       if (toggle.checked) {
         menuGeneral.style.display = "block";
+		setTimeout(() => {
+		contentDiv.style.display = "block";
+	  }, 150);
         menuAbierto("Menu");
       } else {
         menuCerrado("Menu");
+	  	contentDiv.style.display = "none";
       }
       })
 		});

@@ -108,6 +108,8 @@
             .nav-item{font-size:13px;line-height:30px}
 			}
 			.container-menu {
+			--transition: 0.2s cubic-bezier(0.5, 1.5, 0.5, 1);
+			 transition: width var(--transition), height var(--transition);
 			background: rgba(255,255,255,.1);
 			top: 0.625rem;
 			left: 0.625rem;
@@ -120,10 +122,8 @@
 			z-index: 10020;
 			display: none;
 			}
-			.fade-in-container-menu{opacity: 1; transition: opacity .3s ease-in-out;}
-			.fade-out-container-menu{opacity:0;transition:opacity .3s ease-in-out}
 			.container-menu--bend {
-			backdrop-filter: blur(1px);
+			backdrop-filter: blur(5px);
 			border-radius: .2em;
 			filter: url(#glass-blur);
 			inset: 0;
@@ -206,6 +206,7 @@
 			    border-radius: .2em;
 			    padding: 10px;
 			    font-size: 15px;
+				display: none;
 			}
 			.nombre-content { 
 			font-size: 0.9em;
