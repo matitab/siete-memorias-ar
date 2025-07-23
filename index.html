@@ -380,9 +380,11 @@
 			<!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
 		</a-scene>
 
-		<!-- Carga de contenido -->
-		<script>
+		<script type="module">
+			import { ContadorMarcadores } from './contador.js';
 			  document.addEventListener("DOMContentLoaded",()=>{
+				/* Contador de marcadores detectados */
+				ContadorMarcadores();
 			    const loader = document.getElementById("mi-loader");
 			    const boton = document.getElementById("boton-comenzar");
 			    const pantalla = document.getElementById("pantalla-carga");
@@ -504,47 +506,15 @@
       });} contenidoMarcador1();
 
 	  
-	/* Contador de marcadores detectados */
-	const marcadorDetectado = new Set(); // índices de los target ya escaneados
-	const totalMarcadores = 3;
-	const contadorDiv = document.getElementById("contador-marcadores");
-	const actualizarContador = () => {
-	contadorDiv.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;
-	contadorDiv.style.display = "block";
-	setTimeout(() => {
-		contadorDiv.style.display = "none";
-	}, timeout = 3000);
-	if (marcadorDetectado.size === totalMarcadores) {
-		setTimeout(() => {
-		document.getElementById("mensaje-final").style.display = "block";
-		}, 500);}};
-		// eventos de detección (si agregamos más targets, modificar índice)
-		[0, 1, 2].forEach(index => {
-		const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
-		if (!target) return;
-			target.addEventListener("targetFound", () => {
-			if (!marcadorDetectado.has(index)) {
-			    marcadorDetectado.add(index);
-			    actualizarContador();
-			    }});});
-			// cierra mensaje con click
-			document.getElementById("mensaje-final").addEventListener("click", () => {
-			document.getElementById("mensaje-final").style.display = "none";
-			});});
-		</script>		    
+
+		
+		});
+	</script>		    
 
 
-		<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-		<!-- Config. partículas -->
-		<script>
-			tsParticles.load("tsparticles",{particles:{number:{value:40,density:{enable:true,value_area:800}},
-			color:{value: ["#ffffff", "#ddeeff", "#cceeff"]},
-			shape:{type:"circle",stroke:{width:0}},opacity:{value:0.8,random:true, anim:{enable:true,speed:1,opacity_min:0.1,sync:false}},
-			size:{value:3.5,random:true,anim:{enable:false,speed:4,size_min:0.8,sync:false}},line_linked:{enable:false},
-			shadow: {enable: true, color: "#ffffff", blur: 6},
-			move:{enable: true, speed: 0.25, direction: "none", random: true, straight: false, out_mode: "out", bounce: false,}},
-			interactivity:{detect_on:"window",events:{onhover:{enable:false},onclick:{enable:false},resize:true}}, retina_detect:true});
-		</script>
+	<!-- Config. partículas -->
+	<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+	<script>src="/particulas-config.js"</script>
 
 	<svg style="display: none" xmlns="http://www.w3.org/2000/svg">
 	<filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
@@ -552,7 +522,6 @@
 		<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
 	</filter>
 	</svg>
-
 	</body>
 </html>
 
