@@ -89,16 +89,15 @@
 			a-scene .a-enter-vr-button {
 			    background-color: #8499e562;
 			    position: fixed!important;
-			    bottom: 20px!important;
-			    left: 20px!important;
-			    right: auto!important;
+			    bottom: 10px!important;
+			    right: 20px!important;
+			    left: auto!important;
 			    z-index: 10012!important;
 			    display: block!important
 			}
 			a-scene .a-enter-vr-button:hover {
-			    background-color: #3185ac;
-			    color: #d1cfc7;
-			    box-shadow: 0 0 10px 0#3185ac;
+			    background-color: #1a1f3c;
+			    color: #d1cfc77e;
 			    transition: background-color .3s ease,color .3s ease
 			}
 			@media(max-width:425px){
@@ -108,7 +107,6 @@
             #boton-comenzar{padding:.8em 1.5em;font-size:1em}.container-menu{width:80vw;height:25rem;padding:1.25rem}
             .nav-item{font-size:13px;line-height:30px}
 			}
-	
 			.container-menu {
 			background: rgba(255,255,255,.1);
 			top: 0.625rem;
@@ -122,8 +120,10 @@
 			z-index: 10020;
 			display: none;
 			}
+			.fade-in-container-menu{opacity: 1; transition: opacity .3s ease-in-out;}
+			.fade-out-container-menu{opacity:0;transition:opacity .3s ease-in-out}
 			.container-menu--bend {
-			backdrop-filter: blur(3px);
+			backdrop-filter: blur(1px);
 			border-radius: .2em;
 			filter: url(#glass-blur);
 			inset: 0;

@@ -72,8 +72,9 @@
 		<!-- Contador de marcadores detectados -->
 		<div id="contador-marcadores" style="
         position: fixed;
-        top: 10px;
-        right: 30px;
+		top: 0.625rem;
+		left: 5.675rem;
+		width: 16.25rem;
         z-index: 10050;
         background: #1a1f3c;
         color: white;
@@ -141,8 +142,10 @@
 		<script type="module">
 			import {ContadorMarcadores } from './contador.js';
 			  document.addEventListener("DOMContentLoaded",()=>{
+
 				/* Contador de marcadores detectados */
 				ContadorMarcadores();
+
 			    const loader = document.getElementById("mi-loader");
 			    const boton = document.getElementById("boton-comenzar");
 			    const pantalla = document.getElementById("pantalla-carga");
