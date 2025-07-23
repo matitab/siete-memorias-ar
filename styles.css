@@ -13,7 +13,6 @@
 			    left: 50%;
 			    transform: translate(-50%,-50%);
 			    z-index: 10050;
-			    background: rgba(0,0,0,.8);
 			    padding: 1em;
 			    border-radius: 1em
 			}

@@ -19,6 +19,9 @@
 	</head>
 	<base href="./">
 	<body>
+		<!-- ====================================== -->
+		<!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
+		<!-- ====================================== -->
 		<!-- Pantalla de fondo -->
 		<div id="pantalla-fondo-negro"></div>
 		<!-- Efecto sutíl de partículas -->
@@ -59,9 +62,6 @@
 			</div>
 		</div>
 		
-		<!-- ====================================== -->
-		<!--  BOTONES / INTERACCIÓN CON EL USUARIO  -->
-		<!-- ====================================== -->
 		<!-- Botón de play/pausa video -->
 		<div style="position: fixed; bottom: 20px; right: 20px; z-index: 10000;">
 			<button id="boton-play-pausa" style="display: none;"></button>
@@ -125,16 +125,13 @@
 			<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 
 			<!-- Marcador 0 -->
-			<a-entity mindar-image-target="targetIndex: 0" data-index="0">
-			</a-entity>
+			<a-entity mindar-image-target="targetIndex: 0" data-index="0"></a-entity>
 
 			<!-- Marcador 1 -->
-			<a-entity mindar-image-target="targetIndex: 1" data-index="1">
-			</a-entity>
+			<a-entity mindar-image-target="targetIndex: 1" data-index="1"></a-entity>
 
 			<!-- Marcador 2 -->
-			<a-entity mindar-image-target="targetIndex: 2" data-index="2">
-			</a-entity>
+			<a-entity mindar-image-target="targetIndex: 2" data-index="2"></a-entity>
 
 			<!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
 		</a-scene>
@@ -172,7 +169,6 @@
 			    escena.components['mindar-image'].start();
 			  });
 			  
-
 			function menuAbierto(menuId) {
 			  const menu = document.getElementById(menuId);
 			  const nav = document.querySelector(`#${menuId} .nav`);
@@ -213,8 +209,6 @@
 				nombre.style.visibility = "hidden";
 			  }}
 
-			  
-
 			function contenidoMarcador1() {
 			  window.showContent = function (option) {
 			    const contentDiv = document.getElementById("menu-content");
@@ -239,7 +233,7 @@
 			    contentDiv.innerHTML = content;
 			  };}
 
-			// Menú marcador 1
+			// Detección marcador 1 / apertura de menú
 			const Marcador1 = document.querySelector('[mindar-image-target="targetIndex: 1"]');
 			const toggleM1 = document.getElementById("toggle-M1");
 			const menuM1 = document.getElementById("Menu-M1");
@@ -267,7 +261,6 @@
 		});
 	</script>		    
 
-
 	<!-- Config. partículas -->
 	<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
 	<script src="particulas-config.js"></script> 
@@ -280,4 +273,3 @@
 	</svg>
 	</body>
 </html>
-
