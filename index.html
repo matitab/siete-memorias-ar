@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ocho Memorias Desde La Sombra</title>
+
+<!-- Librerías: A-Frame y MindAR -->
+<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+
+<!--Fuente utilizada: Courier Prime-->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" as="style">
+
+<!-- ======================== -->
+<!--        ESTILOS           -->
+<!-- ======================== -->
+<link rel="stylesheet" href="styles.css">
+<!-- ======================== -->
+<base href="./">
+</head>
+<body>
+<!-- ====================================== -->
+<!--  INICIO / BOTONES / MENU -->
+<!-- ====================================== -->
+<!-- Capa de fondo -->
+<div id="capa1" class="capa1">
+<!-- Fondo para las partículas -->
+<div id="pantalla-fondo-negro"></div>
+<!-- Imagen Rosario -->
+<div id="pantalla-fondo-rosario"></div>
+<!-- Efecto sutíl de partículas -->
+<div id="tsparticles" style="display:none;"></div>
+<!-- Pantalla de carga -->
+<div id="pantalla-carga" style="display:none;">
+	<h1 id="titulo-principal">Ocho memorias</h1>
+	<h2 id="subtitulo">desde la sombra</h2>
+	<p>Explorá el mapa y enfocá los marcadores para conocer las historias.</p>
+	<button id="boton-comenzar" style="display:none;">Empezar recorrido</button>
+</div>
+
+<!-- Loader -->
+<div id="mi-loader" class="loader-container">
+<span class="loader"></span></div>
+	
+<!-- Menú (general)-->
+<div class="container-menu" id="Menu">
+	<div class="container-menu--bend"></div>
+	<input type="checkbox" id="toggle">
+		<div class="toggle-container">
+			<button class="button-toggle">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</button>
+		</div>
+	<div class="nav">
+		<div class="nombre-content" id="nombre-persona"><p>Nombre y apellido persona</p></div>
+		<div class="nav-item" onclick="showContent('Info', this)">Info</div>
+		<div class="nav-item" onclick="showContent('Historia', this)">Historia</div>
+		<div class="nav-item" onclick="showContent('Imágenes', this)">Imágenes</div>
+		<div class="nav-item" onclick="showContent('Video', this)">Video</div>
+	</div>
+	<div class="dummy-content" id="menu-content">
+		<p>Selecciona una opción del menú</p>
+	</div>
+</div>
+
+<!-- Contador de marcadores detectados -->
+<div id="contador-marcadores" style="
+position: fixed;
+top: 0.625rem;
+left: 5.675rem;
+width: 16.25rem;
+z-index: 10050;
+background: #1a1f3c;
+color: white;
+padding: 0.4em 0.6em;
+border-radius: .2em;
+font-family: Courier Prime, monospace;
+font-size: 1em;
+display: none;"
+><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
+</div>
+
+<!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
+<div id="mensaje-final" style="display: none;
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: rgba(0, 0, 0, 0.616);
+color: #4fc3f7;
+padding: 2em;
+font-size: 1.4em;
+border-radius: 1em;
+text-align: center;
+z-index: 10050;
+font-family: Courier Prime, monospace;
+max-width: 80vw;"
+><!-- Mensaje por defecto: -->¡Completaste el recorrido! <br /><br><small> Click para cerrar </small>
+</div>
+
+<!-- ======================== -->
+<!--      ESCENA MIND-AR      -->
+<!-- ======================== -->
+<!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
+<!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
+<a-scene
+mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no"
+color-space="sRGB"
+renderer="colorManagement: true, physicallyCorrectLights"
+vr-mode-ui="enabled: true"
+device-orientation-permission-ui="enabled: false">
+<!-- ======================== -->
+<!--        ASSETS            -->
+<!-- ======================== -->
+<!-- Acá agregamos los videos e imágenes que queremos mostrar al usuario -->
+<a-assets>
+	<video id="video1-M2" src="assets/video1test.mp4" preload="auto" loop playsinline></video>
+	<img id="imgtest1" src="assets/imagentest1.png" alt="">
+</a-assets>
+
+<!-- Cámara-->
+<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
+<!-- Marcador 0 -->
+<a-entity mindar-image-target="targetIndex: 0" data-index="0"></a-entity>
+<!-- Marcador 1 -->
+<a-entity mindar-image-target="targetIndex: 1" data-index="1"></a-entity>
+<!-- Marcador 2 -->
+<a-entity mindar-image-target="targetIndex: 2" data-index="2"></a-entity>
+
+<!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
+</a-scene>
+
+<script type="module">
+			import {ContadorMarcadores } from './contador.js';
+			  document.addEventListener("DOMContentLoaded",()=>{
+
+				/* Contador de marcadores detectados */
+				ContadorMarcadores();
+
+			    const loader = document.getElementById("mi-loader");
+			    const boton = document.getElementById("boton-comenzar");
+			    const pantalla = document.getElementById("pantalla-carga");
+			    const pantallaFondo = document.getElementById("pantalla-fondo-negro");
+          const pantallaFondoRosario = document.getElementById("pantalla-fondo-rosario");
+			    const tsparticles = document.getElementById("tsparticles");
+			    const escena = document.querySelector("a-scene");
+			    escena.addEventListener("renderstart", () => {
+			      pantalla.style.display = "flex";
+			      pantallaFondo.style.display = "block";
+			      tsparticles.style.display = "block";
+			      boton.style.display = "inline-block";
+			      loader.classList.add("fade-out-loader");
+			      loader.addEventListener("transitionend", () => {
+			        loader.style.display = "none";
+			      }, { once: true });
+            pantalla.classList.remove("fade-out");
+			  });
+			  // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
+			    boton.addEventListener('click', () => {
+			    pantalla.classList.add('fade-out');
+			    pantalla.addEventListener('transitionend', () => {
+			      pantalla.style.display = 'none';
+			      pantallaFondo.style.display = 'none';
+            pantallaFondoRosario.style.display = 'none';
+			      tsparticles.style.display = 'none';
+			    }, { once: true });
+			    escena.components['mindar-image'].start();
+			  });
+			  
+			function menuAbierto(menuId) {
+			  const menu = document.getElementById(menuId);
+			  const nav = document.querySelector(`#${menuId} .nav`);
+			  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+			  const nombre = document.getElementById("nombre-persona");
+			  if (menu && nav && dummyContent) {
+			    menu.style.display = "block";
+			    menu.style.width = "18.75rem";
+			    menu.style.height = "32.125rem";
+			    menu.style.padding = "1.875rem";
+			    nav.style.opacity = "1";
+			    nav.style.transform = "translateY(0)";
+			    nav.style.pointerEvents = "auto";
+			    nav.style.visibility = "visible";
+			    dummyContent.style.opacity = "1";
+			    dummyContent.style.transform = "translateY(0)";
+			    dummyContent.style.pointerEvents = "auto";
+			    dummyContent.style.visibility = "visible";
+				nombre.style.visibility = "visible";
+			  }}
+			function menuCerrado(menuId) {
+			  const menu = document.getElementById(menuId);
+			  const nav = document.querySelector(`#${menuId} .nav`);
+			  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+			  const nombre = document.getElementById("nombre-persona");
+			  if (menu && nav && dummyContent) {
+			    menu.style.width = "2.5rem";
+			    menu.style.height = "2.5rem";
+			    menu.style.padding = "0.3rem";
+			    nav.style.opacity = "0";
+			    nav.style.transform = "translateY(-20px)";
+			    nav.style.pointerEvents = "none";
+			    nav.style.visibility = "hidden";
+			    dummyContent.style.opacity = "0";
+			    dummyContent.style.transform = "translateY(20px)";
+			    dummyContent.style.pointerEvents = "none";
+			    dummyContent.style.visibility = "hidden";
+				nombre.style.visibility = "hidden";
+			  }}
+
+			const marcadoresData = [
+			{
+				nombre: "Nombre y apellido 0",
+				info: "Información 0",
+				historia: "Historia 0",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			},
+			{
+				nombre: "Nombre y apellido 1",
+				info: "Información 1",
+				historia: "Historia 1",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			},
+			{
+				nombre: "Nombre y apellido 2",
+				info: "Información 2",
+				historia: "Historia 2",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			}
+			];
+
+			let marcadorActivo = 0; 
+		
+window.showContent = function (option, element) {
+  const contentDiv = document.getElementById("menu-content");
+  document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("cliqueado"));
+  if (element) element.classList.add("cliqueado");
+  if (!contentDiv) return;
+  const data = marcadoresData[marcadorActivo];
+  let content = "";
+  switch (option) {
+    case "Info":
+      content = `<p>${data.info}</p>`;
+      break;
+    case "Historia":
+      content = `<p>${data.historia}</p>`;
+      break;
+    case "Imágenes":
+      content = `<img src="${data.imagen}" style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;">`;
+      break;
+    case "Video":
+      content = `<video src="${data.video}" controls style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;"></video>`;
+      break;
+    default:
+      content = "<p>Selecciona una opción del menú</p>";
+  }
+  contentDiv.innerHTML = content;
+}
+
+// Detección marcadores / apertura de menú
+const menuGeneral = document.getElementById("Menu");
+const contentDiv = document.getElementById("menu-content");
+const nombreDiv = document.getElementById("nombre-persona");
+const toggle = document.getElementById("toggle");
+const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
+
+[0, 1, 2].forEach(idx => {
+  const marcador = document.querySelector(`[mindar-image-target="targetIndex: ${idx}"]`);
+  if (marcador) {
+    marcador.addEventListener("targetFound", () => {
+      marcadorActivo = idx;
+      nombreDiv.innerHTML = `<p>${marcadoresData[idx].nombre}</p>`;
+      menuGeneral.style.display = "block";
+	
+		contentDiv.style.display = "block";
+	  
+        menuAbierto("Menu");
+	  toggle.checked = true;
+    });
+    marcador.addEventListener("targetLost", () => {
+    });
+  }
+});
+      toggleButtonMenu.addEventListener("click", () => {
+      toggle.checked = !toggle.checked;
+      if (toggle.checked) {
+        menuGeneral.style.display = "block";
+		setTimeout(() => {
+		contentDiv.style.display = "block";
+	  }, 150);
+        menuAbierto("Menu");
+      } else {
+        menuCerrado("Menu");
+	  	contentDiv.style.display = "none";
+      }
+      })
+		});
+	</script>			    
+
+<!-- Config. partículas -->
+<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+<script src="particulas-config.js"></script> 
+
+<!-- Filtro glass -->
+<svg style="display: none" xmlns="http://www.w3.org/2000/svg">
+<filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
+<feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
+<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
+</filter>
+</svg>
+</body>
+</html>
