@@ -130,125 +130,131 @@ device-orientation-permission-ui="enabled: false">
 </a-scene>
 
 <script type="module">
-import {ContadorMarcadores } from './contador.js';
-	document.addEventListener("DOMContentLoaded",()=>{
-	ContadorMarcadores();
-	const loader = document.getElementById("mi-loader");
-	const boton = document.getElementById("boton-comenzar");
-	const capa1 = document.getElementById("capa1");
-	const pantalla = document.getElementById("pantalla-carga");
-	const pantallaFondo = document.getElementById("pantalla-fondo-negro");
-	const tsparticles = document.getElementById("tsparticles");
-	const escena = document.querySelector("a-scene");
-	escena.addEventListener("renderstart", () => {
-		capa1.style.display = "block";
-		pantalla.style.display = "flex";
-		pantallaFondo.style.display = "block";
-		tsparticles.style.display = "block";
-		boton.style.display = "inline-block";
-		loader.classList.add("fade-out-loader");
-		loader.addEventListener("transitionend", () => {
-		loader.style.display = "none";
-		}, { once: true });
-	pantalla.classList.remove("fade-out");
-	});
-	// Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
-	boton.addEventListener('click', () => {
-	pantalla.classList.add('fade-out');
-	pantalla.addEventListener('transitionend', () => {
-		capa1.style.display = 'none';
-		pantalla.style.display = 'none';
-		pantallaFondo.style.display = 'none';
-		tsparticles.style.display = 'none';
-	}, { once: true });
-	escena.components['mindar-image'].start();
-	});
-function menuAbierto(menuId) {
-	const menu = document.getElementById(menuId);
-	const nav = document.querySelector(`#${menuId} .nav`);
-	const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
-	const nombre = document.getElementById("nombre-persona");
-	if (menu && nav && dummyContent) {
-	menu.style.display = "block";
-	menu.style.width = "18.75rem";
-	menu.style.height = "32.125rem";
-	menu.style.padding = "1.875rem";
-	nav.style.opacity = "1";
-	nav.style.transform = "translateY(0)";
-	nav.style.pointerEvents = "auto";
-	nav.style.visibility = "visible";
-	dummyContent.style.opacity = "1";
-	dummyContent.style.transform = "translateY(0)";
-	dummyContent.style.pointerEvents = "auto";
-	dummyContent.style.visibility = "visible";
-	nombre.style.visibility = "visible";
-	}}
-function menuCerrado(menuId) {
-	const menu = document.getElementById(menuId);
-	const nav = document.querySelector(`#${menuId} .nav`);
-	const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
-	const nombre = document.getElementById("nombre-persona");
-	if (menu && nav && dummyContent) {
-	menu.style.width = "2.5rem";
-	menu.style.height = "2.5rem";
-	menu.style.padding = "0.3rem";
-	nav.style.opacity = "0";
-	nav.style.transform = "translateY(-20px)";
-	nav.style.pointerEvents = "none";
-	nav.style.visibility = "hidden";
-	dummyContent.style.opacity = "0";
-	dummyContent.style.transform = "translateY(20px)";
-	dummyContent.style.pointerEvents = "none";
-	dummyContent.style.visibility = "hidden";
-	nombre.style.visibility = "hidden";
-	}}
-const marcadoresData = [
-{
-nombre: "Nombre y apellido 0",
-info: "Información 0",
-historia: "Historia 0",
-imagen: "assets/imagentest1.png",
-video: "assets/video1test.mp4"
-},
-{
-nombre: "Nombre y apellido 1",
-info: "Información 1",
-historia: "Historia 1",
-imagen: "assets/imagentest1.png",
-video: "assets/video1test.mp4"
-},
-{
-nombre: "Nombre y apellido 2",
-info: "Información 2",
-historia: "Historia 2",
-imagen: "assets/imagentest1.png",
-video: "assets/video1test.mp4"
-}
-];
-let marcadorActivo = 0; 
+			import {ContadorMarcadores } from './contador.js';
+			  document.addEventListener("DOMContentLoaded",()=>{
+
+				/* Contador de marcadores detectados */
+				ContadorMarcadores();
+
+			    const loader = document.getElementById("mi-loader");
+			    const boton = document.getElementById("boton-comenzar");
+			    const pantalla = document.getElementById("pantalla-carga");
+			    const pantallaFondo = document.getElementById("pantalla-fondo-negro");
+          const pantallaFondoRosario = document.getElementById("pantalla-fondo-rosario");
+			    const tsparticles = document.getElementById("tsparticles");
+			    const escena = document.querySelector("a-scene");
+			    escena.addEventListener("renderstart", () => {
+			      pantalla.style.display = "flex";
+			      pantallaFondo.style.display = "block";
+			      tsparticles.style.display = "block";
+			      boton.style.display = "inline-block";
+			      loader.classList.add("fade-out-loader");
+			      loader.addEventListener("transitionend", () => {
+			        loader.style.display = "none";
+			      }, { once: true });
+            pantalla.classList.remove("fade-out");
+			  });
+			  // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
+			    boton.addEventListener('click', () => {
+			    pantalla.classList.add('fade-out');
+			    pantalla.addEventListener('transitionend', () => {
+			      pantalla.style.display = 'none';
+			      pantallaFondo.style.display = 'none';
+            pantallaFondoRosario.style.display = 'none';
+			      tsparticles.style.display = 'none';
+			    }, { once: true });
+			    escena.components['mindar-image'].start();
+			  });
+			  
+			function menuAbierto(menuId) {
+			  const menu = document.getElementById(menuId);
+			  const nav = document.querySelector(`#${menuId} .nav`);
+			  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+			  const nombre = document.getElementById("nombre-persona");
+			  if (menu && nav && dummyContent) {
+			    menu.style.display = "block";
+			    menu.style.width = "18.75rem";
+			    menu.style.height = "32.125rem";
+			    menu.style.padding = "1.875rem";
+			    nav.style.opacity = "1";
+			    nav.style.transform = "translateY(0)";
+			    nav.style.pointerEvents = "auto";
+			    nav.style.visibility = "visible";
+			    dummyContent.style.opacity = "1";
+			    dummyContent.style.transform = "translateY(0)";
+			    dummyContent.style.pointerEvents = "auto";
+			    dummyContent.style.visibility = "visible";
+				nombre.style.visibility = "visible";
+			  }}
+			function menuCerrado(menuId) {
+			  const menu = document.getElementById(menuId);
+			  const nav = document.querySelector(`#${menuId} .nav`);
+			  const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
+			  const nombre = document.getElementById("nombre-persona");
+			  if (menu && nav && dummyContent) {
+			    menu.style.width = "2.5rem";
+			    menu.style.height = "2.5rem";
+			    menu.style.padding = "0.3rem";
+			    nav.style.opacity = "0";
+			    nav.style.transform = "translateY(-20px)";
+			    nav.style.pointerEvents = "none";
+			    nav.style.visibility = "hidden";
+			    dummyContent.style.opacity = "0";
+			    dummyContent.style.transform = "translateY(20px)";
+			    dummyContent.style.pointerEvents = "none";
+			    dummyContent.style.visibility = "hidden";
+				nombre.style.visibility = "hidden";
+			  }}
+
+			const marcadoresData = [
+			{
+				nombre: "Nombre y apellido 0",
+				info: "Información 0",
+				historia: "Historia 0",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			},
+			{
+				nombre: "Nombre y apellido 1",
+				info: "Información 1",
+				historia: "Historia 1",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			},
+			{
+				nombre: "Nombre y apellido 2",
+				info: "Información 2",
+				historia: "Historia 2",
+				imagen: "assets/imagentest1.png",
+				video: "assets/video1test.mp4"
+			}
+			];
+
+			let marcadorActivo = 0; 
+		
 window.showContent = function (option, element) {
-const contentDiv = document.getElementById("menu-content");
-document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("cliqueado"));
-if (element) element.classList.add("cliqueado");
-if (!contentDiv) return;
-const data = marcadoresData[marcadorActivo];
-let content = "";
-switch (option) {
-case "Info":
-	content = `<p>${data.info}</p>`;
-	break;
-case "Historia":
-	content = `<p>${data.historia}</p>`;
-	break;
-case "Imágenes":
-	content = `<img src="${data.imagen}" style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;">`;
-	break;
-case "Video":
-	content = `<video src="${data.video}" controls style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;"></video>`;
-	break;
-default:
-	content = "<p>Selecciona una opción del menú</p>";
-}
+  const contentDiv = document.getElementById("menu-content");
+  document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("cliqueado"));
+  if (element) element.classList.add("cliqueado");
+  if (!contentDiv) return;
+  const data = marcadoresData[marcadorActivo];
+  let content = "";
+  switch (option) {
+    case "Info":
+      content = `<p>${data.info}</p>`;
+      break;
+    case "Historia":
+      content = `<p>${data.historia}</p>`;
+      break;
+    case "Imágenes":
+      content = `<img src="${data.imagen}" style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;">`;
+      break;
+    case "Video":
+      content = `<video src="${data.video}" controls style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;"></video>`;
+      break;
+    default:
+      content = "<p>Selecciona una opción del menú</p>";
+  }
   contentDiv.innerHTML = content;
 }
 
@@ -258,6 +264,7 @@ const contentDiv = document.getElementById("menu-content");
 const nombreDiv = document.getElementById("nombre-persona");
 const toggle = document.getElementById("toggle");
 const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
+
 [0, 1, 2].forEach(idx => {
   const marcador = document.querySelector(`[mindar-image-target="targetIndex: ${idx}"]`);
   if (marcador) {
@@ -265,7 +272,9 @@ const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
       marcadorActivo = idx;
       nombreDiv.innerHTML = `<p>${marcadoresData[idx].nombre}</p>`;
       menuGeneral.style.display = "block";
+	
 		contentDiv.style.display = "block";
+	  
         menuAbierto("Menu");
 	  toggle.checked = true;
     });
@@ -273,21 +282,21 @@ const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
     });
   }
 });
-toggleButtonMenu.addEventListener("click", () => {
-toggle.checked = !toggle.checked;
-if (toggle.checked) {
-menuGeneral.style.display = "block";
-setTimeout(() => {
-contentDiv.style.display = "block";
-}, 150);
-menuAbierto("Menu");
-} else {
-menuCerrado("Menu");
-contentDiv.style.display = "none";
-}
-})
-});
-</script>		    
+      toggleButtonMenu.addEventListener("click", () => {
+      toggle.checked = !toggle.checked;
+      if (toggle.checked) {
+        menuGeneral.style.display = "block";
+		setTimeout(() => {
+		contentDiv.style.display = "block";
+	  }, 150);
+        menuAbierto("Menu");
+      } else {
+        menuCerrado("Menu");
+	  	contentDiv.style.display = "none";
+      }
+      })
+		});
+	</script>			    
 
 <!-- Config. partículas -->
 <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
