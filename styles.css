@@ -35,8 +35,18 @@ left: 0;
 width: 50%;
 height: 100vh;
 background-color: #000000;
-background-image: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%,
-rgba(200,200,200,0.03) 25%, rgba(150,150,150,0.015) 50%, transparent 80%);
+background-image: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 25%, rgba(150,150,150,0.015) 50%, transparent 80%);
+z-index: 10005;
+display: flex;
+}
+#pantalla-fondo-negro {
+position: absolute;
+top: 0;
+left: 0;
+width: 50%;
+height: 100vh;
+background-color: #000000;
+background-image: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 25%, rgba(150,150,150,0.015) 50%, transparent 80%);
 z-index: 10005;
 display: flex;
 }
@@ -51,20 +61,21 @@ background-image: url('assets/rosario2.jpg');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
-z-index: 10005;
+z-index: 10010;
 display: flex;
 }
 #tsparticles {
 position: absolute;
-width: 50%;
+top: 0;
+left: 0;
+width: 50%; 
 height: 100%;
 z-index: 10009;
 pointer-events: none;
-will-change: transform,opacity;
 mix-blend-mode: screen;
+
 }
 #pantalla-carga {
-font-size: clamp(0.4rem, 5vw, .6rem); 
 position: fixed;
 top: 0;
 left: 0;
@@ -76,61 +87,69 @@ justify-content: center;
 align-items: center;
 flex-direction: column;
 text-align: center;
-padding: 0 1em;
+padding: 0 2rem;
 opacity: 1;
 transition: opacity 0.7s ease;
 z-index: 10010;
-background: rgba(0, 0, 0, 0.5); 
-}#pantalla-carga.fade-out{opacity:0}
-
-
+background: rgba(0, 0, 0, 0.5);
+box-sizing: border-box;
+}   
 .titulos-superpuestos {
-   position: relative;
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: clamp(4rem, 6vw, 3.5rem); 
-  font-family: "Courier Prime", monospace;
+position: relative;
+width: 100%;
+height: auto;
+display: flex;
+justify-content: center;
+align-items: center;
+font-family: "Courier Prime", monospace;
+margin: 0;
+padding: 0;
 }
+
 #titulo-principal,
 #titulo-principal-r {
-  position: absolute;
-  top: -8vw;
-  left: -2.5vw;
-  width: 100%;
-  margin: 0;
-  font-weight: 700;
-  pointer-events: none;
+position: absolute;
+top: -8vw;
+left: 50%;
+transform: translateX(-50%);
+margin: 0;
+font-weight: 700;
+pointer-events: none;
+text-align: center;
+font-size: clamp(2rem, 6vw, 4rem);
+line-height: 1.1;
+white-space: nowrap;
+width: max-content;
 }
+
 #titulo-principal {
-  color: white;
-  clip-path: inset(0 50% 0 0);
+color: white;
+clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
 #titulo-principal-r {
-  color: black;
-  clip-path: inset(0 0 0 50%);
+color: black;
+clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
 }
 #boton-comenzar, #pantalla-carga, #subtitulo,
 #titulo-principal, .container-menu, .nombre-content{font-family:"Courier Prime", monospace}
+
 #subtitulo {
-pointer-events: none;
-font-size: 2.7em;
-color: #3a5f70;
+font-size: 2em;
+color: #3185ac;
 font-weight: 600;
 letter-spacing: .04em;
 width: 0;
 white-space: nowrap;
 overflow: hidden;
-border-right: 2.7px solid #d1cfc7;
-animation: typing 2s steps(32,end) forwards,blink .7s step-end infinite;
+border-right: 3px solid #d1cfc7;
+animation: typing 2s steps(32,end) forwards,blink .5s step-end infinite;
 animation-delay: .5s,.5s;
 animation-fill-mode: both;
 text-align: left;
 display: inline-block
 }
+
 #boton-comenzar {
 padding: 0.8em 1.8em;
 font-size: 1.2em;
@@ -160,30 +179,13 @@ background-color: #1a1f3c;
 color: #d1cfc77e;
 transition: background-color .3s ease,color .3s ease
 }
-@media screen and (max-width: 600px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-
-  h2 {
-    font-size: 1.5rem;
-  }
-
-  p {
-    font-size: 0.9rem;
-  }
-
-  button {
-    font-size: 0.9rem;
-    padding: 0.5em 1em;
-  }
-
-  .contenedor-principal {
-    padding: 1rem;
-    text-align: center;
-  }
+@media(max-width:425px){
+#titulo-principal{font-size:1.6em}
+#subtitulo{font-size:1.4em;margin-bottom:1em}
+#pantalla-carga p{font-size:1em;max-width:260px}
+#boton-comenzar{padding:.8em 1.5em;font-size:1.2em}.container-menu{width:80vw;height:25rem;padding:1.25rem}
+.nav-item{font-size:13px;line-height:30px}
 }
-
 .container-menu {
 --transition: 0.2s cubic-bezier(0.5, 1.5, 0.5, 1);
 	transition: width var(--transition), height var(--transition);
@@ -276,7 +278,6 @@ z-index: 3
 background-color: #120907;
 box-shadow: inset 1px 1px 1px 0 #d1cfc7,inset -1px -1px 1px 0 #d1cfc7;
 }
-
 .nav-item:nth-child(1) {transition-delay: .1s}
 .nav-item:nth-child(2) {transition-delay: .2s}
 .nav-item:nth-child(3) {transition-delay: .3s}
