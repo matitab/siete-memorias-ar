@@ -23,6 +23,7 @@ top: 0;
 left: 0;
 width: 100vw;
 height: 100vh;
+transition: opacity 0.7s ease;
 z-index: 10050; 
 overflow: hidden;
 background: transparent;
@@ -32,7 +33,8 @@ display: flex;
 position: absolute;
 top: 0;
 left: 0;
-width: 50%;
+transition: opacity 0.7s ease;
+width: 100%;
 height: 100vh;
 background-color: #000000;
 background-image: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 25%, rgba(150,150,150,0.015) 50%, transparent 80%);
@@ -46,12 +48,17 @@ right: 0;
 left: auto;
 width: 50%;
 height: 100vh;
+transition: opacity 0.7s ease;
 background-image: url('assets/rosario2.jpg');
 background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
 z-index: 10010;
 display: flex;
+}
+#pantalla-fondo-rosario.fade-out {
+  opacity: 0;
+  transition: opacity 0.7s ease;
 }
 #tsparticles {
 position: absolute;
@@ -62,7 +69,6 @@ height: 100%;
 z-index: 10009;
 pointer-events: none;
 mix-blend-mode: screen;
-
 }
 #pantalla-carga {
 position: fixed;
@@ -94,7 +100,6 @@ font-family: "Courier Prime", monospace;
 margin: 0;
 padding: 0;
 }
-
 #titulo-principal,
 #titulo-principal-r {
 position: absolute;
@@ -110,19 +115,19 @@ line-height: 1.1;
 white-space: nowrap;
 width: max-content;
 }
-
 #titulo-principal {
 color: white;
 clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
-
 #titulo-principal-r {
 color: black;
 clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
 }
+#pantalla-carga.fade-out{opacity:0}
+#pantalla-fondo-negro.fade-out{opacity:0}
+#pantalla-fondo-rosario.fade-out{opacity:0}
 #boton-comenzar, #pantalla-carga, #subtitulo,
 #titulo-principal, .container-menu, .nombre-content{font-family:"Courier Prime", monospace}
-
 #subtitulo {
 font-size: 2em;
 color: #3185ac;
@@ -138,8 +143,6 @@ animation-fill-mode: both;
 text-align: left;
 display: inline-block
 }
-
-
 #boton-comenzar {
 padding: 0.8em 1.8em;
 font-size: 1.2em;
@@ -169,7 +172,6 @@ background-color: #1a1f3c;
 color: #d1cfc77e;
 transition: background-color .3s ease,color .3s ease
 }
-
 @media(max-width:425px){
 #subtitulo{font-size:1.4em;margin-bottom:1em}
 #pantalla-carga p{font-size:1em;max-width:260px}

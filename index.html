@@ -164,6 +164,7 @@ device-orientation-permission-ui="enabled: false">
 			  // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
 			    boton.addEventListener('click', () => {
 			    pantalla.classList.add('fade-out');
+				pantallaFondoRosario.classList.add('fade-out');
 			    pantalla.addEventListener('transitionend', () => {
 			      pantalla.style.display = 'none';
 			      pantallaFondo.style.display = 'none';
