@@ -282,6 +282,7 @@
 		<!-- Pantalla de carga -->
 		<div id="pantalla-carga" style="display:none;">
 			<h1 id="titulo-principal">Ocho memorias</h1>
+	
 			<h2 id="subtitulo">desde la sombra</h2>
 			<p>Explorá el mapa y enfocá los distintos marcadores para conocer las historias.</p>
 			<button id="boton-comenzar" style="display:none;">Empezar recorrido</button>
