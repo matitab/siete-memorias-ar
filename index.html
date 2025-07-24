@@ -26,9 +26,9 @@
 <!-- Capa de fondo -->
 <div id="capa1" class="capa1">
 <!-- Fondo para las partículas -->
-<div id="pantalla-fondo-negro" class="capa2">
+<div id="pantalla-fondo-negro"></div>
 <!-- Imagen Rosario -->
-<div id="pantalla-fondo-rosario" class="capa3">
+<div id="pantalla-fondo-rosario"></div>
 <!-- Efecto sutíl de partículas -->
 <div id="tsparticles" style="display:none;"></div>
 <!-- Pantalla de carga -->
@@ -136,14 +136,12 @@ import {ContadorMarcadores } from './contador.js';
 	const loader = document.getElementById("mi-loader");
 	const boton = document.getElementById("boton-comenzar");
 	const capa1 = document.getElementById("capa1");
-	const capa2 = document.getElementById("pantalla-fondo-rosario");
 	const pantalla = document.getElementById("pantalla-carga");
 	const pantallaFondo = document.getElementById("pantalla-fondo-negro");
 	const tsparticles = document.getElementById("tsparticles");
 	const escena = document.querySelector("a-scene");
 	escena.addEventListener("renderstart", () => {
 		capa1.style.display = "block";
-                capa2.style.display = "block";
 		pantalla.style.display = "flex";
 		pantallaFondo.style.display = "block";
 		tsparticles.style.display = "block";
@@ -159,7 +157,6 @@ import {ContadorMarcadores } from './contador.js';
 	pantalla.classList.add('fade-out');
 	pantalla.addEventListener('transitionend', () => {
 		capa1.style.display = 'none';
-		capa2.style.display = 'none';
 		pantalla.style.display = 'none';
 		pantallaFondo.style.display = 'none';
 		tsparticles.style.display = 'none';
