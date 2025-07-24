@@ -64,7 +64,7 @@ will-change: transform,opacity;
 mix-blend-mode: screen;
 }
 #pantalla-carga {
-font-size:1.1em;
+font-size: clamp(0.4rem, 5vw, .6rem); 
 position: fixed;
 top: 0;
 left: 0;
@@ -85,47 +85,39 @@ background: rgba(0, 0, 0, 0.5);
 
 
 .titulos-superpuestos {
-  position: relative;
+   position: relative;
   width: 100%;
-  height: auto; /* o podés fijar altura si hace falta */
+  height: auto;
   display: flex;
-
-  font-size: 3.5rem;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(4rem, 6vw, 3.5rem); 
   font-family: "Courier Prime", monospace;
 }
-
-/* Mitad izquierda blanca */
-#titulo-principal {
-  position: absolute;
-  top: -8vw;
-  left: -1.18vw;
-  width: 100%;
-  margin: 0;
-  font-weight: 700;
-  color: white;
-  clip-path: inset(0 50% 0 0);
-  pointer-events: none;
-
-}
-
-/* Mitad derecha negra */
+#titulo-principal,
 #titulo-principal-r {
   position: absolute;
   top: -8vw;
-  left: -1.18vw;
+  left: -2.5vw;
   width: 100%;
   margin: 0;
   font-weight: 700;
+  pointer-events: none;
+}
+#titulo-principal {
+  color: white;
+  clip-path: inset(0 50% 0 0);
+}
+
+#titulo-principal-r {
   color: black;
   clip-path: inset(0 0 0 50%);
-  pointer-events: none;
-
 }
 #boton-comenzar, #pantalla-carga, #subtitulo,
 #titulo-principal, .container-menu, .nombre-content{font-family:"Courier Prime", monospace}
 #subtitulo {
 pointer-events: none;
-font-size: 2.5em;
+font-size: 2.7em;
 color: #3a5f70;
 font-weight: 600;
 letter-spacing: .04em;
@@ -168,13 +160,30 @@ background-color: #1a1f3c;
 color: #d1cfc77e;
 transition: background-color .3s ease,color .3s ease
 }
-@media(max-width:425px){
-#titulo-principal{font-size:1.6em}
-#subtitulo{font-size:1.4em;margin-bottom:1em}
-#pantalla-carga p{font-size:1.6em;max-width:260px}
-#boton-comenzar{padding:.8em 1.5em;font-size:1.2em}.container-menu{width:80vw;height:25rem;padding:1.25rem}
-.nav-item{font-size:13px;line-height:30px}
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 0.5em 1em;
+  }
+
+  .contenedor-principal {
+    padding: 1rem;
+    text-align: center;
+  }
 }
+
 .container-menu {
 --transition: 0.2s cubic-bezier(0.5, 1.5, 0.5, 1);
 	transition: width var(--transition), height var(--transition);
