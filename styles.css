@@ -39,17 +39,6 @@ background-image: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, r
 z-index: 10005;
 display: flex;
 }
-#pantalla-fondo-negro {
-position: absolute;
-top: 0;
-left: 0;
-width: 50%;
-height: 100vh;
-background-color: #000000;
-background-image: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 25%, rgba(150,150,150,0.015) 50%, transparent 80%);
-z-index: 10005;
-display: flex;
-}
 #pantalla-fondo-rosario {
 position: absolute;
 top: 0;
