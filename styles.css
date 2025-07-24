@@ -150,6 +150,7 @@ text-align: left;
 display: inline-block
 }
 
+
 #boton-comenzar {
 padding: 0.8em 1.8em;
 font-size: 1.2em;
@@ -179,8 +180,8 @@ background-color: #1a1f3c;
 color: #d1cfc77e;
 transition: background-color .3s ease,color .3s ease
 }
+
 @media(max-width:425px){
-#titulo-principal{font-size:1.6em}
 #subtitulo{font-size:1.4em;margin-bottom:1em}
 #pantalla-carga p{font-size:1em;max-width:260px}
 #boton-comenzar{padding:.8em 1.5em;font-size:1.2em}.container-menu{width:80vw;height:25rem;padding:1.25rem}
