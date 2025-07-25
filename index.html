@@ -18,9 +18,9 @@
 	<base href="./">
 </head>
 <body>
-<!-- ================================= -->
-<!--  INICIO / BOTONES / MENU -->
-<!-- ================================= -->
+<!-- ========================== -->
+<!--  INICIO / BOTONES / MENU 	-->
+<!-- ========================== -->
 <!-- Capa de fondo para las partículas -->
 <div id="pantalla-fondo-negro"></div>
 <!-- Imagen Rosario -->
@@ -198,7 +198,6 @@ dummyContent.style.pointerEvents = "none";
 dummyContent.style.visibility = "hidden";
 nombre.style.visibility = "hidden";
 }}
-
 const marcadoresData = [
 {
 nombre: "Nombre y apellido 0",
@@ -266,9 +265,7 @@ menuAbierto("Menu");
 toggle.checked = true;
 });
 marcador.addEventListener("targetLost", () => {
-});
-}
-});
+});}});
 toggleButtonMenu.addEventListener("click", () => {
 toggle.checked = !toggle.checked;
 if (toggle.checked) {
@@ -280,9 +277,7 @@ menuAbierto("Menu");
 } else {
 menuCerrado("Menu");
 contentDiv.style.display = "none";
-}
-})
-});
+}})});
 </script>			    
 
 <!-- Config. partículas -->
