@@ -10,14 +10,12 @@ export function ContadorMarcadores() {
   contadorDiv.hideTimeout = setTimeout(() => {
     contadorDiv.style.display = "none";
   }, 3000);
-
   if (marcadorDetectado.size === totalMarcadores) {
     setTimeout(() => {
       document.getElementById("mensaje-final").style.display = "block";
     }, 500);
   }
 };
-
 // eventos de detección (si agregamos más targets, modificar índice)
 [0, 1, 2].forEach(index => {
 const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
