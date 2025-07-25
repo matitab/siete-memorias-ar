@@ -1,12 +1,10 @@
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes typing{0%{width:0;border-right-color:transparent}1%{border-right-color:#d1cfc7}to{width:16ch;border-right-color:#d1cfc7}}
 @keyframes blink{50%{border-color:transparent}}
-@keyframes fadeout-cursor{to{border-right-color:transparent}}
-@keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#3185ac}}
+@keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#36427a;}}
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
 .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
 .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #3185ac;border-left:4px solid transparent}
-#mi-loader.hidden{display:none}
 .loader-container {
 position: fixed;
 top: 50%;
@@ -89,14 +87,15 @@ padding: 0;
 }
 #titulo-principal,
 #titulo-principal-r {
+letter-spacing: .04em;
 position: absolute;
-top: -8vw;
+top: -7vw;
 left: 50%;
 transform: translateX(-50%);
 margin: 0;
 font-weight: 700;
 text-align: center;
-font-size: clamp(2rem, 6vw, 4rem);
+font-size: clamp(2.5rem, 6vw, 4.5rem);
 line-height: 1.1;
 white-space: nowrap;
 width: max-content;
@@ -113,10 +112,11 @@ clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
 #pantalla-fondo-negro.fade-out{opacity:0}
 #pantalla-fondo-rosario.fade-out{opacity:0}
 #boton-comenzar, #pantalla-carga, #subtitulo,
-#titulo-principal, .titulos-superpuestos, .container-menu, .nombre-content{font-family:"Courier Prime", monospace}
+#titulo-principal, .titulos-superpuestos{font-family:"Courier Prime", monospace}
+.container-menu, .nombre-content{font-family: "Montserrat";}
 #subtitulo {
 font-size: 2em;
-color: #3185ac;
+color: #36427a;
 font-weight: 600;
 letter-spacing: .04em;
 width: 0;
@@ -142,8 +142,12 @@ transition: background-color .3s ease;
 position: relative;
 z-index: 10011
 }
-#boton-comenzar:hover{background-color:#3185ac;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
+#boton-comenzar:hover{background-color:#36427a;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
 a-scene .a-enter-vr-button {
+padding: 0.1em 0.3em;
+font-size: 0.45em;         
+width: 30px;             
+height: 18px;
 background-color: #8499e562;
 position: fixed!important;
 bottom: 10px!important;
@@ -158,7 +162,7 @@ color: #d1cfc77e;
 transition: background-color .3s ease,color .3s ease
 }
 .container-menu {
---transition: 0.7s cubic-bezier(0.5, 1.5, 0.5, 1);
+--transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 transition: width var(--transition), height var(--transition);
 background: rgba(255,255,255,.1);
 top: 0.625rem;
@@ -170,7 +174,7 @@ border-radius: .2em;
 position: fixed;
 overflow: hidden;
 z-index: 10020;
-display: none;
+display: block;
 }
 .container-menu--bend {
 backdrop-filter: blur(7px);
@@ -181,9 +185,6 @@ position: absolute;
 z-index: 0;
 }
 .button-toggle {
--webkit-user-select: none;
--moz-user-select: none;
--ms-user-select: none;
 user-select: none;
 -webkit-tap-highlight-color: transparent; 
 }
@@ -200,7 +201,8 @@ outline: none;
 #toggle:checked~.dummy-content{transform:translateY(20px)}
 #toggle:not(:checked)~.dummy-content,
 #toggle:not(:checked)~.nav{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto}
-.toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}.button-toggle {
+.toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}
+.button-toggle {
 text-align: center;
 position: fixed;
 top: 1.2rem;
@@ -208,6 +210,7 @@ left: 1.25rem;
 width: 30px;
 height: 30px;
 background: #1a1f3c44;
+background-color: #1a1f3c;
 border: 0;
 cursor: pointer;
 border-radius: 50%;
@@ -216,7 +219,6 @@ z-index: 10021;
 justify-content: center;
 align-items: center
 }
-.button-toggle:hover {background-color: #1a1f3c;}
 .button-toggle .bar {
 width: 18px;
 height: 3px;
@@ -239,15 +241,13 @@ padding: 4px;
 width: 100%;
 color: #fff;
 font-size: 14px;
-text-transform: uppercase;
 cursor: pointer;
-background: #1a1f3c;
+background: linear-gradient(to bottom, #1c2e4a, #1e324f);
 z-index: 3
 }
-.nav-item:hover {background: #120907;}
+.nav-item:hover {background: #1a1f3c}
 .nav-item.cliqueado {
-background-color: #120907;
-box-shadow: inset 1px 1px 1px 0 #d1cfc7,inset -1px -1px 1px 0 #d1cfc7;
+background: #1a1f3c;
 }
 .nav-item:nth-child(1) {transition-delay: .1s}
 .nav-item:nth-child(2) {transition-delay: .2s}
@@ -261,9 +261,9 @@ visibility: hidden;
 color: #ffffff;
 text-align: center;
 z-index: 3;
-background: #1a1f3c;
+background: linear-gradient(to bottom, #1c2e4a, #1e324f);
 border-radius: .2em;
-padding: 10px;
+padding: 7px;
 font-size: 15px;
 display: none;
 }
@@ -272,17 +272,14 @@ font-size: 0.9em;
 white-space: nowrap;
 color: #fff;
 margin-bottom: 8px;
-margin-top: 0;
 margin-left: 10px;
-padding: 2px 8px;
+padding: 2px 6px;
 background: #1a1f3c;
 letter-spacing: 0.03em;
-text-transform: uppercase;
 border-radius: 0.2em;
 min-width: 180px;
 max-width: 90%;
 width: 250px;
 display: flex;
 justify-content: center;
-align-items: center;	
 }
