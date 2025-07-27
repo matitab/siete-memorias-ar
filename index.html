@@ -1,98 +1,82 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang=es>
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Ocho Memorias Desde La Sombra</title>
-
-	<!-- Librerías: A-Frame y MindAR -->
-	<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
-	<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
-
-	<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-	<link rel="stylesheet" href="styles.css">
-	<base href="./">
+<meta charset=UTF-8>
+<meta name=viewport content="width=device-width, initial-scale=1">
+<title>Ocho Memorias Desde La Sombra</title>
+<!-- Librerías: A-Frame y MindAR -->
+<script src=https://aframe.io/releases/1.6.0/aframe.min.js></script>
+<script src=https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js></script>
+<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel=stylesheet>
+<link rel=preconnect href=https://fonts.googleapis.com>
+<link rel=preconnect href=https://fonts.gstatic.com crossorigin>
+<link rel=stylesheet href=styles.css>
+<base href=./>
 </head>
 <body>
 <!-- ========================== -->
-<!--  INICIO / BOTONES / MENU 	-->
+<!--  INICIO / BOTONES / MENU     -->
 <!-- ========================== -->
 <!-- Imagen Rosario -->
-<div id="pantalla-fondo-rosario"></div>
+<div id=pantalla-fondo-rosario></div>
 <!-- Pantalla de carga -->
-<div id="pantalla-carga" style="display:none;">
-<div id="titulo-principal">
+<div id=pantalla-carga>
+<div id=titulo-principal>
 <h1>Ocho memorias</h1>
 </div>
-<h2 id="subtitulo">desde la sombra</h2>
+<h2 id=subtitulo>desde la sombra</h2>
 <p>Explorá el mapa y enfocá los marcadores para conocer las historias.</p>
-<button id="boton-comenzar" style="display:none;">Empezar recorrido</button>
+<button id=boton-comenzar>Empezar recorrido</button>
 </div>
-
 <!-- Loader -->
-<div id="mi-loader" class="loader-container">
-<span class="loader"></span></div>
-
+<div id=mi-loader class=loader-container>
+<span class=loader></span></div>
 <!-- Menú (general)-->
-<div class="container-menu" id="Menu">
-<div class="container-menu--bend"></div>
-<input type="checkbox" id="toggle">
-<div class="toggle-container">
-<button class="button-toggle">
-<span class="bar"></span>
-<span class="bar"></span>
-<span class="bar"></span>
+<div class=container-menu id=Menu>
+<div class=container-menu--bend></div>
+<input type=checkbox id=toggle>
+<div class=toggle-container>
+<button class=button-toggle>
+<span class=bar></span>
+<span class=bar></span>
+<span class=bar></span>
 </button>
 </div>
-<div class="nav">
-<div class="nombre-content" id="nombre-persona"><p>Nombre y apellido persona</p></div>
-<div class="nav-item" onclick="showContent('Info', this)">Info</div>
-<div class="nav-item" onclick="showContent('Historia', this)">Historia</div>
-<div class="nav-item" onclick="showContent('Imágenes', this)">Imágenes</div>
-<div class="nav-item" onclick="showContent('Video', this)">Video</div>
+<div class=nav>
+<div class=nombre-content id=nombre-persona><p>Nombre y apellido persona</p></div>
+<div class=nav-item onclick="showContent('Info',this)">Info</div>
+<div class=nav-item onclick="showContent('Historia',this)">Historia</div>
+<div class=nav-item onclick="showContent('Imágenes',this)">Imágenes</div>
+<div class=nav-item onclick="showContent('Video',this)">Video</div>
 </div>
-<div class="dummy-content" id="menu-content">
+<div class=dummy-content id=menu-content>
 <p>Selecciona una opción del menú</p>
 </div>
 </div>
-
 <!-- Contador de marcadores detectados -->
-<div id="contador-marcadores"><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
-
+<div id=contador-marcadores><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
-<div id="mensaje-final">
-	¡Completaste el recorrido 🥳🥳🥳!<br><br>
-	<small> Click para cerrar </small>
+<div id=mensaje-final>
+¡Completaste el recorrido 🥳🥳🥳!<br><br>
+<small> Click para cerrar </small>
 </div>
-
 <!-- ======================== -->
 <!--      ESCENA MIND-AR      -->
 <!-- ======================== -->
 <!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
 <!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
-<a-scene
-mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no"
-color-space="sRGB"
-renderer="colorManagement: true, physicallyCorrectLights"
-vr-mode-ui="enabled: true"
-device-orientation-permission-ui="enabled: false">
-
+<a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no" color-space=sRGB renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: true" device-orientation-permission-ui="enabled: false">
 <!-- Cámara-->
 <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
 <!-- Marcador 0 -->
-<a-entity mindar-image-target="targetIndex: 0" data-index="0"></a-entity>
+<a-entity mindar-image-target="targetIndex: 0" data-index=0></a-entity>
 <!-- Marcador 1 -->
-<a-entity mindar-image-target="targetIndex: 1" data-index="1"></a-entity>
+<a-entity mindar-image-target="targetIndex: 1" data-index=1></a-entity>
 <!-- Marcador 2 -->
-<a-entity mindar-image-target="targetIndex: 2" data-index="2"></a-entity>
-
+<a-entity mindar-image-target="targetIndex: 2" data-index=2></a-entity>
 <!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
 </a-scene>
-
-<script type="module">
+<script type=module>
 import {ContadorMarcadores } from './contador.js';
 document.addEventListener("DOMContentLoaded",()=>{
 ContadorMarcadores();
@@ -198,10 +182,10 @@ case "Historia":
 content = `<p>${data.historia}</p>`;
 break;
 case "Imágenes":
-content = `<img src="${data.imagen}" style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;">`;
+content = `<img src="${data.imagen}">`;
 break;
 case "Video":
-content = `<video src="${data.video}" controls style="width: 100%; max-width: 200px; height: auto; max-height: 160px; border-radius: .2em;"></video>`;
+content = `<video src="${data.video}" controls></video>`;
 break;
 default:
 content = "<p>Selecciona una opción del menú</p>";
@@ -239,13 +223,12 @@ menuAbierto("Menu");
 menuCerrado("Menu");
 contentDiv.style.display = "none";
 }})});
-</script>			    
-
+</script>
 <!-- Filtro glass -->
-<svg style="display: none" xmlns="http://www.w3.org/2000/svg">
-<filter id="glass-blur" x="0" y="0" width="100%" height="100%" filterUnits="objectBoundingBox">
-<feTurbulence type="fractalNoise" baseFrequency="0.003 0.007" numOctaves="1" result="turbulence" />
-<feDisplacementMap in="SourceGraphic" in2="turbulence" scale="200" xChannelSelector="R" yChannelSelector="G" />
+<svg xmlns=http://www.w3.org/2000/svg>
+<filter id=glass-blur x=0 y=0 width=100% height=100% filterUnits=objectBoundingBox>
+<feTurbulence type=fractalNoise baseFrequency="0.003 0.007" numOctaves=1 result=turbulence />
+<feDisplacementMap in=SourceGraphic in2=turbulence scale=200 xChannelSelector=R yChannelSelector=G />
 </filter>
 </svg>
 </body>
