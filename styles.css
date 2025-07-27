@@ -252,7 +252,7 @@ padding: 0.4em 0.6em;
 border-radius: .2em;
 font-family: "Montserrat";
 font-size: 1em;
-display: block;
+display: none;
 }
 #mensaje-final {
 position: fixed;
@@ -268,5 +268,5 @@ text-align: center;
 z-index: 10050;
 font-family: "Montserrat", sans-serif;
 max-width: 80vw;
-display: block;
+display: none;
 }
