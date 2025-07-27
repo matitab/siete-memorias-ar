@@ -9,10 +9,9 @@
 	<script src="https://aframe.io/releases/1.6.0/aframe.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
 
-	<link rel="preload" href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" as="style">
+	<link href="https://fonts.googleapis.com/css2?family=Courier+Prime&display=swap" rel="stylesheet">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
 	<link rel="stylesheet" href="styles.css">
 	<base href="./">
@@ -21,16 +20,12 @@
 <!-- ========================== -->
 <!--  INICIO / BOTONES / MENU 	-->
 <!-- ========================== -->
-<!-- Capa de fondo para las partículas -->
-<div id="pantalla-fondo-negro"></div>
 <!-- Imagen Rosario -->
 <div id="pantalla-fondo-rosario"></div>
-<!-- Efecto sutíl de partículas -->
-<div id="tsparticles" style="display:none;"></div>
 <!-- Pantalla de carga -->
 <div id="pantalla-carga" style="display:none;">
-<div class="titulos-superpuestos">
-<h1 id="titulo-principal">Ocho memorias</h1>
+<div id="titulo-principal">
+<h1>Ocho memorias</h1>
 </div>
 <h2 id="subtitulo">desde la sombra</h2>
 <p>Explorá el mapa y enfocá los marcadores para conocer las historias.</p>
@@ -65,38 +60,12 @@
 </div>
 
 <!-- Contador de marcadores detectados -->
-<div id="contador-marcadores" style="
-position: fixed;
-top: 0.625rem;
-left: 5.675rem;
-width: 16.25rem;
-z-index: 10050;
-background: #1a1f3c;
-color: white;
-padding: 0.4em 0.6em;
-border-radius: .2em;
-font-family: Courier Prime, monospace;
-font-size: 1em;
-display: none;"
-><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes
-</div>
+<div id="contador-marcadores"><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
 
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
-<div id="mensaje-final" style="display: none;
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%, -50%);
-background: rgba(0, 0, 0, 0.616);
-color: #4fc3f7;
-padding: 2em;
-font-size: 1.4em;
-border-radius: 1em;
-text-align: center;
-z-index: 10050;
-font-family: Courier Prime, monospace;
-max-width: 80vw;"
-><!-- Mensaje por defecto: -->¡Completaste el recorrido !<br><br><small> Click para cerrar </small>
+<div id="mensaje-final">
+	¡Completaste el recorrido 🥳🥳🥳!<br><br>
+	<small> Click para cerrar </small>
 </div>
 
 <!-- ======================== -->
@@ -131,11 +100,9 @@ const loader = document.getElementById("mi-loader");
 const boton = document.getElementById("boton-comenzar");
 const pantalla = document.getElementById("pantalla-carga");
 const pantallaFondoRosario = document.getElementById("pantalla-fondo-rosario");
-const tsparticles = document.getElementById("tsparticles");
 const escena = document.querySelector("a-scene");
 escena.addEventListener("renderstart", () => {
 pantalla.style.display = "flex";
-tsparticles.style.display = "block";
 boton.style.display = "inline-block";
 loader.classList.add("fade-out-loader");
 loader.addEventListener("transitionend", () => {
@@ -150,7 +117,6 @@ pantallaFondoRosario.classList.add('fade-out');
 pantalla.addEventListener('transitionend', () => {
 pantalla.style.display = 'none';
 pantallaFondoRosario.style.display = 'none';
-tsparticles.style.display = 'none';
 }, { once: true });
 escena.components['mindar-image'].start();
 });
@@ -274,10 +240,6 @@ menuCerrado("Menu");
 contentDiv.style.display = "none";
 }})});
 </script>			    
-
-<!-- Config. partículas -->
-<script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
-<script src="particulas-config.js"></script> 
 
 <!-- Filtro glass -->
 <svg style="display: none" xmlns="http://www.w3.org/2000/svg">

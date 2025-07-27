@@ -33,16 +33,6 @@ z-index: 10010;
 opacity: 0;
 transition: opacity 0.7s ease;
 }
-#tsparticles {
-position: absolute;
-top: 0;
-left: 0;
-width: 50%; 
-z-index: 10000;
-pointer-events: none;
-mix-blend-mode: screen;
-transition: opacity 2s ease;
-}
 #pantalla-carga {
 position: fixed;
 top: 0;
@@ -54,7 +44,6 @@ display: flex;
 justify-content: center;
 align-items: center;
 flex-direction: column;
-text-align: center;
 padding: 0 2rem;
 opacity: 1;
 transition: opacity 0.7s ease;
@@ -62,37 +51,27 @@ z-index: 10010;
 background: rgba(0, 0, 0, 0.5);
 box-sizing: border-box;
 }   
-.titulos-superpuestos {
-position: relative;
-width: 100%;
-height: auto;
-display: flex;
-justify-content: center;
-align-items: center;
-margin: 0;
-padding: 0;
-}
 #titulo-principal {
+height: auto;
 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
 letter-spacing: .04em;
 position: absolute;
 color: rgb(0, 0, 0);
-top: -7vw;
+top: 5vw;
 left: 50%;
 transform: translateX(-50%);
 margin: 0;
 font-weight: 700;
 text-align: center;
-font-size: clamp(2.5rem, 6vw, 4.5rem);
+font-size: clamp(1.5rem, 6vw, 2.5rem);
 line-height: 1.1;
 white-space: nowrap;
 width: max-content;
 }
 #pantalla-carga.fade-out{opacity:0}
-#pantalla-fondo-negro.fade-out{opacity:0}
 #pantalla-fondo-rosario.fade-out{opacity:0}
 #boton-comenzar, #pantalla-carga, #subtitulo,
-#titulo-principal, .titulos-superpuestos{font-family:"Courier Prime", monospace; user-select: none}
+#titulo-principal{font-family:"Courier Prime", monospace; user-select: none}
 .container-menu, .nombre-content{font-family: "Montserrat";}
 #subtitulo {
 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
@@ -105,9 +84,6 @@ white-space: nowrap;
 overflow: hidden;
 border-right: 3px solid #d1cfc7;
 animation: typing 2s steps(32,end) forwards,blink .5s step-end infinite;
-animation-delay: .5s,.5s;
-animation-fill-mode: both;
-text-align: left;
 }
 #boton-comenzar {
 padding: 0.7em 1.5em;
@@ -263,4 +239,34 @@ max-width: 90%;
 width: 250px;
 display: flex;
 justify-content: center;
+}
+#contador-marcadores {
+position: fixed;
+top: 0.625rem;
+left: 5.675rem;
+width: 16.25rem;
+z-index: 10050;
+background: #1a1f3c;
+color: white;
+padding: 0.4em 0.6em;
+border-radius: .2em;
+font-family: "Montserrat";
+font-size: 1em;
+display: block;
+}
+#mensaje-final {
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+background: rgba(0, 0, 0, 0.938);
+color: #4fc3f7;
+padding: 2em;
+font-size: 1.4em;
+border-radius: 1em;
+text-align: center;
+z-index: 10050;
+font-family: "Montserrat", sans-serif;
+max-width: 80vw;
+display: block;
 }
