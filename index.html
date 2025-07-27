@@ -48,9 +48,7 @@
 <div class=nav-item onclick="showContent('Historia',this)">Historia</div>
 <div class=nav-item onclick="showContent('Imágenes',this)">Imágenes</div>
 <div class=nav-item onclick="showContent('Video',this)">Video</div>
-</div>
-<div class=dummy-content id=menu-content>
-<p>Selecciona una opción del menú</p>
+<div class=dummy-content id=menu-content>Selecciona una opción del menú</div>
 </div>
 </div>
 <!-- Contador de marcadores detectados -->
@@ -138,7 +136,7 @@ nav.style.transform = "translateY(-20px)";
 nav.style.pointerEvents = "none";
 nav.style.visibility = "hidden";
 dummyContent.style.opacity = "0";
-dummyContent.style.transform = "translateY(20px)";
+dummyContent.style.transform = "translateY(-20px)";
 dummyContent.style.pointerEvents = "none";
 dummyContent.style.visibility = "hidden";
 nombre.style.visibility = "hidden";
@@ -182,10 +180,11 @@ case "Historia":
 content = `<p>${data.historia}</p>`;
 break;
 case "Imágenes":
-content = `<img src="${data.imagen}">`;
+content = `<img src="${data.imagen}" style="width: 100%; max-width: auto; max-height: 14vw; border-radius: .2em;">`;
 break;
 case "Video":
-content = `<video src="${data.video}" controls></video>`;
+content = `<video src="${data.video}" controls style="width: 100%; max-width: auto; height: auto; border-radius: .2em;"></video>`;
+
 break;
 default:
 content = "<p>Selecciona una opción del menú</p>";
@@ -215,9 +214,7 @@ toggleButtonMenu.addEventListener("click", () => {
 toggle.checked = !toggle.checked;
 if (toggle.checked) {
 menuGeneral.style.display = "block";
-setTimeout(() => {
 contentDiv.style.display = "block";
-}, 150);
 menuAbierto("Menu");
 } else {
 menuCerrado("Menu");
