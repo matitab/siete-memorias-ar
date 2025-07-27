@@ -54,9 +54,9 @@ box-sizing: border-box;
 }   
 #titulo-principal {
 position: absolute;
-top: 0;
+top: 30%;
 left: 50%;
-transform: translate(-50%, -50%);
+transform: translateX(-50%);
 font-size: clamp(1rem, 4vw, 2rem);
 font-weight: 700;
 color: rgb(0, 0, 0);
@@ -67,7 +67,6 @@ line-height: 1.1;
 white-space: nowrap;
 width: max-content;
 margin: 0;
-height: auto;
 }
 #pantalla-carga.fade-out{opacity:0}
 #pantalla-fondo-rosario.fade-out{opacity:0}
