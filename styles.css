@@ -15,25 +15,12 @@ padding: 1em;
 border-radius: 1em
 }
 .fade-out-loader{opacity:0;transition:opacity .3s ease-in-out}
-#pantalla-fondo-negro {
-position: absolute;
-top: 0;
-left: 0;
-transition: opacity 6s ease;
-width: 100%;
-height: 100%;
-background-color: #000000;
-background-image: radial-gradient(circle at center, rgba(255,255,255,0.06) 0%, rgba(200,200,200,0.03) 25%,
- rgba(150,150,150,0.015) 50%, transparent 80%);
-z-index: 10005;
-display: flex;
-}
 #pantalla-fondo-rosario {
 position: absolute;
 top: 0;
 right: 0;
 left: auto;
-width: 50%;
+width: 100%;
 height: 100vh;
 transition: opacity 0.7s ease;
 background-image: url('assets/rosario2.jpg');
@@ -41,7 +28,6 @@ background-size: cover;
 background-position: center;
 background-repeat: no-repeat;
 z-index: 10010;
-display: flex;
 }
 #pantalla-fondo-rosario.fade-out {
 opacity: 0;
@@ -52,7 +38,7 @@ position: absolute;
 top: 0;
 left: 0;
 width: 50%; 
-z-index: 10009;
+z-index: 10000;
 pointer-events: none;
 mix-blend-mode: screen;
 transition: opacity 2s ease;
@@ -86,10 +72,11 @@ align-items: center;
 margin: 0;
 padding: 0;
 }
-#titulo-principal,
-#titulo-principal-r {
+#titulo-principal {
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
 letter-spacing: .04em;
 position: absolute;
+color: rgb(0, 0, 0);
 top: -7vw;
 left: 50%;
 transform: translateX(-50%);
@@ -100,14 +87,6 @@ font-size: clamp(2.5rem, 6vw, 4.5rem);
 line-height: 1.1;
 white-space: nowrap;
 width: max-content;
-}
-#titulo-principal {
-color: white;
-clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
-}
-#titulo-principal-r {
-color: black;
-clip-path: polygon(50% 0, 100% 0, 100% 100%, 50% 100%);
 }
 #pantalla-carga.fade-out{opacity:0}
 #pantalla-fondo-negro.fade-out{opacity:0}

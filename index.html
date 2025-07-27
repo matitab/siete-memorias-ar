@@ -31,7 +31,6 @@
 <div id="pantalla-carga" style="display:none;">
 <div class="titulos-superpuestos">
 <h1 id="titulo-principal">Ocho memorias</h1>
-<h1 id="titulo-principal-r">Ocho memorias</h1>
 </div>
 <h2 id="subtitulo">desde la sombra</h2>
 <p>Explorá el mapa y enfocá los marcadores para conocer las historias.</p>
@@ -131,13 +130,11 @@ ContadorMarcadores();
 const loader = document.getElementById("mi-loader");
 const boton = document.getElementById("boton-comenzar");
 const pantalla = document.getElementById("pantalla-carga");
-const pantallaFondo = document.getElementById("pantalla-fondo-negro");
 const pantallaFondoRosario = document.getElementById("pantalla-fondo-rosario");
 const tsparticles = document.getElementById("tsparticles");
 const escena = document.querySelector("a-scene");
 escena.addEventListener("renderstart", () => {
 pantalla.style.display = "flex";
-pantallaFondo.style.display = "block";
 tsparticles.style.display = "block";
 boton.style.display = "inline-block";
 loader.classList.add("fade-out-loader");
@@ -150,10 +147,8 @@ pantalla.classList.remove("fade-out");
 boton.addEventListener('click', () => {
 pantalla.classList.add('fade-out');
 pantallaFondoRosario.classList.add('fade-out');
-pantallaFondo.classList.add('fade-out');
 pantalla.addEventListener('transitionend', () => {
 pantalla.style.display = 'none';
-pantallaFondo.style.display = 'none';
 pantallaFondoRosario.style.display = 'none';
 tsparticles.style.display = 'none';
 }, { once: true });
