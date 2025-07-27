@@ -1,7 +1,9 @@
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes typing{0%{width:0;border-right-color:transparent}1%{border-right-color:#d1cfc7}to{width:16ch;border-right-color:#d1cfc7}}
 @keyframes blink{50%{border-color:transparent}}
+@keyframes fadeout-cursor{to{border-right-color:transparent}}
 @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#36427a;}}
+
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
 .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
 .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #3185ac;border-left:4px solid transparent}
@@ -53,26 +55,18 @@ background: rgba(0, 0, 0, 0.5);
 box-sizing: border-box;
 }   
 #titulo-principal {
-position: absolute;
 top: 30%;
 left: 50%;
-transform: translateX(-50%);
-font-size: clamp(1rem, 4vw, 2rem);
+font-size: clamp(1.2rem, 4vw, 2.5rem);
 font-weight: 700;
 color: rgb(0, 0, 0);
 letter-spacing: 0.04em;
 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
-text-align: center;
 line-height: 1.1;
 white-space: nowrap;
 width: max-content;
 margin: 0;
 }
-#pantalla-carga.fade-out{opacity:0}
-#pantalla-fondo-rosario.fade-out{opacity:0}
-#boton-comenzar, #pantalla-carga, #subtitulo,
-#titulo-principal{font-family:"Courier Prime", monospace; user-select: none}
-.container-menu, .nombre-content{font-family: "Montserrat";}
 #subtitulo {
 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
 font-size: 2em;
@@ -81,9 +75,8 @@ font-weight: 600;
 letter-spacing: .04em;
 width: 0;
 white-space: nowrap;
-overflow: hidden;
 border-right: 3px solid #d1cfc7;
-animation: typing 2s steps(32,end) forwards,blink .5s step-end infinite;
+animation: typing 2s steps(32, end) forwards, blink .5s step-end 2s infinite, fadeout-cursor 0.1s linear 3.2s forwards;
 }
 #boton-comenzar {
 padding: 0.7em 1.5em;
@@ -270,3 +263,8 @@ font-family: "Montserrat", sans-serif;
 max-width: 80vw;
 display: none;
 }
+#pantalla-carga.fade-out{opacity:0}
+#pantalla-fondo-rosario.fade-out{opacity:0}
+#boton-comenzar, #pantalla-carga, #subtitulo,
+#titulo-principal{font-family:"Courier Prime", monospace; user-select: none}
+.container-menu, .nombre-content{font-family: "Montserrat";}
