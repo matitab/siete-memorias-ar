@@ -64,7 +64,7 @@ transform: translateX(-50%);
 margin: 10vh auto 0 auto
 font-weight: 700;
 text-align: center;
-font-size: clamp(1.5rem, 6vw, 2.5rem);
+font-size: 3em;
 line-height: 1.1;
 white-space: nowrap;
 width: max-content;
