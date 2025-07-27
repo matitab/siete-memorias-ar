@@ -124,7 +124,7 @@ border-radius: .2em;
 position: fixed;
 overflow: hidden;
 z-index: 10020;
-display: block;
+display: none;
 }
 .container-menu--bend {
 backdrop-filter: blur(7px);
