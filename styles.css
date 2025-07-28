@@ -154,14 +154,13 @@ margin: 2px 0;
 transition: transform .3s ease,opacity .3s ease
 }
 .container-menu {
---transition: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-transition: width var(--transition), height var(--transition);
+transition: width ease .6s, height ease .6s;
 background: rgba(255, 255, 255, 0.274);
 top: 0.625rem;
 left: 0.625rem;
 width: 18.75rem;
 height: 32.125rem;
-padding: .875rem;
+padding: 1.875rem;
 border-radius: .2em;
 position: fixed;
 z-index: 10020;
