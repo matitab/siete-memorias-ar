@@ -164,7 +164,7 @@ padding: 1.875rem;
 border-radius: .2em;
 position: fixed;
 z-index: 10020;
-display: block;
+display: none;
 overflow: hidden;
 overflow-y:auto;
 }
