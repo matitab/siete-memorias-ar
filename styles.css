@@ -154,7 +154,7 @@ margin: 2px 0;
 transition: transform .3s ease,opacity .3s ease
 }
 .container-menu {
-transition: width ease .6s, height ease .6s;
+transition: width ease .3s, height ease .3s;
 background: rgba(255, 255, 255, 0.274);
 top: 0.625rem;
 left: 0.625rem;
@@ -164,7 +164,7 @@ padding: 1.875rem;
 border-radius: .2em;
 position: fixed;
 z-index: 10020;
-display: none;
+display: block;
 overflow: hidden;
 overflow-y:auto;
 }

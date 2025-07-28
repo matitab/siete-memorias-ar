@@ -14,9 +14,6 @@
 <base href=./>
 </head>
 <body>
-<!-- ========================== -->
-<!--  INICIO / BOTONES / MENU     -->
-<!-- ========================== -->
 <!-- Imagen Rosario -->
 <div id=pantalla-fondo-rosario></div>
 <!-- Pantalla de carga -->
@@ -33,23 +30,23 @@
 <span class=loader></span></div>
 <!-- Menú (general)-->
 <div class=container-menu id=Menu>
-<div class=container-menu--bend></div>
-<input type=checkbox id=toggle>
-<div class=toggle-container>
-<button class=button-toggle>
-<span class=bar></span>
-<span class=bar></span>
-<span class=bar></span>
-</button>
-</div>
-<div class=nav>
-<div class=nombre-content id=nombre-persona><p>Nombre y apellido persona</p></div>
-<div class=nav-item onclick="showContent('Info',this)">Info</div>
-<div class=nav-item onclick="showContent('Historia',this)">Historia</div>
-<div class=nav-item onclick="showContent('Imágenes',this)">Imágenes</div>
-<div class=nav-item onclick="showContent('Video',this)">Video</div>
-<div class=dummy-content id=menu-content>Selecciona una opción del menú</div>
-</div>
+    <div class=container-menu--bend></div>
+    <input type=checkbox id=toggle>
+    <div class=toggle-container>
+    <button class=button-toggle>
+        <span class=bar></span>
+        <span class=bar></span>
+        <span class=bar></span>
+    </button>
+    </div>
+    <div class=nav>
+        <div class=nombre-content id=nombre-persona><p>Nombre y apellido persona</p></div>
+        <div class=nav-item onclick="showContent('Info',this)">Info</div>
+        <div class=nav-item onclick="showContent('Historia',this)">Historia</div>
+        <div class=nav-item onclick="showContent('Imágenes',this)">Imágenes</div>
+        <div class=nav-item onclick="showContent('Video',this)">Video</div>
+        <div class=dummy-content id=menu-content>Selecciona una opción del menú</div>
+    </div>
 </div>
 <!-- Contador de marcadores detectados -->
 <div id=contador-marcadores><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
@@ -62,7 +59,6 @@
 <!--      ESCENA MIND-AR      -->
 <!-- ======================== -->
 <!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
-<!-- En caso de agregar más marcadores, usar alguno de los <a-entity> como base -->
 <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no" color-space=sRGB renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: true" device-orientation-permission-ui="enabled: false">
 <!-- Cámara-->
 <a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
@@ -72,10 +68,11 @@
 <a-entity mindar-image-target="targetIndex: 1" data-index=1></a-entity>
 <!-- Marcador 2 -->
 <a-entity mindar-image-target="targetIndex: 2" data-index=2></a-entity>
-<!-- la cantidad de marcadores debe coincidir con la cantidad de imágenes cargadas en targets.mind -->
 </a-scene>
 <script type=module>
 import {ContadorMarcadores } from './contador.js';
+import {menuAbierto, menuCerrado} from './openclose-menu.js';
+import {marcadoresData} from './marcadoresData.js';
 document.addEventListener("DOMContentLoaded",()=>{
 ContadorMarcadores();
 const loader = document.getElementById("mi-loader");
@@ -90,8 +87,7 @@ loader.classList.add("fade-out-loader");
 loader.addEventListener("transitionend", () => {
 loader.style.display = "none";
 }, { once: true });
-pantalla.classList.remove("fade-out");
-});
+pantalla.classList.remove("fade-out");});
 // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
 boton.addEventListener('click', () => {
 pantalla.classList.add('fade-out');
@@ -100,70 +96,7 @@ pantalla.addEventListener('transitionend', () => {
 pantalla.style.display = 'none';
 pantallaFondoRosario.style.display = 'none';
 }, { once: true });
-escena.components['mindar-image'].start();
-});
-function menuAbierto(menuId) {
-const menu = document.getElementById(menuId);
-const nav = document.querySelector(`#${menuId} .nav`);
-const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
-const nombre = document.getElementById("nombre-persona");
-if (menu && nav && dummyContent) {
-menu.style.display = "block";
-menu.style.width = "18.75rem";
-menu.style.height = "32.125rem";
-menu.style.padding = "1.875rem";
-nav.style.opacity = "1";
-nav.style.transform = "translateY(0)";
-nav.style.pointerEvents = "auto";
-nav.style.visibility = "visible";
-dummyContent.style.opacity = "1";
-dummyContent.style.transform = "translateY(0)";
-dummyContent.style.pointerEvents = "auto";
-dummyContent.style.visibility = "visible";
-nombre.style.visibility = "visible";
-}}
-function menuCerrado(menuId) {
-const menu = document.getElementById(menuId);
-const nav = document.querySelector(`#${menuId} .nav`);
-const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
-const nombre = document.getElementById("nombre-persona");
-if (menu && nav && dummyContent) {
-menu.style.width = "2.5rem";
-menu.style.height = "2.5rem";
-menu.style.padding = "0.3rem";
-nav.style.opacity = "0";
-nav.style.transform = "translateY(-20px)";
-nav.style.pointerEvents = "none";
-nav.style.visibility = "hidden";
-dummyContent.style.opacity = "0";
-dummyContent.style.transform = "translateY(-20px)";
-dummyContent.style.pointerEvents = "none";
-dummyContent.style.visibility = "hidden";
-nombre.style.visibility = "hidden";
-}}
-const marcadoresData = [
-{
-nombre: "Nombre y apellido 0",
-info: "Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.",
-historia: "Historia 0",
-imagen: "assets/imagentest1.png",
-video: "assets/video1test.mp4"
-},
-{
-nombre: "Nombre y apellido 1",
-info: "Información 1",
-historia: "Historia 1",
-imagen: "assets/imagentest1.png",
-video: "assets/video1test.mp4"
-},
-{
-nombre: "Nombre y apellido 2",
-info: "Información 2",
-historia: "Historia 2",
-imagen: "assets/imagentest1.png",
-video: "assets/video1test.mp4"
-}
-];
+escena.components['mindar-image'].start();});
 let marcadorActivo = 0; 
 window.showContent = function (option, element) {
 const contentDiv = document.getElementById("menu-content");
@@ -184,7 +117,6 @@ content = `<img src="${data.imagen}" style="width: 100%; height: auto; border-ra
 break;
 case "Video":
 content = `<video src="${data.video}" controls style="width: 100%; max-width: auto; height: auto; border-radius: .2em;"></video>`;
-
 break;
 default:
 content = "<p>Selecciona una opción del menú</p>";
@@ -221,12 +153,5 @@ menuCerrado("Menu");
 contentDiv.style.display = "none";
 }})});
 </script>
-<!-- Filtro glass -->
-<svg xmlns=http://www.w3.org/2000/svg>
-<filter id=glass-blur x=0 y=0 width=100% height=100% filterUnits=objectBoundingBox>
-<feTurbulence type=fractalNoise baseFrequency="0.003 0.007" numOctaves=1 result=turbulence />
-<feDisplacementMap in=SourceGraphic in2=turbulence scale=200 xChannelSelector=R yChannelSelector=G />
-</filter>
-</svg>
 </body>
 </html>
