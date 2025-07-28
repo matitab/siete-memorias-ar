@@ -111,7 +111,7 @@ if (menu && nav && dummyContent) {
 menu.style.display = "block";
 menu.style.width = "18.75rem";
 menu.style.height = "32.125rem";
-menu.style.padding = "1.875rem";
+menu.style.padding = ".875rem";
 nav.style.opacity = "1";
 nav.style.transform = "translateY(0)";
 nav.style.pointerEvents = "auto";
@@ -144,7 +144,7 @@ nombre.style.visibility = "hidden";
 const marcadoresData = [
 {
 nombre: "Nombre y apellido 0",
-info: "Información 0",
+info: "Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.",
 historia: "Historia 0",
 imagen: "assets/imagentest1.png",
 video: "assets/video1test.mp4"
@@ -180,7 +180,7 @@ case "Historia":
 content = `<p>${data.historia}</p>`;
 break;
 case "Imágenes":
-content = `<img src="${data.imagen}" style="width: 100%; max-width: auto; height: auto; border-radius: .2em;">`;
+content = `<img src="${data.imagen}" style="width: 100%; height: auto; border-radius: .2em; display: block;">`;
 break;
 case "Video":
 content = `<video src="${data.video}" controls style="width: 100%; max-width: auto; height: auto; border-radius: .2em;"></video>`;
