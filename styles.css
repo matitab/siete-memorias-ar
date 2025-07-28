@@ -3,7 +3,6 @@
 @keyframes blink{50%{border-color:transparent}}
 @keyframes fadeout-cursor{to{border-right-color:transparent}}
 @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#36427a;}}
-
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
 .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
 .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #3185ac;border-left:4px solid transparent}
@@ -165,20 +164,18 @@ height: 32.125rem;
 padding: .875rem;
 border-radius: .2em;
 position: fixed;
-overflow: hidden;
 z-index: 10020;
-display: block;
+display: none;
+overflow: hidden;
 overflow-y:auto;
 }
 .container-menu::-webkit-scrollbar {
 display: none;
 }
-
 .container-menu {
 -ms-overflow-style: none; 
 scrollbar-width: none;
 }
-
 .nav {gap: 16px;margin: 30px 20px 20px}
 .nav-item {
 display: block;
