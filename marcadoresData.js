@@ -1,8 +1,12 @@
-/* Información de cada marcador */
+/* Información sobre cada marcador */
 export const marcadoresData = [
 {
 nombre: "Nombre y apellido 0",
-info: "Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.",
+info: `Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.
+Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.
+Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.
+Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.
+Proyecto basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.`,
 historia: "Historia 0",
 imagen: "assets/imagentest1.png",
 video: "assets/video1test.mp4"
