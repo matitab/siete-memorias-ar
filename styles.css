@@ -1,6 +1,4 @@
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes typing{0%{width:0;border-right-color:transparent}1%{border-right-color:#d1cfc7}to{width:16ch;border-right-color:#d1cfc7}}
-@keyframes blink{50%{border-color:transparent}}
 @keyframes fadeout-cursor{to{border-right-color:transparent}}
 @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#36427a;}}
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
@@ -16,21 +14,20 @@ padding: 1em;
 border-radius: 1em
 }
 .fade-out-loader{opacity:0;transition:opacity .3s ease-in-out}
-#pantalla-fondo-rosario {
-position: absolute;
+#img-fondo {
+border: none;
+height: 100%;
+pointer-events: none;
+position: fixed;
 top: 0;
-right: 0;
-left: auto;
+visibility: visible;
 width: 100%;
-height: 100vh;
-transition: opacity 0.7s ease;
-background-image: url('assets/rosario2.jpg');
 background-size: cover;
 background-position: center;
-background-repeat: no-repeat;
-z-index: 10010;
+background-image: url('assets/rosario2.jpg');
+transition: opacity 0.7s ease;
 }
-#pantalla-fondo-rosario.fade-out {
+#img-fondo.fade-out {
 opacity: 0;
 transition: opacity 0.7s ease;
 }
@@ -54,28 +51,25 @@ background: rgba(0, 0, 0, 0.5);
 box-sizing: border-box;
 }   
 #titulo-principal {
-top: 30%;
 left: 50%;
 font-size: clamp(1.2rem, 4vw, 2.5rem);
 font-weight: 700;
 color: rgb(0, 0, 0);
-letter-spacing: 0.04em;
+text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
+line-height: 1.1;
+white-space: nowrap;
+margin: 0;
+}
+#subtitulo {
+left: 50%;
+font-size: clamp(1.2rem, 4vw, 2.5rem);
+font-weight: 700;
+color: rgb(0, 0, 0);
 text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
 line-height: 1.1;
 white-space: nowrap;
 width: max-content;
 margin: 0;
-}
-#subtitulo {
-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
-font-size: 2em;
-color: #36427a;
-font-weight: 600;
-letter-spacing: .04em;
-width: 0;
-white-space: nowrap;
-border-right: 3px solid #d1cfc7;
-animation: typing 2s steps(32, end) forwards, blink .5s step-end 2s infinite, fadeout-cursor 0.1s linear 3.2s forwards;
 }
 #boton-comenzar {
 padding: 0.7em 1.5em;
@@ -179,7 +173,6 @@ scrollbar-width: none;
 .nav-item {
 display: block;
 line-height: 32px;
-transition: opacity .3s ease,transform .3s ease;
 text-align: center;
 border-radius: .2em;
 justify-content: center;
@@ -268,7 +261,7 @@ max-width: 80vw;
 display: none;
 }
 #pantalla-carga.fade-out{opacity:0}
-#pantalla-fondo-rosario.fade-out{opacity:0}
+#img-fondo.fade-out{opacity:0}
 #boton-comenzar, #pantalla-carga, #subtitulo,
 #titulo-principal{font-family:"Courier Prime", monospace; user-select: none}
 .container-menu, .nombre-content{font-family: "Montserrat";}

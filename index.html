@@ -14,8 +14,8 @@
 <base href=./>
 </head>
 <body>
-<!-- Imagen Rosario -->
-<div id=pantalla-fondo-rosario></div>
+<!-- Imagen de fondo -->
+<div id=img-fondo></div>
 <!-- Pantalla de carga -->
 <div id=pantalla-carga>
 <div id=titulo-principal>
@@ -70,7 +70,7 @@
 <a-entity mindar-image-target="targetIndex: 2" data-index=2></a-entity>
 </a-scene>
 <script type=module>
-import {ContadorMarcadores } from './contador.js';
+import {ContadorMarcadores} from './contador.js';
 import {menuAbierto, menuCerrado} from './openclose-menu.js';
 import {marcadoresData} from './marcadoresData.js';
 document.addEventListener("DOMContentLoaded",()=>{
@@ -78,7 +78,7 @@ ContadorMarcadores();
 const loader = document.getElementById("mi-loader");
 const boton = document.getElementById("boton-comenzar");
 const pantalla = document.getElementById("pantalla-carga");
-const pantallaFondoRosario = document.getElementById("pantalla-fondo-rosario");
+const background = document.getElementById("img-fondo");
 const escena = document.querySelector("a-scene");
 escena.addEventListener("renderstart", () => {
 pantalla.style.display = "flex";
@@ -91,11 +91,11 @@ pantalla.classList.remove("fade-out");});
 // Botón "Empezar recorrido" activa MindAR y oculta la pantalla de carga
 boton.addEventListener('click', () => {
 pantalla.classList.add('fade-out');
-pantallaFondoRosario.classList.add('fade-out');
+background.classList.add('fade-out');
 pantalla.addEventListener('transitionend', () => {
 pantalla.style.display = 'none';
-pantallaFondoRosario.style.display = 'none';
-}, { once: true });
+background.style.display = 'none';
+}, {once: true});
 escena.components['mindar-image'].start();});
 let marcadorActivo = 0; 
 window.showContent = function (option, element) {
