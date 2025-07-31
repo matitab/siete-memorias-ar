@@ -40,11 +40,11 @@
     </button>
     </div>
     <div class=nav>
-        <div class=nombre-content id=nombre-persona><p>Nombre y apellido persona</p></div>
-        <div class=nav-item onclick="showContent('Info',this)">Info</div>
-        <div class=nav-item onclick="showContent('Historia',this)">Historia</div>
-        <div class=nav-item onclick="showContent('Imágenes',this)">Imágenes</div>
-        <div class=nav-item onclick="showContent('Video',this)">Video</div>
+        <div class=nombre id=nombre-persona><p>Nombre y apellido</p></div>
+        <div class=nav-item>Info</div>
+        <div class=nav-item>Historia</div>
+        <div class=nav-item>Imágenes</div>
+        <div class=nav-item>Video</div>
         <div class=dummy-content id=menu-content>Selecciona una opción del menú</div>
     </div>
 </div>
@@ -52,7 +52,8 @@
 <div id=contador-marcadores><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
 <div id=mensaje-final>
-¡Completaste el recorrido 🥳🥳🥳!<br><br>
+¡Completaste el recorrido 🥳🥳🥳!
+<br><br>
 <small> Click para cerrar </small>
 </div>
 <!-- ======================== -->
@@ -71,67 +72,20 @@
 </a-scene>
 <script type=module>
 import {ContadorMarcadores} from './contador.js';
-import {menuAbierto, menuCerrado} from './openclose-menu.js';
+import {DetectarMarcador} from './DetectarMarcador.js';
 import {marcadoresData} from './marcadoresData.js';
 import {arranque} from './arranque.js';
+import {mostrarContenido} from './mostrarContenido.js';
 document.addEventListener("DOMContentLoaded",()=>{
-ContadorMarcadores();
 arranque();
-let marcadorActivo = 0; 
-window.showContent = function (option, element) {
-const contentDiv = document.getElementById("menu-content");
-document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("cliqueado"));
-if (element) element.classList.add("cliqueado");
-if (!contentDiv) return;
-const data = marcadoresData[marcadorActivo];
-let content = "";
-switch (option) {
-case "Info":
-content = `<p>${data.info}</p>`;
-break;
-case "Historia":
-content = `<p>${data.historia}</p>`;
-break;
-case "Imágenes":
-content = `<img src="${data.imagen}" style="width: 100%; height: auto; border-radius: .2em; display: block;">`;
-break;
-case "Video":
-content = `<video src="${data.video}" controls style="width: 100%; max-width: auto; height: auto; border-radius: .2em;"></video>`;
-break;
-default:
-content = "<p>Selecciona una opción del menú</p>";
-}
-contentDiv.innerHTML = content;
-}
-// Detección marcadores / apertura de menú
-const menuGeneral = document.getElementById("Menu");
-const contentDiv = document.getElementById("menu-content");
-const nombreDiv = document.getElementById("nombre-persona");
-const toggle = document.getElementById("toggle");
-const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
-[0, 1, 2].forEach(idx => {
-const marcador = document.querySelector(`[mindar-image-target="targetIndex: ${idx}"]`);
-if (marcador) {
-marcador.addEventListener("targetFound", () => {
-marcadorActivo = idx;
-nombreDiv.innerHTML = `<p>${marcadoresData[idx].nombre}</p>`;
-menuGeneral.style.display = "block";
-contentDiv.style.display = "block";
-menuAbierto("Menu");
-toggle.checked = true;
+ContadorMarcadores();
+document.querySelectorAll(".nav-item").forEach(boton => {
+boton.addEventListener("click", () => {
+const opcion = boton.textContent.trim();
+mostrarContenido(opcion, boton);
+});});
+DetectarMarcador();
 });
-marcador.addEventListener("targetLost", () => {
-});}});
-toggleButtonMenu.addEventListener("click", () => {
-toggle.checked = !toggle.checked;
-if (toggle.checked) {
-menuGeneral.style.display = "block";
-contentDiv.style.display = "block";
-menuAbierto("Menu");
-} else {
-menuCerrado("Menu");
-contentDiv.style.display = "none";
-}})});
 </script>
 </body>
 </html>
