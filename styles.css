@@ -240,7 +240,7 @@ background: #1a1f3c;
 color: white;
 padding: 0.4em 0.6em;
 border-radius: .2em;
-font-family: "Montserrat";
+font-family: "Saira";
 font-size: 1em;
 display: none;
 }
@@ -256,12 +256,12 @@ font-size: 1.4em;
 border-radius: 1em;
 text-align: center;
 z-index: 10050;
-font-family: "Montserrat", sans-serif;
+font-family: "Saira", sans-serif;
 max-width: 80vw;
 display: none;
 }
 #pantalla-carga.fade-out{opacity:0}
 #img-fondo.fade-out{opacity:0}
 #boton-comenzar, #pantalla-carga, #subtitulo,
-#titulo-principal{font-family:"Courier Prime", monospace; user-select: none}
-.container-menu, .nombre{font-family: "Montserrat";}
+#titulo-principal{font-family:"Saira", monospace; user-select: none}
+.container-menu, .nombre{font-family: "Saira";}
