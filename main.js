@@ -1,3 +1,4 @@
+/* Motor del programa */
 import {ContadorMarcadores} from './contador.js';
 import {DetectarMarcador} from './DetectarMarcador.js';
 import {arranque} from './arranque.js';
