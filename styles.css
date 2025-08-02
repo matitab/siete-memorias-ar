@@ -5,13 +5,7 @@ a-scene .a-enter-vr-button {display: none!important}
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
 .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
 .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #3185ac;border-left:4px solid transparent}
-.loader-container {
-position: fixed;
-top: 50%;
-left: 50%;
-transform: translate(-50%,-50%);
-z-index: 10012;
-}
+.loader-container {position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 10012;}
 .fade-out-loader{opacity:0;transition:opacity .3s ease-in-out}
 #img-fondo {
 border: none;
