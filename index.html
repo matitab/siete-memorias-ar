@@ -4,6 +4,8 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width, initial-scale=1">
 <title>Ocho Memorias Desde La Sombra</title>
+<link rel="icon" href="assets/favicon.png" type="image/x-icon" />
+
 <!-- Librerías: A-Frame y MindAR -->
 <script src=https://aframe.io/releases/1.6.0/aframe.min.js defer></script>
 <script src=https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js defer></script>
@@ -25,20 +27,14 @@
 <h2 id=subtitulo>desde la sombra</h2>
 <p>Explorá el mapa y enfocá los marcadores para conocer las historias.</p>
 <button id=boton-comenzar>Empezar recorrido</button>
-<button id="fullscreen-button">
-	            <svg viewBox="0 0 24 24">
-                    <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"></path>
-                </svg>
-                <svg viewBox="0 0 24 24">
-                    <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"></path>
-                </svg>
-	        </button>
+<button id="fullscreen-button"></button>
 </div>
 <!-- Loader -->
 <div id=mi-loader class=loader-container>
 <span class=loader></span></div>
 <!-- Menú (general)-->
 <div class="container-menu" id=Menu>
+    <div class = "container-menu--edge"></div>
     <input type=checkbox id=toggle>
     <div class=toggle-container>
     <button class=button-toggle>
