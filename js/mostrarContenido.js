@@ -19,7 +19,7 @@ case "Imágenes":
 contenido_mostrado = `<img src="${data.imagen}" style="width: 100%; height: auto; border-radius: .2em; display: block;">`;
 break;
 case "Video":
-contenido_mostrado = `<video src="${data.video}" controls style="width: 100%; max-width: auto; height: auto; border-radius: .2em;"></video>`;
+//contenido_mostrado = `<video src="${data.video}" controls style="width: 100%; max-width: auto; height: auto; border-radius: .2em;"></video>`;
 break;
 default:
 contenido_mostrado = "<p>Selecciona una opción del menú</p>";

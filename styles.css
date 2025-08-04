@@ -22,6 +22,7 @@ transition: opacity 0.7s ease;
 #img-fondo.fade-out {
 opacity: 0;
 transition: opacity 0.7s ease;
+pointer-events: none;
 }
 #pantalla-carga {
 top: 0;
@@ -86,35 +87,32 @@ opacity: 1;
 user-select: none;
 -webkit-tap-highlight-color: transparent; 
 }
-.button-toggle .bar {transform-origin: center;}
-#toggle{display:none}
-#toggle:checked~.toggle-container .button-toggle .bar:nth-child(1){transform: rotate(45deg); position: absolute;}
-#toggle:checked~.toggle-container .button-toggle .bar:nth-child(2){opacity:0}
-#toggle:checked~.toggle-container .button-toggle .bar:nth-child(3){transform: rotate(-45deg); position: absolute;}
+#toggle{
+    display:none
+}
 .toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}
 .button-toggle {
+    background-color: transparent;
+display: flex;
+border:none;
 text-align: center;
 position: fixed;
 top: 1.2rem;
 left: 1.25rem;
 width: 30px;
 height: 30px;
-background-color: #1a1f3c;
-border: 0;
 cursor: pointer;
-border-radius: 50%;
-z-index: 10020;
+z-index: 10023;
 justify-content: center;
 align-items: center
 }
-.button-toggle .bar {
-width: 18px;
-height: 3px;
-background-color: #fff;
-border-radius: .2em;
-margin: 2px 0;
-transition: transform .3s ease,opacity .3s ease
+.button-toggle img {
+width: 25px;
+height: 25px;
+background-color: transparent;
+pointer-events: none;
 }
+
 .container-menu {
 transition: width ease .3s, height ease .3s;
 background: #84877fec;
@@ -124,7 +122,7 @@ width: 18.75rem;
 height: 32.125rem;
 padding: 1.875rem;
 position: fixed;
-z-index: 10020;
+z-index: 10060;
 overflow: hidden;
 overflow-y:auto;
 display: flex;
@@ -132,10 +130,12 @@ flex-direction: column;
 align-items: center;
 }
 .container-menu--edge {
-border: 5px solid #2a2e23e7;
+border: 2.5px solid #2a2e23e7;
 inset: 0;
 position: absolute;
 z-index: 2;
+pointer-events: none; 
+z-index: 10061;
 }
 .container-menu::-webkit-scrollbar {
 display: none;
@@ -242,7 +242,7 @@ font-family: "Saira", sans-serif;
 max-width: 80vw;
 display: none;
 }
-#pantalla-carga.fade-out{opacity:0}
+#pantalla-carga.fade-out{opacity:0; pointer-events: none;}
 #img-fondo.fade-out{opacity:0}
 #boton-comenzar, #pantalla-carga, #subtitulo,
 #titulo-principal{font-family:"Saira", monospace; user-select: none}
