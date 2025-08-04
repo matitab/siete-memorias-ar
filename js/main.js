@@ -3,6 +3,8 @@ import {ContadorMarcadores} from './contador.js';
 import {DetectarMarcador} from './DetectarMarcador.js';
 import {arranque} from './arranque.js';
 import {mostrarContenido} from './mostrarContenido.js';
+import { fullscreen } from './fullscreen.js';
+fullscreen();
 document.addEventListener("DOMContentLoaded",()=>{
 arranque();
 ContadorMarcadores();
