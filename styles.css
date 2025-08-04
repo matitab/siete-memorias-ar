@@ -86,10 +86,6 @@ user-select: none;
 #toggle:checked~.toggle-container .button-toggle .bar:nth-child(1){transform: rotate(45deg); position: absolute;}
 #toggle:checked~.toggle-container .button-toggle .bar:nth-child(2){opacity:0}
 #toggle:checked~.toggle-container .button-toggle .bar:nth-child(3){transform: rotate(-45deg); position: absolute;}
-#toggle:checked~.dummy-content,#toggle:checked~.nav{opacity:0;transform:translateY(-20px);pointer-events:none;visibility:hidden}
-#toggle:checked~.dummy-content{transform:translateY(20px)}
-#toggle:not(:checked)~.dummy-content,
-#toggle:not(:checked)~.nav{opacity:1;transform:translateY(0);visibility:visible;pointer-events:auto}
 .toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}
 .button-toggle {
 text-align: center;
@@ -148,6 +144,12 @@ height: 2.5rem;
 padding: 0.3rem;
 }
 .nav {gap: 8px;margin: 15px}
+.nav-abierto {
+opacity: 1;
+transform: translateY(0);
+pointer-events: auto;
+visibility: visible;
+}
 .nav-item {
 display: block;
 line-height: 32px;
@@ -167,10 +169,6 @@ background: linear-gradient(to bottom, #1c2e4a, #1e324f);
 .nav-item.cliqueado {
 background: #1a1f3c;
 }
-.nav-item-abierto {}
-.nav-item-cerrado {
-
-}
 .nombre { 
 margin: 0 auto;
 white-space: nowrap;
@@ -182,6 +180,9 @@ width: 85%;
 color: #fff;
 font-size: 14px;
 background: linear-gradient(to bottom, #1c2e4a, #1e324f);
+}
+.nombre-cerrado{
+  visibility: hidden;
 }
 .dummy-content {
 white-space: normal;
