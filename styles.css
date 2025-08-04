@@ -136,6 +136,17 @@ align-items: center;
 .container-menu::-webkit-scrollbar {
 display: none;
 }
+.menu-abierto {
+display: block;
+width: 18.75rem;
+height: 32.125rem;
+padding: 1.875rem;
+}
+.menu-cerrado {
+width: 2.5rem;
+height: 2.5rem;
+padding: 0.3rem;
+}
 .nav {gap: 8px;margin: 15px}
 .nav-item {
 display: block;
@@ -155,6 +166,10 @@ background: linear-gradient(to bottom, #1c2e4a, #1e324f);
 .nav-item:hover {background: #1a1f3c}
 .nav-item.cliqueado {
 background: #1a1f3c;
+}
+.nav-item-abierto {}
+.nav-item-cerrado {
+
 }
 .nombre { 
 margin: 0 auto;

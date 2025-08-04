@@ -5,10 +5,8 @@ const nav = document.querySelector(`#${menuId} .nav`);
 const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
 const nombre = document.getElementById("nombre-persona");
 if (menu && nav && dummyContent) {
-menu.style.display = "block";
-menu.style.width = "18.75rem";
-menu.style.height = "32.125rem";
-menu.style.padding = "1.875rem";
+menu.classList.add("menu-abierto");
+menu.classList.remove("menu-cerrado");
 nav.style.opacity = "1";
 nav.style.transform = "translateY(0)";
 nav.style.pointerEvents = "auto";
@@ -26,8 +24,7 @@ const nav = document.querySelector(`#${menuId} .nav`);
 const dummyContent = document.querySelector(`#${menuId} .dummy-content`);
 const nombre = document.getElementById("nombre-persona");
 if (menu && nav && dummyContent) {
-menu.style.width = "2.5rem";
-menu.style.height = "2.5rem";
-menu.style.padding = "0.3rem";
+menu.classList.remove("menu-abierto");    
+menu.classList.add("menu-cerrado");
 nombre.style.visibility = "hidden";
 }}

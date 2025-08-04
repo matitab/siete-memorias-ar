@@ -1,7 +1,6 @@
 // Detección marcadores / apertura de menú
 let marcadorActivo = 0; 
 import {menuAbierto, menuCerrado} from './openclose-menu.js';
-
 export function DetectarMarcador() {
 const menuGeneral = document.getElementById("Menu");
 const contenido = document.getElementById("menu-content");
