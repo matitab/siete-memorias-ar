@@ -39,7 +39,7 @@ flex-direction: column;
 opacity: 1;
 transition: opacity 0.7s ease;
 z-index: 10010;
-background: rgba(0, 0, 0, 0.5);
+background: rgba(0, 0, 0, 0.288);
 box-sizing: border-box;
 }   
 #titulo-principal {
@@ -171,9 +171,9 @@ width: 100%;
 color: #fff;
 font-size: 14px;
 cursor: pointer;
-background: linear-gradient(to bottom, #1c2e4a, #1e324f);
+background: #2A2E23;
 }
-.nav-item:hover {background: #1a1f3c}
+.nav-item:hover {background: #232423}
 .nav-item.cliqueado {
 background: #1a1f3c;
 }
@@ -187,7 +187,7 @@ padding: 4px;
 width: 85%;
 color: #fff;
 font-size: 14px;
-background: linear-gradient(to bottom, #1c2e4a, #1e324f);
+background: #2A2E23;
 }
 .nombre-cerrado{
   visibility: hidden;
@@ -202,7 +202,7 @@ box-sizing: border-box;
 padding: 0.3em .3em;
 font-size: .9em;
 left: 2px;
-background: linear-gradient(to bottom, #1c2e4a, #1e324f);
+background: #2A2E23;
 color: #ffffff;
 border: 0;
 border-radius: .2em;
