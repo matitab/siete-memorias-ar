@@ -52,16 +52,12 @@ line-height: 1.1;
 white-space: nowrap;
 margin: 0;
 }
-#subtitulo {
-left: 50%;
-font-size: clamp(1.2rem, 4vw, 2.5rem);
-font-weight: 700;
-color: rgb(0, 0, 0);
-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
-line-height: 1.1;
-white-space: nowrap;
-width: max-content;
-margin: 0;
+#titulo-principal img {
+  background-size: 300px;
+  background-color: transparent;
+  display: block; 
+  max-width: 100%;
+  height: auto;
 }
 #boton-comenzar {
 top: 75%;
