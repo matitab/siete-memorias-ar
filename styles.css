@@ -63,17 +63,23 @@ width: max-content;
 margin: 0;
 }
 #boton-comenzar {
+top: 75%;
 padding: 0.7em 1.5em;
 font-size: 1.2em;
 background-color: #d1cfc7;
 color: #1a1a1a;
 border: 0;
 border-radius: .2em;
-cursor: pointer;
 user-select: none;
 font-weight: 500;
-position: relative;
+position: absolute;
+opacity: 0;
+pointer-events: none;
+transition: opacity 0.3s ease;
+display: inline-block;
 z-index: 10011
+}#boton-comenzar.fade-in {
+opacity: 1;
 }
 #boton-comenzar:hover{background-color:#36427a;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
 .button-toggle {
@@ -82,7 +88,6 @@ user-select: none;
 }
 .button-toggle .bar {transform-origin: center;}
 #toggle{display:none}
-#toggle:checked~.toggle-container .button-toggle{background-color:#1a1f3c;}
 #toggle:checked~.toggle-container .button-toggle .bar:nth-child(1){transform: rotate(45deg); position: absolute;}
 #toggle:checked~.toggle-container .button-toggle .bar:nth-child(2){opacity:0}
 #toggle:checked~.toggle-container .button-toggle .bar:nth-child(3){transform: rotate(-45deg); position: absolute;}
@@ -94,12 +99,10 @@ top: 1.2rem;
 left: 1.25rem;
 width: 30px;
 height: 30px;
-background: #1a1f3c44;
 background-color: #1a1f3c;
 border: 0;
 cursor: pointer;
 border-radius: 50%;
-transition: background-color .3s ease;
 z-index: 10020;
 justify-content: center;
 align-items: center
