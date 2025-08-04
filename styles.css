@@ -269,3 +269,12 @@ display: none;
 [fullscreen] #fullscreen-button svg:nth-child(2) {
     display: inline-block;
 }
+video {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: cover !important;
+  z-index: -2 !important;
+}
