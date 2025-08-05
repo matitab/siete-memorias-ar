@@ -4,17 +4,14 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width, initial-scale=1">
 <title>Ocho Memorias Desde La Sombra</title>
-<link rel="icon" href="assets/favicon.png" type="image/x-icon" />
+<link rel="icon" href="assets/favicon.png" type="image/x-icon">
 
 <!-- Librerías: A-Frame y MindAR -->
 <script src=https://aframe.io/releases/1.6.0/aframe.min.js defer></script>
 <script src=https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js defer></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 <link rel=stylesheet href=styles.css>
 <base href=./>
-<base href="/ocho-memorias-ar/">
 </head>
 <body>
 <!-- Imagen de fondo -->
@@ -22,7 +19,7 @@
 <!-- Pantalla de carga -->
 <div id=pantalla-carga>
 <div id=titulo-principal>
-<h1><img src="assets/8mdls-11.png"/></h1>
+<img src="assets/8mdls-11.png" alt="Título Principal">
 </div>
 <button id=boton-comenzar>Empezar recorrido</button>
 </div>
@@ -33,7 +30,7 @@
 <div class="container-menu menu-cerrado" id=Menu>
     <input type=checkbox id=toggle>
     <div class=toggle-container>
-    <button class=button-toggle > <img src="assets/hamburguesa.png"/> </button>
+    <button class=button-toggle > <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
     </div>
     <div class=nombre id=nombre-persona>ID del marcador</div>
     <div class=nav>
