@@ -82,7 +82,7 @@ user-select: none;
 position: fixed;
 border:none;
 top:  15px;
-left:  17px;
+left:  14px;
 background: rgba(0,0,0,0.05);
 width:  35px;
 height:  35px;
@@ -102,6 +102,9 @@ pointer-events: none;
 }
 .button-toggle:hover {
   transform: scale(1.125);
+}
+.button-toggle:active {
+  transform: scale(1);
 }
 .container-menu {
 transition: width ease .3s, height ease .3s;
