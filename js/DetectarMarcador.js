@@ -21,4 +21,4 @@ if (toggle.checked) {
 menuAbierto("Menu");
 } else {
 menuCerrado("Menu");
-}})}
+}})};

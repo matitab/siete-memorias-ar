@@ -8,7 +8,7 @@ if (menu && nav && dummyContent) {
 menu.classList.add("menu-abierto");
 menu.classList.remove("menu-cerrado");
 nav.classList.add("nav-abierto");
-nombre.classList.add("nombre-abierto")
+nombre.classList.add("nombre-abierto");
 }}
 /* Cierra menú */
 export function menuCerrado(menuId) {
