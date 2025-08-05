@@ -83,26 +83,20 @@ user-select: none;
 .toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}
 .button-toggle {
 background-color: transparent;
+position: fixed;
 display: flex;
 border:none;
-text-align: center;
-position: fixed;
-top: 1.2rem;
-left: 1.25rem;
-width: 30px;
-height: 30px;
+top: 1rem;
+left: 0.8rem;
 cursor: pointer;
 z-index: 10023;
-justify-content: center;
-align-items: center
+transition:  transform .3s;
 }
 .button-toggle img {
-background: rgba(0,0,0,0.05);
-border:  0;
-width:  25px;
-height:  25px;
-border-radius: 50%;
-pointer-events: none;
+width: 25px;
+height: 25px;
+background-color: transparent;
+pointer-events: none; 
 }
 .button-toggle:hover {
   transform: scale(1.125);
@@ -134,8 +128,8 @@ height: 32.125rem;
 padding: 1.875rem;
 }
 .menu-cerrado {
-width: 2.5rem;
-height: 2.5rem;
+width: 30px;
+height: 30px;
 padding: 0.3rem;
 border: 0;
 background: rgba(0,0,0,0.05);
@@ -283,6 +277,7 @@ background: rgba(0, 0, 0, 0);
 #titulo-principal{
 background: rgba(0, 0, 0, 0);
 transform: rotate(-20deg);
+margin-top: -10rem;
 }
 }
 
