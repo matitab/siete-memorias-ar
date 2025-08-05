@@ -1,6 +1,6 @@
 // Detección marcadores / apertura de menú
 import {menuAbierto, menuCerrado} from './openclose-menu.js';
-import {marcadoresData} from './marcadores-data.js';
+import {marcadoresData} from './marcadoresData.js';
 export function DetectarMarcador() {
 let marcadorActivo = 0;
 const getNombre = document.getElementById("nombre-persona");
