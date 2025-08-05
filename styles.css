@@ -1,10 +1,10 @@
 a-scene .a-enter-vr-button {display: none!important}
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes fadeout-cursor{to{border-right-color:transparent}}
-@keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#36427a;}}
+@keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#952A2E;}}
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
 .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
-.loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #3185ac;border-left:4px solid transparent}
+.loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #952A2E;border-left:4px solid transparent}
 .loader-container {position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 10012;}
 .fade-out-loader{opacity:0;transition:opacity .3s ease-in-out}
 #img-fondo {
@@ -43,22 +43,15 @@ background: rgba(0, 0, 0, 0.288);
 box-sizing: border-box;
 }   
 #titulo-principal {
-left: 50%;
-font-size: clamp(1.2rem, 4vw, 2.5rem);
-font-weight: 700;
-color: rgb(0, 0, 0);
-text-shadow: 0 1px 2px rgba(0, 0, 0, 0.445);
-line-height: 1.1;
-white-space: nowrap;
-margin: 0;
-transform: rotate(-20deg);
+user-select: none;
+filter: drop-shadow(0 0 0.35rem #444443c0);
 }
 #titulo-principal img {
-  background-size: 300px;
-  background-color: transparent;
-  display: block; 
-  max-width: 100%;
-  height: auto;
+width: 700px;
+background-color: transparent;
+display: block; 
+max-width: 100%;
+height: auto;
 }
 #boton-comenzar {
 top: 75%;
@@ -79,7 +72,7 @@ z-index: 10011
 }#boton-comenzar.fade-in {
 opacity: 1;
 }
-#boton-comenzar:hover{background-color:#36427a;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
+#boton-comenzar:hover{background-color:#952A2E;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
 .button-toggle {
 user-select: none;
 -webkit-tap-highlight-color: transparent; 
@@ -89,7 +82,7 @@ user-select: none;
 }
 .toggle-container{position:relative}.button-toggle,.nav{display:flex;flex-direction:column}
 .button-toggle {
-    background-color: transparent;
+background-color: transparent;
 display: flex;
 border:none;
 text-align: center;
@@ -104,12 +97,16 @@ justify-content: center;
 align-items: center
 }
 .button-toggle img {
-width: 25px;
-height: 25px;
-background-color: transparent;
+background: rgba(0,0,0,0.05);
+border:  0;
+width:  25px;
+height:  25px;
+border-radius: 50%;
 pointer-events: none;
 }
-
+.button-toggle:hover {
+  transform: scale(1.125);
+}
 .container-menu {
 transition: width ease .3s, height ease .3s;
 background: #84877fec;
@@ -125,14 +122,7 @@ overflow-y:auto;
 display: flex;
 flex-direction: column;
 align-items: center;
-}
-.container-menu--edge {
 border: 2.5px solid #2a2e23e7;
-inset: 0;
-position: absolute;
-z-index: 2;
-pointer-events: none; 
-z-index: 10061;
 }
 .container-menu::-webkit-scrollbar {
 display: none;
@@ -147,11 +137,13 @@ padding: 1.875rem;
 width: 2.5rem;
 height: 2.5rem;
 padding: 0.3rem;
+border: 0;
+background: rgba(0,0,0,0.05);
+border-radius: 50%;
 }
 .nav {gap: 8px;margin: 15px}
 .nav-abierto {
 opacity: 1;
-transform: translateY(0);
 pointer-events: auto;
 visibility: visible;
 }
@@ -185,9 +177,10 @@ width: 85%;
 color: #fff;
 font-size: 14px;
 background: #2A2E23;
+visibility: hidden;
 }
-.nombre-cerrado{
-  visibility: hidden;
+.nombre-abierto{
+  visibility: visible;
 }
 .dummy-content {
 white-space: normal;
@@ -241,8 +234,7 @@ display: none;
 }
 #pantalla-carga.fade-out{opacity:0; pointer-events: none;}
 #img-fondo.fade-out{opacity:0}
-#boton-comenzar, #pantalla-carga, #subtitulo,
-#titulo-principal{font-family:"Saira", monospace; user-select: none}
+#boton-comenzar, #pantalla-carga,
 .container-menu, .nombre{font-family: "Saira";}
 
 #fullscreen-button {
@@ -285,9 +277,13 @@ video {
   background-size: cover;
 background-position: center;
 }
-}
-@media screen and (max-width: 414px) {
 #pantalla-carga{
 background: rgba(0, 0, 0, 0);
 }
+#titulo-principal{
+background: rgba(0, 0, 0, 0);
+transform: rotate(-20deg);
 }
+}
+
+
