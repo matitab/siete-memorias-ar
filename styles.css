@@ -86,7 +86,7 @@ background-color: transparent;
 position: fixed;
 display: flex;
 border:none;
-top: 1rem;
+top: 15px;
 left: 0.8rem;
 cursor: pointer;
 z-index: 10023;
