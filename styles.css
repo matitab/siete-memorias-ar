@@ -125,7 +125,7 @@ display: none;
 display: block;
 width: 18.75rem;
 height: 32.125rem;
-padding: 1.875rem 1.875rem 1.875rem 1.800rem;
+padding: 1.875rem 1.875rem 1.875rem 1.700rem;
 }
 .menu-cerrado {
 width: 30px;
@@ -166,7 +166,9 @@ background: #2A2E23;
 background: #952A2E;
 }
 .nombre { 
-margin: 0 auto;
+justify-content: center;
+align-items: center;
+margin: 0 0 0 23px;
 white-space: nowrap;
 line-height: 32px;
 text-align: center;
