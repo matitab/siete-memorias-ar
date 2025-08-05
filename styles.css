@@ -82,7 +82,7 @@ user-select: none;
 position: fixed;
 border:none;
 top:  15px;
-left:  14px;
+left:  15px;
 background: rgba(0,0,0,0.05);
 width:  35px;
 height:  35px;
@@ -107,7 +107,7 @@ pointer-events: none;
   transform: scale(1);
 }
 .container-menu {
-transition: width ease .3s, height ease .3s;
+transition: width ease .1s, height ease .1s;
 background: #84877fec;
 top: 0.625rem;
 left: 0.625rem;
@@ -125,7 +125,7 @@ display: none;
 display: block;
 width: 18.75rem;
 height: 32.125rem;
-padding: 1.875rem;
+padding: 1.875rem 1.875rem 1.875rem 1.800rem;
 }
 .menu-cerrado {
 width: 30px;
@@ -140,6 +140,11 @@ border-radius: 50%;
 opacity: 1;
 pointer-events: auto;
 visibility: visible;
+}
+.nav-cerrado {
+opacity: 0;
+pointer-events: none;
+visibility: hidden
 }
 .nav-item {
 display: block;

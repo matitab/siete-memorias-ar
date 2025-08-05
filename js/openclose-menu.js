@@ -8,6 +8,7 @@ if (menu && nav && dummyContent) {
 menu.classList.add("menu-abierto");
 menu.classList.remove("menu-cerrado");
 nav.classList.add("nav-abierto");
+nav.classList.remove("nav-cerrado");
 nombre.classList.add("nombre-abierto");
 }}
 /* Cierra menú */
@@ -19,6 +20,7 @@ const nombre = document.getElementById("nombre-persona");
 if (menu && nav && dummyContent) {
 menu.classList.remove("menu-abierto");    
 menu.classList.add("menu-cerrado");
+nav.classList.add("nav-cerrado");
 nav.classList.remove("nav-abierto");
 nombre.classList.remove("nombre-abierto");
 }}
