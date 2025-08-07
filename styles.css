@@ -1,3 +1,9 @@
+@font-face {
+  font-family: 'Saira';
+  src: url(/assets/fonts/Saira/Saira-VariableFont_wdth\,wght.ttf);
+  font-weight: 350;
+  font-style: normal;
+}
 a-scene .a-enter-vr-button {display: none!important}
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
 @keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#952A2E;}}
@@ -40,7 +46,8 @@ opacity: 0;
   pointer-events: none;
 }
 #titulo-principal {
-filter: drop-shadow(0 0 0.35rem #444443c0);
+  filter: drop-shadow(0 0 0.35rem #444443c0);
+  user-select: none;
 }
 #titulo-principal img {
   margin-top: -3rem;
