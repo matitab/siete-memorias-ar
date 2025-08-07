@@ -51,7 +51,7 @@ opacity: 0;
 }
 #titulo-principal img {
   margin-top: -3rem;
-  width: 800px;
+  width: 850px;
   max-width: 100%;
   pointer-events: none;
   user-select: none;
@@ -245,6 +245,6 @@ margin-top: -10rem;
 }
 #titulo-principal img {
   margin: 0 auto;
-  width: 200px;
+  width: 250px;
 }
 }
