@@ -5,7 +5,6 @@ import {arranque} from './arranque.js';
 import {mostrarContenido} from './mostrarContenido.js';
 import { fullscreen } from './fullscreen.js';
 fullscreen();
-document.addEventListener("DOMContentLoaded",()=>{
 arranque();
 ContadorMarcadores();
 document.querySelectorAll(".nav-item").forEach(boton => {
@@ -14,4 +13,3 @@ const opcion = boton.textContent.trim();
 mostrarContenido(opcion, boton);
 });});
 DetectarMarcador();
-});
