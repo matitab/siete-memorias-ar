@@ -1,7 +1,4 @@
-export function fullscreen(){if(document.fullscreenEnabled){const fullscreen_button=document.createElement("button");fullscreen_button.setAttribute('id','fullscreen-button');fullscreen_button.addEventListener("click",toggle_fullscreen);fullscreen_button.innerHTML=`
-        <img width: 25px;
-height: 25px;
-background-color: transparent;
-pointer-events: none; src="assets/fullscreen.png">
+export function fullscreen(){if(document.fullscreenEnabled){const fullscreen_button=document.createElement("button");fullscreen_button.setAttribute('id','fullscreen-button');fullscreen_button.classList.add('boton-ui');fullscreen_button.addEventListener("click",toggle_fullscreen);fullscreen_button.innerHTML=`
+        <img width: 25px; height: 25px; background-color: transparent; pointer-events: none; src="assets/fullscreen.png">
     `;document.body.appendChild(fullscreen_button)}
 function toggle_fullscreen(){if(!document.fullscreenElement){document.body.requestFullscreen();document.body.setAttribute("fullscreen","")}else{document.exitFullscreen();document.body.removeAttribute("fullscreen")}}}

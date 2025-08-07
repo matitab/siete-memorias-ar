@@ -34,9 +34,7 @@
 <!-- Menú (general)-->
 <div class="container-menu menu-cerrado" id=Menu>
     <input type=checkbox id=toggle>
-    <div class=toggle-container>
-    <button class=button-toggle > <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
-    </div>
+    <button class="boton-ui button-toggle" > <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
     <div class=nombre id=nombre-persona>ID del marcador</div>
     <div class=nav>
         <div class=nav-item>Info</div>
@@ -47,9 +45,9 @@
     </div>
 </div>
 <!-- Contador de marcadores detectados -->
-<div id=contador-marcadores><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
+<div class="pop-up" id=contador-marcadores><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
-<div id=mensaje-final>
+<div class="pop-up" id=mensaje-final>
 ¡Completaste el recorrido 🥳🥳🥳!
 <br><br>
 <small> Click para cerrar </small>
