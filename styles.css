@@ -3,6 +3,7 @@
   src: url(/assets/fonts/Saira/Saira-VariableFont_wdth\,wght.ttf);
   font-weight: 350;
   font-style: normal;
+  font-display: swap;
 }
 a-scene .a-enter-vr-button {display: none!important}
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
