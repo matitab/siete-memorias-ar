@@ -20,11 +20,16 @@ loader.style.display = "none";
 pantalla.classList.remove("fade-out");
 });
 // Al clickearlo, activa MindAR y oculta la pantalla de carga
-boton.addEventListener('click', () => {
+boton.addEventListener('click', async() => {
 pantalla.classList.add('fade-out');
 background.classList.add('fade-out');
 pantalla.addEventListener('transitionend', () => {
 pantalla.style.display = 'none';
 background.style.display = 'none';
 escena.components['mindar-image'].start();
-}, { once: true });});}
+}, { once: true });
+const {ContadorMarcadores} = await import('./contador');
+const {DetectarMarcador} = await import('./DetectarMarcador');
+DetectarMarcador();
+ContadorMarcadores();
+});}
