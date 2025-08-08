@@ -20,6 +20,7 @@ loader.style.display = "none";
 pantalla.classList.remove("fade-out");
 });
 // Al clickearlo, activa MindAR y oculta la pantalla de carga
+let bandera_toggle = false;
 boton.addEventListener('click', async() => {
 pantalla.classList.add('fade-out');
 background.classList.add('fade-out');
@@ -28,8 +29,22 @@ pantalla.style.display = 'none';
 background.style.display = 'none';
 escena.components['mindar-image'].start();
 }, { once: true });
+if (!bandera_toggle) {
+const {menuAbierto, menuCerrado} = await import('./openclose-menu.js');
+const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
+toggleButtonMenu.addEventListener("click", () => {
+const toggle = document.getElementById("toggle");
+toggle.checked = !toggle.checked;
+if (toggle.checked) {
+menuAbierto("Menu");
+} else {
+menuCerrado("Menu");
+}});
+} bandera_toggle = true;
 const {ContadorMarcadores} = await import('./contador');
 const {DetectarMarcador} = await import('./DetectarMarcador');
 DetectarMarcador();
 ContadorMarcadores();
-});}
+}); 
+
+}
