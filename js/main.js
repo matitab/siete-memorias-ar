@@ -4,4 +4,3 @@ import { fullscreen } from './fullscreen.js';
 import { DetectarMarcador } from './DetectarMarcador.js';
 fullscreen();
 arranque();
-DetectarMarcador();
