@@ -1,17 +1,17 @@
 /* Carga la escena AR*/
-export function arranque() {
+export async function arranque() {
+const {fullscreen} = await import('./fullscreen.js');//aparece el btn de pantalla completa
+fullscreen();
 const loader = document.getElementById("mi-loader");
 const boton = document.getElementById("boton-comenzar");
 const pantalla = document.getElementById("pantalla-carga");
 const background = document.getElementById("img-fondo");
 const escena = document.querySelector("a-scene");
-escena.addEventListener("renderstart", async() => {
+escena.addEventListener("renderstart", () => {
 loader.classList.add("fade-out-loader");
 loader.addEventListener("transitionend", () => {
 loader.style.display = "none";
 }, { once: true });
-const {fullscreen} = await import('./fullscreen.js');//aparece el btn de pantalla completa
-fullscreen();
 // Botón "Empezar recorrido" aparece recién al cargar la escena AR
 boton.classList.add("fade-in");
 boton.style.pointerEvents = "auto";
