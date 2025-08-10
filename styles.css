@@ -7,12 +7,21 @@
 }
 a-scene .a-enter-vr-button {display: none!important}
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
-@keyframes shadow-drop-center{0%{box-shadow:0 0 0 0 transparent}to{box-shadow:0 0 10px 0#952A2E;}}
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
 .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
 .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #952A2E;border-left:4px solid transparent}
 .loader-container {position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 10012;}
 .fade-out-loader{opacity:0;transition:opacity .3s ease-in-out}
+
+body {
+  visibility: hidden;
+  margin: 0;
+}
+
+body.visible {
+  visibility: visible;
+}
+
 body, #boton-comenzar {
 font-family: "Saira", sans-serif;
 }
@@ -32,23 +41,26 @@ user-select: none;
 opacity: 0;
 }
 #pantalla-carga {
-  width: 100vw; 
-  height: 100%;
-  display: flex;
-  position: fixed;
+ display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: fixed; 
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.11);
   transition: opacity 0.7s ease;
   z-index: 10010;
-  background: rgba(0, 0, 0, 0.11);
 }  
 #pantalla-carga.fade-out{
   opacity:0; 
   pointer-events: none;
 }
 #titulo-principal {
+  position: absolute;
   filter: drop-shadow(0 0 0.35rem #444443c0);
   user-select: none;
+  margin: 0 0 1rem 0; 
 }
 #titulo-principal img {
   margin-top: -3rem;
@@ -67,14 +79,14 @@ border: none;
 user-select: none;
 position: absolute;
 opacity: 0;
-pointer-events: auto;
-transition: opacity 0.3s ease;
+pointer-events: none;
+transition: opacity 0.4s ease;
 z-index: 10011
 }
 #boton-comenzar.fade-in {
 opacity: 1;
 }
-#boton-comenzar:hover{background-color:#952A2E;color:#d1cfc7;animation:shadow-drop-center .1s linear both}
+#boton-comenzar:hover{background-color:#952A2E;color:#d1cfc7;}
 #toggle{ /*oculta el checkbox*/
 display:none
 }

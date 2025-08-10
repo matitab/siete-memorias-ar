@@ -1,5 +1,13 @@
 /* Motor del programa */
+
 import {arranque} from './arranque.js';
 import { fullscreen } from './fullscreen.js';
-fullscreen();
-arranque();
+
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.classList.add('visible');
+    fullscreen();
+    arranque();
+});
+
+
+

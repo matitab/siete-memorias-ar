@@ -6,11 +6,11 @@ const pantalla = document.getElementById("pantalla-carga");
 const background = document.getElementById("img-fondo");
 const escena = document.querySelector("a-scene");
 escena.addEventListener("renderstart", () => {
+pantalla.style.display = "flex";
+background.style.display = "block";
 loader.classList.add("fade-out-loader");
 boton.classList.add("fade-in");
-boton.addEventListener("transitionend", () => {
 boton.style.pointerEvents = "auto";
-}, { once: true });
 // Botón "Empezar recorrido" aparece recién al cargar la escena AR
 loader.addEventListener("transitionend", () => {
 loader.style.display = "none";
@@ -19,6 +19,7 @@ pantalla.classList.remove("fade-out");
 });
 // Al clickearlo, activa MindAR y oculta la pantalla de carga
 boton.addEventListener('click', async() => {
+boton.style.display = "none"; //para que no sea clickeable de nuevo
 const {DetectarMarcador} = await import('./DetectarMarcador.js');
 DetectarMarcador();
 pantalla.classList.add('fade-out');
