@@ -114,16 +114,22 @@ z-index: 10060;
 overflow: hidden;
 overflow-y:auto;
 border: 2.5px solid #2a2e23e7;
+opacity: 0;
+pointer-events: none;
 }
 .container-menu::-webkit-scrollbar {
 display: none;
 }
 .menu-abierto {
+opacity: 1;
+pointer-events: auto;
 width: 18.75rem;
 height: 32.125rem;
 padding: 1.875rem 1.875rem 1.875rem 1.650rem;
 }
 .menu-cerrado {
+opacity: 1;
+pointer-events: auto;
 width: 30px;
 height: 30px;
 border: 0;

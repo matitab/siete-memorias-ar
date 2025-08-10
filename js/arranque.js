@@ -6,8 +6,6 @@ const pantalla = document.getElementById("pantalla-carga");
 const background = document.getElementById("img-fondo");
 const escena = document.querySelector("a-scene");
 escena.addEventListener("renderstart", () => {
-pantalla.style.display = "flex";
-background.style.display = "block";
 loader.classList.add("fade-out-loader");
 boton.classList.add("fade-in");
 boton.addEventListener("transitionend", () => {
@@ -20,18 +18,15 @@ loader.style.display = "none";
 pantalla.classList.remove("fade-out");
 });
 // Al clickearlo, activa MindAR y oculta la pantalla de carga
-let bandera_toggle = false;
 boton.addEventListener('click', async() => {
 pantalla.classList.add('fade-out');
 background.classList.add('fade-out');
 pantalla.addEventListener('transitionend', () => {
-pantalla.style.display = 'none';
-background.style.display = 'none';
 escena.components['mindar-image'].start();
 }, { once: true });
-if (!bandera_toggle) {
 const {menuAbierto, menuCerrado} = await import('./openclose-menu.js');
 const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
+
 toggleButtonMenu.addEventListener("click", () => {
 const toggle = document.getElementById("toggle");
 toggle.checked = !toggle.checked;
@@ -40,11 +35,5 @@ menuAbierto("Menu");
 } else {
 menuCerrado("Menu");
 }});
-} bandera_toggle = true;
-const {ContadorMarcadores} = await import('./contador');
-const {DetectarMarcador} = await import('./DetectarMarcador');
-DetectarMarcador();
-ContadorMarcadores();
 }); 
-
 }

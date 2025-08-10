@@ -1,12 +1,12 @@
 /* Contenido que se mostrará en pantalla */
+import {getMarcadorActivo} from './MarcadorActual.js';
 import {marcadoresData} from './marcadoresData.js';
-let marcadorActivo = 0; //Marcador por defecto
-export function mostrarContenido(opc, element) {
+export function mostrar_contenido(opc, element) {
 const contenido = document.getElementById("menu-content");
 document.querySelectorAll(".nav-item").forEach(boton => boton.classList.remove("cliqueado"));
 if (element) element.classList.add("cliqueado");
 if (!contenido) return;
-const data = marcadoresData[marcadorActivo];
+const data = marcadoresData[getMarcadorActivo()];
 let contenido_mostrado = "";
 switch (opc) {
 case "Info":

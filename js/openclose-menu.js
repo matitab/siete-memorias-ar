@@ -1,4 +1,5 @@
 /* Abre menú */
+let primerCierre = true; 
 export function menuAbierto(menuId) {
 const menu = document.getElementById(menuId);
 const nav = document.querySelector(`#${menuId} .nav`);
@@ -23,4 +24,10 @@ menu.classList.add("menu-cerrado");
 nav.classList.add("nav-cerrado");
 nav.classList.remove("nav-abierto");
 nombre.classList.remove("nombre-abierto");
-}}
+
+if (primerCierre) {
+//El contenido del menú se reinicia al minimizarlo
+dummyContent.innerHTML = "Selecciona una opción del menú";
+nombre.innerHTML = "ID del marcador";
+document.querySelectorAll(".nav-item").forEach(btn => btn.classList.remove("cliqueado"));
+}}}
