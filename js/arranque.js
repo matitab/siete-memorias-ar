@@ -1,13 +1,11 @@
 /* Carga la escena AR*/
-export async function arranque() {
-const {fullscreen} = await import('./fullscreen.js');//aparece el btn de pantalla completa
-fullscreen();
+export function arranque() {
 const loader = document.getElementById("mi-loader");
 const boton = document.getElementById("boton-comenzar");
 const pantalla = document.getElementById("pantalla-carga");
 const background = document.getElementById("img-fondo");
 const escena = document.querySelector("a-scene");
-escena.addEventListener("renderstart", () => {
+escena.addEventListener("renderstart", async() => {
 loader.classList.add("fade-out-loader");
 loader.addEventListener("transitionend", () => {
 loader.style.display = "none";
