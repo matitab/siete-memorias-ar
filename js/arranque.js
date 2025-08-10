@@ -20,11 +20,11 @@ pantalla.classList.remove("fade-out");
 // Al clickearlo, activa MindAR y oculta la pantalla de carga
 boton.addEventListener('click', async() => {
 boton.style.display = "none"; //para que no sea clickeable de nuevo
-const {DetectarMarcador} = await import('./DetectarMarcador.js');
-DetectarMarcador();
 pantalla.classList.add('fade-out');
 background.classList.add('fade-out');
-pantalla.addEventListener('transitionend', () => {
+pantalla.addEventListener('transitionend', async () => {
+const {DetectarMarcador} = await import('./DetectarMarcador.js');
+DetectarMarcador();
 escena.components['mindar-image'].start();
 }, { once: true });
 const {menuAbierto, menuCerrado} = await import('./openclose-menu.js');
