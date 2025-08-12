@@ -53,24 +53,47 @@
 <!-- ======================== -->
 <!--      ESCENA MIND-AR      -->
 <!-- ======================== -->
-<!-- Contiene la información que mostraremos al usuario cuando escanee los marcadores (entities)-->
+<!-- Contiene los objetos (entidades) que mostraremos al escanear los marcadores-->
 <a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no" color-space=sRGB renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-<!-- Cámara-->
-<a-camera position="0 0 0" look-controls="enabled: false"></a-camera>
-<!-- Marcador 0 -->
-<a-entity mindar-image-target="targetIndex: 0" data-index=0>
-<a-text value="Marcador 0" color="white" align="center" position="0 0.3 0.1" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-</a-entity>
-<!-- Marcador 1 -->
-<a-entity mindar-image-target="targetIndex: 1" data-index=1>
-<a-text value="Marcador 1" color="white" align="center" position="0 0.3 0.1" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-</a-entity>
-<!-- Marcador 2 -->
-<a-entity mindar-image-target="targetIndex: 2" data-index=2>
-<a-text value="Marcador 2" color="white" align="center" position="0 0.3 0.1" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-</a-entity>
+  <!-- Cámara-->
+  <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .cliqueable; far: 10000"></a-camera>
+  <!-- Marcador 0 -->
+  <a-entity mindar-image-target="targetIndex: 0" data-index=0>
+    <a-box position="0 0.3 0.1" color="#535351ec" depth="0.1" height="0.1" width=".6"></a-box>
+      <a-text value="Marcador 0" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
+    <a-cylinder interactivo class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
+      <a-image interactivo class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
+  </a-entity>
+  <!-- Marcador 1 -->
+  <a-entity mindar-image-target="targetIndex: 1" data-index=1>
+    <a-box position="0 0.3 0.1" color="#535351ec" depth="0.1" height="0.1" width=".6"></a-box>
+      <a-text value="Marcador 1" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
+    <a-cylinder interactivo class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
+      <a-image interactivo class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
+  </a-entity>
+  <!-- Marcador 2 -->
+  <a-entity mindar-image-target="targetIndex: 2" data-index=2>
+    <a-box position="0 0.3 0.1" color="#535351ec" depth="0.1" height="0.1" width=".6"></a-box>
+      <a-text value="Marcador 2" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
+    <a-cylinder interactivo class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
+      <a-image interactivo class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
+  </a-entity>
 </a-scene>
+
+<script type="module">
+const menu = document.getElementById("Menu");
+import {menuAbierto, menuCerrado} from './js/openclose-menu.js';
+AFRAME.registerComponent('interactivo', {
+init: function () {
+const objeto = this.el;
+objeto.addEventListener('click', () => {
+const toggle = document.getElementById("toggle");
+toggle.checked = !toggle.checked;
+if (toggle.checked) {
+menuAbierto("Menu");
+} else {menuCerrado("Menu");}});}});
+</script>
+
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>
-

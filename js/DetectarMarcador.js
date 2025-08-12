@@ -10,8 +10,8 @@ if (marcador) {
 marcador.addEventListener("targetFound", async() => {
 setMarcadorActivo(idx);
 getNombre.innerHTML = `<p>${marcadoresData[idx].nombre}</p>`;
-const {menuCerrado} = await import('./openclose-menu.js');
-menuCerrado("Menu");
+//const {menuCerrado} = await import('./openclose-menu.js');
+//menuCerrado("Menu");
 });
 marcador.addEventListener("targetLost", () => {
 });}});
