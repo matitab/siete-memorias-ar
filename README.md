@@ -23,5 +23,5 @@ A partir de todo esto, creamos un ejemplo de implementación del desarrollo, al 
 
 <img width="566" height="526" alt="qr sc" src="https://github.com/user-attachments/assets/496bb1f2-1fb9-4823-8944-66536949857c" />
 
-Si bien se trata de un ejemplo utilizando imágenes inconexas con el tema del que trata el proyecto, aún estamos explorando las herramientas que vamos a utilizar para el desarrollo de esta experiencia de realidad aumentada como es mostrar texto en pantalla, videos e imágenes, así como el uso de un contador de imágenes escaneadas que conduce a un mensaje final.
+Se trata de un ejemplo utilizando imágenes relacionadas con el tema del proyecto. Aún estamos explorando las herramientas que vamos a utilizar para el desarrollo de esta experiencia de realidad aumentada como es mostrar texto en pantalla, videos e imágenes, así como el uso de un contador de imágenes escaneadas que conduce a un mensaje final.
 Entre otras ideas que podríamos implementar a futuro, contemplamos la conexión a un circuito físico que responda a comandos enviados por el usuario desde la web del proyecto.
