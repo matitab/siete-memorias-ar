@@ -2,11 +2,12 @@
 import {getMarcadorActivo} from './MarcadorActual.js';
 import {marcadoresData} from './marcadoresData.js';
 export function mostrar_contenido(opc, element) {
-const contenido = document.getElementById("menu-content");
-document.querySelectorAll(".nav-item").forEach(boton => boton.classList.remove("cliqueado"));
+const marcadorActivo = getMarcadorActivo();
+const contenido = document.getElementById(`menu-content${marcadorActivo}`);
+const menuActivo = document.getElementById(`Menu${marcadorActivo}`);
+if (menuActivo) menuActivo.querySelectorAll(".nav-item").forEach(boton => boton.classList.remove("cliqueado"));
 if (element) element.classList.add("cliqueado");
-if (!contenido) return;
-const data = marcadoresData[getMarcadorActivo()];
+const data = marcadoresData[marcadorActivo];
 let contenido_mostrado = "";
 switch (opc) {
 case "Info":

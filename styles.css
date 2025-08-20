@@ -87,7 +87,13 @@ z-index: 10011
 opacity: 1;
 }
 #boton-comenzar:hover{background-color:#952A2E;color:#d1cfc7;}
-#toggle{ /*oculta el checkbox*/
+#toggle0{ /*oculta el checkbox*/
+display:none
+}
+#toggle1{ /*oculta el checkbox*/
+display:none
+}
+#toggle2{ /*oculta el checkbox*/
 display:none
 }
 .boton-ui {

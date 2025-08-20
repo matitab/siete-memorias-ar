@@ -29,23 +29,49 @@
 <!-- Loader -->
 <div id=mi-loader class=loader-container>
 <span class=loader></span></div>
-<!-- Menú (general)-->
-<div class="container-menu" id=Menu>
-    <input type=checkbox id=toggle>
-    <button class="boton-ui button-toggle" > <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
-    <div class=nombre id=nombre-persona>ID del marcador</div>
-    <div class=nav>
-        <div class=nav-item>Info</div>
-        <div class=nav-item>Historia</div>
-        <div class=nav-item>Imágenes</div>
-        <div class=nav-item>Video</div>
-        <div class=dummy-content id=menu-content>Selecciona una opción del menú</div>
+<!-- Menú 0-->
+<div class="container-menu" id="Menu0">
+    <input type="checkbox" id="toggle0">
+    <button class="boton-ui button-toggle"> <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
+    <div class="nombre" id="nombre-persona0">ID del marcador 0</div>
+    <div class="nav">
+        <div class="nav-item">Info</div>
+        <div class="nav-item">Historia</div>
+        <div class="nav-item">Imágenes</div>
+        <div class="nav-item">Video</div>
+        <div class="dummy-content" id="menu-content0">Selecciona una opción del menú</div>
+    </div>
+</div>
+<!-- Menú 1-->
+<div class="container-menu" id="Menu1">
+    <input type="checkbox" id="toggle1">
+    <button class="boton-ui button-toggle"> <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
+    <div class="nombre" id="nombre-persona1">ID del marcador 1</div>
+    <div class="nav">
+        <div class="nav-item">Info</div>
+        <div class="nav-item">Historia</div>
+        <div class="nav-item">Imágenes</div>
+        <div class="nav-item">Video</div>
+        <div class="dummy-content" id="menu-content1">Selecciona una opción del menú</div>
+    </div>
+</div>
+<!-- Menú 2 -->
+<div class="container-menu" id="Menu2">
+    <input type="checkbox" id="toggle2">
+    <button class="boton-ui button-toggle"> <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
+    <div class="nombre" id="nombre-persona2">ID del marcador 2</div>
+    <div class="nav">
+        <div class="nav-item">Info</div>
+        <div class="nav-item">Historia</div>
+        <div class="nav-item">Imágenes</div>
+        <div class="nav-item">Video</div>
+        <div class="dummy-content" id="menu-content2">Selecciona una opción del menú</div>
     </div>
 </div>
 <!-- Contador de marcadores detectados -->
-<div class="pop-up" id=contador-marcadores><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
+<div class="pop-up" id="contador-marcadores"><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
 <!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
-<div class="pop-up" id=mensaje-final>
+<div class="pop-up" id="mensaje-final">
 ¡Completaste el recorrido 🥳🥳🥳!
 <br><br>
 <small> Click para cerrar </small>
@@ -54,46 +80,48 @@
 <!--      ESCENA MIND-AR      -->
 <!-- ======================== -->
 <!-- Contiene los objetos (entidades) que mostraremos al escanear los marcadores-->
-<a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no" color-space=sRGB renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
+<a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
   <!-- Cámara-->
   <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .cliqueable; far: 10000"></a-camera>
   <!-- Marcador 0 -->
-  <a-entity mindar-image-target="targetIndex: 0" data-index=0>
+  <a-entity mindar-image-target="targetIndex: 0" interactivo data-index="0">
     <a-box position="0 0.3 0.1" color="#535351ec" depth="0.1" height="0.1" width=".6"></a-box>
-      <a-text value="Yanina García" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-    <a-cylinder interactivo class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
-      <a-image interactivo class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
+      <a-text value="Marcador 0" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
+    <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
+      <a-image class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
   </a-entity>
   <!-- Marcador 1 -->
-  <a-entity mindar-image-target="targetIndex: 1" data-index=1>
+  <a-entity mindar-image-target="targetIndex: 1" interactivo data-index="1">
     <a-box position="0 0.3 0.1" color="#535351ec" depth="0.1" height="0.1" width=".6"></a-box>
-      <a-text value="Protestas en rosario" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-    <a-cylinder interactivo class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
-      <a-image interactivo class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
+      <a-text value="Marcador 1" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
+    <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
+      <a-image class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
   </a-entity>
   <!-- Marcador 2 -->
-  <a-entity mindar-image-target="targetIndex: 2" data-index=2>
-    <a-box position="0 0.3 0.1" color="#535351ec" depth="0.1" height="0.1" width=".8"></a-box>
-      <a-text value="Pedido de justicia" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-    <a-cylinder interactivo class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
-      <a-image interactivo class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
+  <a-entity mindar-image-target="targetIndex: 2" interactivo data-index="2">
+    <a-box position="0 0.3 0.1" color="#535351ec" depth="0.1" height="0.1" width=".6"></a-box>
+      <a-text value="Marcador 2" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
+    <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#535351ec" height=".05" radius=".15"></a-cylinder>
+      <a-image class="cliqueable" src="assets/hamburguesa.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
   </a-entity>
 </a-scene>
-
 <script type="module">
-const menu = document.getElementById("Menu");
-import {menuAbierto, menuCerrado} from './js/openclose-menu.js';
+import {menuAbierto, menuCerrado, toggle_marcador} from './js/openclose-menu.js';
+import {setMarcadorActivo} from './js/MarcadorActual.js';
 AFRAME.registerComponent('interactivo', {
 init: function () {
-const objeto = this.el;
-objeto.addEventListener('click', () => {
-const toggle = document.getElementById("toggle");
-toggle.checked = !toggle.checked;
-if (toggle.checked) {
-menuAbierto("Menu");
-} else {menuCerrado("Menu");}});}});
+const entidad = this.el;
+const indice = entidad.getAttribute('data-index');
+const elementosInteractivos = entidad.querySelectorAll('.cliqueable');
+elementosInteractivos.forEach(elemento => {
+elemento.addEventListener('click', () => {setMarcadorActivo(indice);
+const toggle = document.getElementById(`toggle${indice}`);
+if (toggle) {const estado_menu = toggle.checked;
+if (estado_menu) menuCerrado(`Menu${indice}`);
+else menuAbierto(`Menu${indice}`);
+toggle_marcador(`Menu${indice}`);
+}});});}});
 </script>
-
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>

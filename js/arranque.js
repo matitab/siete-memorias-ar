@@ -23,8 +23,10 @@ background.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
 const {DetectarMarcador} = await import('./DetectarMarcador.js');
 const {ContadorMarcadores} = await import('./contador.js');
+const {toggle_menu} = await import('./openclose-menu.js');    
 DetectarMarcador();
 ContadorMarcadores();
+toggle_menu();
 escena.components['mindar-image'].start();
 }, { once: true });
 const {menuAbierto, menuCerrado} = await import('./openclose-menu.js');
@@ -32,10 +34,6 @@ const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
 toggleButtonMenu.addEventListener("click", () => {
 const toggle = document.getElementById("toggle");
 toggle.checked = !toggle.checked;
-if (toggle.checked) {
-menuAbierto("Menu");
-} else {
-menuCerrado("Menu");
-}});
-}); 
-}
+if (toggle.checked) menuAbierto("Menu");
+else menuCerrado("Menu");
+});});}
