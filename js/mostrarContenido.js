@@ -10,8 +10,15 @@ if (element) element.classList.add("cliqueado");
 const data = marcadoresData[marcadorActivo];
 let contenido_mostrado = "";
 switch (opc) {
-case "Info":
-contenido_mostrado = `<p>${data.info}</p>`;
+case "botón temporal":
+contenido_mostrado = `
+  <p>${data.info}</p> <p>${data.historia}</p>
+  <a href="${data.imagen}" data-lightbox="galeria${marcadorActivo}" data-title="Imagen completa">
+    <img src="${data.imagen}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
+  </a>
+  <p> Introducción al video </p>
+  <video src="${data.video}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
+`;
 break;
 case "Historia":
 contenido_mostrado = `<p>${data.historia}</p>`;
