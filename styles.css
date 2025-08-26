@@ -6,7 +6,7 @@
   font-display: swap;
 }
 .lightboxOverlay,.lightbox {
-  z-index: 9999 !important;
+  z-index: 99999 !important;
 }
 a-scene .a-enter-vr-button {display: none!important}
 @keyframes rotation{0%{transform:rotate(0deg)}to{transform:rotate(360deg)}}
