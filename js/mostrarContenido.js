@@ -13,21 +13,12 @@ switch (opc) {
 case "botón temporal":
 contenido_mostrado = `
   <p>${data.info}</p> <p>${data.historia}</p>
-  <a href="${data.imagen}" data-lightbox="galeria${marcadorActivo}" data-title="Imagen completa">
-    <img src="${data.imagen}" style="width: 100%; height: auto; border-radius: .2em; display: block; z-index: 10090;">
+  <a href="${data.imagen}" data-lightbox="galeria${marcadorActivo}" data-title="${data.titulo}">
+    <img src="${data.imagen}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
-  <p> Introducción al video </p>
+  <p> Video de prueba </p>
   <video src="${data.video}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
-`;
-break;
-case "Historia":
-contenido_mostrado = `<p>${data.historia}</p>`;
-break;
-case "Imágenes":
-contenido_mostrado = `<img src="${data.imagen}" style="width: 100%; height: auto; border-radius: .2em; display: block;">`;
-break;
-case "Video":
-contenido_mostrado = `<video src="${data.video}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>`;
+  `;
 break;
 default:
 contenido_mostrado = "<p>Selecciona una opción del menú</p>";

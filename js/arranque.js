@@ -29,11 +29,4 @@ ContadorMarcadores();
 toggle_menu();
 escena.components['mindar-image'].start();
 }, { once: true });
-const {menuAbierto, menuCerrado} = await import('./openclose-menu.js');
-const toggleButtonMenu = document.querySelector("#Menu .button-toggle");
-toggleButtonMenu.addEventListener("click", () => {
-const toggle = document.getElementById("toggle");
-toggle.checked = !toggle.checked;
-if (toggle.checked) menuAbierto("Menu");
-else menuCerrado("Menu");
-});});}
+});}

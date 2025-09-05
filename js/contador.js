@@ -3,8 +3,8 @@ export function ContadorMarcadores() {
 	const marcadorDetectado = new Set(); // índices de los target ya escaneados
 	const totalMarcadores = 3;
 	const contador = document.getElementById("contador-marcadores");
-    contador.addEventListener("click", ()=>{ // cierra mensaje con click
-    contador.style.display="none";
+  contador.addEventListener("click", ()=>{ // cierra mensaje con click
+  contador.style.display="none";
   });
 	const actualizarContador = () => {
   contador.textContent = `Escaneaste ${marcadorDetectado.size} de ${totalMarcadores} imágenes`;

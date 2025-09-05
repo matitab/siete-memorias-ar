@@ -2,23 +2,25 @@
 export const marcadoresData = [
 {
 nombre: "Yanina García",
-info: `Proximamente.`,
-historia: "Proximamente.",
+info: `Por completar`,
+historia: "",
 imagen: "assets/1.jpg",
-video: "Proximamente."
+titulo: "Yanina García, una de las 7 víctimas.",
+video: "assets/video2.mp4"
 },
 {
-nombre: "Nombre y apellido 1",
+nombre: "Por completar",
 info: "Los días 19 y 20 fueron días de agitación civil, saqueos y represión por parte de la policía y las fuerzas federales.",
 historia: "Los días 19 y 20 fueron días de agitación civil, saqueos y represión por parte de la policía y las fuerzas federales.",
 imagen: "assets/2.jpg",
-video: "´Proximamente."
+titulo: "Yanina García, una de las 7 víctimas.",
+video: "assets/video2.mp4"
 },
 {
-nombre: "Nombre y apellido 2",
+nombre: "Por completar",
 info: "Todos los años, los familiares se encuentran frente a tribunales para exigir justicia.",
 historia: "Todos los años, los familiares se encuentran frente a tribunales para exigir justicia.",
 imagen: "assets/3.jpg",
-video: "Proximamente."
+video: "assets/video2.mp4"
 }
 ];

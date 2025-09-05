@@ -19,11 +19,9 @@ body {
   visibility: hidden;
   margin: 0;
 }
-
 body.visible {
   visibility: visible;
 }
-
 body, #boton-comenzar {
 font-family: "Saira", sans-serif;
 }
