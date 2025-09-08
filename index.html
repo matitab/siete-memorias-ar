@@ -94,23 +94,6 @@
       <a-image class="cliqueable" src="assets/TOGGLE-YG.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
   </a-entity>
 </a-scene>
-<script type="module">
-import {menuAbierto, menuCerrado, toggle_marcador} from './js/openclose-menu.js';
-import {setMarcadorActivo} from './js/MarcadorActual.js';
-AFRAME.registerComponent('interactivo', {
-init: function () {
-const entidad = this.el;
-const indice = entidad.getAttribute('data-index');
-const elementosInteractivos = entidad.querySelectorAll('.cliqueable');
-elementosInteractivos.forEach(elemento => {
-elemento.addEventListener('click', () => {setMarcadorActivo(indice);
-const toggle = document.getElementById(`toggle${indice}`);
-if (toggle) {const estado_menu = toggle.checked;
-if (estado_menu) menuCerrado(`Menu${indice}`);
-else menuAbierto(`Menu${indice}`);
-toggle_marcador(`Menu${indice}`);
-}});});}});
-</script>
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>
