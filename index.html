@@ -4,7 +4,7 @@
 <meta charset=UTF-8>
 <meta name=viewport content="width=device-width, initial-scale=1">
 <meta name="description" content="Proyecto web basado en el escaneo de imágenes para acceder a una experiencia de realidad aumentada.">
-<title>Ocho Memorias Desde La Sombra</title>
+<title>Siete Memorias Desde La Sombra</title>
 <link rel="preload" href="styles.css" as="style">
 <link rel="stylesheet" href="styles.css">
 <link rel="icon" href="assets/favicon.png" alt="favicon" type="image/x-icon">
@@ -40,8 +40,8 @@
 <div class="container-menu" id="Menu0">
     <input type="checkbox" id="toggle0">
     <button class="boton-ui button-toggle"> <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
-    <div class="nombre" id="nombre-persona0">ID del marcador 0</div>
     <div class="nav">
+        <div class="nombre" id="nombre-persona0">ID del marcador 0</div>
         <div class="dummy-content" id="menu-content0"></div>
     </div>
 </div>
@@ -49,8 +49,8 @@
 <div class="container-menu" id="Menu1">
     <input type="checkbox" id="toggle1">
     <button class="boton-ui button-toggle"> <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
-    <div class="nombre" id="nombre-persona1">ID del marcador 1</div>
     <div class="nav">
+        <div class="nombre" id="nombre-persona1">ID del marcador 1</div>
         <div class="dummy-content" id="menu-content1"></div>
     </div>
 </div>
@@ -58,18 +58,13 @@
 <div class="container-menu" id="Menu2">
     <input type="checkbox" id="toggle2">
     <button class="boton-ui button-toggle"> <img src="assets/hamburguesa.png" alt="Checkbox Menú"> </button>
-    <div class="nombre" id="nombre-persona2">ID del marcador 2</div>
     <div class="nav">
+        <div class="nombre" id="nombre-persona2">ID del marcador 2</div>
         <div class="dummy-content" id="menu-content2"></div>
     </div>
 </div>
 <!-- Contador de marcadores detectados -->
 <div class="pop-up" id="contador-marcadores"><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
-<!-- Cartel recorrido completado (si todos los marcadores son escaneados)-->
-<div class="pop-up" id="mensaje-final">
-¡Completaste el recorrido 🥳🥳🥳! <br><br>
-<small> Click para cerrar </small>
-</div>
 <!-- ======================== -->
 <!--      ESCENA MIND-AR      -->
 <!-- ======================== -->
@@ -96,7 +91,7 @@
     <a-box position="0 0.3 0.1" color="#ffbb6e" depth="0.1" height="0.1" width="1"></a-box>
       <a-text value="Presencia actual / Memoria" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
     <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#ffbb6e" height=".05" radius=".15"></a-cylinder>
-            <a-image class="cliqueable" src="assets/TOGGLE-YG.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
+      <a-image class="cliqueable" src="assets/TOGGLE-YG.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
   </a-entity>
 </a-scene>
 <script type="module">

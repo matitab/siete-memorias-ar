@@ -1,10 +1,9 @@
 /* Contenido que se mostrará en pantalla */
 import {getMarcadorActivo} from './MarcadorActual.js';
 import {marcadoresData} from './marcadoresData.js';
-export function mostrar_contenido(opc, element) {
+export function mostrar_contenido(opc) {
 const marcadorActivo = getMarcadorActivo();
 const contenido = document.getElementById(`menu-content${marcadorActivo}`);
-const menuActivo = document.getElementById(`Menu${marcadorActivo}`);
 const data = marcadoresData[marcadorActivo];
 let contenido_mostrado = "";
 switch (opc) {

@@ -13,10 +13,11 @@ export function ContadorMarcadores() {
   contador.hideTimeout = setTimeout(() => {
     contador.style.display = "none";
   }, 3000);
-  if (marcadorDetectado.size === totalMarcadores) {
-    setTimeout(() => {
-      document.getElementById("mensaje-final").style.display = "block"; //muestra mensaje final
-    }, 500);}};
+  // if (marcadorDetectado.size === totalMarcadores) {
+  //   setTimeout(() => {
+  //     document.getElementById("mensaje-final").style.display = "block"; //muestra mensaje final
+  //   }, 500);}
+  };
 // eventos de detección (si agregamos más targets, modificar índice)
 [0, 1, 2].forEach(index => {
 const target = document.querySelector(`[mindar-image-target="targetIndex: ${index}"]`);
@@ -26,6 +27,4 @@ if (!target) return;
 		marcadorDetectado.add(index);
 		actualizarContador();
 		}});});
-// cierra mensaje con click
-document.getElementById("mensaje-final").addEventListener("click", () => {
-document.getElementById("mensaje-final").style.display = "none"});}
+}
