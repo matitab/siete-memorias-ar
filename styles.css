@@ -18,9 +18,7 @@ a-scene .a-enter-vr-button {display: none!important}
 body {
   visibility: hidden;
   margin: 0;
-}
-body, #boton-comenzar {
-font-family: "Saira", sans-serif;
+  font-family: 'Saira', sans-serif;
 }
 body.visible {
   visibility: visible;
@@ -37,9 +35,6 @@ transition: opacity 0.7s ease;
 pointer-events: none;
 user-select: none;
 }
-#img-fondo.fade-out {
-opacity: 0;
-}
 #pantalla-carga {
   display: flex;
   flex-direction: column;
@@ -48,7 +43,6 @@ opacity: 0;
   position: fixed; 
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.11);
   transition: opacity 0.7s ease;
   z-index: 10010;
 }  
@@ -134,7 +128,6 @@ height: 32.125rem;
 padding: 1.875rem 1.875rem 1.875rem 1.650rem;
 }
 .menu-cerrado {
-opacity: 1;
 pointer-events: auto;
 width: 30px;
 height: 30px;

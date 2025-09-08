@@ -15,7 +15,6 @@ export function ContadorMarcadores() {
   }, 3000);
   // if (marcadorDetectado.size === totalMarcadores) {
   //   setTimeout(() => {
-  //     document.getElementById("mensaje-final").style.display = "block"; //muestra mensaje final
   //   }, 500);}
   };
 // eventos de detección (si agregamos más targets, modificar índice)
@@ -26,5 +25,4 @@ if (!target) return;
 	if (!marcadorDetectado.has(index)) {
 		marcadorDetectado.add(index);
 		actualizarContador();
-		}});});
-}
+		}});});}

@@ -28,7 +28,7 @@ menu.classList.add("menu-abierto");
 menu.classList.remove("menu-cerrado");
 nav.classList.add("nav-abierto");
 nav.classList.remove("nav-cerrado");
-mostrar_contenido("botón temporal", null); 
+mostrar_contenido("botón temporal"); 
 if (nombre && data) nombre.innerHTML = `<p>${data.nombre}</p>`;
 if (toggle) toggle.checked = true;
 elevarZDe(idx);
