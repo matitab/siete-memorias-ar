@@ -21,10 +21,8 @@ boton.style.display = "none"; //para que no sea clickeable de nuevo
 pantalla.classList.add('fade-out');
 background.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
-const {DetectarMarcador} = await import('./DetectarMarcador.js');
 const {ContadorMarcadores} = await import('./contador.js');
 const {toggle_menu} = await import('./openclose-menu.js');    
-DetectarMarcador();
 ContadorMarcadores();
 toggle_menu();
 escena.components['mindar-image'].start();
