@@ -13,7 +13,7 @@ a-scene .a-enter-vr-button {display: none!important}
 .loader,.loader::after{box-sizing:border-box;width:48px;height:48px;border-radius:50%}
 .loader{display:inline-block;border-top:4px solid #d1cfc7;border-right:4px solid transparent;animation:rotation 1s linear infinite}
 .loader::after{content:"";position:absolute;left:0;top:0;border-bottom:solid #952A2E;border-left:4px solid transparent}
-.loader-container {position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%);z-index: 10012;}
+.loader-container {position: fixed;top: 50%;left: 50%;transform: translate(-50%,-50%)}
 .fade-out-loader{opacity:0;transition:opacity .3s ease-in-out}
 body {
   visibility: hidden;
@@ -67,7 +67,6 @@ opacity: 0;
   width: 850px;
   max-width: 100%;
   pointer-events: none;
-  user-select: none;
 }
 #boton-comenzar {
 top: 75%;
@@ -81,7 +80,6 @@ position: absolute;
 opacity: 0;
 pointer-events: none;
 transition: opacity 0.4s ease;
-z-index: 10011
 }
 #boton-comenzar.fade-in {
 opacity: 1;
@@ -95,14 +93,12 @@ position: fixed;
 background: none;
 width: 35px;
 height: 35px;
-border-radius: 50%;
 transition: transform .3s;
 cursor: pointer;
 justify-content: center;
 border: 0;
 user-select: none;
 -webkit-tap-highlight-color: transparent;
-z-index: 10060;
 }
 .button-toggle{
 top: 17px;
@@ -122,8 +118,6 @@ background: #84877fec;
 top: 0.625rem;
 left: 0.625rem;
 position: fixed;
-z-index: 10060;
-overflow: hidden;
 overflow-y:auto;
 border: 2.5px solid #2a2e23e7;
 opacity: 0;
@@ -146,7 +140,6 @@ width: 30px;
 height: 30px;
 border: 0;
 background: transparent;
-border-radius: 50%;
 }
 .nav {
   display:flex;
@@ -165,9 +158,7 @@ pointer-events: none;
 visibility: hidden
 }
 .nombre {
-  align-items: center;
   margin: 0 0 0 23px;
-  line-height: 32px;
   text-align: center;
   border-radius: .2em;
   width: 85%;
