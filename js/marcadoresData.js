@@ -12,7 +12,7 @@ bio3: `Desde chica se caracterizó por su curiosidad. “En lo que podía partic
 Por otro lado, se encontraba terminando la primaria en colegio nocturno. A pesar de los retos de su mamá por sus reiteradas repeticiones de año, ella estaba convencida a finalizar sus estudios.
 `,
 bio4: `Yanina tenía diferentes gustos, -como cualquier adolescente que está en proceso de formar su identidad-, pero particularmente, la escritura y la música se llevaban el primer puesto. 
-“A ella le gustaba escribir, me robaba las hojas de un cuaderno y escribía las letras de canciones que escuchaba…Le gustaba la música romántica, Leo Mattioli y ese estilo de música”, relata Lila.
+“A ella le gustaba escribir, me robaba las hojas de un cuaderno y escribía las letras de canciones que escuchaba… Le gustaba la música romántica, Leo Mattioli y ese estilo de música”, relata Lila.
 <br>Pero, había algo que Yanina disfrutaba más: la risa de su familia y amigos.`,
 bio5: `A los 17 años, se fue de su casa. Se juntó con su pareja, a quien había conocido en el barrio.
 Al poco tiempo de cumplir 18 años, quedó embarazada. Contra todo pronóstico y resistencias, Yanina se convirtió en madre. Las dudas y el miedo se transformaron en alegría. <br>Adoraba ser madre. <strong>“Era feliz”</strong>, recuerda Lila con lágrimas en los ojos.
@@ -32,11 +32,11 @@ img2: "assets/marcador1/IMG_1041.jpg",
 descripcion2:"Yanina (a la izquierda) y sus primos.",
 img3: "assets/marcador1/Brenda de chica.jpg",
 descripcion3:"Brenda, hija de Yanina, sostiene una foto de su madre.",
-video2: "https://drive.google.com/file/d/1bb0QWag86-zdtxwqNIDNJcO2dcdrQ9rE/view?usp=drive_link",
-video7: "https://drive.google.com/file/d/1J5Wvl_C6_kjpcnacuMUL9vRhwrhJDzad/view?usp=drive_link",
-video1: "https://drive.google.com/file/d/1e8Q5kG6Myz3tjvXdgGBjk0wUdSdsRw_V/view?usp=drive_link",
-video6: "https://drive.google.com/file/d/156SqmPBIsyXqKf2cuGj-bejtVEncvyqO/view?usp=drive_link",
-video8: "https://drive.google.com/file/d/16UXxueld-_fvppTVlnV2ZOjJiojchDhM/view?usp=drive_link",
+video2: "https://drive.google.com/uc?export=download&id=1bb0QWag86-zdtxwqNIDNJcO2dcdrQ9rE",
+video7: "https://drive.google.com/uc?export=download&id=1J5Wvl_C6_kjpcnacuMUL9vRhwrhJDzad",
+video1: "https://drive.google.com/uc?export=download&id=1e8Q5kG6Myz3tjvXdgGBjk0wUdSdsRw_V",
+video6: "https://drive.google.com/uc?export=download&id=156SqmPBIsyXqKf2cuGj-bejtVEncvyqO",
+video8: "https://drive.google.com/uc?export=download&id=16UXxueld-_fvppTVlnV2ZOjJiojchDhM",
 },
 //marcadoresData[1]
 {
