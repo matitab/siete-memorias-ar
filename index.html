@@ -11,11 +11,9 @@
 <link rel="preload" as="image" href="assets/rosario2.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="assets/07ea3b36d3e4a1b1288ff8f44d54df01.jpg" fetchpriority="high">
 <link rel="preload" as="image" href="assets/8mdls-11.png" fetchpriority="high">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-
 <!-- CSS de Lightbox -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.4/css/lightbox.min.css" rel="stylesheet">
 <!-- jQuery (necesario para Lightbox2) -->
@@ -38,9 +36,10 @@
 </div>
 <button class="saira-capybarino" id=boton-comenzar>Empezar recorrido</button>
 </div>
-<!-- Loader -->
-<div id=mi-loader class=loader-container>
-<span class=loader></span></div>
+<!-- Video de ráfaga -->
+<video id="video-rafaga" autoplay muted>
+  <source src="assets/Rafaga.mp4" type="video/mp4">
+</video>
 <!-- Menú 0-->
 <div class="container-menu saira-capybarino" id="Menu0">
     <input type="checkbox" id="toggle0">
@@ -68,38 +67,7 @@
         <div class="dummy-content" id="menu-content2"></div>
     </div>
 </div>
-<!-- Contador de marcadores detectados -->
-<div class="pop-up" id="contador-marcadores"><!-- Mensaje por defecto: --> Escaneaste 0 de 3 imágenes</div>
-<!-- ======================== -->
-<!--      ESCENA MIND-AR      -->
-<!-- ======================== -->
-<!-- Contiene los objetos (entidades) que mostraremos al escanear los marcadores-->
-<a-scene mindar-image="imageTargetSrc: targets.mind; maxTrack: 3; uiLoading:no; uiScanning:no" color-space="sRGB" renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false" device-orientation-permission-ui="enabled: false">
-  <!-- Cámara-->
-  <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" raycaster="objects: .cliqueable; far: 10000"></a-camera>
-  <!-- Marcador 0 -->
-  <a-entity mindar-image-target="targetIndex: 0" interactivo data-index="0">
-    <a-box position="0 0.3 0.1" color="#ffbb6e" depth="0.1" height="0.1" width=".6"></a-box>
-      <a-text value="¿Quien fue?" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-    <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#ffbb6e" height=".05" radius=".15"></a-cylinder>
-      <a-image class="cliqueable" src="assets/TOGGLE-YG.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
-  </a-entity>
-  <!-- Marcador 1 -->
-  <a-entity mindar-image-target="targetIndex: 1" interactivo data-index="1">
-    <a-box position="0 0.3 0.1" color="#ffbb6e" depth="0.1" height="0.1" width=".6"></a-box>
-      <a-text value="¿Como murio?" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-    <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#ffbb6e" height=".05" radius=".15"></a-cylinder>
-      <a-image class="cliqueable" src="assets/TOGGLE-YG.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
-  </a-entity>
-  <!-- Marcador 2 -->
-  <a-entity mindar-image-target="targetIndex: 2" interactivo data-index="2">
-    <a-box position="0 0.3 0.1" color="#ffbb6e" depth="0.1" height="0.1" width="1"></a-box>
-      <a-text value="Presencia actual / Memoria" color="black" align="center" position="0 0.3 0.16" width="1.5" font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"> </a-text>
-    <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#ffbb6e" height=".05" radius=".15"></a-cylinder>
-      <a-image class="cliqueable" src="assets/TOGGLE-YG.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
-  </a-entity>
-</a-scene>
+<div id="escena"></div>
 <script type="module" src="./js/main.js"></script>
 </body>
 </html>
-
