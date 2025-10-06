@@ -52,6 +52,7 @@ escena.innerHTML = info;
 }, { once: true });
 videoRafaga.addEventListener('ended', () => {
 videoRafaga.classList.add('fade-out');
+escena.style.display = "block";
 escena.innerHTML = info;
 }, { once: true });
 const {toggle_menu} = await import('./openclose-menu.js');    
