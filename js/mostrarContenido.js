@@ -14,13 +14,11 @@ contenido_mostrado = `
   </a>
   <p>${data.bio1}</p> 
 <iframe class="short"
-width="100%"
-height="auto"
-src="${data.video2}"
-title="YouTube""
-frameborder="0"
-allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-allowfullscreen>
+  src="${data.video2}"
+  title="YouTube"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
 </iframe>
   <p>${data.bio2}</p> 
   <video src="${data.video7}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
