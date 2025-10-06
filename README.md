@@ -21,7 +21,6 @@ Comenzamos a diseñar el código del proyecto en el editor de código Visual Stu
 Dentro de github, contamos con los dos archivos principales del código del proyecto, index.html y targets.mind. En index.html creamos la interfaz y diseñamos la interacción con los distintos marcadores, contenidos en el archivo targets.mind. Este último archivo es interpretado gracias a la librería mindAR - que incluimos en index.html - que maneja la implementación de realidad aumentada en el lenguaje de programación html. Mediante las herramientas que incluye la web de la librería mindAR, entrenamos imágenes con IA y las almacenamos en targets.mind, para luego ser reconocidas desde distintos ángulos y distancias, con cierto margen de error. Esta librería trabaja en complemetación con el framework A-Frame, el cual nos permite construir la escena de realidad aumentada y mostrar información en pantalla al detectar un marcador.
 A partir de todo esto, creamos un ejemplo de implementación del desarrollo, al cual podemos acceder escaneando el siguiente QR y luego escaneando las imágenes que usamos como prueba:
 
-<img width="566" height="526" alt="qr sc" src="https://github.com/user-attachments/assets/496bb1f2-1fb9-4823-8944-66536949857c" />
+<img width="825" height="477" alt="image" src="https://github.com/user-attachments/assets/ee512b0d-2770-49ed-aaf3-ab4892630fa6" />
 
-Se trata de un ejemplo utilizando imágenes relacionadas con el tema del proyecto. Aún estamos explorando las herramientas que vamos a utilizar para el desarrollo de esta experiencia de realidad aumentada como es mostrar texto en pantalla, videos e imágenes, así como el uso de un contador de imágenes escaneadas que conduce a un mensaje final.
-Entre otras ideas que podríamos implementar a futuro, contemplamos la conexión a un circuito físico que responda a comandos enviados por el usuario desde la web del proyecto.
+Se trata de un ejemplo utilizando imágenes relacionadas con el tema del proyecto. 
