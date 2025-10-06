@@ -13,7 +13,7 @@ contenido_mostrado = `
     <img src="${data.img1}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
   <p>${data.bio1}</p> 
-  <iframe class="short"
+  <iframe class="short" loading="lazy"
   src="${data.video2}"
   title="YouTube"
   frameborder="0"
@@ -21,7 +21,7 @@ contenido_mostrado = `
   allowfullscreen>
   </iframe>
   <p>${data.bio2}</p> 
-  <iframe class="short"
+   <iframe class="short" loading="lazy"
   src="${data.video7}"
   title="YouTube"
   frameborder="0"
@@ -29,7 +29,7 @@ contenido_mostrado = `
   allowfullscreen>
   </iframe>
   <p>${data.bio3}</p>
-  <iframe class="short"
+  <iframe class="short" loading="lazy"
   src="${data.video1}"
   title="YouTube"
   frameborder="0"
@@ -37,7 +37,7 @@ contenido_mostrado = `
   allowfullscreen>
   </iframe>
   <p>${data.bio4}</p>
-  <iframe class="short"
+  <iframe class="short" loading="lazy"
   src="${data.video6}"
   title="YouTube"
   frameborder="0"
@@ -49,7 +49,7 @@ contenido_mostrado = `
     <img src="${data.img2}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
   <p>${data.bio5}</p>
-  <iframe class="short"
+    <iframe class="short" loading="lazy"
   src="${data.video8}"
   title="YouTube"
   frameborder="0"
