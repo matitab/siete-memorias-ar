@@ -16,7 +16,7 @@ contenido_mostrado = `
 <iframe
 width="100%"
 height="auto"
-src={data.video2}
+src="${data.video2}"
 title="YouTube video player"
 frameborder="0"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
