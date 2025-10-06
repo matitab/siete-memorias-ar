@@ -123,12 +123,12 @@ pointer-events: none;
 }
 .container-menu {
 transition: width ease .1s, height ease .1s;
-background: #84877fec;
+background: #1a2c3ac7;
+border: 2.5px solid #2a2e23e7;
 top: 0.625rem;
 left: 0.625rem;
 position: fixed;
 overflow-y:auto;
-border: 2.5px solid #2a2e23e7;
 opacity: 0;
 pointer-events: none;
 z-index: 99999;
@@ -177,6 +177,7 @@ visibility: hidden
   color: #fff;
   font-size: 14px;
   background: #2A2E23;
+  text-decoration: underline #0b7fad;
 }
 .dummy-content {
   pointer-events: auto;
@@ -187,24 +188,6 @@ border-radius: .2em;
 cursor: auto;
 transition: background-color .3s ease;
 position: relative;
-}
-.pop-up {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 16.25rem;
-  background: rgba(0, 0, 0, 0.938);
-  color: white;
-  z-index: 10050;
-  padding: 1em;
-  border-radius: .2em;
-  text-align: center;
-}
-#contador-marcadores {
-background: #952A2E;
-font-size: 1em;
-display: none;
 }
 #fullscreen-button {
 top:  15px;
