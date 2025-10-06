@@ -13,7 +13,15 @@ contenido_mostrado = `
     <img src="${data.img1}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
   <p>${data.bio1}</p> 
-  <video src="${data.video2}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
+<iframe
+width="100%"
+height="auto"
+src={data.video2}
+title="YouTube video player"
+frameborder="0"
+allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+allowfullscreen>
+</iframe>
   <p>${data.bio2}</p> 
   <video src="${data.video7}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
   <p>${data.bio3}</p>
