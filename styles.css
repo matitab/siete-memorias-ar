@@ -123,7 +123,7 @@ pointer-events: none;
 }
 .container-menu {
 transition: width ease .1s, height ease .1s;
-background: #1a2c3ac7;
+background: #1a2c3ad8;
 border: 2.5px solid #2a2e23e7;
 top: 0.625rem;
 left: 0.625rem;

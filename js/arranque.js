@@ -44,6 +44,7 @@ boton.style.display = "none"; //para que no sea clickeable de nuevo
 pantalla.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
 videoRafaga.style.display = "block"; 
+videoRafaga.play();
 videoRafaga.addEventListener('click', () => {
 videoRafaga.classList.add('fade-out');
 escena.style.display = "block";
