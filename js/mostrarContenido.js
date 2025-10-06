@@ -13,25 +13,49 @@ contenido_mostrado = `
     <img src="${data.img1}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
   <p>${data.bio1}</p> 
-<iframe class="short"
+  <iframe class="short"
   src="${data.video2}"
   title="YouTube"
   frameborder="0"
   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
   allowfullscreen>
-</iframe>
+  </iframe>
   <p>${data.bio2}</p> 
-  <video src="${data.video7}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
+  <iframe class="short"
+  src="${data.video7}"
+  title="YouTube"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+  </iframe>
   <p>${data.bio3}</p>
-  <video src="${data.video1}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
+  <iframe class="short"
+  src="${data.video1}"
+  title="YouTube"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+  </iframe>
   <p>${data.bio4}</p>
-  <video src="${data.video6}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
+  <iframe class="short"
+  src="${data.video6}"
+  title="YouTube"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+  </iframe>
   <p></p>
   <a href="${data.img2}" data-lightbox="galeria1" data-title="${data.descripcion2}">
     <img src="${data.img2}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
   <p>${data.bio5}</p>
-  <video src="${data.video8}" controls style="width: 100%; height: auto; border-radius: .2em; display: block;"></video>
+  <iframe class="short"
+  src="${data.video8}"
+  title="YouTube"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+  allowfullscreen>
+  </iframe>
   <p>${data.bio6}</p>
   <a href="${data.img3}" data-lightbox="galeria1" data-title="${data.descripcion3}">
     <img src="${data.img3}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
