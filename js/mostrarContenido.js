@@ -13,11 +13,11 @@ contenido_mostrado = `
     <img src="${data.img1}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
   <p>${data.bio1}</p> 
-<iframe
+<iframe class="short"
 width="100%"
 height="auto"
 src="${data.video2}"
-title="YouTube video player"
+title="YouTube""
 frameborder="0"
 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 allowfullscreen>

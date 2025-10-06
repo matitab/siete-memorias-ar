@@ -21,6 +21,11 @@
   opacity:0; 
   pointer-events: none;
 }
+.short { 
+  width: 100%;
+  aspect-ratio: 9/16;
+  border: none;
+}
 #escena {
   width: 100vw;
   height: 100vh;
