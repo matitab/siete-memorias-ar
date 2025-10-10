@@ -13,24 +13,21 @@ export function arranque() {
       <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;" 
                 raycaster="objects: .cliqueable; far: 10000"></a-camera>
       <a-entity mindar-image-target="targetIndex: 0" interactivo data-index="0">
-        <a-box position="0 0.3 0.1" color="#ffbb6e" depth="0.1" height="0.1" width=".6"></a-box>
-        <a-text value="¿Quien fue?" color="black" align="center" position="0 0.3 0.16" width="1.5" 
-                font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"></a-text>
-        <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#ffbb6e" height=".05" radius=".15"></a-cylinder>
+        <a-box position="0 0.3 0.1" color="#777574ff" depth="0.1" height="0.2" width=".8"></a-box>
+        <a-image src="assets/quién fue. marcador 1.svg" position="0 0.3 0.2" width="0.6" height="0.2"></a-image>
+        <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#777574ff" height=".05" radius=".15"></a-cylinder>
         <a-image class="cliqueable" src="assets/m1.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 1" interactivo data-index="1">
-        <a-box position="0 0.3 0.1" color="#ffbb6e" depth="0.1" height="0.1" width=".6"></a-box>
-        <a-text value="¿Como murio?" color="black" align="center" position="0 0.3 0.16" width="1.5" 
-                font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"></a-text>
-        <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#ffbb6e" height=".05" radius=".15"></a-cylinder>
+        <a-box position="0 0.3 0.1" color="#777574ff" depth="0.1" height="0.1" width=".6"></a-box>
+        <a-image src="assets/qué le pasó. marcador 2.svg" position="0 0.3 0.2" width="0.6" height="0.2"></a-image>
+        <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#777574ff" height=".05" radius=".15"></a-cylinder>
         <a-image class="cliqueable" src="assets/m2.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
       </a-entity>
       <a-entity mindar-image-target="targetIndex: 2" interactivo data-index="2">
-        <a-box position="0 0.3 0.1" color="#ffbb6e" depth="0.1" height="0.1" width="1"></a-box>
-        <a-text value="Presencia actual / Memoria" color="black" align="center" position="0 0.3 0.16" width="1.5" 
-                font="https://cdn.aframe.io/fonts/Aileron-Semibold.fnt"></a-text>
-        <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#ffbb6e" height=".05" radius=".15"></a-cylinder>
+        <a-box position="0 0.3 0.1" color="#777574ff" depth="0.1" height="0.1" width="1"></a-box>
+        <a-image src="assets/cómo está presente. marcador 3.svg" position="0 0.3 0.2" width="0.6" height="0.2"></a-image>
+        <a-cylinder class="cliqueable" position="0 0 0.20" rotation="90 0 0"  color="#777574ff" height=".05" radius=".15"></a-cylinder>
         <a-image class="cliqueable" src="assets/m3.png" position="0 0 0.26" width="0.2" height="0.2"></a-image>
       </a-entity>
     </a-scene>

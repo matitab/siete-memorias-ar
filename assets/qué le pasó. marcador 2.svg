@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Capa_2" data-name="Capa 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 822.5 95.87">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #231f20;
+        font-family: SairaStencilOne-Regular, 'Saira Stencil One';
+        font-size: 80.03px;
+      }
+
+      .cls-2 {
+        letter-spacing: 0em;
+      }
+
+      .cls-3 {
+        letter-spacing: 0em;
+      }
+
+      .cls-4 {
+        letter-spacing: 0em;
+      }
+
+      .cls-5 {
+        letter-spacing: 0em;
+      }
+    </style>
+  </defs>
+  <g id="Layer_1" data-name="Layer 1">
+    <text class="cls-1" transform="translate(0 67.54)"><tspan x="0" y="0">¿Cómo e</tspan><tspan class="cls-4" x="308.25" y="0">s</tspan><tspan class="cls-5" x="347.71" y="0">t</tspan><tspan x="381.08" y="0">á p</tspan><tspan class="cls-3" x="492.79" y="0">r</tspan><tspan class="cls-2" x="526.4" y="0">esen</tspan><tspan class="cls-4" x="702.46" y="0">t</tspan><tspan x="736.23" y="0">e?</tspan></text>
+  </g>
+</svg>
