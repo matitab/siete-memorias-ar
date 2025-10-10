@@ -119,7 +119,7 @@ filter: invert(1) brightness(2);
 }
 .button-toggle{
 top: 17px;
-left: 15px;
+left: 10px;
 }
 .button-toggle img {
 width: 25px;
@@ -209,10 +209,21 @@ position: relative;
 }
 #fullscreen-button {
 top:  15px;
-right:  15px;
+right:  10px;
 border:  0;
 display: flex;
 flex-direction: column;
+}
+#close-button {
+bottom:  15px;
+right:  10px;
+border:  0;
+display: flex;
+flex-direction: column;
+z-index: 10000;
+}
+#close-button:hover {
+  transform: scale(1.125);
 }
 #fullscreen-button:hover {
   transform: scale(1.125);

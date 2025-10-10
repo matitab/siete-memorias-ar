@@ -3,6 +3,7 @@ export function arranque() {
   const pantalla = document.getElementById("pantalla-carga");
   const escena = document.getElementById("escena");
   const videoRafaga = document.getElementById("video-rafaga");
+  const cerrar = document.getElementById("close-button");
   escena.style.display = "none";
   videoRafaga.style.display = "none";
   const info = `
@@ -58,4 +59,8 @@ escena.innerHTML = info;
 const {toggle_menu} = await import('./openclose-menu.js');    
 toggle_menu();
 }, { once: true });
-});}
+});
+cerrar.addEventListener('click', () => {
+  location.reload();
+});
+}
