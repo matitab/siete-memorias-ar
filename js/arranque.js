@@ -34,7 +34,7 @@ export function arranque() {
       </a-entity>
     </a-scene>
   `;
-// Mostrar botón de inicio
+// aparece el botón comenzar
 boton.classList.add("fade-in");
 boton.style.pointerEvents = "auto";
 pantalla.classList.remove("fade-out");

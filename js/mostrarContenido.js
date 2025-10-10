@@ -79,6 +79,3 @@ break;
 }
 contenido.innerHTML = contenido_mostrado;
 }
-
-
-
