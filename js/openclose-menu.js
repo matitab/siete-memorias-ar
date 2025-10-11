@@ -24,6 +24,8 @@ const nav = menu.querySelector('.nav');
 const nombre = menu.querySelector(`#nombre-persona${idx}`);
 const toggle = document.getElementById(`toggle${idx}`);
 const data = marcadoresData[idx];
+const button = menu.querySelector(".button-toggle img");
+button.src = "assets/x.png"; //cambia ícono del toggle
 menu.classList.add("menu-abierto");
 menu.classList.remove("menu-cerrado");
 nav.classList.add("nav-abierto");
@@ -39,6 +41,8 @@ const menu = document.getElementById(menuId);
 const idx = getINDICE(menuId);
 const nav = menu.querySelector('.nav');
 const toggle = document.getElementById(`toggle${idx}`);
+const button = menu.querySelector(".button-toggle img");
+button.src = "assets/hamburguesa.png"; //cambia ícono del toggle
 menu.classList.remove("menu-abierto");
 menu.classList.add("menu-cerrado");
 nav.classList.add("nav-cerrado");

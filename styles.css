@@ -220,7 +220,9 @@ right:  10px;
 border:  0;
 display: flex;
 flex-direction: column;
-z-index: 10000;
+z-index: 1000;
+width: 50px;
+height: 50px;
 }
 #close-button:hover {
   transform: scale(1.125);
