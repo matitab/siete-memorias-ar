@@ -69,6 +69,9 @@ contenido_mostrado = `
   </a>
 
   <p>${data.bio1}</p>
+  <a href="${data.img2}" data-lightbox="galeria2" data-title="${data.descripcion2}">
+    <img src="${data.img2}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
+  </a>
   <iframe class="short" loading="lazy"
     src="${data.video1}"
     title="YouTube"
@@ -85,8 +88,6 @@ contenido_mostrado = `
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
   </iframe>
-
-  <p>${data.bio3}</p>
   <iframe class="short" loading="lazy"
     src="${data.video3}"
     title="YouTube"
@@ -95,13 +96,8 @@ contenido_mostrado = `
     allowfullscreen>
   </iframe>
 
-  <p>${data.bio4}</p>
+  <p>${data.bio3}</p>
 
-  <a href="${data.img2}" data-lightbox="galeria2" data-title="${data.descripcion2}">
-    <img src="${data.img2}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
-  </a>
-
-  <p>${data.bio5}</p>
   <iframe class="short" loading="lazy"
     src="${data.video4}"
     title="YouTube"
@@ -110,13 +106,8 @@ contenido_mostrado = `
     allowfullscreen>
   </iframe>
 
-  <p>${data.bio6}</p>
+  <p>${data.bio4}</p>
 
-  <a href="${data.img3}" data-lightbox="galeria2" data-title="${data.descripcion3}">
-    <img src="${data.img3}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
-  </a>
-
-  <p>${data.bio7}</p>
   <iframe class="short" loading="lazy"
     src="${data.video5}"
     title="YouTube"
@@ -125,7 +116,24 @@ contenido_mostrado = `
     allowfullscreen>
   </iframe>
 
-  <p>${data.bio8}</p>
+  <a href="${data.img3}" data-lightbox="galeria2" data-title="${data.descripcion3}">
+    <img src="${data.img3}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
+  </a>
+
+  <p>${data.bio5}</p>
+
+  <p>${data.bio6}</p>
+
+  <iframe class="short" loading="lazy"
+    src="${data.video6}"
+    title="YouTube"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen>
+  </iframe>
+
+  <p>${data.bio7}</p>
+
   <iframe class="short" loading="lazy"
     src="${data.video7}"
     title="YouTube"
@@ -134,11 +142,7 @@ contenido_mostrado = `
     allowfullscreen>
   </iframe>
 
-  <p>${data.bio9}</p>
-
-  <a href="${data.img4}" data-lightbox="galeria2" data-title="${data.descripcion4}">
-    <img src="${data.img4}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
-  </a>
+  <p>${data.bio8}</p>
 
   <iframe class="short" loading="lazy"
     src="${data.video8}"
@@ -148,6 +152,8 @@ contenido_mostrado = `
     allowfullscreen>
   </iframe>
 
+  <p>${data.bio9}</p>
+
   <iframe class="short" loading="lazy"
     src="${data.video9}"
     title="YouTube"
@@ -155,6 +161,10 @@ contenido_mostrado = `
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowfullscreen>
   </iframe>
+
+  <a href="${data.img4}" data-lightbox="galeria2" data-title="${data.descripcion4}">
+    <img src="${data.img4}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
+  </a>
 `;
 break;
 case 2:
