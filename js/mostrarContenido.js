@@ -214,7 +214,7 @@ case 2:
   </iframe>
 
   <p>${data.bio4}</p>
-  <br><br>
+
   <p>${data.bio5}</p>
 
   <iframe class="short" loading="lazy"
@@ -226,7 +226,7 @@ case 2:
   </iframe>
 
   <p>${data.bio6}</p>
-  <br><br>
+
   <p>${data.bio7}</p>
   
   <iframe class="short" loading="lazy"

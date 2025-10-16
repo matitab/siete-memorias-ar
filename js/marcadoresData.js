@@ -70,7 +70,7 @@ video8: "https://youtube.com/embed/-iEUFAlxirs?rel=0",
 },
 //marcadoresData[2]
 {
- nombre: "Presente",
+  nombre: "Presente.",
   bio1: `Tras la muerte de Yanina, se inició una causa judicial para investigar lo ocurrido durante las jornadas del 19 y 20 de diciembre de 2001 en Rosario. En una primera instancia Lila y David, dudaron de encauzarse en la lucha que sostienen hasta el día de hoy, la de la justicia por su hija. La duda no recae en el desánimo, ni en el dolor por su pérdida, sino en <strong>el temor</strong>: <em>“Yo tenía mucho miedo por mis hijos. Porque si es contra la policía, decía yo, me van a venir a matar a otro hijo”</em>,  relata Lila`,
   bio2: `Al poco tiempo, Ana María Figueroa abogada vinculada a organismos de derechos humanos se acercó y convenció a Lila y David  de la importancia del caso. Tomó la representación de la familia García y la de otras familias, comenzando así, el proceso judicial con el que se logró avances en el expediente. Estaba previsto que fueran citados a declarar distintos agentes de las fuerzas de seguridad que actuaron en el operativo de esos días.<br>En simultáneo, familiares, allegados y distintos organismos, realizaban las primeras manifestaciones y pedidos de justicia en la ciudad.`,
   bio3: `Sin embargo, Figueroa asumió como Diputada Nacional no mucho tiempo después. Así, el caso pasó a manos de otro estudio jurídico donde las gestiones se fueron diluyendo hasta truncarse finalmente. Según relató Lila —la madre de Yanina—, desde el estudio les informaron que no continuarían con la causa. Por cuestiones económicas, la familia no pudo sostener una nueva representación legal, y desde entonces el expediente quedó sin movimientos significativos.`,
