@@ -63,7 +63,7 @@ contenido_mostrado = `
   `;
 break;
 case 1:
-const contenido_mostrado = `
+contenido_mostrado = `
   <a href="${data.img1}" data-lightbox="galeria2" data-title="${data.descripcion1}">
     <img src="${data.img1}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
   </a>
