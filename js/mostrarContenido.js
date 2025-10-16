@@ -70,7 +70,7 @@ contenido_mostrado = `
 
   <p>${data.bio1}</p>
   <a href="${data.img2}" data-lightbox="galeria2" data-title="${data.descripcion2}">
-    <img src="${data.img2}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
+    <img src="${data.img2}" style="width: 100%; height: auto; border-radius: .2em; display: block; margin-bottom:20px;">
   </a>
   <br>
   <iframe class="short" loading="lazy"
@@ -119,7 +119,7 @@ contenido_mostrado = `
   </iframe>
 
   <a href="${data.img3}" data-lightbox="galeria2" data-title="${data.descripcion3}">
-    <img src="${data.img3}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
+    <img src="${data.img3}" style="width: 100%; height: auto; border-radius: .2em; display: block; margin-top:20px;">
   </a>
 
   <br>
@@ -169,7 +169,7 @@ contenido_mostrado = `
   <br>
 
   <a href="${data.img4}" data-lightbox="galeria2" data-title="${data.descripcion4}">
-    <img src="${data.img4}" style="width: 100%; height: auto; border-radius: .2em; display: block;">
+    <img src="${data.img4}" style="width: 100%; height: auto; border-radius: .2em; display: block; margin-top:20px;">
   </a>
 `;
 break;
