@@ -44,7 +44,7 @@ videoRafaga.classList.add("fade-out");
 escena.style.display = "block";
 escena.innerHTML = info;
 };
-setTimeout(avanzar, 29000); // dura 29 segundos el video (29000ms)
+setTimeout(avanzar, 31000); // dura algo más de 30 segundos el video
 videoRafaga.addEventListener("click", avanzar, { once: true });
 const {toggle_menu} = await import('./openclose-menu.js');    
 toggle_menu();
