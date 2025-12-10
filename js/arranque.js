@@ -39,37 +39,12 @@ boton.style.display = "none"; //para que no sea clickeable de nuevo
 pantalla.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
 videoRafaga.style.display = "block";
-
-let yaAvanzado = false;
-
 const avanzar = () => {
-  if (yaAvanzado) return;
-  yaAvanzado = true;
-  if (window.videoCheckInterval) {
-    clearInterval(window.videoCheckInterval);
-  }
-  videoRafaga.style.display = "none";
-  escena.style.display = "block";
-  escena.innerHTML = info;
+videoRafaga.classList.add("fade-out");
+escena.style.display = "block";
+escena.innerHTML = info;
 };
-
-// Chequear cada segundo si el video terminó
-window.videoCheckInterval = setInterval(() => {
-  if (window.YT && window.YT.Player && document.querySelector('#video-rafaga iframe')) {
-    try {
-      const iframe = document.querySelector('#video-rafaga iframe');
-      const player = new YT.Player(iframe);
-      const state = player.getPlayerState();
-      // 0 = ENDED
-      if (state === 0) {
-        avanzar();
-      }
-    } catch (e) {
-      // Silenciar errores si el player no está listo
-    }
-  }
-}, 1000);
-
+setTimeout(avanzar, 32000);
 videoRafaga.addEventListener("click", avanzar, { once: true });
 const {toggle_menu} = await import('./openclose-menu.js');    
 toggle_menu();
