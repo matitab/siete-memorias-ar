@@ -40,7 +40,7 @@ pantalla.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
   videoRafaga.style.display = "block";
   const avanzar = () => {
-    videoRafaga.style.display = "none";
+    videoRafaga.classList.add("fade-out");
     escena.style.display = "block";
     escena.innerHTML = info;
   };
@@ -48,12 +48,9 @@ pantalla.addEventListener('transitionend', async () => {
     avanzar();
   };
   videoRafaga.addEventListener("click", avanzar, { once: true });
-  // Import del menú
-  const { toggle_menu } = await import('./openclose-menu.js');
+  const {toggle_menu} = await import('./openclose-menu.js');    
   toggle_menu();
 }, { once: true });
-  
-
 });
 cerrar.addEventListener('click', () => {
   location.reload();
@@ -63,6 +60,14 @@ cerrar.addEventListener('click', () => {
 let player;
 window.onYouTubeIframeAPIReady = () => {
   player = new YT.Player('video-rafaga', {
+    playerVars: {
+      rel: 0,
+      modestbranding: 1,
+      controls: 0,
+      showinfo: 0,
+      fs: 0,
+      iv_load_policy: 3
+    },
     events: {
       onStateChange: event => {
         if (event.data === YT.PlayerState.ENDED) {
@@ -72,4 +77,3 @@ window.onYouTubeIframeAPIReady = () => {
     }
   });
 };
-
