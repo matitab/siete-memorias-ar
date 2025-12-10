@@ -44,7 +44,7 @@ videoRafaga.classList.add("fade-out");
 escena.style.display = "block";
 escena.innerHTML = info;
 };
-setTimeout(avanzar, 32000);
+setTimeout(avanzar, 30000);
 videoRafaga.addEventListener("click", avanzar, { once: true });
 const {toggle_menu} = await import('./openclose-menu.js');    
 toggle_menu();
