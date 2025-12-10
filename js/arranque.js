@@ -35,69 +35,47 @@ boton.style.pointerEvents = "auto";
 pantalla.classList.remove("fade-out");
 // Al clickearlo, activa MindAR y oculta la pantalla de carga
 boton.addEventListener('click', async() => {
-boton.style.display = "none";
+boton.style.display = "none"; //para que no sea clickeable de nuevo
 pantalla.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
-  videoRafaga.style.display = "block";
-  
-  const avanzar = () => {
-    if (window.videoCheckInterval) {
-      clearInterval(window.videoCheckInterval);
-    }
-    videoRafaga.style.display = "none";
-    escena.style.display = "block";
-    escena.innerHTML = info;
-  };
-  
-  // Iniciar el player de YouTube si existe
-  if (window.player && window.player.playVideo) {
-    window.player.playVideo();
-    
-    // Chequear cada 500ms si el video terminó
-    window.videoCheckInterval = setInterval(() => {
-      try {
-        const state = window.player.getPlayerState();
-        // 0 = ENDED
-        if (state === 0) {
-          avanzar();
-        }
-      } catch (e) {
-        console.log('Error checkeando estado del video:', e);
-      }
-    }, 500);
+videoRafaga.style.display = "block";
+
+let yaAvanzado = false;
+
+const avanzar = () => {
+  if (yaAvanzado) return;
+  yaAvanzado = true;
+  if (window.videoCheckInterval) {
+    clearInterval(window.videoCheckInterval);
   }
-  
-  videoRafaga.addEventListener("click", avanzar, { once: true });
-  const {toggle_menu} = await import('./openclose-menu.js');    
-  toggle_menu();
+  videoRafaga.style.display = "none";
+  escena.style.display = "block";
+  escena.innerHTML = info;
+};
+
+// Chequear cada segundo si el video terminó
+window.videoCheckInterval = setInterval(() => {
+  if (window.YT && window.YT.Player && document.querySelector('#video-rafaga iframe')) {
+    try {
+      const iframe = document.querySelector('#video-rafaga iframe');
+      const player = new YT.Player(iframe);
+      const state = player.getPlayerState();
+      // 0 = ENDED
+      if (state === 0) {
+        avanzar();
+      }
+    } catch (e) {
+      // Silenciar errores si el player no está listo
+    }
+  }
+}, 1000);
+
+videoRafaga.addEventListener("click", avanzar, { once: true });
+const {toggle_menu} = await import('./openclose-menu.js');    
+toggle_menu();
 }, { once: true });
 });
 cerrar.addEventListener('click', () => {
   location.reload();
 });
 }
-
-let player;
-window.onYouTubeIframeAPIReady = () => {
-  player = new YT.Player('video-rafaga', {
-    playerVars: {
-      rel: 0,
-      modestbranding: 1,
-      controls: 0,
-      showinfo: 0,
-      fs: 0,
-      iv_load_policy: 3,
-      autoplay: 1
-    },
-    events: {
-      onStateChange: event => {
-        if (event.data === YT.PlayerState.ENDED) {
-          videoRafaga.style.display = "none";
-          escena.style.display = "block";
-          escena.innerHTML = info;
-        }
-      }
-    }
-  });
-  window.player = player;
-};
