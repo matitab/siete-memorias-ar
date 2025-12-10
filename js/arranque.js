@@ -38,19 +38,37 @@ boton.addEventListener('click', async() => {
 boton.style.display = "none"; //para que no sea clickeable de nuevo
 pantalla.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
-videoRafaga.style.display = "block";
-const avanzar = () => {
-videoRafaga.classList.add("fade-out");
-escena.style.display = "block";
-escena.innerHTML = info;
-};
-setTimeout(avanzar, 29000);
-videoRafaga.addEventListener("click", avanzar, { once: true });
-const {toggle_menu} = await import('./openclose-menu.js');    
-toggle_menu();
+  videoRafaga.style.display = "block";
+  const avanzar = () => {
+    videoRafaga.classList.add("fade-out");
+    escena.style.display = "block";
+    escena.innerHTML = info;
+  };
+  window._videoRafagaTermino = () => {
+    avanzar();
+  };
+  videoRafaga.addEventListener("click", avanzar, { once: true });
+  // Import del menú
+  const { toggle_menu } = await import('./openclose-menu.js');
+  toggle_menu();
 }, { once: true });
+
 });
 cerrar.addEventListener('click', () => {
   location.reload();
 });
 }
+
+let player;
+window.onYouTubeIframeAPIReady = () => {
+  player = new YT.Player('video-rafaga', {
+    events: {
+      onStateChange: event => {
+        if (event.data === YT.PlayerState.ENDED) {
+          window._videoRafagaTermino?.();
+        }
+      }
+    }
+  });
+};
+
