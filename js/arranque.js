@@ -35,18 +35,38 @@ boton.style.pointerEvents = "auto";
 pantalla.classList.remove("fade-out");
 // Al clickearlo, activa MindAR y oculta la pantalla de carga
 boton.addEventListener('click', async() => {
-boton.style.display = "none"; //para que no sea clickeable de nuevo
+boton.style.display = "none";
 pantalla.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
   videoRafaga.style.display = "block";
+  
   const avanzar = () => {
+    if (window.videoCheckInterval) {
+      clearInterval(window.videoCheckInterval);
+    }
     videoRafaga.style.display = "none";
     escena.style.display = "block";
     escena.innerHTML = info;
   };
-  window._videoRafagaTermino = () => {
-    avanzar();
-  };
+  
+  // Iniciar el player de YouTube si existe
+  if (window.player && window.player.playVideo) {
+    window.player.playVideo();
+    
+    // Chequear cada 500ms si el video terminó
+    window.videoCheckInterval = setInterval(() => {
+      try {
+        const state = window.player.getPlayerState();
+        // 0 = ENDED
+        if (state === 0) {
+          avanzar();
+        }
+      } catch (e) {
+        console.log('Error checkeando estado del video:', e);
+      }
+    }, 500);
+  }
+  
   videoRafaga.addEventListener("click", avanzar, { once: true });
   const {toggle_menu} = await import('./openclose-menu.js');    
   toggle_menu();
@@ -66,14 +86,18 @@ window.onYouTubeIframeAPIReady = () => {
       controls: 0,
       showinfo: 0,
       fs: 0,
-      iv_load_policy: 3
+      iv_load_policy: 3,
+      autoplay: 1
     },
     events: {
       onStateChange: event => {
         if (event.data === YT.PlayerState.ENDED) {
-          window._videoRafagaTermino?.();
+          videoRafaga.style.display = "none";
+          escena.style.display = "block";
+          escena.innerHTML = info;
         }
       }
     }
   });
+  window.player = player;
 };
