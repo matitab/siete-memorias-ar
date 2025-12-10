@@ -40,7 +40,7 @@ pantalla.classList.add('fade-out');
 pantalla.addEventListener('transitionend', async () => {
   videoRafaga.style.display = "block";
   const avanzar = () => {
-    videoRafaga.classList.add("fade-out");
+    videoRafaga.style.display = "none";
     escena.style.display = "block";
     escena.innerHTML = info;
   };
